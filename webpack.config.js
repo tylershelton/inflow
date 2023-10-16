@@ -3,12 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   // This property defines where the application starts
-  entry: './client/app.jsx',
+  entry: './client/App.jsx',
 
   // Define the filepath and file name used for deploying
   // the bundled file
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.resolve(__dirname, '/dist'),
     filename: 'bundle.js',
   },
 
