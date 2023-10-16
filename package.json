@@ -1,0 +1,24 @@
+{
+  "name": "inflow",
+  "version": "0.1.0",
+  "description": "An RSS reader with power tools",
+
+  "author": "Tyler Shelton",
+  "bugs": {
+    "url": "https://github.com/tylershelton/inflow/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "homepage": "https://github.com/tylershelton/inflow#readme",
+  "license": "GPL-3.0-only",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylershelton/inflow.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
