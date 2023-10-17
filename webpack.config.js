@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: process.env.NODE_DEV,
   // This property defines where the application starts
   entry: './client/App.jsx',
 
