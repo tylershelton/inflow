@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/subscribe', feedController.subscribe, (req, res) => {
-  return res.status(200).send('Check server console for output.');
+  return res.status(200).send();
 });
 
 module.exports = router;
