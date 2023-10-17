@@ -33,6 +33,7 @@ module.exports = {
     }),
   ],
   devServer: {
+    proxy: { '/': 'http://localhost:3000' },
     static: {
       directory: path.join(__dirname, 'build'),
     },
