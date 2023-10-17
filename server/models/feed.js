@@ -5,8 +5,6 @@ const pool = new Pool({
   connectionString: conf.DB.URI
 });
 
-console.log('db uri:', conf.DB.URI);
-
 module.exports = {
   query: (text, params, callback) => {
     return pool.query(text, params, callback);
