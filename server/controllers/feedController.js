@@ -1,3 +1,5 @@
+const Feed = require('../models/feed');
+
 module.exports = {
   subscribe: (req, res, next) => {
     import('@extractus/feed-extractor')
