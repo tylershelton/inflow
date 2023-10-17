@@ -2,13 +2,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: process.env.NODE_DEV,
   // This property defines where the application starts
   entry: './client/App.jsx',
 
   // Define the filepath and file name used for deploying
   // the bundled file
   output: {
-    path: path.resolve(__dirname, '/dist'),
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
   },
 
@@ -24,14 +25,18 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.jsx', '.js', '...'],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/index.html'
     }),
   ],
   devServer: {
+    proxy: { '/': 'http://localhost:3000' },
     static: {
-      directory: path.join(__dirname, '/dist'),
+      directory: path.join(__dirname, 'build'),
     },
   },
   devtool: 'eval-source-map',
