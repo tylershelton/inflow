@@ -1,14 +1,21 @@
 const conf     = require('../../config');
 const { Pool } = require('pg');
 
-const PG_URI = conf.DB.URI;
-
 const pool = new Pool({
-  connectionString: PG_URI
+  connectionString: conf.DB.URI
 });
+
+console.log('db uri:', conf.DB.URI);
 
 module.exports = {
   query: (text, params, callback) => {
     return pool.query(text, params, callback);
-  }
+  },
+
+  create: (url, title, desc) => {
+    return pool.query(`
+      INSERT INTO feed (url, title, description)
+      VALUES ($1, $2, $3)
+    `, [url, title, desc]);
+  },
 };
