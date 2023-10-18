@@ -1,14 +1,39 @@
 const conf     = require('../../config');
 const { Pool } = require('pg');
 
-const PG_URI = conf.DB.URI;
-
 const pool = new Pool({
-  connectionString: PG_URI
+  connectionString: conf.DB.URI,
 });
 
 module.exports = {
-  query: (text, params, callback) => {
-    return pool.query(text, params, callback);
+  create: (url, title, desc) => {
+    return pool.query(`
+      INSERT INTO feed (url, title, description)
+      VALUES ($1, $2, $3)
+    `, [url, title, desc]);
+  },
+
+  deleteById: id => {
+    return pool.query(`
+      DELETE FROM feed WHERE id=$1
+    `, [id]);
+  },
+
+  getAll: () => {
+    return pool.query('SELECT * FROM feed');
+  },
+
+  getById: id => {
+    return pool.query(`
+      SELECT * FROM feed WHERE id=$1
+    `, [id]);
+  },
+
+  update: (id, changes) => {
+    return pool.query(`
+      UPDATE feed
+      SET title = $2, description = $3 
+      WHERE id = $1
+    `, [id, changes.title, changes.description]);
   }
 };
