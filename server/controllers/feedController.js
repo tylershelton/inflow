@@ -1,6 +1,29 @@
 const Feed = require('../models/feed');
 
 module.exports = {
+  getFeeds: async (req, res, next) => {
+    try {
+      const result = await Feed.getAll();
+      res.locals.feeds = result.rows;
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
+  },
+  
+  getFeed: async (req, res, next) => {
+    try {
+      const result = await Feed.getById(req.params.id);
+      if (result.rows.length) res.locals.feed = result.rows[0];
+      // TODO: handle when no item found in db
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
+  },
+  
   subscribe: async (req, res, next) => {
     try {
       const rss  = await import('@extractus/feed-extractor');
@@ -15,30 +38,7 @@ module.exports = {
 
   unsubscribe: async (req, res, next) => {
     try {
-      await Feed.deleteById(req.body.id);
-      next();
-    }
-    catch (err) {
-      next(err);
-    }
-  },
-
-  getFeeds: async (req, res, next) => {
-    try {
-      const result = await Feed.getAll();
-      res.locals.feeds = result.rows;
-      next();
-    }
-    catch (err) {
-      next(err);
-    }
-  },
-
-  getFeed: async (req, res, next) => {
-    try {
-      const result = await Feed.getById(req.params.id);
-      if (result.rows.length) res.locals.feed = result.rows[0];
-      // TODO: handle when no item found in db
+      await Feed.deleteById(req.params.id);
       next();
     }
     catch (err) {
