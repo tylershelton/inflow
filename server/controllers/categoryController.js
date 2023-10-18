@@ -27,8 +27,7 @@ module.exports = {
   createCategory: async (req, res, next) => {
     try {
       await Category.create(req.body.name);
-      const result = await Category.get(req.body.name);
-      res.locals.category = result.rows[0];
+      res.locals.category = await Category.getByName(req.body.name);
       next();
     }
     catch (err) {

@@ -25,7 +25,7 @@ router.put('/:id', categoryController.renameCategory, (req, res) => {
 
 // delete category
 router.delete('/:id', categoryController.deleteCategory, (req, res) => {
-  return res.status(200).send();
+  return res.status(200).send({ success: true });
 });
 
 module.exports = router;
