@@ -13,7 +13,7 @@ module.exports = {
     `, [url, title, desc, category_id]);
   },
 
-  deleteById: id => {
+  delete: id => {
     return pool.query(`
       DELETE FROM feed WHERE id = $1
     `, [id]);

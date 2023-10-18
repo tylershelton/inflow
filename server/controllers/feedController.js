@@ -49,7 +49,7 @@ module.exports = {
 
   unsubscribe: async (req, res, next) => {
     try {
-      await Feed.deleteById(req.params.id);
+      await Feed.delete(req.params.id);
       next();
     }
     catch (err) {
