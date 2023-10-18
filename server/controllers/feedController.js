@@ -55,8 +55,7 @@ module.exports = {
         title: req.body.title || current.title,
         description: req.body.description || current.description,
       };
-
-      const result = await Feed.update(req.params.id, changes);
+      await Feed.update(req.params.id, changes);
       next();
     }
     catch (err) {
