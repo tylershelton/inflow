@@ -14,8 +14,7 @@ module.exports = {
   
   getFeed: async (req, res, next) => {
     try {
-      const result = await Feed.getById(req.params.id);
-      if (result.rows.length) res.locals.feed = result.rows[0];
+      res.locals.feed = await Feed.get(req.params.id);
       // TODO: handle when no item found in db
       next();
     }
@@ -48,14 +47,14 @@ module.exports = {
 
   updateFeed: async (req, res, next) => {
     try {
-      let current = await Feed.getById(req.params.id);
-      current = current.rows[0];
+      const current = await Feed.get(req.params.id);
       // TODO: handle when no item found in db
       const changes = {
         title: req.body.title || current.title,
         description: req.body.description || current.description,
       };
       await Feed.update(req.params.id, changes);
+      res.locals.feed = await Feed.get(req.params.id);
       next();
     }
     catch (err) {
