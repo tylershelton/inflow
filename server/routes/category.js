@@ -1,7 +1,31 @@
 const express = require('express');
-
 const router = express.Router();
 
-// router.get()...
+const categoryController = require('../controllers/categoryController');
+
+// get category list
+router.get('/', categoryController.getCategories, (req, res) => {
+  return res.status(200).json(res.locals.categories);
+});
+
+// get specific category
+router.get('/:id', categoryController.getCategory, (req, res) => {
+  return res.status(200).json(res.locals.category);
+});
+
+// create new category
+router.post('/create', categoryController.createCategories, (req, res) => {
+  return res.status(200).json(res.locals.category);
+});
+
+// rename category
+router.put('/rename/:id', categoryController.renameCategory, (req, res) => {
+  return res.status(200).json(res.locals.category);
+});
+
+// delete category
+router.delete('/delete/:id', categoryController.deleteCategory, (req, res) => {
+  return res.status(200).send();
+});
 
 module.exports = router;
