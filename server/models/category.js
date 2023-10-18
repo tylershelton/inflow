@@ -23,6 +23,18 @@ module.exports = {
     return pool.query('SELECT * FROM category');
   },
 
+  getByName: async name => {
+    try {
+      const result = await pool.query(`
+        SELECT * FROM category WHERE name = $1
+      `, [name]);
+      return result.rows[0];
+    }
+    catch (err) {
+      return err;
+    }
+  },
+
   get: id => {
     return pool.query(`
       SELECT * FROM category WHERE id = $1
