@@ -19,7 +19,7 @@ router.post('/subscribe', feedController.subscribe, (req, res) => {
 });
 
 // unsubscribe from a feed
-router.post('/unsubscribe', feedController.unsubscribe, (req, res) => {
+router.delete('/:id', feedController.unsubscribe, (req, res) => {
   return res.status(200).send();
 });
 

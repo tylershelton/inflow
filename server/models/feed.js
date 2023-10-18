@@ -15,7 +15,7 @@ module.exports = {
 
   deleteById: id => {
     return pool.query(`
-      DELETE FROM feed WHERE id=$1
+      DELETE FROM feed WHERE id = $1
     `, [id]);
   },
 
@@ -25,7 +25,7 @@ module.exports = {
 
   getById: id => {
     return pool.query(`
-      SELECT * FROM feed WHERE id=$1
+      SELECT * FROM feed WHERE id = $1
     `, [id]);
   },
 
