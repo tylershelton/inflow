@@ -10,3 +10,15 @@ CREATE TABLE IF NOT EXISTS feed (
     description varchar(255),
     category_id integer         REFERENCES category(id)
 );
+
+CREATE TABLE IF NOT EXISTS feeditem (
+    id                          SERIAL PRIMARY KEY,
+    title       varchar(255),
+    description varchar(255),
+    url         varchar(255)    UNIQUE,
+    pubDate     timestamp,
+    archived    boolean         DEFAULT false,
+    feed_id     integer         REFERENCES feed(id),
+    category_id integer         REFERENCES category(id),
+    CONSTRAINT title_or_description CHECK (title IS NOT NULL OR description IS NOT NULL)
+);
