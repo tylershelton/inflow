@@ -6,7 +6,7 @@ const pool = new Pool({
 });
 
 module.exports = {
-  create: (url, title, desc) => {
+  create: (url, title, desc, category_id) => {
     return pool.query(`
       INSERT INTO feed (url, title, description, category_id)
       VALUES ($1, $2, $3, $4)
