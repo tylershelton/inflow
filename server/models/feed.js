@@ -33,13 +33,14 @@ module.exports = {
 
   getAll: () => {
     return pool.query('SELECT * FROM feed');
-  },
+  },  
 
-  getById: id => {
-    return pool.query(`
-      SELECT * FROM feed WHERE id = $1
-    `, [id]);
-  },
+  getByURL: async url => {
+    const result = await pool.query(`
+      SELECT * FROM feed WHERE url = $1
+    `, [url]);  
+    return result.rows[0]; 
+  },  
 
   update: (id, changes) => {
     return pool.query(`
