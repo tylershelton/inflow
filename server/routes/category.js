@@ -14,17 +14,17 @@ router.get('/:id', categoryController.getCategory, (req, res) => {
 });
 
 // create new category
-router.post('/create', categoryController.createCategories, (req, res) => {
+router.post('/', categoryController.createCategory, (req, res) => {
   return res.status(200).json(res.locals.category);
 });
 
 // rename category
-router.put('/rename/:id', categoryController.renameCategory, (req, res) => {
+router.put('/:id', categoryController.renameCategory, (req, res) => {
   return res.status(200).json(res.locals.category);
 });
 
 // delete category
-router.delete('/delete/:id', categoryController.deleteCategory, (req, res) => {
+router.delete('/:id', categoryController.deleteCategory, (req, res) => {
   return res.status(200).send();
 });
 
