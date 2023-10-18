@@ -19,6 +19,18 @@ module.exports = {
     `, [id]);
   },
 
+  get: async id => {
+    try {
+      const result = await pool.query(`
+        SELECT * FROM feed WHERE id = $1
+      `, [id]);
+      return result.rows[0];
+    }
+    catch (err) {
+      return err;
+    }
+  },
+
   getAll: () => {
     return pool.query('SELECT * FROM feed');
   },
