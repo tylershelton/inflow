@@ -13,15 +13,54 @@ module.exports = {
     }
   },
 
-  unsubscribe: (req, res, next) => {
-
+  unsubscribe: async (req, res, next) => {
+    try {
+      await Feed.deleteById(req.body.id);
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
   },
 
-  getFeeds: (req, res, next) => {
-
+  getFeeds: async (req, res, next) => {
+    try {
+      const result = await Feed.getAll();
+      res.locals.feeds = result.rows;
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
   },
 
-  getFeed: (req, res, next) => {
+  getFeed: async (req, res, next) => {
+    try {
+      const result = await Feed.getById(req.params.id);
+      if (result.rows.length) res.locals.feed = result.rows[0];
+      // TODO: handle when no item found in db
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
+  },
 
+  updateFeed: async (req, res, next) => {
+    try {
+      let current = await Feed.getById(req.params.id);
+      current = current.rows[0];
+      // TODO: handle when no item found in db
+      const changes = {
+        title: req.body.title || current.title,
+        description: req.body.description || current.description,
+      };
+
+      const result = await Feed.update(req.params.id, changes);
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
   },
 };
