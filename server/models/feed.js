@@ -1,3 +1,4 @@
+const format = require('pg-format');
 const pool     = require('../lib/db');
 const FeedItem = require('./feedItem');
 
@@ -29,7 +30,26 @@ module.exports = {
 
   getAll: () => {
     return pool.query('SELECT * FROM feed');
-  },  
+  },
+
+  getItems: async (feedId, includeArchived) => {
+    try {
+      const params = [feedId];
+      let addendum = '';
+      if (!includeArchived) {
+        addendum = ' AND archived = $2';
+        params.push(includeArchived);
+      }
+      const result = await pool.query(`
+        SELECT * FROM feeditem
+        WHERE feed_id = $1
+      ` + addendum, params);
+      return result.rows;
+    }
+    catch (err) {
+      return err;
+    }
+  },
 
   getByURL: async url => {
     const result = await pool.query(`
