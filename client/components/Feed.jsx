@@ -25,7 +25,7 @@ const Feed = ({ id, title }) => {
   });
   
   return (
-    <section className='feedBrowser debug-box'>
+    <section className='feedBrowser'>
       <h2>{title}</h2>
       {feedItemComponents}
     </section>

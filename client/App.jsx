@@ -35,13 +35,15 @@ const App = () => {
       const data = await fetch(currFeedUrl);
       const feed = await data.json();
       setCurrFeed(feed);
+      if (currFeedItemUrl) setCurrFeedItemUrl();
+      if (currFeedItem) setCurrFeedItem();
     }
     getFeedItems();
   }, [currFeedUrl]);
 
   // get data for the article view from the server
   useEffect(() => {
-    if (!currFeedUrl) return;
+    if (!currFeedItemUrl) return;
     async function getFeedItem () {
       const data = await fetch(currFeedItemUrl);
       const feeditem = await data.json();
@@ -71,7 +73,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div id="app-container">
       <Sidebar />
       {feed}
       {article}
