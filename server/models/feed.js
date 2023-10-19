@@ -1,9 +1,6 @@
-const conf     = require('../../config');
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  connectionString: conf.DB.URI,
-});
+const format = require('pg-format');
+const pool     = require('../lib/db');
+const FeedItem = require('./feedItem');
 
 module.exports = {
   create: (url, title, desc, category_id) => {
@@ -33,14 +30,57 @@ module.exports = {
 
   getAll: () => {
     return pool.query('SELECT * FROM feed');
-  },  
+  },
+
+  getItems: async (feedId, includeArchived) => {
+    try {
+      const params = [feedId];
+      let addendum = '';
+      if (!includeArchived) {
+        addendum = ' AND archived = $2';
+        params.push(includeArchived);
+      }
+      const result = await pool.query(`
+        SELECT * FROM feeditem
+        WHERE feed_id = $1
+      ` + addendum, params);
+      return result.rows;
+    }
+    catch (err) {
+      return err;
+    }
+  },
 
   getByURL: async url => {
     const result = await pool.query(`
       SELECT * FROM feed WHERE url = $1
     `, [url]);  
     return result.rows[0]; 
-  },  
+  },
+
+  sync: async id => {
+    try {
+      const feed = await module.exports.get(id);
+      const rss  = await import('@extractus/feed-extractor');
+      let { entries } = await rss.extract(feed.url);
+      entries = entries.map(entry => {
+        return [
+          entry.title,
+          entry.description,
+          entry.link,
+          entry.published,
+          false, // is the item archived?
+          feed.id,
+          feed.category_id,
+        ];
+      });
+      const result = await FeedItem.createMany(entries);
+      return result.rows;
+    }
+    catch (err) {
+      return err;
+    }
+  },
 
   update: (id, changes) => {
     return pool.query(`

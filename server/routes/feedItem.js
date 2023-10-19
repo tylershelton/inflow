@@ -3,20 +3,25 @@ const router  = express.Router();
 
 const feedItemController = require('../controllers/feedItemController');
 
+router.get('/:id', feedItemController.getFeedItem, (req, res) => {
+  return res.status(200).json(res.locals.feeditem);
+});
+
 // get all feeditems in a given category
-router.get('/category/:id', (req, res) => {
+router.get('/category/:id', feedItemController.getItemsByCategory, (req, res) => {
   // support all vs unread only
   return res.status(200).json(res.locals.feeditems);
 });
 
 // get all feeditems from a given feed
-router.get('/feed/:id', (req, res) => {
+router.get('/feed/:id', feedItemController.getItemsByFeed, (req, res) => {
   // support all vs unread only
   return res.status(200).json(res.locals.feeditems);
 });
 
 // mark a feeditem as read or unread
-router.put('/:id', (req, res) => {
+router.put('/:id', feedItemController.toggleArchived, (req, res) => {
+  console.log(res.locals.feeditem);
   return res.status(200).json(res.locals.feeditem);
 });
 
