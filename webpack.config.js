@@ -23,6 +23,11 @@ module.exports = {
           loader: 'babel-loader'
         },
       },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      }
     ],
   },
   resolve: {
@@ -34,6 +39,9 @@ module.exports = {
     }),
   ],
   devServer: {
+    host: 'localhost',
+    port: 8080,
+    hot: true,
     proxy: { '/': 'http://localhost:3000' },
     static: {
       directory: path.join(__dirname, 'build'),
