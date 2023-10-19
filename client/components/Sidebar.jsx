@@ -4,11 +4,13 @@ import CategoryList from './CategoryList';
 
 const Sidebar = () => {
   return (
-    <header className='debug-box'>
-      <h1>Inflow</h1>
-      <img src="#" alt="Inflow logo" />
+    <section className='sidebar debug-box'>
+      <header>
+        <h1>Inflow</h1>
+        <img src="#" alt="Inflow logo" />
+      </header>
       <CategoryList />  
-    </header>
+    </section>
   );
 };
 
