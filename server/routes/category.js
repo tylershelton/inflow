@@ -13,6 +13,11 @@ router.get('/:id', categoryController.getCategory, (req, res) => {
   return res.status(200).json(res.locals.category);
 });
 
+// get contents for a given category (feeds, individually saved pages)
+router.get('/:id/contents', categoryController.getContents, (req, res) => {
+  return res.status(200).json(res.locals.contents);
+});
+
 // create new category
 router.post('/', categoryController.createCategory, (req, res) => {
   return res.status(200).json(res.locals.category);

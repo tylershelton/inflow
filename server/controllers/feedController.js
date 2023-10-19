@@ -2,10 +2,10 @@ const Category = require('../models/category');
 const Feed = require('../models/feed');
 
 module.exports = {
-  getFeeds: async (req, res, next) => {
+  getFeed: async (req, res, next) => {
     try {
-      const result = await Feed.getAll();
-      res.locals.feeds = result.rows;
+      res.locals.feed = await Feed.get(req.params.id);
+      // TODO: handle when no item found in db
       next();
     }
     catch (err) {
@@ -13,10 +13,10 @@ module.exports = {
     }
   },
   
-  getFeed: async (req, res, next) => {
+  getFeeds: async (req, res, next) => {
     try {
-      res.locals.feed = await Feed.get(req.params.id);
-      // TODO: handle when no item found in db
+      const result = await Feed.getAll();
+      res.locals.feeds = result.rows;
       next();
     }
     catch (err) {

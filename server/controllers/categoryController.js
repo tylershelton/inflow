@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const Feed = require('../models/feed');
 
 module.exports = {
   getCategories: async (req, res, next) => {
@@ -17,6 +18,16 @@ module.exports = {
       const result = await Category.get(req.params.id);
       if (result.rows.length) res.locals.category = result.rows[0];
       // TODO: handle when no item found in db
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
+  },
+
+  getContents: async (req, res, next) => {
+    try {
+      res.locals.contents = await Feed.getAllByCategory(req.params.id);
       next();
     }
     catch (err) {
