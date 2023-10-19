@@ -20,5 +20,6 @@ CREATE TABLE IF NOT EXISTS feeditem (
     archived    boolean         DEFAULT false,
     feed_id     integer         REFERENCES feed(id),
     category_id integer         REFERENCES category(id),
+    
     CONSTRAINT title_or_description CHECK (title IS NOT NULL OR description IS NOT NULL)
 );
