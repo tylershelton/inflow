@@ -28,4 +28,24 @@ module.exports = {
     `, arr);
     return pool.query(sql);
   },
+
+  get: async id => {
+    try {
+      const result = await pool.query(`
+        SELECT * FROM feeditem WHERE id = $1
+      `, [id]);
+      return result.rows[0];
+    }
+    catch (err) {
+      return err;
+    }
+  },
+
+  update: (id, changes) => {
+    return pool.query(`
+      UPDATE feeditem
+      SET archived = $2, category_id = $3
+      WHERE id = $1
+    `, [id, changes.archived, changes.category_id]);
+  }
 };
