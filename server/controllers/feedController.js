@@ -47,6 +47,16 @@ module.exports = {
     }
   },
 
+  sync: async (req, res, next) => {
+    try {
+      res.locals.newItems = await Feed.sync(req.params.id);
+      next();
+    }
+    catch (err) {
+      next(err);
+    }
+  },
+
   unsubscribe: async (req, res, next) => {
     try {
       await Feed.delete(req.params.id);
@@ -57,7 +67,7 @@ module.exports = {
     }
   },
 
-  updateFeed: async (req, res, next) => {
+  updateMetadata: async (req, res, next) => {
     try {
       let category;
       if (req.body.category) {
