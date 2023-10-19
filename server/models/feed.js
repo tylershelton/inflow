@@ -1,9 +1,4 @@
-const conf     = require('../../config');
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  connectionString: conf.DB.URI,
-});
+const pool = require('../lib/db');
 
 module.exports = {
   create: (url, title, desc, category_id) => {
