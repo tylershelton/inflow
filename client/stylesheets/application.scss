@@ -6,8 +6,11 @@
 
 // Main Layout
 body {
+    background-color: #FDFDFD;
+    color: #222222;
     margin: 0;
 }
+
 #app-container {
     display: flex;
     align-items: stretch;
@@ -32,6 +35,15 @@ body {
     // max-height: 100vh;
     flex-grow: 0;
     flex-shrink: 0;
+
+    article h3 {
+        margin-bottom: 0.25rem;
+    }
+
+    article time {
+        font-size: 90%;
+        font-style: italic;
+    }
 }
 
 .article {

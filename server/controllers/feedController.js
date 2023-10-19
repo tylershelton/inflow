@@ -69,7 +69,7 @@ module.exports = {
 
   updateMetadata: async (req, res, next) => {
     try {
-      let category;
+      let category = {id: undefined};
       if (req.body.category) {
         category = await Category.getByName(req.body.category);
         if (!category) category = Category.create(req.body.category);
