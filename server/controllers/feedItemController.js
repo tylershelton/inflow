@@ -1,9 +1,11 @@
+const Category = require('../models/category');
 const Feed = require('../models/feed');
 const FeedItem = require('../models/feedItem');
 
 module.exports = {
   getItemsByCategory: async (req, res, next) => {
     try {
+      res.locals.feeditems = await Category.getItems(req.params.id, req.query.all);
       next();
     }
     catch (err) {
