@@ -73,7 +73,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div id="app-container">
       <Sidebar />
       {feed}
       {article}

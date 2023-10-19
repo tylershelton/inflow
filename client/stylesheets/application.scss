@@ -3,3 +3,40 @@
 .debug-box-cascade * {
     border: 1px solid fuchsia;
 }
+
+// Main Layout
+body {
+    margin: 0;
+}
+#app-container {
+    display: flex;
+    align-items: stretch;
+    max-height: 100vh;
+}
+
+.sidebar {
+    padding: 1rem;
+
+    flex-basis: 31%;
+    max-width: 20rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.feedBrowser {
+    padding: 1rem;
+    overflow-y: scroll;
+
+    flex-basis: 31%;
+    max-width: 24rem;
+    // max-height: 100vh;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.article {
+    padding: 1rem;
+    overflow-y: scroll;
+
+    flex-grow: 1;
+}
