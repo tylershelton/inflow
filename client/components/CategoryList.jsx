@@ -4,20 +4,24 @@ import Category from './Category';
 
 
 const CategoryList = () => {
-  const [categories, setCategories] = useState(['Sports', 'News']);
+  const [categories, setCategories] = useState([]);
   
-  useEffect(() => getCategories(), []);
-  
-  const getCategories = async () => {
-    const data = await fetch('/categories');
-    const categories = await data.json();
-    setCategories(categories.map(cat => cat.name));
-  };
+  useEffect(() => {
+    async function fetchCategories () {
+      const data = await fetch('/categories');
+      const categories = await data.json();
+      setCategories(categories);
+    }
+    fetchCategories();
+  }, []);
 
-  const categoryComponents = categories.map((name, i) => {
+  console.log(categories);
+
+  const categoryComponents = categories.map((cat, i) => {
     return (<Category
-      key  = {`cat-${i}`}
-      name = {name}
+      key   = {`cat-${i}`}
+      catid = {cat.id}
+      name  = {cat.name}
     />);
   });
 

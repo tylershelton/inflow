@@ -3,4 +3,5 @@ const { Pool } = require('pg');
 
 module.exports = new Pool({
   connectionString: conf.DB.URI,
+  max: 5,
 });

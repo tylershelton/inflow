@@ -32,23 +32,11 @@ module.exports = {
     return pool.query('SELECT * FROM feed');
   },
 
-  getItems: async (feedId, includeArchived) => {
-    try {
-      const params = [feedId];
-      let addendum = '';
-      if (!includeArchived) {
-        addendum = ' AND archived = $2';
-        params.push(includeArchived);
-      }
-      const result = await pool.query(`
-        SELECT * FROM feeditem
-        WHERE feed_id = $1
-      ` + addendum, params);
-      return result.rows;
-    }
-    catch (err) {
-      return err;
-    }
+  getAllByCategory: async category_id => {
+    const result = await pool.query(`
+      SELECT * FROM feed WHERE category_id = $1
+    `, [category_id]);
+    return result.rows;
   },
 
   getByURL: async url => {
@@ -57,6 +45,25 @@ module.exports = {
     `, [url]);  
     return result.rows[0]; 
   },
+
+  getItems: async (feedId, includeArchived) => {
+    try {
+      const params = [feedId];
+      let addendum = '';
+      if (!includeArchived) {
+        addendum = ' AND archived = $2';
+        params.push(includeArchived);
+      }  
+      const result = await pool.query(`
+        SELECT * FROM feeditem
+        WHERE feed_id = $1
+      ` + addendum, params);  
+      return result.rows;
+    }  
+    catch (err) {
+      return err;
+    }  
+  },  
 
   sync: async id => {
     try {

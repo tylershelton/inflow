@@ -4,7 +4,7 @@ import CategoryList from './CategoryList';
 
 const Sidebar = () => {
   return (
-    <header>
+    <header className='debug-box'>
       <h1>Inflow</h1>
       <img src="#" alt="Inflow logo" />
       <CategoryList />  
