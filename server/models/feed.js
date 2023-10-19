@@ -1,6 +1,4 @@
-const pool = require('../lib/db');
-
-
+const pool     = require('../lib/db');
 const FeedItem = require('./feedItem');
 
 module.exports = {
