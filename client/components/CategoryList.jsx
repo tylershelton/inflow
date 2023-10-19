@@ -15,8 +15,6 @@ const CategoryList = () => {
     fetchCategories();
   }, []);
 
-  console.log(categories);
-
   const categoryComponents = categories.map((cat, i) => {
     return (<Category
       key   = {`cat-${i}`}
