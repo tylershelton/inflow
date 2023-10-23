@@ -1,5 +1,5 @@
 const Category = require('../models/category');
-const Feed = require('../models/feed');
+const Feed     = require('../models/feed');
 
 module.exports = {
   getCategories: async (req, res, next) => {
