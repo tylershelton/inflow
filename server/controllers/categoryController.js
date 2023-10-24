@@ -1,5 +1,5 @@
 const Category = require('../models/category');
-const Feed = require('../models/feed');
+const Feed     = require('../models/feed');
 
 module.exports = {
   getCategories: async (req, res, next) => {
@@ -37,8 +37,8 @@ module.exports = {
 
   createCategory: async (req, res, next) => {
     try {
-      await Category.create(req.body.name);
-      res.locals.category = await Category.getByName(req.body.name);
+      await Category.create(req.body.title);
+      res.locals.category = await Category.getByTitle(req.body.title);
       next();
     }
     catch (err) {
@@ -51,7 +51,7 @@ module.exports = {
       let current = await Category.get(req.params.id);
       current = current.rows[0];
       await Category.update(req.params.id, {
-        name: req.body.name || current.name
+        title: req.body.title || current.title
       });
       const result = await Category.get(req.params.id);
       res.locals.category = result.rows[0];

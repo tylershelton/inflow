@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import FeedItem from './FeedItem';
+import BrowserItem from './BrowserItem';
 
-const Feed = ({ id, title }) => {
+const Browser = ({ id, groupType, title }) => {
   const [feedItems, setFeedItems] = useState([]);
 
   useEffect(() => {
     async function getFeedItems () {
-      const data = await fetch(`/feeditems/feed/${id}?all=false`);
+      const data = await fetch(`/feeditems/${groupType}/${id}?all=false`);
       const items = await data.json();
       setFeedItems(items);
     }
@@ -14,9 +14,10 @@ const Feed = ({ id, title }) => {
   }, [id]);
 
   const feedItemComponents = feedItems.map((item, i) => {
-    return (<FeedItem
+    return (<BrowserItem
       key = {`feeditem-${i}`}
       id = {item.id}
+      feed_title= {item.feed_title}
       title = {item.title}
       archived = {item.archived}
       pubdate = {item.pubdate}
@@ -32,4 +33,4 @@ const Feed = ({ id, title }) => {
   );
 };
 
-export default Feed;
+export default Browser;

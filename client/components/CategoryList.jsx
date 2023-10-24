@@ -19,7 +19,7 @@ const CategoryList = () => {
     return (<Category
       key   = {`cat-${i}`}
       catid = {cat.id}
-      name  = {cat.name}
+      title  = {cat.title}
     />);
   });
 

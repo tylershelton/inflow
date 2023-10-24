@@ -15,7 +15,7 @@ module.exports = {
 
   getItemsByCategory: async (req, res, next) => {
     try {
-      res.locals.feeditems = await Category.getItems(req.params.id, req.query.all);
+      res.locals.feeditems = await FeedItem.getByCategory(req.params.id, req.query.all);
       next();
     }
     catch (err) {
@@ -25,7 +25,7 @@ module.exports = {
 
   getItemsByFeed: async (req, res, next) => {
     try {
-      res.locals.feeditems = await Feed.getItems(req.params.id, req.query.all);
+      res.locals.feeditems = await FeedItem.getByFeed(req.params.id, req.query.all);
       next();
     }
     catch (err) {

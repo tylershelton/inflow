@@ -4,7 +4,10 @@ import eventBus from '../lib/eventBus';
 const ContentListItem = ({ id, title }) => {
   function handleClick (e) {
     e.preventDefault();
-    eventBus.dispatch('browseFeed', e.target.href);
+    eventBus.dispatch('browse', {
+      type: 'feed',
+      url: e.target.href
+    });
   }
 
   return (

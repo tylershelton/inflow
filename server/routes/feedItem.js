@@ -9,13 +9,13 @@ router.get('/:id', feedItemController.getFeedItem, (req, res) => {
 
 // get all feeditems in a given category
 router.get('/category/:id', feedItemController.getItemsByCategory, (req, res) => {
-  // support all vs unread only
+  // TODO: support all vs unread only
   return res.status(200).json(res.locals.feeditems);
 });
 
 // get all feeditems from a given feed
 router.get('/feed/:id', feedItemController.getItemsByFeed, (req, res) => {
-  // support all vs unread only
+  // TODO: support all vs unread only
   return res.status(200).json(res.locals.feeditems);
 });
 
