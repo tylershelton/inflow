@@ -1,11 +1,11 @@
 const pool = require('../lib/db');
 
 module.exports = {
-  create: name => {
+  create: title => {
     return pool.query(`
       INSERT INTO category (name)
       VALUES ($1)
-    `, [name]);
+    `, [title]);
   },
 
   delete: id => {
@@ -14,21 +14,21 @@ module.exports = {
     `, [id]);
   },
   
-    get: id => {
-      return pool.query(`
-        SELECT * FROM category WHERE id = $1
-      `, [id]);
-    },
+  get: id => {
+    return pool.query(`
+      SELECT * FROM category WHERE id = $1
+    `, [id]);
+  },
 
   getAll: () => {
     return pool.query('SELECT * FROM category');
   },
 
-  getByName: async name => {
+  getByTitle: async title => {
     try {
       const result = await pool.query(`
-        SELECT * FROM category WHERE name = $1
-      `, [name]);
+        SELECT * FROM category WHERE title = $1
+      `, [title]);
       return result.rows[0];
     }
     catch (err) {
@@ -58,8 +58,8 @@ module.exports = {
   update: (id, changes) => {
     return pool.query(`
       UPDATE category
-      SET name = $2
+      SET title = $2
       WHERE id = $1
-    `, [id, changes.name]);
+    `, [id, changes.title]);
   },
 };

@@ -28,7 +28,7 @@ module.exports = {
     try {
       // if user specified a category, get it from the db.
       // create the category if it does not yet exist
-      let category = await Category.getByName(req.body.category);
+      let category = await Category.getByTitle(req.body.category);
       if (!category) category = Category.create(req.body.category);
       
       const rss  = await import('@extractus/feed-extractor');
@@ -71,7 +71,7 @@ module.exports = {
     try {
       let category = {id: undefined};
       if (req.body.category) {
-        category = await Category.getByName(req.body.category);
+        category = await Category.getByTitle(req.body.category);
         if (!category) category = Category.create(req.body.category);
       }
       const current = await Feed.get(req.params.id);

@@ -1,4 +1,3 @@
-const format = require('pg-format');
 const pool     = require('../lib/db');
 const FeedItem = require('./feedItem');
 
