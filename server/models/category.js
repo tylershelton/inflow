@@ -36,25 +36,6 @@ module.exports = {
     }
   },
 
-  getItems: async (categoryId, includeArchived) => {
-    try {
-      const params = [categoryId];
-      let addendum = '';
-      if (!includeArchived) {
-        addendum = ' AND archived = $2';
-        params.push(includeArchived);
-      }
-      const result = await pool.query(`
-        SELECT * FROM feeditem
-        WHERE category_id = $1
-      ` + addendum, params);
-      return result.rows;
-    }
-    catch (err) {
-      return err;
-    }
-  },
-
   update: (id, changes) => {
     return pool.query(`
       UPDATE category
