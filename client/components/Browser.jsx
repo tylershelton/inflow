@@ -26,7 +26,7 @@ const Browser = ({ id, groupType, title }) => {
   });
   
   return (
-    <section className='feedBrowser'>
+    <section className='browser'>
       <h2>{title}</h2>
       {feedItemComponents}
     </section>
