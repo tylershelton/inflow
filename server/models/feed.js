@@ -45,26 +45,6 @@ module.exports = {
     return result.rows[0]; 
   },
 
-  getItems: async (feedId, includeArchived) => {
-    try {
-      const params = [feedId];
-      let addendum = '';
-      if (!includeArchived) {
-        addendum = ' AND archived = $2';
-        params.push(includeArchived);
-      }  
-      const result = await pool.query(`
-        SELECT * FROM feeditem
-        WHERE feed_id = $1 ${addendum}
-        ORDER BY pubdate DESC
-      `, params);  
-      return result.rows;
-    }  
-    catch (err) {
-      return err;
-    }  
-  },  
-
   sync: async id => {
     try {
       const feed = await module.exports.get(id);
