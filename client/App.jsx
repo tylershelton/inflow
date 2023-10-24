@@ -7,7 +7,7 @@ import eventBus from './lib/eventBus';
 
 // components
 import Article from './components/Article';
-import Feed from './components/Feed';
+import Browser from './components/Browser';
 import Sidebar from './components/Sidebar';
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
@@ -56,7 +56,7 @@ const App = () => {
   // build out state-based UI elements
   let browser;
   if (browserData) {
-    browser = (<Feed
+    browser = (<Browser
       id = {browserData.id}
       title = {browserData.title}
       groupType = {browserTarget.type}

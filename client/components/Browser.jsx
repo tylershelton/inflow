@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import FeedItem from './FeedItem';
+import BrowserItem from './BrowserItem';
 
-const Feed = ({ id, groupType, title }) => {
+const Browser = ({ id, groupType, title }) => {
   const [feedItems, setFeedItems] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Feed = ({ id, groupType, title }) => {
   }, [id]);
 
   const feedItemComponents = feedItems.map((item, i) => {
-    return (<FeedItem
+    return (<BrowserItem
       key = {`feeditem-${i}`}
       id = {item.id}
       title = {item.title}
@@ -32,4 +32,4 @@ const Feed = ({ id, groupType, title }) => {
   );
 };
 
-export default Feed;
+export default Browser;

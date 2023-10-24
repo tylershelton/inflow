@@ -1,7 +1,7 @@
 import React from 'react';
 import eventBus from '../lib/eventBus';
 
-const FeedItem = ({ id, title, pubdate, url, archived }) => {
+const BrowserItem = ({ id, title, pubdate, url, archived }) => {
   function handleClick (e) {
     e.preventDefault();
     eventBus.dispatch('openFeedItem', e.target.href);
@@ -15,4 +15,4 @@ const FeedItem = ({ id, title, pubdate, url, archived }) => {
   );
 };
 
-export default FeedItem;
+export default BrowserItem;
