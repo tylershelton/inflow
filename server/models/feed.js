@@ -55,8 +55,9 @@ module.exports = {
       }  
       const result = await pool.query(`
         SELECT * FROM feeditem
-        WHERE feed_id = $1
-      ` + addendum, params);  
+        WHERE feed_id = $1 ${addendum}
+        ORDER BY pubdate DESC
+      `, params);  
       return result.rows;
     }  
     catch (err) {

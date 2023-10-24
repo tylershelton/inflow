@@ -50,9 +50,11 @@ module.exports = {
         params.push(includeArchived);
       }
       const result = await pool.query(`
-        SELECT * FROM feeditem
-        WHERE category_id = $1
-      ` + addendum, params);
+        SELECT fi.*, f.title AS feed_title 
+        FROM feeditem fi INNER JOIN feed f ON fi.feed_id = f.id
+        WHERE fi.category_id = $1 ${addendum}
+        ORDER BY fi.pubdate DESC
+      `, params);
       return result.rows;
     }
     catch (err) {
