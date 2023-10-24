@@ -17,6 +17,7 @@ const Browser = ({ id, groupType, title }) => {
     return (<BrowserItem
       key = {`feeditem-${i}`}
       id = {item.id}
+      feed_title= {item.feed_title}
       title = {item.title}
       archived = {item.archived}
       pubdate = {item.pubdate}
