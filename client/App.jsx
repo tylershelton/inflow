@@ -12,34 +12,35 @@ import Sidebar from './components/Sidebar';
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
 const App = () => {
-  const [currFeedUrl, setCurrFeedUrl] = useState();
-  const [currFeed, setCurrFeed] = useState();
+  const [browserTarget, setBrowserTarget] = useState();
+  const [browserData, setBrowserData] = useState();
 
   const [currFeedItemUrl, setCurrFeedItemUrl] = useState();
   const [currFeedItem, setCurrFeedItem] = useState();
 
   // handle incoming url data intercepted from
   // sidebar links
-  eventBus.on('browseFeed', (url) => {
-    setCurrFeedUrl(url);
+  eventBus.on('browse', (targetInfo) => {
+    setBrowserTarget(targetInfo);
   });
 
   eventBus.on('openFeedItem', (url) => {
     setCurrFeedItemUrl(url);
   });
 
-  // get data for the feed browser from the server
+  // get data for the article browser from the server
   useEffect(() => {
-    if (!currFeedUrl) return;
+    if (!browserTarget) return;
     async function getFeedItems () {
-      const data = await fetch(currFeedUrl);
+      const data = await fetch(browserTarget.url);
       const feed = await data.json();
-      setCurrFeed(feed);
+      setBrowserData(feed);
+      // clear state elements that drive the article view
       if (currFeedItemUrl) setCurrFeedItemUrl();
       if (currFeedItem) setCurrFeedItem();
     }
     getFeedItems();
-  }, [currFeedUrl]);
+  }, [browserTarget]);
 
   // get data for the article view from the server
   useEffect(() => {
@@ -53,17 +54,17 @@ const App = () => {
   }, [currFeedItemUrl]);
 
   // build out state-based UI elements
-  let feed;
-  if (currFeed) {
-    feed = (<Feed
-      id = {currFeed.id}
-      title = {currFeed.title}
+  let browser;
+  if (browserData) {
+    browser = (<Feed
+      id = {browserData.id}
+      title = {browserData.title}
+      groupType = {browserTarget.type}
     />);
   }
 
   let article;
   if (currFeedItem) {
-    console.log(currFeedItem);
     article = (<Article
       title = {currFeedItem.title}
       description = {currFeedItem.description}
@@ -75,7 +76,7 @@ const App = () => {
   return (
     <div id="app-container">
       <Sidebar />
-      {feed}
+      {browser}
       {article}
     </div>
   );

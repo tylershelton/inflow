@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import FeedItem from './FeedItem';
 
-const Feed = ({ id, title }) => {
+const Feed = ({ id, groupType, title }) => {
   const [feedItems, setFeedItems] = useState([]);
 
   useEffect(() => {
     async function getFeedItems () {
-      const data = await fetch(`/feeditems/feed/${id}?all=false`);
+      const data = await fetch(`/feeditems/${groupType}/${id}?all=false`);
       const items = await data.json();
       setFeedItems(items);
     }
