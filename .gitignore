@@ -59,6 +59,3 @@ web_modules/
 
 # webpack production builds
 /build
-
-# instance-specific app configuration
-/vars

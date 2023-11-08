@@ -2,7 +2,10 @@
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 
-source $REPO_ROOT/vars
+# load in env vars if they exist
+if [ -f $REPO_ROOT/.env ]; then
+    export $(cat $REPO_ROOT/.env | xargs)
+fi
 psql -d $INFLOW_DB_URI -f $REPO_ROOT/server/models/schema.sql
 
 npm run dev
