@@ -2,7 +2,8 @@
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 
-source $REPO_ROOT/vars
+# create any missing database tables
 psql -d $INFLOW_DB_URI -f $REPO_ROOT/server/models/schema.sql
 
+# start servers
 npm run dev
