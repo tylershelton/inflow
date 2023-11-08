@@ -6,6 +6,6 @@ module.exports = {
     CONNECTIONS: process.env.INFLOW_DB_CONNECTIONS || 5,
   },
   EXPRESS: {
-    PORT: 3000,
+    PORT: process.env.INFLOW_EXPRESS_PORT || 3000,
   },
 };

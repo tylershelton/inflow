@@ -1,4 +1,5 @@
 const path = require('path');
+const conf = require('./config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -42,7 +43,7 @@ module.exports = {
     host: 'localhost',
     port: 8080,
     hot: true,
-    proxy: { '/': 'http://localhost:3000' },
+    proxy: { '/': `http://localhost:${conf.EXPRESS.PORT}` },
     static: {
       directory: path.join(__dirname, 'build'),
     },
