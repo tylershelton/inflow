@@ -3,7 +3,7 @@ const pool = require('../lib/db');
 module.exports = {
   create: title => {
     return pool.query(`
-      INSERT INTO category (name)
+      INSERT INTO category (title)
       VALUES ($1)
     `, [title]);
   },
