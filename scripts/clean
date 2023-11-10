@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# clean up webpack artifacts
+if [ -d "$REPO_ROOT/build" ]; then
+    echo '==> cleaning up webpack build artifacts...'
+    rm -rf $REPO_ROOT/build
+fi
+
+# clean up node_modules
+if [ -d "$REPO_ROOT/node_modules" ]; then
+    echo '==> removing node_modules...'
+    rm -rf $REPO_ROOT/node_modules
+fi
