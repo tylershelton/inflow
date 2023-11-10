@@ -1,7 +1,7 @@
 const express = require('express');
 const app     = express();
 const path    = require('path');
-const conf    = require(path.join('../config'));
+const conf    = require('./config');
 
 const categoryRouter = require('./routes/category');
 const feedRouter     = require('./routes/feed');
