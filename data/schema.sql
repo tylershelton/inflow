@@ -1,3 +1,6 @@
+SELECT 'CREATE DATABASE inflow'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'inflow');
+
 CREATE TABLE IF NOT EXISTS category (
     id                          SERIAL PRIMARY KEY,
     title        varchar(80)    NOT NULL UNIQUE
