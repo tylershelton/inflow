@@ -21,11 +21,17 @@ services:
     image: postgres:latest
     restart: always
     environment:
+      # these settings align with defaults built into the
+      # inflow codebase
       POSTGRES_USER: inflow
       POSTGRES_PASSWORD: testpass
       POSTGRES_DB: inflow
+
+      # per the postgres image docs, when storing database data
+      # on a mounted volume, postgres needs the database storage
+      # location to be a subfolder of that mounted volume, and
+      # not the root, so we define `pgdata/` here
       PGDATA: /var/lib/postgresql/data/pgdata
-      PGPASSWORD: postgres
 
 volumes:
   inflowdb:
