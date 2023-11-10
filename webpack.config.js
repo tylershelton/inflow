@@ -1,5 +1,5 @@
 const path = require('path');
-const conf = require('./config');
+const conf = require('./server/config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
