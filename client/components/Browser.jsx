@@ -3,6 +3,7 @@ import BrowserItem from './BrowserItem';
 
 const Browser = ({ id, groupType, title }) => {
   const [feedItems, setFeedItems] = useState([]);
+  const [syncStatus, setSyncStatus] = useState('Sync');
 
   useEffect(() => {
     async function getFeedItems () {
@@ -12,6 +13,15 @@ const Browser = ({ id, groupType, title }) => {
     }
     getFeedItems();
   }, [id]);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    setSyncStatus('Syncing...');
+    const data = await fetch(e.target.href);
+    const newItems = await data.json();
+    setFeedItems(newItems);
+    setSyncStatus('Sync');
+  };
 
   const feedItemComponents = feedItems.map((item, i) => {
     return (<BrowserItem
@@ -25,9 +35,12 @@ const Browser = ({ id, groupType, title }) => {
     />);
   });
   
+  const apiCategory = groupType === 'feed' ? 'feeds' : 'categories';
+
   return (
-    <section className='feedBrowser'>
+    <section className='browser'>
       <h2>{title}</h2>
+      <a onClick={handleClick} href={`/${apiCategory}/${id}/sync`}>{syncStatus}</a>
       {feedItemComponents}
     </section>
   );

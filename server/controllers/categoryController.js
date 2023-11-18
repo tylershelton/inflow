@@ -1,5 +1,6 @@
 const Category = require('../models/category');
 const Feed     = require('../models/feed');
+const FeedItem = require('../models/feedItem');
 
 module.exports = {
   getCategories: async (req, res, next) => {
@@ -58,6 +59,16 @@ module.exports = {
       next();
     }
     catch (err) {
+      next(err);
+    }
+  },
+
+  sync: async (req, res, next) => {
+    try {
+      await Category.sync(req.params.id);
+      res.locals.contents = await FeedItem.getByCategory(req.params.id, false);
+      next();
+    } catch (err) {
       next(err);
     }
   },

@@ -18,6 +18,10 @@ router.get('/:id/contents', categoryController.getContents, (req, res) => {
   return res.status(200).json(res.locals.contents);
 });
 
+router.get('/:id/sync', categoryController.sync, (req, res) => {
+  return res.status(200).json(res.locals.contents);
+});
+
 // create new category
 router.post('/', categoryController.createCategory, (req, res) => {
   return res.status(200).json(res.locals.category);

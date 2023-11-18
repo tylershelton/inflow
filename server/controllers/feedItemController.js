@@ -3,33 +3,42 @@ const Feed = require('../models/feed');
 const FeedItem = require('../models/feedItem');
 
 module.exports = {
+  deleteFeedItem: async (req, res, next) => {
+    try {
+      res.locals.success = await FeedItem.delete(req.params.id);
+      return next();
+    } catch (err) {
+      return next(err);
+    }
+  },
+
   getFeedItem: async (req, res, next) => {
     try {
       res.locals.feeditem = await FeedItem.get(req.params.id);
-      next();
+      return next();
     }
     catch (err) {
-      next(err);
+      return next(err);
     }
   },
 
   getItemsByCategory: async (req, res, next) => {
     try {
       res.locals.feeditems = await FeedItem.getByCategory(req.params.id, req.query.all);
-      next();
+      return next();
     }
     catch (err) {
-      next(err);
+      return next(err);
     }
   },
 
   getItemsByFeed: async (req, res, next) => {
     try {
       res.locals.feeditems = await FeedItem.getByFeed(req.params.id, req.query.all);
-      next();
+      return next();
     }
     catch (err) {
-      next(err);
+      return next(err);
     }
   },
 
@@ -43,10 +52,10 @@ module.exports = {
         }
       );
       res.locals.feeditem = await FeedItem.get(req.params.id);
-      next();
+      return next();
     }
     catch (err) {
-      next(err);
+      return next(err);
     }
   },
 };

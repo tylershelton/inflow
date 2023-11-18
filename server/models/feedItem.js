@@ -24,9 +24,16 @@ module.exports = {
       (title, description, url, pubdate, archived, feed_id, category_id)
     VALUES %L
     ON CONFLICT DO NOTHING
-    RETURNING *
     `, arr);
     return pool.query(sql);
+  },
+
+  delete: async id => {
+    const { rowCount } = await pool.query(`
+      DELETE FROM feeditem
+      WHERE id = $1
+    `, [id]);
+    return rowCount === 0 ? false : true;
   },
 
   get: async id => {
