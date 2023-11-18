@@ -3,6 +3,15 @@ const Feed = require('../models/feed');
 const FeedItem = require('../models/feedItem');
 
 module.exports = {
+  deleteFeedItem: async (req, res, next) => {
+    try {
+      res.locals.success = await FeedItem.delete(req.params.id);
+      return next();
+    } catch (err) {
+      return next(err);
+    }
+  },
+
   getFeedItem: async (req, res, next) => {
     try {
       res.locals.feeditem = await FeedItem.get(req.params.id);

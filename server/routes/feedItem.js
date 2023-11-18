@@ -24,4 +24,9 @@ router.put('/:id', feedItemController.toggleArchived, (req, res) => {
   return res.status(200).json(res.locals.feeditem);
 });
 
+router.delete('/:id', feedItemController.deleteFeedItem, (req, res) => {
+  if (res.locals.success) return res.sendStatus(204); // "No content"
+  else return res.sendStatus(404);
+});
+
 module.exports = router;

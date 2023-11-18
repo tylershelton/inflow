@@ -28,6 +28,14 @@ module.exports = {
     return pool.query(sql);
   },
 
+  delete: async id => {
+    const { rowCount } = await pool.query(`
+      DELETE FROM feeditem
+      WHERE id = $1
+    `, [id]);
+    return rowCount === 0 ? false : true;
+  },
+
   get: async id => {
     try {
       const result = await pool.query(`
