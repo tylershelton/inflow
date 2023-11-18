@@ -1,4 +1,5 @@
 const pool = require('../lib/db');
+const Feed = require('./feed');
 
 module.exports = {
   create: title => {
@@ -32,6 +33,17 @@ module.exports = {
       return result.rows[0];
     }
     catch (err) {
+      return err;
+    }
+  },
+
+  sync: async id => {
+    try {
+      const feeds = await Feed.getAllByCategory(id);
+      for (const feed of feeds) {
+        await Feed.sync(feed.id);
+      }
+    } catch (err) {
       return err;
     }
   },
