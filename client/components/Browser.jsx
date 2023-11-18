@@ -17,7 +17,7 @@ const Browser = ({ id, groupType, title }) => {
     e.preventDefault();
     const data = await fetch(e.target.href);
     const newItems = await data.json();
-    setFeedItems([...newItems, ...feedItems]);
+    setFeedItems(newItems);
   };
 
   const feedItemComponents = feedItems.map((item, i) => {
@@ -37,7 +37,7 @@ const Browser = ({ id, groupType, title }) => {
   return (
     <section className='browser'>
       <h2>{title}</h2>
-      <a onClick={handleClick} href={`/${apiCategory}/${id}/sync`}>Sync</a>
+      <a onClick={handleClick} href={`/${apiCategory}/${id}/sync`}>{syncStatus}</a>
       {feedItemComponents}
     </section>
   );
