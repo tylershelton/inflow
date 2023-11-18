@@ -21,7 +21,6 @@ router.get('/feed/:id', feedItemController.getItemsByFeed, (req, res) => {
 
 // mark a feeditem as read or unread
 router.put('/:id', feedItemController.toggleArchived, (req, res) => {
-  console.log(res.locals.feeditem);
   return res.status(200).json(res.locals.feeditem);
 });
 
