@@ -13,6 +13,13 @@ const Browser = ({ id, groupType, title }) => {
     getFeedItems();
   }, [id]);
 
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const data = await fetch(e.target.href);
+    const newItems = await data.json();
+    setFeedItems([...newItems, ...feedItems]);
+  };
+
   const feedItemComponents = feedItems.map((item, i) => {
     return (<BrowserItem
       key = {`feeditem-${i}`}
@@ -25,9 +32,12 @@ const Browser = ({ id, groupType, title }) => {
     />);
   });
   
+  const apiCategory = groupType === 'feed' ? 'feeds' : 'categories';
+
   return (
     <section className='browser'>
       <h2>{title}</h2>
+      <a onClick={handleClick} href={`/${apiCategory}/${id}/sync`}>Sync</a>
       {feedItemComponents}
     </section>
   );
