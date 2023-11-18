@@ -15,7 +15,7 @@ router.get('/:id', feedController.getFeed, (req, res) => {
 });
 
 router.get('/:id/sync', feedController.sync, (req, res) => {
-  return res.status(200).json(res.locals.newItems);
+  return res.status(200).json(res.locals.items);
 });
 
 // subscribe to a new feed

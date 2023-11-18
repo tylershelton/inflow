@@ -24,7 +24,6 @@ module.exports = {
       (title, description, url, pubdate, archived, feed_id, category_id)
     VALUES %L
     ON CONFLICT DO NOTHING
-    RETURNING *
     `, arr);
     return pool.query(sql);
   },

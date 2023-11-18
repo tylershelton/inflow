@@ -61,8 +61,7 @@ module.exports = {
           feed.category_id,
         ];
       });
-      const result = await FeedItem.createMany(entries);
-      return result.rows;
+      return await FeedItem.createMany(entries);
     }
     catch (err) {
       return err;
