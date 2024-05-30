@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# update the dataset used to populate the database in non-production environments
+# by dumping its current state to a file
+docker exec inflow-db-1 /bin/bash -c 'pg_dumpall -c -U inflow' > "$REPO_ROOT/data/dev_dataset.sql"
