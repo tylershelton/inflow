@@ -17,7 +17,7 @@ services:
   db:
     volumes:
       - inflowdb:/var/lib/postgresql/data
-      - ./server/models/schema.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/testData/dev_dataset.sql:/docker-entrypoint-initdb.d/init.sql
     image: postgres:latest
     restart: always
     environment:
