@@ -1,0 +1,36 @@
+name: inflow
+
+services:
+  inflow:
+    image: inflow
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: production
+      INFLOW_DB_HOST: db
+      INFLOW_EXPRESS_PORT: 8080
+    ports:
+      - 8080:8080
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      # these settings align with defaults built into the
+      # inflow codebase
+      POSTGRES_USER: inflow
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: inflow
+      # per the postgres image docs, when storing database data
+      # on a mounted volume, postgres needs the database storage
+      # location to be a subfolder of that mounted volume, and
+      # not the root, so we define `pgdata/` here
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - inflowdb:/var/lib/postgresql/data
+
+volumes:
+  inflowdb:
