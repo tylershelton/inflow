@@ -3,7 +3,7 @@ const conf = require('./server/config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: process.env.NODE_DEV,
+  mode: process.env.NODE_ENV,
   // This property defines where the application starts
   entry: './client/App.jsx',
 
@@ -40,8 +40,8 @@ module.exports = {
     }),
   ],
   devServer: {
-    host: 'localhost',
-    port: 8080,
+    host: '0.0.0.0',
+    port: process.env.PORT || 8080,
     hot: true,
     proxy: { '/': `http://localhost:${conf.EXPRESS.PORT}` },
     static: {
