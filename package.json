@@ -20,7 +20,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack-dev-server & NODE_ENV=development nodemon server/server.js",
-    "start": "NODE_ENV=production node server/server.js",
+    "start": "npm build & NODE_ENV=production node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
