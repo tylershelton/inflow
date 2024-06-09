@@ -19,7 +19,7 @@ app.use('/feeds', feedRouter);
 app.use('/feeditems', feedItemRouter);
 
 app.get('/', (req, res) => {
-  res.status(200).sendFile('index.html');
+  res.status(200).sendFile('/index.html');
 });
 
 // Fallback route handler
