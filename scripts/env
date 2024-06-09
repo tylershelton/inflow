@@ -25,12 +25,11 @@ print_envs() {
 
 # handle runs with no argument provided
 if [ -z "$1" ]; then
-    if [ -r "$env_file" ]; then
-        rm -f "$env_file"
-        echo "Clearing environment."
+    if [ -e "$env_file" ]; then
+        cat "$env_file"
         exit 0
     else
-        echo "No environment provided."
+        echo "No environment set."
         print_envs
         exit 1
     fi
