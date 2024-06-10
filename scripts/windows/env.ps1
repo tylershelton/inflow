@@ -7,7 +7,7 @@ $originalDir = Get-Location
 Set-Location -Path (Split-Path -Parent $MyInvocation.MyCommand.Path)
 
 $supported_envs = @("production", "development")
-$env_file = ".env"
+$env_file = "..\.env"
 
 function env_exists {
     param ($new_env)
