@@ -2,7 +2,7 @@ name: inflow
 
 services:
   inflow:
-    image: inflow
+    image: inflow:latest
     build:
       context: .
       dockerfile: Dockerfile

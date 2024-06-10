@@ -2,7 +2,7 @@ name: inflow-dev
 
 services:
   inflow:
-    image: inflow
+    image: inflow-dev:latest
     build:
       context: .
       dockerfile: Dockerfile.dev
