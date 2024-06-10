@@ -24,7 +24,6 @@ Set-Location -Path $REPO_ROOT
 # Start servers
 if ($cmd -eq "up") {
     if ($ENV.Trim() -eq "production") {
-        # <todo> generate webpack artifacts first
         & "$(Split-Path -Parent $MyInvocation.MyCommand.Path)\setup.ps1"
         docker compose -f docker-compose.yml up --build -d
     } else {
