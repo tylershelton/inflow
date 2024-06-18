@@ -1,7 +1,7 @@
 const express = require('express');
 const app     = express();
 const path    = require('path');
-const conf    = require(path.join('../config'));
+const conf    = require('./config');
 
 const categoryRouter = require('./routes/category');
 const feedRouter     = require('./routes/feed');
@@ -19,7 +19,7 @@ app.use('/feeds', feedRouter);
 app.use('/feeditems', feedItemRouter);
 
 app.get('/', (req, res) => {
-  res.status(200);
+  res.status(200).sendFile('/index.html');
 });
 
 // Fallback route handler

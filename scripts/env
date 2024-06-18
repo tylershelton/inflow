@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+
+cd $(dirname "$0")
+
+supported_envs="production development"
+env_file=".env"
+
+env_exists() {
+    for env in $supported_envs;
+    do
+        if [ "$env" = "$new_env" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+print_envs() {
+    echo "This project supports the following environments:"
+    for env in $supported_envs;
+    do
+        echo "  $env"
+    done
+}
+
+# handle runs with no argument provided
+if [ -z "$1" ]; then
+    if [ -e "$env_file" ]; then
+        cat "$env_file"
+        exit 0
+    else
+        echo "No environment set."
+        print_envs
+        exit 1
+    fi
+fi
+
+# handle runs with an argument provided
+new_env="$1"
+if env_exists; then
+    echo "$new_env" > "$env_file"
+    echo "Setting environment to '$new_env'."
+    exit 0
+else
+    echo "Unknown environment '"$new_env"'."
+    print_envs
+    exit 1
+fi

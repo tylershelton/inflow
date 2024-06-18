@@ -13,3 +13,9 @@ if [ -d "$REPO_ROOT/node_modules" ]; then
     echo '==> removing node_modules...'
     rm -rf $REPO_ROOT/node_modules
 fi
+
+# clean up environment info
+if [ -e "$REPO_ROOT/scripts/.env" ]; then
+    echo '==> clearing environment settings...'
+    rm -f "$REPO_ROOT/scripts/.env"
+fi

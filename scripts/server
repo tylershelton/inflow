@@ -1,9 +1,41 @@
 #!/bin/sh
 
-REPO_ROOT=$(git rev-parse --show-toplevel)
+cmd_is_valid() {
+    for valid_cmd in "up down";
+    do
+        if [ "$cmd" = "$valid_cmd" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
 
-# create any missing database tables
-psql -d $INFLOW_DB_URI -f $REPO_ROOT/server/models/schema.sql
+if [ -z "$1" ]; then
+    echo "Usage: server (up|down)"
+    exit 1
+fi
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+ENV=$(cat "$(dirname "$0")/.env")
+cmd="$1"
+
+cd "$REPO_ROOT"
 
 # start servers
-npm run dev
+if [ "$1" = "up" ]; then
+    if [ "$ENV" = "production" ]; then
+        # <todo> generate webpack artifacts first
+        docker compose -f docker-compose.yml up --build -d
+    else
+        # start in dev mode by default
+        docker compose -f docker-compose.dev.yml up --build -d
+        docker compose -f docker-compose.dev.yml exec -d inflow npm run dev
+    fi
+elif [ "$1" = "down" ]; then
+    if [ "$ENV" = "production" ]; then
+        docker compose -f docker-compose.yml down
+    else
+        # start in dev mode by default
+        docker compose -f docker-compose.dev.yml down
+    fi
+fi
