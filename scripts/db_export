@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# update the dataset used to populate the database in non-production environments
+# by dumping its current state to a file
+docker compose -f ./docker-compose.dev.yml exec db /bin/bash -c 'pg_dump -a -U inflow -d inflow' > "$REPO_ROOT/database/testData/dev_dataset.sql"

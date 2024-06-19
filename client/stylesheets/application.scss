@@ -1,0 +1,58 @@
+.debug-box,
+.debug-box-cascade,
+.debug-box-cascade * {
+    border: 1px solid fuchsia;
+}
+
+// Main Layout
+body {
+    background-color: #FDFDFD;
+    color: #222222;
+    margin: 0;
+}
+
+#app-container {
+    display: flex;
+    align-items: stretch;
+    max-height: 100vh;
+}
+
+.sidebar {
+    padding: 1rem;
+
+    flex-basis: 31%;
+    max-width: 20rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.browser {
+    padding: 1rem;
+    overflow-y: scroll;
+
+    flex-basis: 31%;
+    max-width: 24rem;
+    // max-height: 100vh;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    article h3 {
+        margin-bottom: 0.25rem;
+    }
+
+    article p {
+        margin: 0;
+    }
+
+    article time {
+        font-size: 90%;
+        font-style: italic;
+    }
+}
+
+.article {
+    padding: 1rem;
+    overflow-y: scroll;
+
+    flex-grow: 1;
+}
