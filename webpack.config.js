@@ -31,14 +31,17 @@ module.exports = {
       }
     ],
   },
+  
   resolve: {
     extensions: ['.jsx', '.js', '...'],
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/index.html'
     }),
   ],
+
   devServer: {
     host: '0.0.0.0',
     port: process.env.PORT || 8080,
@@ -48,5 +51,10 @@ module.exports = {
       directory: path.join(__dirname, 'build'),
     },
   },
+
+  watchOptions: {
+    poll: 1000,
+  },
+
   devtool: 'eval-source-map',
 };
