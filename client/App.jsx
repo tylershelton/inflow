@@ -81,11 +81,10 @@ const App = () => {
   }
 
   return (
-    <div id="app-container">
+    <main id="app">
       <Sidebar />
-      {browser}
-      {article}
-    </div>
+      <Outlet />
+    </main>
   );
 };
 
@@ -97,7 +96,7 @@ const router = createBrowserRouter(
   )
 );
 
-createRoot(document.getElementById('app')).render(
+createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
