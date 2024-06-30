@@ -2,6 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
+
 // internal libraries
 import eventBus from './lib/eventBus';
 
@@ -82,9 +89,16 @@ const App = () => {
   );
 };
 
-const root = createRoot(document.getElementById('app'));
-root.render(
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+
+    </Route>
+  )
+);
+
+createRoot(document.getElementById('app')).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
