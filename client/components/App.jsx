@@ -1,25 +1,15 @@
-// core
+// dependencies
 import React, { useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Outlet,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 // internal libraries
-import eventBus from './lib/eventBus';
+import eventBus from '../lib/eventBus';
 
-// components
-import Article from './components/Article';
-import ItemBrowser from './components/ItemBrowser';
-import Sidebar from './components/Sidebar';
-import styles from './stylesheets/application.scss'; // webpack will pick this up
+// internal components
+import Article from './Article';
+import Sidebar from './Sidebar';
 
-const App = () => {
+export default function App () {
   const [browserTarget, setBrowserTarget] = useState();
   const [browserData, setBrowserData] = useState();
 
@@ -61,16 +51,6 @@ const App = () => {
     getFeedItem();
   }, [currFeedItemUrl]);
 
-  // build out state-based UI elements
-  let browser;
-  if (browserData) {
-    browser = (<ItemBrowser
-      id = {browserData.id}
-      title = {browserData.title}
-      groupType = {browserTarget.type}
-    />);
-  }
-
   let article;
   if (currFeedItem) {
     article = (<Article
@@ -87,18 +67,4 @@ const App = () => {
       <Outlet />
     </main>
   );
-};
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-
-    </Route>
-  )
-);
-
-createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+}
