@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import BrowserItem from './BrowserItem';
+import { useLoaderData } from 'react-router-dom';
 
-const Browser = ({ id, groupType, title }) => {
+export async function loader ({ request }) {
+  const url = new URL(request.url);
+  const data = await fetch(url);
+  const category = await data.json();
+  category.type = url.pathname.includes('categories')
+    ? 'category'
+    : 'feed';
+  return { category };
+}
+
+export default function ItemBrowser () {
+  const { category } = useLoaderData();
+
   const [feedItems, setFeedItems] = useState([]);
   const [syncStatus, setSyncStatus] = useState('Sync');
 
   useEffect(() => {
     async function getFeedItems () {
-      const data = await fetch(`/feeditems/${groupType}/${id}?all=false`);
+      const data = await fetch(`/feeditems/${category.type}/${category.id}?all=false`);
       const items = await data.json();
       setFeedItems(items);
     }
     getFeedItems();
-  }, [id]);
+  }, [category.id]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -35,15 +48,13 @@ const Browser = ({ id, groupType, title }) => {
     />);
   });
   
-  const apiCategory = groupType === 'feed' ? 'feeds' : 'categories';
+  const apiCategory = category.type === 'category' ? 'categories' : 'feeds';
 
   return (
-    <section className='browser'>
-      <h2>{title}</h2>
-      <a onClick={handleClick} href={`/${apiCategory}/${id}/sync`}>{syncStatus}</a>
+    <section className='itemBrowser'>
+      <h2>{category.title}</h2>
+      <a onClick={handleClick} href={`/${apiCategory}/${category.id}/sync`}>{syncStatus}</a>
       {feedItemComponents}
     </section>
   );
-};
-
-export default Browser;
+}
