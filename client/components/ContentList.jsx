@@ -2,7 +2,7 @@ import React from 'react';
 
 import ContentListItem from './ContentListItem';
 
-const ContentList = ({ contents }) => {
+export default function ContentList ({ contents }) {
   const contentListItems = contents.map((item, i) => {
     return (<ContentListItem
       key = {`contentlistitem-${i}`}
@@ -16,6 +16,4 @@ const ContentList = ({ contents }) => {
       {contentListItems}
     </ul>
   );
-};
-
-export default ContentList;
+}
