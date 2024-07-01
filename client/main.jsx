@@ -9,7 +9,9 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import App from './components/App';
+import Root, {
+  loader as rootLoader,
+} from './components/Root';
 
 import ItemBrowser, {
   loader as itemBrowserLoader,
@@ -19,7 +21,10 @@ import styles from './stylesheets/application.scss'; // webpack will pick this u
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route path="/"
+      element={<Root />}
+      loader={rootLoader}
+    >
       <Route path="categories/:categoryId"
         element={<ItemBrowser />}
         loader={itemBrowserLoader}

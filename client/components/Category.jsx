@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import eventBus from '../lib/eventBus';
+import { NavLink } from 'react-router-dom';
 
 import ContentList from './ContentList';
 
-const Category = ({ catid, title }) => {
+export default function Category ({ catid, title }) {
 
   const [contents, setContents] = useState();
 
@@ -16,23 +16,13 @@ const Category = ({ catid, title }) => {
     getContents();
   }, []);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    eventBus.dispatch('browse', {
-      type: 'category',
-      url: e.target.href,
-    });
-  };
-
   let contentList;
   if (contents) contentList = <ContentList contents = {contents} />;
 
   return (
     <div>
-      <li data-id={catid}><a onClick={handleClick} href={`/categories/${catid}`}>{title}</a></li>
+      <li data-id={catid}><NavLink to={`/categories/${catid}`}>{title}</NavLink></li>
       {contentList}
     </div>
   );
-};
-
-export default Category;
+}
