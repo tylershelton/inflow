@@ -17,8 +17,6 @@ async function getFeed (id) {
 }
 
 async function getFeedItems (category) {
-  console.log('getting feed items for --');
-  console.log(category);
   const data = await fetch(`/feeditems/${category.type}/${category.id}?all=false`);
   return await data.json();
 }
