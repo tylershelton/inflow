@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BrowserItem from './BrowserItem';
-import { useLoaderData } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 
 export async function loader ({ request }) {
   const url = new URL(request.url);
@@ -9,52 +9,42 @@ export async function loader ({ request }) {
   category.type = url.pathname.includes('categories')
     ? 'category'
     : 'feed';
-  return { category };
+  const feeditemurl = `/feeditems/${category.type}/${category.id}`;
+  const itemdata = await fetch(feeditemurl);
+  const items = await itemdata.json();
+  return { category, items };
 }
 
 export default function ItemBrowser () {
-  const { category } = useLoaderData();
+  const { category, items } = useLoaderData();
+  console.log(items);
 
-  const [feedItems, setFeedItems] = useState([]);
+  // const [feedItems, setFeedItems] = useState([]);
   const [syncStatus, setSyncStatus] = useState('Sync');
 
-  useEffect(() => {
-    async function getFeedItems () {
-      const data = await fetch(`/feeditems/${category.type}/${category.id}?all=false`);
-      const items = await data.json();
-      setFeedItems(items);
-    }
-    getFeedItems();
-  }, [category.id]);
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
+  //   setSyncStatus('Syncing...');
+  //   const data = await fetch(e.target.href);
+  //   const newItems = await data.json();
+  //   setFeedItems(newItems);
+  //   setSyncStatus('Sync');
+  // };
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    setSyncStatus('Syncing...');
-    const data = await fetch(e.target.href);
-    const newItems = await data.json();
-    setFeedItems(newItems);
-    setSyncStatus('Sync');
-  };
-
-  const feedItemComponents = feedItems.map((item, i) => {
-    return (<BrowserItem
-      key = {`feeditem-${i}`}
-      id = {item.id}
-      feed_title= {item.feed_title}
-      title = {item.title}
-      archived = {item.archived}
-      pubdate = {item.pubdate}
-      url = {item.url}
-    />);
+  const feedItemComponents = items.map((item, i) => {
+    return (<BrowserItem item={item} />);
   });
   
   const apiCategory = category.type === 'category' ? 'categories' : 'feeds';
 
   return (
-    <section className='itemBrowser'>
-      <h2>{category.title}</h2>
-      <a onClick={handleClick} href={`/${apiCategory}/${category.id}/sync`}>{syncStatus}</a>
-      {feedItemComponents}
-    </section>
+    <>
+      <section className='itemBrowser'>
+        <h2>{category.title}</h2>
+        <a href={`/${apiCategory}/${category.id}/sync`}>{syncStatus}</a>
+        {feedItemComponents}
+      </section>
+      <Outlet />
+    </>
   );
 }
