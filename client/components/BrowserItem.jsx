@@ -1,22 +1,15 @@
 import React from 'react';
-import eventBus from '../lib/eventBus';
+import { NavLink } from 'react-router-dom';
 
-const BrowserItem = ({ id, feed_title, title, pubdate, url, archived }) => {
-  function handleClick (e) {
-    e.preventDefault();
-    eventBus.dispatch('openFeedItem', e.target.href);
-  }
-
+export default function BrowserItem ({ item }) {
   return (
     <article>
-      <h3><a onClick={handleClick} href={`/feeditems/${id}`}>{title}</a></h3>
+      <h3><NavLink to={`item/${item.id}`}>{item.title}</NavLink></h3>
       <p>
         {/* Render the feed title if it is present */}
-        {feed_title}{feed_title && <br/>}
-        <time dateTime={pubdate}>{new Date(pubdate).toDateString()}</time>
+        {item.feed_title}{item.feed_title && <br/>}
+        <time dateTime={item.pubdate}>{new Date(item.pubdate).toDateString()}</time>
       </p>
     </article>
   );
-};
-
-export default BrowserItem;
+}
