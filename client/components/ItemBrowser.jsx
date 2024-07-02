@@ -26,17 +26,7 @@ export async function loader ({ request, params }) {
 export default function ItemBrowser () {
   const { category, items } = useLoaderData();
 
-  // const [feedItems, setFeedItems] = useState([]);
   const [syncStatus, setSyncStatus] = useState('Sync');
-
-  // const handleClick = async (e) => {
-  //   e.preventDefault();
-  //   setSyncStatus('Syncing...');
-  //   const data = await fetch(e.target.href);
-  //   const newItems = await data.json();
-  //   setFeedItems(newItems);
-  //   setSyncStatus('Sync');
-  // };
 
   const feedItemComponents = items.map((item, i) => {
     return (<BrowserItem key={`browseritem-${i}`} item={item} />);
