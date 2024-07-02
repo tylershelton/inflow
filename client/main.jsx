@@ -16,6 +16,10 @@ import ItemBrowser, {
   loader as itemBrowserLoader,
 } from './components/ItemBrowser';
 
+import Article, {
+  loader as articleLoader,
+} from './components/Article';
+
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
 const router = createBrowserRouter(
@@ -31,7 +35,12 @@ const router = createBrowserRouter(
       <Route path="feeds/:feedId"
         element={<ItemBrowser />}
         loader={itemBrowserLoader}
-      />
+      >
+        <Route path="item/:itemId"
+          element={<Article />}
+          loader={articleLoader}
+        />
+      </Route>
     </Route>
   )
 );
