@@ -28,8 +28,11 @@ const router = createBrowserRouter(
       <Route path="categories/:categoryId"
         element={<ItemBrowser />}
         loader={itemBrowserLoader}
-      >
-      </Route>
+      />
+      <Route path="feeds/:feedId"
+        element={<ItemBrowser />}
+        loader={itemBrowserLoader}
+      />
     </Route>
   )
 );
