@@ -2,22 +2,29 @@ import React, { useState } from 'react';
 import BrowserItem from './BrowserItem';
 import { Outlet, useLoaderData } from 'react-router-dom';
 
-export async function loader ({ request }) {
+async function getCategory (id) {
+  const data = await fetch(`/categories/${id}`);
+  return await data.json();
+}
+
+async function getFeedItems (category) {
+  console.log('getting feed items for --');
+  console.log(category);
+  const data = await fetch(`/feeditems/${category.type}/${category.id}?all=false`);
+  return await data.json();
+}
+
+export async function loader ({ request, params }) {
   const url = new URL(request.url);
-  const data = await fetch(url);
-  const category = await data.json();
+  const category = await getCategory(params.categoryId);
   category.type = url.pathname.includes('categories')
     ? 'category'
     : 'feed';
-  const feeditemurl = `/feeditems/${category.type}/${category.id}`;
-  const itemdata = await fetch(feeditemurl);
-  const items = await itemdata.json();
-  return { category, items };
+  return { category, items: await getFeedItems(category) };
 }
 
 export default function ItemBrowser () {
   const { category, items } = useLoaderData();
-  console.log(items);
 
   // const [feedItems, setFeedItems] = useState([]);
   const [syncStatus, setSyncStatus] = useState('Sync');
@@ -32,7 +39,7 @@ export default function ItemBrowser () {
   // };
 
   const feedItemComponents = items.map((item, i) => {
-    return (<BrowserItem item={item} />);
+    return (<BrowserItem key={`browseritem-${i}`} item={item} />);
   });
   
   const apiCategory = category.type === 'category' ? 'categories' : 'feeds';
