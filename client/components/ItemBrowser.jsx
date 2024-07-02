@@ -4,7 +4,16 @@ import { Outlet, useLoaderData } from 'react-router-dom';
 
 async function getCategory (id) {
   const data = await fetch(`/categories/${id}`);
-  return await data.json();
+  const category = await data.json();
+  category.type = 'category';
+  return category;
+}
+
+async function getFeed (id) {
+  const data = await fetch(`/feeds/${id}`);
+  const feed = await data.json();
+  feed.type = 'feed';
+  return feed;
 }
 
 async function getFeedItems (category) {
@@ -16,10 +25,9 @@ async function getFeedItems (category) {
 
 export async function loader ({ request, params }) {
   const url = new URL(request.url);
-  const category = await getCategory(params.categoryId);
-  category.type = url.pathname.includes('categories')
-    ? 'category'
-    : 'feed';
+  const category = url.pathname.includes('categories')
+    ? await getCategory(params.categoryId)
+    : await getFeed(params.feedId);
   return { category, items: await getFeedItems(category) };
 }
 
