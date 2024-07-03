@@ -3,6 +3,7 @@ const router  = express.Router();
 
 const feedController = require('../controllers/feedController');
 const feed = require('../models/feed');
+const feedItemController = require('../controllers/feedItemController');
 
 // get all feeds
 router.get('/', feedController.getFeeds, (req, res) => {
@@ -16,6 +17,10 @@ router.get('/:id', feedController.getFeed, (req, res) => {
 
 router.get('/:id/sync', feedController.sync, (req, res) => {
   return res.status(200).json(res.locals.items);
+});
+
+router.get('/:id/item/:itemId', feedItemController.getFeedItem, (req, res) => {
+  return res.status(200).json(res.locals.feeditem);
 });
 
 // subscribe to a new feed
