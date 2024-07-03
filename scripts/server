@@ -29,7 +29,7 @@ if [ "$1" = "up" ]; then
     else
         # start in dev mode by default
         docker compose -f docker-compose.dev.yml up --build -d
-        docker compose -f docker-compose.dev.yml exec -d inflow npm run dev
+        docker compose -f docker-compose.dev.yml exec inflow bash
     fi
 elif [ "$1" = "down" ]; then
     if [ "$ENV" = "production" ]; then
