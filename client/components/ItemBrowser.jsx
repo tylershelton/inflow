@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BrowserItem from './BrowserItem';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet, useFetcher, useLoaderData } from 'react-router-dom';
 
 async function getCategory (id) {
   const data = await fetch(`/categories/${id}`);
@@ -21,6 +21,14 @@ async function getFeedItems (category) {
   return await data.json();
 }
 
+export async function action ({ request, params }) {
+  const formData = await request.formData();
+  if (formData.get('sync') === 'true') {
+    console.log(formData);
+  }
+  return null;
+}
+
 export async function loader ({ request, params }) {
   const url = new URL(request.url);
   const category = url.pathname.includes('categories')
@@ -31,8 +39,9 @@ export async function loader ({ request, params }) {
 
 export default function ItemBrowser () {
   const { category, items } = useLoaderData();
+  const fetcher = useFetcher();
 
-  const [syncStatus, setSyncStatus] = useState('Sync');
+  const syncing = fetcher.formData ? true : false;
 
   const feedItemComponents = items.map((item, i) => {
     return (<BrowserItem key={`browseritem-${i}`} category={category} item={item} />);
@@ -44,7 +53,12 @@ export default function ItemBrowser () {
     <>
       <section className='itemBrowser'>
         <h2>{category.title}</h2>
-        <a href={`/${apiCategory}/${category.id}/sync`}>{syncStatus}</a>
+        <fetcher.Form method="post">
+          <button
+            name="sync"
+            value={syncing ? 'false' : 'true'}
+            href={`/${apiCategory}/${category.id}/sync`}>{syncing ? 'Syncing...' : 'Sync'}</button>
+        </fetcher.Form>
         {feedItemComponents}
       </section>
       <Outlet />

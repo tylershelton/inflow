@@ -13,6 +13,7 @@ import Root, {
 } from './components/Root';
 
 import ItemBrowser, {
+  action as itemBrowserAction,
   loader as itemBrowserLoader,
 } from './components/ItemBrowser';
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path="categories/:categoryId"
         element={<ItemBrowser />}
         loader={itemBrowserLoader}
+        action={itemBrowserAction}
       >
         <Route path="item/:itemId"
           element={<Article />}
@@ -40,6 +42,7 @@ const router = createBrowserRouter(
       <Route path="feeds/:feedId"
         element={<ItemBrowser />}
         loader={itemBrowserLoader}
+        action={itemBrowserAction}
       >
         <Route path="item/:itemId"
           element={<Article />}
