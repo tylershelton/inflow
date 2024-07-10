@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const categoryController = require('../controllers/categoryController');
+const feedItemController = require('../controllers/feedItemController');
 
 // get category list
 router.get('/', categoryController.getCategories, (req, res) => {
@@ -20,6 +21,10 @@ router.get('/:id/contents', categoryController.getContents, (req, res) => {
 
 router.get('/:id/sync', categoryController.sync, (req, res) => {
   return res.status(200).json(res.locals.contents);
+});
+
+router.get('/:id/item/:itemId', feedItemController.getFeedItem, (req, res) => {
+  return res.status(200).json(res.locals.feeditem);
 });
 
 // create new category

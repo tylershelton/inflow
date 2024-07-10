@@ -35,11 +35,11 @@ export default function ItemBrowser () {
   const [syncStatus, setSyncStatus] = useState('Sync');
 
   const feedItemComponents = items.map((item, i) => {
-    return (<BrowserItem key={`browseritem-${i}`} item={item} />);
+    return (<BrowserItem key={`browseritem-${i}`} category={category} item={item} />);
   });
   
   const apiCategory = category.type === 'category' ? 'categories' : 'feeds';
-
+  
   return (
     <>
       <section className='itemBrowser'>
