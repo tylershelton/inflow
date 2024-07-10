@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData, useMatch } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 export async function loader ({ request }) {
   const url = new URL(request.url);
