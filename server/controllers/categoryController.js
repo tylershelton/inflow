@@ -66,7 +66,6 @@ module.exports = {
   sync: async (req, res, next) => {
     try {
       await Category.sync(req.params.id);
-      res.locals.contents = await FeedItem.getByCategory(req.params.id, false);
       next();
     } catch (err) {
       next(err);

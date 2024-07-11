@@ -16,7 +16,7 @@ router.get('/:id', feedController.getFeed, (req, res) => {
 });
 
 router.get('/:id/sync', feedController.sync, (req, res) => {
-  return res.status(200).json(res.locals.items);
+  return res.status(200);
 });
 
 router.get('/:id/item/:itemId', feedItemController.getFeedItem, (req, res) => {

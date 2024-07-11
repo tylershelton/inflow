@@ -24,7 +24,7 @@ async function getFeedItems (category) {
 export async function action ({ request, params }) {
   const formData = await request.formData();
   if (formData.get('sync') === 'true') {
-    console.log(formData);
+    return await fetch(formData.get('endpoint'));
   }
   return null;
 }
@@ -54,10 +54,13 @@ export default function ItemBrowser () {
       <section className='itemBrowser'>
         <h2>{category.title}</h2>
         <fetcher.Form method="post">
+          <input type='hidden' name='endpoint' value={`/${apiCategory}/${category.id}/sync`} />
           <button
             name="sync"
             value={syncing ? 'false' : 'true'}
-            href={`/${apiCategory}/${category.id}/sync`}>{syncing ? 'Syncing...' : 'Sync'}</button>
+          >
+            {syncing ? 'Syncing...' : 'Sync'}
+          </button>
         </fetcher.Form>
         {feedItemComponents}
       </section>
