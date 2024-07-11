@@ -29,7 +29,7 @@ if ($cmd -eq "up") {
     } else {
         # Start in dev mode by default
         docker compose -f docker-compose.dev.yml up --build -d
-        docker compose -f docker-compose.dev.yml exec -d inflow npm run dev
+        docker compose -f docker-compose.dev.yml exec inflow bash
     }
 } elseif ($cmd -eq "down") {
     if ($ENV.Trim() -eq "production") {
