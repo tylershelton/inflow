@@ -14,7 +14,7 @@ module.exports = {
 
   getFeedItem: async (req, res, next) => {
     try {
-      res.locals.feeditem = await FeedItem.get(req.params.id);
+      res.locals.feeditem = await FeedItem.get(req.params.itemId);
       return next();
     }
     catch (err) {

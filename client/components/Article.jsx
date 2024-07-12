@@ -1,6 +1,14 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
-const Article = ({ title, description, pubdate, url }) => {
+export async function loader ({ request }) {
+  const url = new URL(request.url);
+  return await fetch(url);
+}
+
+export default function Article () {
+  const { title, pubdate, description } = useLoaderData();
+
   return (
     <section className='article'>
       <article>
@@ -12,6 +20,4 @@ const Article = ({ title, description, pubdate, url }) => {
       </article>
     </section>
   );
-};
-
-export default Article;
+}

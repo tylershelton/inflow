@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: process.env.NODE_ENV,
   // This property defines where the application starts
-  entry: './client/App.jsx',
+  entry: './client/main.jsx',
 
   // Define the filepath and file name used for deploying
   // the bundled file

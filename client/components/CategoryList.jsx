@@ -1,25 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Category from './Category';
 
-
-const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
-  
-  useEffect(() => {
-    async function fetchCategories () {
-      const data = await fetch('/categories');
-      const categories = await data.json();
-      setCategories(categories);
-    }
-    fetchCategories();
-  }, []);
-
+export default function CategoryList ({ categories }) {
   const categoryComponents = categories.map((cat, i) => {
     return (<Category
-      key   = {`cat-${i}`}
-      catid = {cat.id}
-      title  = {cat.title}
+      key      = {`cat-${i}`}
+      catid    = {cat.id}
+      title    = {cat.title}
+      contents = {cat.contents}
     />);
   });
 
@@ -31,6 +20,4 @@ const CategoryList = () => {
       </ul>
     </nav>
   );
-};
-
-export default CategoryList;
+}

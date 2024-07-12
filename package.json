@@ -18,9 +18,9 @@
     "url": "git+https://github.com/tylershelton/inflow.git"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack-dev-server & NODE_ENV=development nodemon server/server.js",
-    "start": "NODE_ENV=production node server/server.js",
+    "build": "webpack",
+    "dev": "webpack-dev-server & nodemon server/server.js",
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -30,7 +30,8 @@
     "pg": "^8.11.3",
     "pg-format": "^1.0.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",

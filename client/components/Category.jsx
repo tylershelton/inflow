@@ -1,38 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import eventBus from '../lib/eventBus';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import ContentList from './ContentList';
 
-const Category = ({ catid, title }) => {
-
-  const [contents, setContents] = useState();
-
-  useEffect(() => {
-    async function getContents () {
-      const data = await fetch(`/categories/${catid}/contents`);
-      const contents = await data.json();
-      setContents(contents);
-    }
-    getContents();
-  }, []);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    eventBus.dispatch('browse', {
-      type: 'category',
-      url: e.target.href,
-    });
-  };
-
+export default function Category ({ catid, title, contents }) {
   let contentList;
-  if (contents) contentList = <ContentList contents = {contents} />;
+  if (contents) contentList = <ContentList contents={contents} />;
 
   return (
     <div>
-      <li data-id={catid}><a onClick={handleClick} href={`/categories/${catid}`}>{title}</a></li>
+      <li data-id={catid}><NavLink to={`/categories/${catid}`}>{title}</NavLink></li>
       {contentList}
     </div>
   );
-};
-
-export default Category;
+}
