@@ -21,12 +21,9 @@ async function getFeedItems (category) {
   return await data.json();
 }
 
-export async function action ({ request, params }) {
+export async function action ({ request }) {
   const formData = await request.formData();
-  if (formData.get('sync') === 'true') {
-    return await fetch(formData.get('endpoint'));
-  }
-  return null;
+  return await fetch(formData.get('endpoint'));
 }
 
 export async function loader ({ request, params }) {
