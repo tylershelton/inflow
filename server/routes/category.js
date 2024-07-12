@@ -20,7 +20,7 @@ router.get('/:id/contents', categoryController.getContents, (req, res) => {
 });
 
 router.get('/:id/sync', categoryController.sync, (req, res) => {
-  return res.status(200);
+  return res.sendStatus(200);
 });
 
 router.get('/:id/item/:itemId', feedItemController.getFeedItem, (req, res) => {
