@@ -11,8 +11,10 @@ servers:
   - url: http://localhost:{port}
     variables:
       port:
-       default: "8080"
-       description: This value assigned per-deployment.
+        default: "8080"
+        description:
+          Port is defined per-deployment. The default reflects a
+          typical setup for a development environment.
 
 tags:
   - name: user
