@@ -34,7 +34,7 @@ paths:
                     title:
                       type: string
         "401":
-          description: User needs to authenticate
+          $ref: "#/components/responses/notLoggedIn"
     post:
       summary: Create a new Collection
       requestBody:
@@ -48,7 +48,7 @@ paths:
         "201":
           description: Collction successfully created
         "401":
-          description: User needs to authenticate
+          $ref: "#/components/responses/notLoggedIn"
         "409":
           description: Collection already exists
   /feeds:
@@ -58,14 +58,14 @@ paths:
         "200":
           description: Feeds successfully returned
         "401":
-          description: User needs to authenticate
+          $ref: "#/components/responses/notLoggedIn"
     post:
       summary: Subscribe User to a new Feed
       responses:
         "201":
           description: Successfully subscribed to Feed
         "401":
-          description: User needs to authenticate
+          $ref: "#/components/responses/notLoggedIn"
         "409":
           description: User is already subscribed to Feed
   /items:
@@ -78,13 +78,18 @@ paths:
       responses:
         # Figure out best HTTP codes for paginated data
         "401":
-          description: User needs to authenticate
+          $ref: "#/components/responses/notLoggedIn"
     post:
       summary: Create a new Item
       responses:
         "201":
           description: Item successfully created
         "401":
-          description: User needs to authenticate
+          $ref: "#/components/responses/notLoggedIn"
         "409":
           description: Item already exists
+
+components:
+  responses:
+    notLoggedIn:
+      description: User needs to authenticate
