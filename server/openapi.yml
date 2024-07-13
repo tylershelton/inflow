@@ -13,6 +13,17 @@ servers:
       port:
        default: "8080"
        description: This value assigned per-deployment.
+
+tags:
+  - name: user
+    description: Operations related to Users
+  - name: collection
+    description: Operations related to Item Collections
+  - name: feed
+    description: Operations related to RSS/Atom feed subscriptions
+  - name: item
+    description: Operations related to Items
+
 paths:
   /users:
     post:
