@@ -1,7 +1,9 @@
 openapi: 3.1.0
+
 info:
   title: Inflow API Description
   version: 0.0.1
+
 paths:
   /users:
     post:
@@ -13,6 +15,17 @@ paths:
           description: User cannot be created due to missing information
         "409":
           description: User already exists
+  /users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+    get:
+    patch:
+    delete:
   /collections:
     get:
       summary: Get all Collections, parented where applicable
@@ -51,6 +64,16 @@ paths:
           $ref: "#/components/responses/notLoggedIn"
         "409":
           description: Collection already exists
+  /collections/{collectionId}:
+    parameters:
+      - $ref: "#/components/parameters/collectionId"
+    get:
+    patch:
+    delete:
+  /collections/{collectionId}/items:
+    parameters:
+      - $ref: "#/components/parameters/collectionId"
+    get:
   /feeds:
     get:
       summary: Get the User's subscribed Feeds
@@ -68,6 +91,16 @@ paths:
           $ref: "#/components/responses/notLoggedIn"
         "409":
           description: User is already subscribed to Feed
+  /feeds/{feedId}:
+    parameters:
+      - name: feedId
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+    get:
+    delete:
   /items:
     get:
       summary: Get a User's Items
@@ -88,8 +121,27 @@ paths:
           $ref: "#/components/responses/notLoggedIn"
         "409":
           description: Item already exists
+  /items/{itemId}:
+    parameters:
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+    get:
+    patch:
+    delete:
 
 components:
+  parameters:
+    collectionId:
+      name: collectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
   responses:
     notLoggedIn:
       description: User needs to authenticate
