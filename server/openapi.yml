@@ -19,10 +19,31 @@ paths:
       responses:
         "200":
           description: Collections successfully returned
+          content:
+            # TODO: This is the current, non-hierarchical representation of Collections
+            #       that gets returned by the server. Need to spec out a version of this
+            #       that supports Collection parenting.
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
         "401":
           description: User needs to authenticate
     post:
       summary: Create a new Collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              minLength: 1
       responses:
         "201":
           description: Collction successfully created
