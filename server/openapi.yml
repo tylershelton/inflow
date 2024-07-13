@@ -2,7 +2,10 @@ openapi: 3.1.0
 
 info:
   title: Inflow API Description
+  description: Spec for the API that backs the Inflow webapp.
   version: 0.0.1
+  contact:
+    url: https://github.com/tylershelton/inflow
 
 paths:
   /users:
