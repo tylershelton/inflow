@@ -29,6 +29,8 @@ tags:
 paths:
   /users:
     post:
+      tags:
+       - user
       summary: Create a new User
       description: Register a new user for the application.
       operationId: createUser
@@ -39,8 +41,6 @@ paths:
           description: User cannot be created due to missing information
         "409":
           description: User already exists
-      tags:
-       - user
   /users/{userId}:
     parameters:
       - name: userId
