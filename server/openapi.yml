@@ -5,18 +5,65 @@ info:
 paths:
   /users:
     post:
-      summary: Create a new user
+      summary: Create a new User
       responses:
         "201":
-          description: New user successfully created.
+          description: User successfully created
         "400":
-          description: User cannot be created due to missing information, or because the user already exists.
+          description: User cannot be created due to missing information
+        "409":
+          description: User already exists
   /collections:
-    get: {}
-    post: {}
+    get:
+      summary: Get all Collections, parented where applicable
+      responses:
+        "200":
+          description: Collections successfully returned
+        "401":
+          description: User needs to authenticate
+    post:
+      summary: Create a new Collection
+      responses:
+        "201":
+          description: Collction successfully created
+        "401":
+          description: User needs to authenticate
+        "409":
+          description: Collection already exists
   /feeds:
-    get: {}
-    post: {}
+    get:
+      summary: Get the User's subscribed Feeds
+      responses:
+        "200":
+          description: Feeds successfully returned
+        "401":
+          description: User needs to authenticate
+    post:
+      summary: Subscribe User to a new Feed
+      responses:
+        "201":
+          description: Successfully subscribed to Feed
+        "401":
+          description: User needs to authenticate
+        "409":
+          description: User is already subscribed to Feed
   /items:
-    get: {}
-    post: {}
+    get:
+      summary: Get a User's Items
+      description: |
+        Returns all of a User's items, from all sources,
+        starting with the most recently published/created.
+        Returned data is paginated.
+      responses:
+        # Figure out best HTTP codes for paginated data
+        "401":
+          description: User needs to authenticate
+    post:
+      summary: Create a new Item
+      responses:
+        "201":
+          description: Item successfully created
+        "401":
+          description: User needs to authenticate
+        "409":
+          description: Item already exists
