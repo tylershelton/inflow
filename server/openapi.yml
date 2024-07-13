@@ -71,7 +71,7 @@ paths:
   /items:
     get:
       summary: Get a User's Items
-      description: |
+      description:
         Returns all of a User's items, from all sources,
         starting with the most recently published/created.
         Returned data is paginated.
