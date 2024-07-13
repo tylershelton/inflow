@@ -7,6 +7,12 @@ info:
   contact:
     url: https://github.com/tylershelton/inflow
 
+servers:
+  - url: http://localhost:{port}
+    variables:
+      port:
+       default: "8080"
+       description: This value assigned per-deployment.
 paths:
   /users:
     post:
