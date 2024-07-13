@@ -2,4 +2,21 @@ openapi: 3.1.0
 info:
   title: Inflow API Description
   version: 0.0.1
-paths: {}
+paths:
+  /users:
+    post:
+      summary: Create a new user
+      responses:
+        "201":
+          description: New user successfully created.
+        "400":
+          description: User cannot be created due to missing information, or because the user already exists.
+  /collections:
+    get: {}
+    post: {}
+  /feeds:
+    get: {}
+    post: {}
+  /items:
+    get: {}
+    post: {}
