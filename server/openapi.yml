@@ -32,7 +32,7 @@ paths:
       tags:
        - user
       summary: Create a new User
-      description: Register a new user for the application.
+      description: Registers a new user account.
       operationId: createUser
       responses:
         "201":
