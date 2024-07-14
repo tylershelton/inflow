@@ -70,7 +70,13 @@ paths:
       operationId: deleteUser
   /collections:
     get:
-      summary: Get all Collections, parented where applicable
+      summary: Get all Collections
+      description:
+        Returns all of a User's collections, nested to reflect any
+        Collection parenting the User has done.
+      tags:
+        - collection
+      operationId: getCollections
       responses:
         "200":
           description: Collections successfully returned
@@ -92,6 +98,11 @@ paths:
           $ref: "#/components/responses/notLoggedIn"
     post:
       summary: Create a new Collection
+      description:
+        Creates a new Collection and returns the newly created record upon success.
+      tags:
+        - collection
+      operationId: createCollection
       requestBody:
         required: true
         content:
@@ -110,12 +121,38 @@ paths:
     parameters:
       - $ref: "#/components/parameters/collectionId"
     get:
+      tags:
+        - collection
+      summary: Get a Collection
+      description: Returns the record for an individual Collection.
+      operationId: getCollection
     patch:
+      tags:
+        - collection
+      summary: Update a Collection property
+      description:
+        Update an existing Collection's title or parent-child relationship.
+      operationId: updateCollection
     delete:
+      tags:
+        - collection
+      summary: Delete a Collection
+      description:
+        Permanently removes a Collection. This only deletes the Collection itself,
+        and not any associated Items or sub-Collections.
+      operationId: deleteCollection
   /collections/{collectionId}/items:
     parameters:
       - $ref: "#/components/parameters/collectionId"
     get:
+      tags:
+        - collection
+      summary: Get Collection contents
+      description:
+        Retrieves the Items associated with a Collection. Will retrieve all Items
+        by default, with pagination. Query parameters can be used to filter the
+        returned data, and to control the pagination behavior.
+      operationId: getCollectionItems
   /feeds:
     get:
       summary: Get the User's subscribed Feeds
