@@ -50,8 +50,24 @@ paths:
           type: string
           minLength: 1
     get:
+      tags:
+        - user
+      summary: Get a User
+      description: Get information about a specific User.
+      operationId: getUser
     patch:
+      tags:
+        - user
+      summary: Update a User property
+      description: Updates a single property about a User.
+      operationId: updateUser
     delete:
+      tags:
+        - user
+      summary: Delete a User
+      description:
+        Permanently deletes a User, and all their associated data.
+      operationId: deleteUser
   /collections:
     get:
       summary: Get all Collections, parented where applicable
