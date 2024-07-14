@@ -85,7 +85,7 @@ paths:
               minLength: 1
       responses:
         "201":
-          description: Collction successfully created
+          description: Collection successfully created
         "401":
           $ref: "#/components/responses/notLoggedIn"
         "409":
