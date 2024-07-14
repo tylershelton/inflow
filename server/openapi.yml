@@ -206,17 +206,25 @@ paths:
       operationId: unsubscribeFromFeed
   /items:
     get:
+      tags:
+        - item
       summary: Get a User's Items
       description:
-        Returns all of a User's items, from all sources,
-        starting with the most recently published/created.
-        Returned data is paginated.
+        Returns all of a User's items, from all sources, starting with the most recently
+        published/created. Returned data is paginated.
+      operationId: getItems
       responses:
         # Figure out best HTTP codes for paginated data
         "401":
           $ref: "#/components/responses/notLoggedIn"
     post:
+      tags:
+        - item
       summary: Create a new Item
+      description:
+        Creates a new Item in the system, associated with the currently
+        authenticated User.
+      operationId: createItem
       responses:
         "201":
           description: Item successfully created
@@ -233,8 +241,29 @@ paths:
           type: string
           minLength: 1
     get:
+      tags:
+        - item
+      summary: Get an Item
+      description:
+        Retrieves a single Item. Item must belong to the currently authenticated
+        User.
+      operationId: getItem
     patch:
+      tags:
+        - item
+      summary: Update an Item property
+      description:
+        Update a property of a given Item. Item must be associated with the
+        currently authenticated User.
+      operationId: updateItem
     delete:
+      tags:
+        - item
+      summary: Delete Item
+      description:
+        Permanently delete a given Item. Item must be associated with the
+        currently authenticated User, and not be sourced from a Feed.
+      operationId: deleteItem
 
 components:
   parameters:
