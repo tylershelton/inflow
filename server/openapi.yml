@@ -215,6 +215,8 @@ paths:
       operationId: getItems
       responses:
         # Figure out best HTTP codes for paginated data
+        "200":
+          description: Page of Items successfully returned
         "401":
           $ref: "#/components/responses/notLoggedIn"
     post:
