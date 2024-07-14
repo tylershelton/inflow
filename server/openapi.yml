@@ -155,14 +155,24 @@ paths:
       operationId: getCollectionItems
   /feeds:
     get:
+      tags:
+        - feed
       summary: Get the User's subscribed Feeds
+      description:
+        Retrieves subscribed Feeds for the currently authenticated User.
+      operationId: getFeeds
       responses:
         "200":
           description: Feeds successfully returned
         "401":
           $ref: "#/components/responses/notLoggedIn"
     post:
-      summary: Subscribe User to a new Feed
+      tags:
+        - feed
+      summary: Subscribe to a new Feed
+      description:
+        Subscribes the currently authenticated User to a new RSS Feed.
+      operationId: subscribeToFeed
       responses:
         "201":
           description: Successfully subscribed to Feed
@@ -179,7 +189,21 @@ paths:
           type: string
           minLength: 1
     get:
+      tags:
+        - feed
+      summary: Get a Feed
+      description:
+        Retrieve info about an individual Feed the User is subscribed to. Note
+        that this returns information about the Feed itself; not the contents of
+        that Feed.
+      operationId: getFeed
     delete:
+      tags:
+        - feed
+      summary: Unsubscribe from a Feed
+      description:
+        Unsubscribes the currently authenticated User from the provided Feed.
+      operationId: unsubscribeFromFeed
   /items:
     get:
       summary: Get a User's Items
