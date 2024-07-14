@@ -1,0 +1,281 @@
+openapi: 3.1.0
+
+info:
+  title: Inflow API Description
+  description: Spec for the API that backs the Inflow webapp.
+  version: 0.0.1
+  contact:
+    url: https://github.com/tylershelton/inflow
+
+servers:
+  - url: http://localhost:{port}
+    variables:
+      port:
+        default: "8080"
+        description:
+          Port is defined per-deployment. The default reflects a
+          typical setup for a development environment.
+
+tags:
+  - name: user
+    description: Operations related to Users
+  - name: collection
+    description: Operations related to Item Collections
+  - name: feed
+    description: Operations related to RSS/Atom feed subscriptions
+  - name: item
+    description: Operations related to Items
+
+paths:
+  /users:
+    post:
+      tags:
+       - user
+      summary: Create a new User
+      description: Registers a new user account.
+      operationId: createUser
+      responses:
+        "201":
+          description: User successfully created
+        "400":
+          description: User cannot be created due to missing information
+        "409":
+          description: User already exists
+  /users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+    get:
+      tags:
+        - user
+      summary: Get a User
+      description: Get information about a specific User.
+      operationId: getUser
+    patch:
+      tags:
+        - user
+      summary: Update a User property
+      description: Updates a single property about a User.
+      operationId: updateUser
+    delete:
+      tags:
+        - user
+      summary: Delete a User
+      description:
+        Permanently deletes a User, and all their associated data.
+      operationId: deleteUser
+  /collections:
+    get:
+      summary: Get all Collections
+      description:
+        Returns all of a User's collections, nested to reflect any
+        Collection parenting the User has done.
+      tags:
+        - collection
+      operationId: getCollections
+      responses:
+        "200":
+          description: Collections successfully returned
+          content:
+            # TODO: This is the current, non-hierarchical representation of Collections
+            #       that gets returned by the server. Need to spec out a version of this
+            #       that supports Collection parenting.
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+        "401":
+          $ref: "#/components/responses/notLoggedIn"
+    post:
+      summary: Create a new Collection
+      description:
+        Creates a new Collection and returns the newly created record upon success.
+      tags:
+        - collection
+      operationId: createCollection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              minLength: 1
+      responses:
+        "201":
+          description: Collection successfully created
+        "401":
+          $ref: "#/components/responses/notLoggedIn"
+        "409":
+          description: Collection already exists
+  /collections/{collectionId}:
+    parameters:
+      - $ref: "#/components/parameters/collectionId"
+    get:
+      tags:
+        - collection
+      summary: Get a Collection
+      description: Returns the record for an individual Collection.
+      operationId: getCollection
+    patch:
+      tags:
+        - collection
+      summary: Update a Collection property
+      description:
+        Update an existing Collection's title or parent-child relationship.
+      operationId: updateCollection
+    delete:
+      tags:
+        - collection
+      summary: Delete a Collection
+      description:
+        Permanently removes a Collection. This only deletes the Collection itself,
+        and not any associated Items or sub-Collections.
+      operationId: deleteCollection
+  /collections/{collectionId}/items:
+    parameters:
+      - $ref: "#/components/parameters/collectionId"
+    get:
+      tags:
+        - collection
+      summary: Get Collection contents
+      description:
+        Retrieves the Items associated with a Collection. Will retrieve all Items
+        by default, with pagination. Query parameters can be used to filter the
+        returned data, and to control the pagination behavior.
+      operationId: getCollectionItems
+  /feeds:
+    get:
+      tags:
+        - feed
+      summary: Get the User's subscribed Feeds
+      description:
+        Retrieves subscribed Feeds for the currently authenticated User.
+      operationId: getFeeds
+      responses:
+        "200":
+          description: Feeds successfully returned
+        "401":
+          $ref: "#/components/responses/notLoggedIn"
+    post:
+      tags:
+        - feed
+      summary: Subscribe to a new Feed
+      description:
+        Subscribes the currently authenticated User to a new RSS Feed.
+      operationId: subscribeToFeed
+      responses:
+        "201":
+          description: Successfully subscribed to Feed
+        "401":
+          $ref: "#/components/responses/notLoggedIn"
+        "409":
+          description: User is already subscribed to Feed
+  /feeds/{feedId}:
+    parameters:
+      - name: feedId
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+    get:
+      tags:
+        - feed
+      summary: Get a Feed
+      description:
+        Retrieve info about an individual Feed the User is subscribed to. Note
+        that this returns information about the Feed itself; not the contents of
+        that Feed.
+      operationId: getFeed
+    delete:
+      tags:
+        - feed
+      summary: Unsubscribe from a Feed
+      description:
+        Unsubscribes the currently authenticated User from the provided Feed.
+      operationId: unsubscribeFromFeed
+  /items:
+    get:
+      tags:
+        - item
+      summary: Get a User's Items
+      description:
+        Returns all of a User's items, from all sources, starting with the most recently
+        published/created. Returned data is paginated.
+      operationId: getItems
+      responses:
+        # Figure out best HTTP codes for paginated data
+        "200":
+          description: Page of Items successfully returned
+        "401":
+          $ref: "#/components/responses/notLoggedIn"
+    post:
+      tags:
+        - item
+      summary: Create a new Item
+      description:
+        Creates a new Item in the system, associated with the currently
+        authenticated User.
+      operationId: createItem
+      responses:
+        "201":
+          description: Item successfully created
+        "401":
+          $ref: "#/components/responses/notLoggedIn"
+        "409":
+          description: Item already exists
+  /items/{itemId}:
+    parameters:
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+    get:
+      tags:
+        - item
+      summary: Get an Item
+      description:
+        Retrieves a single Item. Item must belong to the currently authenticated
+        User.
+      operationId: getItem
+    patch:
+      tags:
+        - item
+      summary: Update an Item property
+      description:
+        Update a property of a given Item. Item must be associated with the
+        currently authenticated User.
+      operationId: updateItem
+    delete:
+      tags:
+        - item
+      summary: Delete Item
+      description:
+        Permanently delete a given Item. Item must be associated with the
+        currently authenticated User, and not be sourced from a Feed.
+      operationId: deleteItem
+
+components:
+  parameters:
+    collectionId:
+      name: collectionId
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+  responses:
+    notLoggedIn:
+      description: User needs to authenticate
