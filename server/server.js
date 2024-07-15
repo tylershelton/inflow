@@ -3,6 +3,7 @@ const app     = express();
 const path    = require('path');
 const conf    = require('./config');
 
+const authRouter     = require('./routes/auth');
 const categoryRouter = require('./routes/category');
 const feedRouter     = require('./routes/feed');
 const feedItemRouter = require('./routes/feedItem');
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../build')));
 
 // api routes
+app.use('/auth', authRouter);
 app.use('/categories', categoryRouter);
 app.use('/feeds', feedRouter);
 app.use('/feeditems', feedItemRouter);
@@ -23,7 +25,7 @@ app.get('/', (req, res) => {
 });
 
 // Fallback route handler
-app.use((req, res) => res.sendStatus(404));
+app.use((req, res) => res.sendStatus(500));
 
 console.log('Express server listening on', conf.EXPRESS.PORT);
 app.listen(conf.EXPRESS.PORT);
