@@ -1,5 +1,16 @@
 import React from 'react';
-import { Form } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
+
+export async function action ({ request }) {
+  const formData = await request.formData();
+  console.log(formData);
+  const response = await fetch('/auth/login', {
+    method: 'post',
+    body: formData,
+  });
+  console.log(response);
+  return redirect('/');
+}
 
 export default function Login () {
   return (
