@@ -36,6 +36,12 @@ services:
       - inflowdb:/var/lib/postgresql/data
       - ./database/schema/schema.sql:/docker-entrypoint-initdb.d/01-init.sql
       - ./database/testData/dev_dataset.sql:/docker-entrypoint-initdb.d/02-data.sql
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
 
 volumes:
   inflowdb:
