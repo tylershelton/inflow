@@ -24,11 +24,12 @@ erDiagram
 	}
 	user {
 		int id PK
-		string email
+		string username
 		string password_hash
 		string password_salt
 		timestamp last_login
 		timestamp created_at
+		timestamp updated_at
 	}
 	collection-useritem {
 		int item_id PK,FK
