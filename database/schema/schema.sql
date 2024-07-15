@@ -33,6 +33,6 @@ CREATE TABLE IF NOT EXISTS user (
     password_hash   varchar(255)    NOT NULL,
     password_salt   varchar(255)    NOT NULL,
     last_login      timestamp,
-    created_at      timestamp       DEFAULT CURRENT_TIMESTAMP,
-    updated_at      timestamp       DEFAULT CURRENT_TIMESTAMP
+    created_at      timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at      timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
