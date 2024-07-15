@@ -21,6 +21,8 @@ import Article, {
   loader as articleLoader,
 } from './components/Article';
 
+import Login from './components/Login';
+
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
 const router = createBrowserRouter(
@@ -49,6 +51,9 @@ const router = createBrowserRouter(
           loader={articleLoader}
         />
       </Route>
+      <Route path="login"
+        element={<Login />}
+      />
     </Route>
   )
 );
