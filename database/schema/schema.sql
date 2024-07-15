@@ -26,3 +26,13 @@ CREATE TABLE IF NOT EXISTS feeditem (
     
     CONSTRAINT title_or_description CHECK (title IS NOT NULL OR description IS NOT NULL)
 );
+
+CREATE TABLE IF NOT EXISTS user (
+    id                              SERIAL PRIMARY KEY,
+    username        varchar(255)    UNIQUE NOT NULL,
+    password_hash   varchar(255)    NOT NULL,
+    password_salt   varchar(255)    NOT NULL,
+    last_login      timestamp,
+    created_at      timestamp       DEFAULT CURRENT_TIMESTAMP,
+    updated_at      timestamp       DEFAULT CURRENT_TIMESTAMP
+);
