@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS feeditem (
 CREATE TABLE IF NOT EXISTS user_account (
     id                              SERIAL PRIMARY KEY,
     username        varchar(255)    UNIQUE NOT NULL,
-    password_hash   varchar(255)    NOT NULL,
-    password_salt   varchar(255)    NOT NULL,
+    password_hash   BYTEA           NOT NULL,
+    password_salt   BYTEA           NOT NULL,
     last_login      timestamp,
     created_at      timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP
