@@ -10,12 +10,11 @@ const userAccountController = require('../controllers/userAccountController');
 passport.use(new LocalStrategy(async function verify(username, password, callback) {
   try {
     const user = await User.get(username);
-    console.log('found user in db:', user);
     if (!user) return callback(null, false, { message: 'Incorrect username or password.' });
 
-    crypto.pbkdf2(password, user.salt, 31000, 32, 'sha256', function (err, hashedPassword) {
+    crypto.pbkdf2(password, user.password_salt, 310000, 32, 'sha256', function (err, hashedPassword) {
       if (err) return callback(err);
-      if (!crypto.timingSafeEqual(user.hashed_password, hashedPassword)) {
+      if (!crypto.timingSafeEqual(user.password_hash, hashedPassword)) {
         return callback(null, false, { message: 'Incorrect username or password.' });
       }
       return callback(null, user);
@@ -31,7 +30,7 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.post('/signup', userAccountController.createUser, (req, res) => {
-  res.sendStatus(201);
+  return res.sendStatus(201);
 });
 
 module.exports = router;
