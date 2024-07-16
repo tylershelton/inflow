@@ -12,9 +12,6 @@ export async function action ({ request }) {
     body: new URLSearchParams(formData).toString(),
   });
 
-  console.log(response);
-  const result = await response.json();
-  console.log(result);
   if (response.ok) {
     return redirect('/');
   } else {
