@@ -38,6 +38,13 @@ app.get('/', (req, res) => {
   res.status(200).sendFile('/index.html');
 });
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.status(500).send(res.locals);
+});
+
 // Fallback route handler
 app.use((req, res) => res.sendStatus(500));
 
