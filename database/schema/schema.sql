@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS feeditem (
     CONSTRAINT title_or_description CHECK (title IS NOT NULL OR description IS NOT NULL)
 );
 
-CREATE TABLE IF NOT EXISTS user (
+CREATE TABLE IF NOT EXISTS user_account (
     id                              SERIAL PRIMARY KEY,
     username        varchar(255)    UNIQUE NOT NULL,
     password_hash   varchar(255)    NOT NULL,
