@@ -4,7 +4,6 @@ const crypto = require('crypto');
 module.exports = {
   create: (username, password) => {
     const salt = crypto.randomBytes(16);
-    console.log(salt);
     return pool.query(`
       INSERT INTO user_account
         (username, password_hash, password_salt)
@@ -12,7 +11,7 @@ module.exports = {
     `, [
       username,
       crypto.pbkdf2Sync(password, salt, 310000, 32, 'sha256'),
-      salt
+      salt,
     ]);
   },
 
