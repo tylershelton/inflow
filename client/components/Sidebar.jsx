@@ -9,7 +9,10 @@ const Sidebar = ({ categories }) => {
       <header>
         <h1>Inflow</h1>
         <img src="#" alt="Inflow logo" />
-        <Link to="login">Log In</Link>
+        <section>
+          <Link to="signup">Sign Up</Link><br/>
+          <Link to="login">Sign In</Link>
+        </section>
       </header>
       <CategoryList categories={categories} />  
     </section>

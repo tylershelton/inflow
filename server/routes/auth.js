@@ -16,8 +16,8 @@ passport.use(new LocalStrategy(async function verify(username, password, callbac
     crypto.pbkdf2(password, user.salt, 31000, 32, 'sha256', function (err, hashedPassword) {
       if (err) return callback(err);
       if (!crypto.timingSafeEqual(user.hashed_password, hashedPassword)) {
-          return callback(null, false, { message: 'Incorrect username or password.' });
-        }
+        return callback(null, false, { message: 'Incorrect username or password.' });
+      }
       return callback(null, user);
     });
   }
@@ -29,5 +29,9 @@ passport.use(new LocalStrategy(async function verify(username, password, callbac
 router.post('/login', passport.authenticate('local', {
   failureMessage: true,
 }));
+
+router.post('/signup', userAccountController.createUser, (req, res) => {
+  res.sendStatus(201);
+});
 
 module.exports = router;

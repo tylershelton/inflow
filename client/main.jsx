@@ -25,6 +25,10 @@ import Login, {
   action as loginAction,
 } from './components/Login';
 
+import Signup, {
+  action as signupAction,
+} from './components/Signup';
+
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
 const router = createBrowserRouter(
@@ -56,6 +60,10 @@ const router = createBrowserRouter(
       <Route path="login"
         element={<Login />}
         action={loginAction}
+      />
+      <Route path="signup"
+        element={<Signup />}
+        action={signupAction}
       />
     </Route>
   )
