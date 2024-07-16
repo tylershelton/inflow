@@ -21,14 +21,10 @@ export async function action ({ request }) {
     body: new URLSearchParams(formData).toString(),
   });
 
-  console.log(response);
-  const result = await response.json();
-  console.log(result);
   if (response.ok) {
-    console.log('yay! success.');
-    return redirect('/');
-  } else {
     return redirect('/login');
+  } else {
+    return json({ errors }, { status: response.status });
   }
 }
 
