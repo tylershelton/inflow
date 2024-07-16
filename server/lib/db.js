@@ -9,4 +9,5 @@ module.exports = new Pool({
   port: conf.DB.PORT,
   max: conf.DB.CONNECTIONS,
   database: conf.DB.DATABASE,
+  charset: 'utf8',
 });
