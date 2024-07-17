@@ -11,7 +11,7 @@ const session      = require('express-session');
 const conf           = require('./config');
 const authRouter     = require('./routes/auth');
 const categoryRouter = require('./routes/category');
-const errorHandler   = require('./lib/errorHandler');
+const errorHandler   = require('./lib/error/globalHandler');
 const feedRouter     = require('./routes/feed');
 const feedItemRouter = require('./routes/feedItem');
 
