@@ -1,3 +1,4 @@
+// third-party/core library imports
 const express      = require('express');
 const app          = express();
 const bodyParser   = require('body-parser');
@@ -6,9 +7,11 @@ const passport     = require('passport');
 const path         = require('path');
 const session      = require('express-session');
 
+// internal imports
 const conf           = require('./config');
 const authRouter     = require('./routes/auth');
 const categoryRouter = require('./routes/category');
+const errorHandler   = require('./lib/errorHandler');
 const feedRouter     = require('./routes/feed');
 const feedItemRouter = require('./routes/feedItem');
 
@@ -38,15 +41,11 @@ app.get('/', (req, res) => {
   res.status(200).sendFile('/index.html');
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.status(500).send(res.locals);
-});
-
 // Fallback route handler
-app.use((req, res) => res.sendStatus(500));
+app.use((req, res) => res.sendStatus(404));
+
+// global error handler
+app.use(errorHandler);
 
 console.log('Express server listening on', conf.EXPRESS.PORT);
 app.listen(conf.EXPRESS.PORT);
