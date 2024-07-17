@@ -4,6 +4,7 @@ const passport      = require('passport');
 const LocalStrategy = require('passport-local');
 const router        = express.Router();
 
+const asyncHandler  = require('../lib/error/asyncHandler');
 const User = require('../models/user');
 const userAccountController = require('../controllers/userAccountController');
 
@@ -29,8 +30,11 @@ router.post('/login', passport.authenticate('local', {
   failureMessage: true,
 }));
 
-router.post('/signup', userAccountController.createUser, (req, res) => {
-  return res.sendStatus(201);
-});
+router.post('/signup',
+  asyncHandler(userAccountController.createUser),
+  (req, res) => {
+    return res.sendStatus(201);
+  }
+);
 
 module.exports = router;
