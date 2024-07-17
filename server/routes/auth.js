@@ -32,9 +32,7 @@ router.post('/login', passport.authenticate('local', {
 
 router.post('/signup',
   asyncHandler(userAccountController.createUser),
-  (req, res) => {
-    return res.sendStatus(201);
-  }
+  (req, res) => res.sendStatus(201),
 );
 
 module.exports = router;
