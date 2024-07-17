@@ -13,13 +13,8 @@ module.exports = {
   },
 
   getFeedItem: async (req, res, next) => {
-    try {
-      res.locals.feeditem = await FeedItem.get(req.params.itemId);
-      return next();
-    }
-    catch (err) {
-      return next(err);
-    }
+    res.locals.feeditem = await FeedItem.get(req.params.itemId);
+    return next();
   },
 
   getItemsByCategory: async (req, res, next) => {
