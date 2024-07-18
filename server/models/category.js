@@ -15,10 +15,11 @@ module.exports = {
     `, [id]);
   },
   
-  get: id => {
-    return pool.query(`
+  get: async id => {
+    const result = await pool.query(`
       SELECT * FROM category WHERE id = $1
     `, [id]);
+    return result.rows[0];
   },
 
   getAll: () => {

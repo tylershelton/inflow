@@ -22,13 +22,14 @@ erDiagram
 		timestamp pub_date
 		int feed_id FK
 	}
-	user {
+	user_account {
 		int id PK
-		string email
+		string username
 		string password_hash
 		string password_salt
 		timestamp last_login
 		timestamp created_at
+		timestamp updated_at
 	}
 	collection-useritem {
 		int item_id PK,FK
@@ -51,9 +52,9 @@ erDiagram
 	user-item one -- zero or more collection-useritem : ""
 	item one -- one or more user-item : ""
 
-	user one -- zero or more user-item : ""
-	user one -- zero or more user-feed : ""
-	user one -- zero or more collection : ""
+	user_account one -- zero or more user-item  : ""
+	user_account one -- zero or more user-feed  : ""
+	user_account one -- zero or more collection : ""
 	
 	feed one -- one or more user-feed : ""
 	
