@@ -1,11 +1,12 @@
 // third-party/core library imports
-const express      = require('express');
-const app          = express();
-const bodyParser   = require('body-parser');
-const cookieParser = require('cookie-parser');
-const passport     = require('passport');
-const path         = require('path');
-const session      = require('express-session');
+const express        = require('express');
+const app            = express();
+const bodyParser     = require('body-parser');
+const cookieParser   = require('cookie-parser');
+const { isLoggedIn } = require('./controllers/authController');
+const passport       = require('passport');
+const path           = require('path');
+const session        = require('express-session');
 
 // internal imports
 const conf           = require('./config');
@@ -33,9 +34,9 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 // api routes
 app.use('/auth', authRouter);
-app.use('/categories', categoryRouter);
-app.use('/feeds', feedRouter);
-app.use('/feeditems', feedItemRouter);
+app.use('/categories', isLoggedIn, categoryRouter);
+app.use('/feeds', isLoggedIn, feedRouter);
+app.use('/feeditems', isLoggedIn, feedItemRouter);
 
 app.get('/', (req, res) => {
   res.status(200).sendFile('/index.html');
