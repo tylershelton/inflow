@@ -14,7 +14,10 @@ const Sidebar = ({ categories }) => {
           <Link to="login">Sign In</Link>
         </section>
       </header>
-      <CategoryList categories={categories} />  
+      { localStorage.loggedIn
+        ? <CategoryList categories={categories} />  
+        : null
+      }
     </section>
   );
 };
