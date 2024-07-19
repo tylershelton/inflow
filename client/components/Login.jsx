@@ -13,6 +13,8 @@ export async function action ({ request }) {
   });
 
   if (response.ok) {
+    // const user = await response.json();
+    localStorage.setItem('loggedIn', true);
     return redirect('/');
   } else {
     return redirect('/login');
