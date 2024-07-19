@@ -6,6 +6,8 @@ import { Outlet, useLoaderData } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 export async function loader () {
+  if (!localStorage.loggedIn) return [];
+
   const data = await fetch('/categories');
   const categories = await data.json();
   // populate each category with its feeds/contents
