@@ -42,7 +42,7 @@ passport.deserializeUser(function (user, callback) {
 
 router.post('/login', passport.authenticate('local', {
   failureMessage: true,
-}));
+}), (req, res) => res.end());
 
 router.post('/logout', (req, res, next) => {
   req.logout( (err) => {
