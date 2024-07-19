@@ -44,6 +44,13 @@ router.post('/login', passport.authenticate('local', {
   failureMessage: true,
 }));
 
+router.post('/logout', (req, res, next) => {
+  req.logout( (err) => {
+    if (err) return next(err);
+    res.redirect('/');
+  });
+});
+
 router.post('/signup',
   asyncHandler(userAccountController.createUser),
   (req, res) => res.sendStatus(201),
