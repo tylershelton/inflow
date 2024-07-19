@@ -8,6 +8,7 @@ const asyncHandler  = require('../lib/error/asyncHandler');
 const User = require('../models/user');
 const userAccountController = require('../controllers/userAccountController');
 
+// authenticate login attempts
 passport.use(new LocalStrategy(async function verify(username, password, callback) {
   try {
     const user = await User.get(username);
@@ -25,6 +26,19 @@ passport.use(new LocalStrategy(async function verify(username, password, callbac
     return callback(err);
   }
 }));
+
+// persist user info in the login session
+passport.serializeUser(function (user, callback) {
+  process.nextTick(function () {
+    callback(null, { id: user.id, username: user.name });
+  });
+});
+
+passport.deserializeUser(function (user, callback) {
+  process.nextTick(function () {
+    return callback(null, user);
+  });
+});
 
 router.post('/login', passport.authenticate('local', {
   failureMessage: true,
