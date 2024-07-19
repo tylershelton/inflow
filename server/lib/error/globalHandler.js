@@ -1,6 +1,6 @@
 module.exports = (err, req, res, next) => {
   // server-side detailed error logging
-  console.error(err.stack);
+  err.serverError();
 
   // client-side error messaging
   const statusCode = err.statusCode || 500;
