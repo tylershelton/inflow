@@ -49,7 +49,6 @@ router.get('/check', (req, res, next) => {
       return res.status(401).end();
     });
   }
-  res.status((req.session && req.session.userId) ? 200 : 401).end();
 });
 
 router.post('/login', passport.authenticate('local', {
