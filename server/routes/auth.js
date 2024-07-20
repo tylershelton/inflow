@@ -41,7 +41,7 @@ passport.deserializeUser(function (user, callback) {
 });
 
 router.get('/check', (req, res) => {
-  res.status((req.session && req.session.userId) ? 200 : 401).end();
+  return res.status((req.session && req.session.userId) ? 200 : 401).end();
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -51,7 +51,7 @@ router.post('/login', passport.authenticate('local', {
 router.post('/logout', (req, res, next) => {
   req.logout( (err) => {
     if (err) return next(err);
-    res.redirect('/');
+    return res.redirect('/');
   });
 });
 
