@@ -27,6 +27,9 @@ export default {
       },
       body: new URLSearchParams(formData).toString(),
     });
+    this.loggedIn = response.ok;
+    return;
+  },
 
   async logout () {
     this.loggedIn = false;
