@@ -28,7 +28,7 @@ if ($cmd -eq "up") {
         docker compose -f docker-compose.yml up --build -d
     } else {
         # Start in dev mode by default
-        docker compose -f docker-compose.dev.yml up --build -d
+        $env:DEV_HOST_ENV = "windows"; docker compose -f docker-compose.dev.yml up --build -d
         docker compose -f docker-compose.dev.yml exec inflow bash
     }
 } elseif ($cmd -eq "down") {

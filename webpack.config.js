@@ -48,5 +48,11 @@ module.exports = {
       directory: path.join(__dirname, 'build'),
     },
   },
+
+  // 
+  watchOptions: process.env.DEV_HOST_ENV === 'windows'
+    ? { poll: 1000 }
+    : {},
+
   devtool: 'eval-source-map',
 };
