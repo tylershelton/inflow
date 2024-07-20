@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import CategoryList from './CategoryList';
-import { Link } from 'react-router-dom';
+import { Link, useRouteLoaderData } from 'react-router-dom';
 
 const Sidebar = ({ categories }) => {
-  const [ loggedIn, setLoggedIn ] = useState(() => {
-    const val = localStorage.getItem('isAuthenticated');
-    return val !== null ? JSON.parse(val) : false;
-  });
-
-  useEffect(() => {
-    localStorage.isAuthenticated = JSON.stringify(loggedIn);
-  }, [loggedIn]);
-
+  const { loggedIn } = useRouteLoaderData('root');
   return (
     <section className='sidebar'>
       <header>
