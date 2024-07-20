@@ -10,7 +10,7 @@ import auth from '../utils/auth';
 
 export async function loader () {
   return {
-    isAuthenticated: await auth.check(),
+    loggedIn: await auth.check(),
     categories: await getCategories(),
   };
 }

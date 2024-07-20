@@ -18,7 +18,7 @@ export default {
     }
   },
 
-  async signin (request) {
+  async login (request) {
     const formData = await request.formData();
     const response = await fetch('/auth/login', {
       method: 'post',

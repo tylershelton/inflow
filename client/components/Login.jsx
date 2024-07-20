@@ -5,13 +5,16 @@ import auth from '../utils/auth';
 
 export async function action ({ request }) {
   try {
-    await auth.signin(request);
+    await auth.login(request);
+    if (auth.loggedIn) return redirect('/');
+    else {
+      console.log('login failed.');
+      return null;
+    }
   }
   catch (err) {
     return err;
   }
-
-  return redirect('/');
 }
 
 export default function Login () {
