@@ -9,10 +9,11 @@ import Sidebar from '../components/Sidebar';
 import auth from '../utils/auth';
 
 export async function loader () {
-  return {
-    loggedIn: await auth.check(),
-    categories: await getCategories(),
-  };
+  const loggedIn = await auth.check();
+  const categories = loggedIn
+    ? await getCategories()
+    : [];
+  return { loggedIn, categories };
 }
 
 export default function Root () {
