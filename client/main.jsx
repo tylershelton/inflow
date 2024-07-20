@@ -34,6 +34,7 @@ import styles from './stylesheets/application.scss'; // webpack will pick this u
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/"
+      id='root'
       element={<Root />}
       loader={rootLoader}
     >
