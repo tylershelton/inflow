@@ -40,8 +40,16 @@ passport.deserializeUser(function (user, callback) {
   });
 });
 
-router.get('/check', (req, res) => {
-  return res.status((req.session && req.session.userId) ? 200 : 401).end();
+router.get('/check', (req, res, next) => {
+  if (req.session && req.session.userId) {
+    res.status(200).end();
+  } else {
+    req.logout((err) => {
+      if (err) return next(err);
+      return res.status(401).end();
+    });
+  }
+  res.status((req.session && req.session.userId) ? 200 : 401).end();
 });
 
 router.post('/login', passport.authenticate('local', {
