@@ -3,9 +3,19 @@ export default {
   loggedIn: false,
 
   async check () {
-    const response = await fetch('/auth/check');
-    if (response.ok) console.log('we are authenticated!');
-    return response.ok ? true : false;
+    let response;
+    try {
+      response = await fetch('/auth/check');
+      if (response.ok) console.log('checking...we are authenticated!');
+      this.loggedIn = response.ok ? true : false;
+      return this.loggedIn;
+    }
+    catch (err) {
+      console.error(err.stack);
+      if (response.status === 401) {
+        this.logout();
+      }
+    }
   },
 
   async signin (request) {
