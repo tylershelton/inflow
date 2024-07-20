@@ -46,7 +46,10 @@ router.get('/check', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   failureMessage: true,
-}), (req, res) => res.end());
+}), (req, res) => {
+  console.log('login attempt routed correctly.');
+  return res.end();
+});
 
 router.post('/logout', (req, res, next) => {
   req.logout( (err) => {
