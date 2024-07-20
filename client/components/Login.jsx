@@ -1,24 +1,17 @@
 import React from 'react';
 import { Form, redirect } from 'react-router-dom';
 
+import auth from '../utils/auth';
+
 export async function action ({ request }) {
-  const formData = await request.formData();
-
-  const response = await fetch('/auth/login', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams(formData).toString(),
-  });
-
-  if (response.ok) {
-    // const user = await response.json();
-    localStorage.setItem('loggedIn', true);
-    return redirect('/');
-  } else {
-    return redirect('/login');
+  try {
+    await auth.signin(request);
   }
+  catch (err) {
+    return err;
+  }
+
+  return redirect('/');
 }
 
 export default function Login () {

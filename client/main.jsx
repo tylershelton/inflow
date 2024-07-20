@@ -10,7 +10,7 @@ import {
 
 import Root, {
   loader as rootLoader,
-} from './components/Root';
+} from './routes/Root';
 
 import ItemBrowser, {
   action as itemBrowserAction,

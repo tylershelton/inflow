@@ -2,20 +2,17 @@
 import React from 'react';
 import { Outlet, useLoaderData } from 'react-router-dom';
 
+import { getCategories } from '../api/categories';
+
 // internal components
-import Sidebar from './Sidebar';
+import Sidebar from '../components/Sidebar';
+import auth from '../utils/auth';
 
 export async function loader () {
-  if (!localStorage.loggedIn) return [];
-
-  const data = await fetch('/categories');
-  const categories = await data.json();
-  // populate each category with its feeds/contents
-  for (const i in categories) {
-    const data = await fetch(`/categories/${categories[i].id}/contents`);
-    categories[i].contents = await data.json();
-  }
-  return categories;
+  return {
+    isAuthenticated: await auth.check(),
+    categories: await getCategories(),
+  };
 }
 
 export default function Root () {
