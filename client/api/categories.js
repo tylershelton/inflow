@@ -1,3 +1,5 @@
+import auth from '../utils/auth';
+
 export async function getCategories () {
   const response = await fetch('/categories');
 
@@ -9,6 +11,10 @@ export async function getCategories () {
       categories[i].contents = await data.json();
     }
     return categories;
+  }
+
+  if (response.status === 401) {
+    auth.logout();
   }
 
   return [];

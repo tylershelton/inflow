@@ -1,4 +1,7 @@
 export default {
+
+  loggedIn: false,
+
   async check () {
     const response = await fetch('/auth/check');
     if (response.ok) console.log('we are authenticated!');
@@ -15,6 +18,9 @@ export default {
       body: new URLSearchParams(formData).toString(),
     });
 
-    return response;
+  async logout () {
+    this.loggedIn = false;
+    return;
   },
+
 };
