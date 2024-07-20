@@ -32,6 +32,15 @@ app.use(passport.authenticate('session'));
 // handle requests for static files
 app.use(express.static(path.join(__dirname, '../build')));
 
+// debug session activity
+if (process.env.NODE_ENV === 'development') {
+  app.use((req, res, next) => {
+    if (req.session)
+      console.log('Sesson Data:', req.session);
+    return next();
+  });
+}
+
 // api routes
 app.use('/auth', authRouter);
 app.use('/categories', isLoggedIn, categoryRouter);
