@@ -31,6 +31,8 @@ import Signup, {
   action as signupAction,
 } from './components/Signup';
 
+import { action as logoutAction } from './components/Sidebar';
+
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
 // once on load, check with the server whether any session cookie we may have
@@ -67,6 +69,9 @@ const router = createBrowserRouter(
       <Route path="login"
         element={<Login />}
         action={loginAction}
+      />
+      <Route path="logout"
+        action={logoutAction}
       />
       <Route path="signup"
         element={<Signup />}

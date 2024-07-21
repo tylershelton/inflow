@@ -34,6 +34,9 @@ export default {
   },
 
   async logout () {
+    await fetch('/auth/logout', {
+      method: 'post',
+    });
     this.loggedIn = false;
     return;
   },
