@@ -3,7 +3,7 @@ import React from 'react';
 import CategoryList from './CategoryList';
 import { Link, useRouteLoaderData } from 'react-router-dom';
 
-const Sidebar = ({ categories }) => {
+export default function Sidebar ({ categories }) {
   const { loggedIn } = useRouteLoaderData('root');
   return (
     <section className='sidebar'>
@@ -23,6 +23,4 @@ const Sidebar = ({ categories }) => {
       }
     </section>
   );
-};
-
-export default Sidebar;
+}
