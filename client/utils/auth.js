@@ -25,7 +25,7 @@ export default {
     const response = await fetch('/auth/login', {
       method: 'post',
       headers: {
-        'Content-Type': 'x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams(formData).toString(),
     });
