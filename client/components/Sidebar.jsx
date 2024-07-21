@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import CategoryList from './CategoryList';
 import { Link, useRouteLoaderData } from 'react-router-dom';
