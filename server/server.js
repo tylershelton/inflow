@@ -3,18 +3,14 @@ const express        = require('express');
 const app            = express();
 const bodyParser     = require('body-parser');
 const cookieParser   = require('cookie-parser');
-const { isLoggedIn } = require('./controllers/authController');
 const passport       = require('passport');
 const path           = require('path');
 const session        = require('express-session');
 
 // internal imports
-const conf           = require('./config');
-const authRouter     = require('./routes/auth');
-const categoryRouter = require('./routes/category');
-const errorHandler   = require('./lib/error/globalHandler');
-const feedRouter     = require('./routes/feed');
-const feedItemRouter = require('./routes/feedItem');
+const conf         = require('./config');
+const apiRouter    = require('./routes/api');
+const errorHandler = require('./lib/error/globalHandler');
 
 // set up global middleware
 app.use(express.json());
@@ -32,18 +28,12 @@ app.use(passport.authenticate('session'));
 // handle requests for static files
 app.use(express.static(path.join(__dirname, '../build')));
 
-// api routes
-app.use('/auth', authRouter);
-app.use('/categories', isLoggedIn, categoryRouter);
-app.use('/feeds', isLoggedIn, feedRouter);
-app.use('/feeditems', isLoggedIn, feedItemRouter);
+app.use('/api', apiRouter);
 
-app.get('/', (req, res) => {
-  res.status(200).sendFile('/index.html');
+// Catch-all route handler for serving up the client
+app.get('*', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../build', 'index.html'));
 });
-
-// Fallback route handler
-app.use((req, res) => res.sendStatus(404));
 
 // global error handler
 app.use(errorHandler);

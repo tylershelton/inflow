@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, json, redirect, useActionData } from 'react-router-dom';
+import apiFetch from '../api/apiFetch';
 
 export async function action ({ request }) {
   const formData = await request.formData();
@@ -13,7 +14,7 @@ export async function action ({ request }) {
     return json({ errors }, { status: 400 });
   }
 
-  const response = await fetch('/auth/signup', {
+  const response = await apiFetch('/api/auth/signup', {
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

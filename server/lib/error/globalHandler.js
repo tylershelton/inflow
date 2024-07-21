@@ -1,6 +1,9 @@
+const { AppError } = require('./errors');
+
 module.exports = (err, req, res, next) => {
   // server-side detailed error logging
-  err.serverError();
+  if (err instanceof AppError) err.serverError();
+  else console.error(err.stack);
 
   // client-side error messaging
   const statusCode = err.statusCode || 500;

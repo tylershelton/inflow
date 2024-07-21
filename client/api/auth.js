@@ -4,15 +4,14 @@ export default {
 
   async check () {
     try {
-      const response = await fetch('/auth/check', {
+      const response = await fetch('/api/auth/check', {
         credentials: 'include',
       });
       if (response.status === 200) {
         this.loggedIn = true;
       }
       else if (response.status === 401) {
-        this.logout();
-        this.loggedOut = false;
+        await this.logout();
       }
     }
     catch (err) {
@@ -22,7 +21,7 @@ export default {
 
   async login (request) {
     const formData = await request.formData();
-    const response = await fetch('/auth/login', {
+    const response = await fetch('/api/auth/login', {
       method: 'post',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -34,7 +33,7 @@ export default {
   },
 
   async logout () {
-    await fetch('/auth/logout', {
+    await fetch('/api/auth/logout', {
       method: 'post',
     });
     this.loggedIn = false;

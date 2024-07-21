@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, redirect } from 'react-router-dom';
 
-import auth from '../utils/auth';
+import auth from '../api/auth';
 
 export async function action ({ request }) {
   try {
