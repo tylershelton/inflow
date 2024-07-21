@@ -8,7 +8,7 @@ import {
   useRouteLoaderData,
 } from 'react-router-dom';
 
-import auth from '../utils/auth';
+import auth from '../api/auth';
 
 export async function action () {
   console.log('logging out.');

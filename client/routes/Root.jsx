@@ -6,7 +6,7 @@ import { getCategories } from '../api/categories';
 
 // internal components
 import Sidebar from '../components/Sidebar';
-import auth from '../utils/auth';
+import auth from '../api/auth';
 
 export async function loader () {
   const categories = auth.loggedIn

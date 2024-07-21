@@ -8,7 +8,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import auth from './utils/auth';
+import auth from './api/auth';
 
 import Root, {
   loader as rootLoader,
