@@ -11,10 +11,7 @@ const Sidebar = ({ categories }) => {
         <h1>Inflow</h1>
         <img src="#" alt="Inflow logo" />
         <section>
-          {loggedIn
-            ? <Link to="logout">Sign Out</Link>
-            : <>
-              <Link to="login">Sign In</Link><br/>
+              <Link to="login">Log In</Link><br/>
               <Link to="signup">Sign Up</Link>
             </>
           }
