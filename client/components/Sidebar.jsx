@@ -11,7 +11,6 @@ import {
 import auth from '../api/auth';
 
 export async function action () {
-  console.log('logging out.');
   await auth.logout();
   return redirect('/');
 }
