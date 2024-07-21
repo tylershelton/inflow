@@ -8,6 +8,8 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import auth from './utils/auth';
+
 import Root, {
   loader as rootLoader,
 } from './routes/Root';
@@ -30,6 +32,10 @@ import Signup, {
 } from './components/Signup';
 
 import styles from './stylesheets/application.scss'; // webpack will pick this up
+
+// once on load, check with the server whether any session cookie we may have
+// is still valid
+await auth.check();
 
 const router = createBrowserRouter(
   createRoutesFromElements(

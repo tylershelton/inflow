@@ -9,15 +9,14 @@ import Sidebar from '../components/Sidebar';
 import auth from '../utils/auth';
 
 export async function loader () {
-  const loggedIn = await auth.check();
-  const categories = loggedIn
+  const categories = auth.loggedIn
     ? await getCategories()
     : [];
-  return { loggedIn, categories };
+  return { loggedIn: auth.loggedIn, categories };
 }
 
 export default function Root () {
-  const categories = useLoaderData();
+  const { categories } = useLoaderData();
 
   return (
     <>

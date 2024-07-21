@@ -41,8 +41,8 @@ passport.deserializeUser(function (user, callback) {
 });
 
 router.get('/check', (req, res, next) => {
-  if (req.session && req.session.userId) {
-    res.status(200).end();
+  if (req.isAuthenticated()) {
+    return res.status(200).end();
   } else {
     req.logout((err) => {
       if (err) return next(err);
