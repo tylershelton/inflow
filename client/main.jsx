@@ -32,6 +32,7 @@ import Signup, {
 } from './components/Signup';
 
 import { action as logoutAction } from './components/Sidebar';
+import { loader as privateRouteLoader } from './routes/PrivateRoutes';
 
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
@@ -46,24 +47,29 @@ const router = createBrowserRouter(
       element={<Root />}
       loader={rootLoader}
     >
-      <Route path="categories/:categoryId"
-        element={<ItemBrowser />}
-        loader={itemBrowserLoader}
-        action={itemBrowserAction}
-      >
-        <Route path="item/:itemId"
-          element={<Article />}
-          loader={articleLoader}
-        />
-      </Route>
-      <Route path="feeds/:feedId"
-        element={<ItemBrowser />}
-        loader={itemBrowserLoader}
-        action={itemBrowserAction}
-      >
-        <Route path="item/:itemId"
-          element={<Article />}
-          loader={articleLoader}
+      <Route loader={privateRouteLoader}>
+        <Route path="categories/:categoryId"
+          element={<ItemBrowser />}
+          loader={itemBrowserLoader}
+          action={itemBrowserAction}
+        >
+          <Route path="item/:itemId"
+            element={<Article />}
+            loader={articleLoader}
+          />
+        </Route>
+        <Route path="feeds/:feedId"
+          element={<ItemBrowser />}
+          loader={itemBrowserLoader}
+          action={itemBrowserAction}
+        >
+          <Route path="item/:itemId"
+            element={<Article />}
+            loader={articleLoader}
+          />
+        </Route>
+        <Route path="logout"
+          action={logoutAction}
         />
       </Route>
       <Route path="login"
