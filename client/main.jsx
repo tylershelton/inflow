@@ -25,6 +25,7 @@ import Article, {
 
 import Login, {
   action as loginAction,
+  loader as loginLoader,
 } from './components/Login';
 
 import Signup, {
@@ -75,9 +76,7 @@ const router = createBrowserRouter(
       <Route path="login"
         element={<Login />}
         action={loginAction}
-      />
-      <Route path="logout"
-        action={logoutAction}
+        loader={loginLoader}
       />
       <Route path="signup"
         element={<Signup />}

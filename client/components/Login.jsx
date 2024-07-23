@@ -15,6 +15,11 @@ export async function action ({ request }) {
   }
 }
 
+export async function loader () {
+  if (auth.loggedIn) return redirect('/');
+  return null;
+}
+
 export default function Login () {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
