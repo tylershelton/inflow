@@ -6,11 +6,7 @@ import auth from '../api/auth';
 export async function action ({ request }) {
   try {
     await auth.login(request);
-    if (auth.loggedIn) return redirect('/');
-    else {
-      console.log('login failed.');
-      return null;
-    }
+    return auth.loggedIn ? redirect('/') : null;
   }
   catch (err) {
     return err;
