@@ -1,12 +1,14 @@
 import React from 'react';
-import { Form, redirect } from 'react-router-dom';
+import { Form, redirect, useLocation } from 'react-router-dom';
 
 import auth from '../api/auth';
 
 export async function action ({ request }) {
   try {
     await auth.login(request);
-    return auth.loggedIn ? redirect('/') : null;
+    const formData = await request.formData();
+    const redirectTo = formData.get('redirectTo');
+    return auth.loggedIn ? redirect(redirectTo || '/') : null;
   }
   catch (err) {
     return err;
@@ -14,10 +16,15 @@ export async function action ({ request }) {
 }
 
 export default function Login () {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const from = params.get('from') || '/';
+
   return (
     <section>
-      <h2>Sign In</h2>
-      <Form method='post' id='login-form'>
+      <h2>Log In</h2>
+      <Form method='post' id='login-form' replace>
+        <input type='hidden' name='redirectTo' value={from} />
         <section>
           <label>
             Username
@@ -40,7 +47,7 @@ export default function Login () {
             />
           </label>
         </section>
-        <button type='submit'>Sign In</button>
+        <button type='submit'>Log In</button>
       </Form>
     </section>
   );
