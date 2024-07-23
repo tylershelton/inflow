@@ -54,8 +54,9 @@ router.get('/check', (req, res, next) => {
 router.post('/login', passport.authenticate('local', {
   failureMessage: true,
 }), (req, res) => {
-  console.log('login attempt routed correctly.');
-  return res.end();
+  // successful login. the passport middleware will return
+  // 401 Unauthorized on failure.
+  res.sendStatus(200);
 });
 
 router.post('/logout', (req, res, next) => {
