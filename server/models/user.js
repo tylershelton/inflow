@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-const { AppError } = require('../lib/error/errors')
+const { DatabaseError } = require('../lib/error/errors');
 const pool   = require('../lib/db');
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
         salt,
       ]);
     } catch (err) {
-      throw new AppError('Database Error', 500, err);
+      throw new DatabaseError({ cause: err });
     }
   },
 
@@ -29,7 +29,7 @@ module.exports = {
       `, [username]);
       return result.rows[0];
     } catch (err) {
-      throw new AppError('Database Error', 500, err);
+      throw new DatabaseError({ cause: err });
     }
   },
 };

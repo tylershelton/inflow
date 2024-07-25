@@ -11,6 +11,7 @@ module.exports = {
   // the bundled file
   output: {
     path: path.join(__dirname, 'build'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
 
@@ -42,11 +43,18 @@ module.exports = {
   devServer: {
     host: '0.0.0.0',
     port: process.env.PORT || 8080,
+    historyApiFallback: true,
     hot: true,
-    proxy: { '/': `http://localhost:${conf.EXPRESS.PORT}` },
+    proxy: { '/api': `http://localhost:${conf.EXPRESS.PORT}` },
     static: {
       directory: path.join(__dirname, 'build'),
     },
   },
+
+  // 
+  watchOptions: process.env.DEV_HOST_ENV === 'windows'
+    ? { poll: 1000 }
+    : {},
+
   devtool: 'eval-source-map',
 };

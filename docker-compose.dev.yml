@@ -11,8 +11,11 @@ services:
     environment:
       NODE_ENV: development
       INFLOW_DB_HOST: db
+      DEV_HOST_ENV: ${DEV_HOST_ENV}
+    hostname: inflow-dev
     ports:
       - 8080:8080
+      - 9229:9229 # debugger
     stdin_open: true
     volumes:
       - .:/usr/src/app

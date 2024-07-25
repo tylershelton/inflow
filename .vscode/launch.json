@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        // {
+        //     "type": "firefox",
+        //     "request": "launch",
+        //     "reAttach": true,
+        //     "name": "Attach to Firefox",
+        //     "url": "http://localhost:8080/",
+        //     // "webRoot": "${workspaceFolder}",
+        //     "pathMappings": [
+        //         {
+        //             "url": "http://localhost:8080",
+        //             "path": "${workspaceFolder}/build",
+        //         },
+        //     ],
+        // },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Docker: Attach to Node",
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/usr/src/app",
+        }
+    ]
+}

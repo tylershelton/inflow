@@ -1,29 +1,35 @@
 import React from 'react';
-import { Form, redirect } from 'react-router-dom';
+import { Form, redirect, useLocation } from 'react-router-dom';
+
+import auth from '../api/auth';
 
 export async function action ({ request }) {
-  const formData = await request.formData();
-
-  const response = await fetch('/auth/login', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams(formData).toString(),
-  });
-
-  if (response.ok) {
-    return redirect('/');
-  } else {
-    return redirect('/login');
+  try {
+    const formData = await request.formData();
+    const redirectTo = formData.get('redirectTo');
+    await auth.login(formData);
+    return auth.loggedIn ? redirect(redirectTo || '/') : null;
+  }
+  catch (err) {
+    return err;
   }
 }
 
+export async function loader () {
+  if (auth.loggedIn) return redirect('/');
+  return null;
+}
+
 export default function Login () {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const from = params.get('from') || '/';
+
   return (
     <section>
-      <h2>Sign In</h2>
-      <Form method='post' id='login-form'>
+      <h2>Log In</h2>
+      <Form method='post' id='login-form' replace>
+        <input type='hidden' name='redirectTo' value={from} />
         <section>
           <label>
             Username
@@ -46,7 +52,7 @@ export default function Login () {
             />
           </label>
         </section>
-        <button type='submit'>Sign In</button>
+        <button type='submit'>Log In</button>
       </Form>
     </section>
   );

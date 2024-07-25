@@ -1,5 +1,5 @@
 class AppError extends Error {
-  constructor (message, statusCode, cause) {
+  constructor ({ message, statusCode, cause }) {
     super(message);
     this.statusCode = statusCode;
     this.cause = cause;
@@ -7,12 +7,26 @@ class AppError extends Error {
     // this constructor function's frame from it
     Error.captureStackTrace(this, this.constructor);
   }
-}
 
-class ValidationError extends AppError {
-  constructor(message = 'Validation Error') {
-    super(message, 400);
+  serverError () {
+    console.error(this.stack);
   }
 }
 
-module.exports = { AppError };
+class DatabaseError extends AppError {
+  constructor ({ message = 'Database Error', cause }) {
+    super({
+      message: `${message}: ${cause.message} at ${cause.where}`,
+      statusCode: 500,
+      cause
+    });
+  }
+}
+
+class ValidationError extends AppError {
+  constructor ({ message = 'Validation Error', cause }) {
+    super(message, 400, cause);
+  }
+}
+
+module.exports = { AppError, DatabaseError, ValidationError };

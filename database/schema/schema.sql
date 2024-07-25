@@ -1,9 +1,3 @@
-CREATE DATABASE inflow
-    WITH ENCODING = 'UTF8'
-         LC_COLLATE = 'en_US.UTF-8'
-         LC_CTYPE = 'en_US.UTF-8';
--- WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'inflow');
-
 CREATE TABLE IF NOT EXISTS category (
     id                         SERIAL PRIMARY KEY,
     title       varchar(80)    NOT NULL UNIQUE

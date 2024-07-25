@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BrowserItem from './BrowserItem';
 import { Outlet, useFetcher, useLoaderData } from 'react-router-dom';
+import apiFetch from '../api/apiFetch';
 
 async function getCategory (id) {
-  const data = await fetch(`/categories/${id}`);
+  const data = await apiFetch(`/api/categories/${id}`);
   const category = await data.json();
   category.type = 'category';
   return category;
 }
 
 async function getFeed (id) {
-  const data = await fetch(`/feeds/${id}`);
+  const data = await apiFetch(`/api/feeds/${id}`);
   const feed = await data.json();
   feed.type = 'feed';
   return feed;
 }
 
 async function getFeedItems (category) {
-  const data = await fetch(`/feeditems/${category.type}/${category.id}?all=false`);
+  const data = await apiFetch(`/api/feeditems/${category.type}/${category.id}?all=false`);
   return await data.json();
 }
 
 export async function action ({ request }) {
   const formData = await request.formData();
-  return await fetch(formData.get('endpoint'));
+  return await apiFetch('/api/' + formData.get('endpoint'));
 }
 
 export async function loader ({ request, params }) {

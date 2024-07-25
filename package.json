@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server & nodemon server/server.js",
+    "dev": "webpack-dev-server & nodemon -L --exec 'node --inspect=0.0.0.0:9229' server/server.js",
     "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

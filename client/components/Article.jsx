@@ -1,9 +1,12 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 
+import apiFetch from '../api/apiFetch';
+
 export async function loader ({ request }) {
   const url = new URL(request.url);
-  return await fetch(url);
+  url.pathname = '/api' + url.pathname;
+  return await apiFetch(url);
 }
 
 export default function Article () {
