@@ -1,13 +1,14 @@
 import React from 'react';
 import {
+  Navigate,
   Outlet,
   redirect,
-  useRouteLoaderData
+  useLocation,
 } from 'react-router-dom';
 
 import auth from '../api/auth';
 
-export async function loader ({ request }) {
+export function loader ({ request }) {
   if (!auth.loggedIn) {
     console.log('not logged in, denying access to private route.');
     const params = new URLSearchParams();
@@ -18,8 +19,19 @@ export async function loader ({ request }) {
   return null;
 }
 
-export default function PrivateRoutes () {
+export default function PrivateRoutes ({ children }) {
+  const location = useLocation();
+
+  console.log('entering private route. checking if logged in:', auth.loggedIn);
+
   return (
-    auth.loggedIn ? <Outlet /> : null
+    auth.loggedIn 
+      ? children
+      : <Navigate
+        to="/login"
+        state={{
+          from: location.search
+        }}
+      />
   );
 }
