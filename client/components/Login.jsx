@@ -5,9 +5,9 @@ import auth from '../api/auth';
 
 export async function action ({ request }) {
   try {
-    await auth.login(request);
     const formData = await request.formData();
     const redirectTo = formData.get('redirectTo');
+    await auth.login(formData);
     return auth.loggedIn ? redirect(redirectTo || '/') : null;
   }
   catch (err) {

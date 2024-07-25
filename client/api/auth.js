@@ -19,8 +19,7 @@ export default {
     }
   },
 
-  async login (request) {
-    const formData = await request.formData();
+  async login (formData) {
     const response = await fetch('/api/auth/login', {
       method: 'post',
       headers: {
