@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BrowserItem from './BrowserItem';
 import { Outlet, useFetcher, useLoaderData } from 'react-router-dom';
 import apiFetch from '../api/apiFetch';
