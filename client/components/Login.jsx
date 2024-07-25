@@ -29,7 +29,10 @@ export default function Login () {
     <section>
       <h2>Log In</h2>
       <Form method='post' id='login-form' replace>
-        <input type='hidden' name='redirectTo' value={from} />
+        {location.state && location.state.from
+          ? <input type='hidden' name='redirectTo' value={from} />
+          : null
+        }
         <section>
           <label>
             Username

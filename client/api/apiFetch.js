@@ -5,8 +5,8 @@ export default async function apiFetch (url, options = {}) {
   const response = await fetch(url, options);
 
   if (response.status === 401) {
-    await auth.logout();
-    return redirect('/');
+    auth.loggedIn = false;
+    throw response;
   }
 
   return response;

@@ -14,6 +14,8 @@ import Root, {
   loader as rootLoader,
 } from './routes/Root';
 
+import ErrorDisplay from './components/ErrorDisplay';
+
 import ItemBrowser, {
   action as itemBrowserAction,
   loader as itemBrowserLoader,
@@ -33,7 +35,6 @@ import Signup, {
 } from './components/Signup';
 
 import { action as logoutAction } from './components/Sidebar';
-import { loader as privateRouteLoader } from './routes/PrivateRoutes';
 
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 
@@ -48,11 +49,11 @@ const router = createBrowserRouter(
       element={<Root />}
       loader={rootLoader}
     >
-      <Route loader={privateRouteLoader}>
+      <Route errorElement={<ErrorDisplay />}>
         <Route path="categories/:categoryId"
-          element={<ItemBrowser />}
           loader={itemBrowserLoader}
           action={itemBrowserAction}
+          element={<ItemBrowser />}
         >
           <Route path="item/:itemId"
             element={<Article />}

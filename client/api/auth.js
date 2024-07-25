@@ -11,7 +11,7 @@ export default {
         this.loggedIn = true;
       }
       else if (response.status === 401) {
-        await this.logout();
+        this.loggedIn = false;
       }
     }
     catch (err) {
