@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+// internal imports
 import auth from './api/auth';
 
 import Root, {
@@ -25,12 +26,12 @@ import Article, {
   loader as articleLoader,
 } from './components/Article';
 
-import Login, {
+import {
   action as loginAction,
   loader as loginLoader,
 } from './components/Login';
 
-import Signup, {
+import {
   action as signupAction,
 } from './components/Signup';
 
@@ -77,12 +78,10 @@ const router = createBrowserRouter(
         />
       </Route>
       <Route path="login"
-        element={<Login />}
         action={loginAction}
         loader={loginLoader}
       />
       <Route path="signup"
-        element={<Signup />}
         action={signupAction}
       />
     </Route>

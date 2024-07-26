@@ -1,21 +1,31 @@
 import React from 'react';
 import {
   Link,
-  useFetcher,
+  useLocation,
   useRouteLoaderData,
 } from 'react-router-dom';
 
 // import auth from '../api/auth';
 import CategoryList from './CategoryList';
+import Login from './Login';
 import LogoutButton from './LogoutButton';
-
-// export async function action () {
-
-// }
+import Signup from './Signup';
 
 export default function Sidebar ({ categories }) {
   const { loggedIn } = useRouteLoaderData('root');
-  // const fetcher = useFetcher();
+  const location = useLocation();
+
+  let form;
+  switch (location.pathname) {
+  case '/login':
+    form = <Login />;
+    break;
+  case '/signup':
+    form = <Signup />;
+    break;
+  default:
+    form = null;
+  }
 
   return (
     <section className='sidebar'>
@@ -32,6 +42,7 @@ export default function Sidebar ({ categories }) {
             </>
           }
         </section>
+        {form}
       </header>
       { loggedIn
         ? <CategoryList categories={categories} />  
