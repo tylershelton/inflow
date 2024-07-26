@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+
+cmd_is_valid() {
+    for valid_cmd in "export" "reset";
+    do
+        if [ "$cmd" = "$valid_cmd" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cmd="$1"
+
+# validate input
+if [[ -z "$1" ]] || ! cmd_is_valid; then
+    echo "Usage: db (export|reset)"
+    exit 1
+fi
+
+cd "$REPO_ROOT"
+
+if [ "$cmd" = "export" ]; then
+
+    output_file="${REPO_ROOT}/database/testData/dev_dataset.sql"
+
+    # don't clobber the existing file, just in case
+    if [ -f "$output_file" ]; then
+        backup_file="${output_file}.backup"
+        cp "$output_file" "$backup_file"
+    fi
+
+    # update the dataset used to populate the database in non-production environments
+    # by dumping its current state to a file
+    docker compose -f ./docker-compose.dev.yml exec db \
+        /bin/bash -c 'pg_dump -a -U inflow -d inflow' > "$output_file"
+
+elif [ "$cmd" = "reset" ]; then
+
+    docker compose -f ./docker-compose.dev.yml stop db
+    docker compose -f ./docker-compose.dev.yml rm -f db
+    docker volume rm inflow-dev_inflowdb
+    docker compose -f ./docker-compose.dev.yml up -d
+
+fi
+
+exit 0
