@@ -34,7 +34,9 @@ import Signup, {
   action as signupAction,
 } from './components/Signup';
 
-import { action as logoutAction } from './components/Sidebar';
+import {
+  action as logoutAction
+} from './routes/Logout';
 
 import styles from './stylesheets/application.scss'; // webpack will pick this up
 

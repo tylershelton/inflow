@@ -1,23 +1,21 @@
 import React from 'react';
 import {
   Link,
-  redirect,
   useFetcher,
   useRouteLoaderData,
 } from 'react-router-dom';
 
-import auth from '../api/auth';
+// import auth from '../api/auth';
 import CategoryList from './CategoryList';
 import LogoutButton from './LogoutButton';
 
-export async function action () {
-  await auth.logout();
-  return redirect('/');
-}
+// export async function action () {
+
+// }
 
 export default function Sidebar ({ categories }) {
   const { loggedIn } = useRouteLoaderData('root');
-  const fetcher = useFetcher();
+  // const fetcher = useFetcher();
 
   return (
     <section className='sidebar'>
