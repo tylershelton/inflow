@@ -61,3 +61,6 @@ web_modules/
 
 # webpack production builds
 /build
+
+# database backup files
+*.backup
