@@ -23,6 +23,7 @@ app.use(session({
   secret: process.env.INFLOW_COOKIE_SECRET,
   store: new (require('connect-pg-simple')(session))({
     pool: dbpool,
+    tableName: 'user_session',
   }),
   cookie: {
     maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
