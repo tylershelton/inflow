@@ -18,6 +18,9 @@ if [[ -z "$1" ]] || ! cmd_is_valid; then
     echo "Usage: db (export|reset)"
     exit 1
 fi
+
+cd "$REPO_ROOT"
+
 if [ "$cmd" = "export" ]; then
 
 
