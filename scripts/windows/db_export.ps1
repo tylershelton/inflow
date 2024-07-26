@@ -4,7 +4,7 @@
 $REPO_ROOT = & git rev-parse --show-toplevel
 
 # Ensure the output directory exists
-$devDatasetPath = Join-Path -Path $REPO_ROOT -ChildPath "database/testData/dev_dataset.sql"
+$devDatasetPath = Join-Path -Path $REPO_ROOT -ChildPath "database/test_data/dev_dataset.sql"
 $devDatasetDir = Split-Path -Path $devDatasetPath -Parent
 
 if (-not (Test-Path -Path $devDatasetDir)) {
