@@ -27,8 +27,13 @@ export default {
       },
       body: new URLSearchParams(formData).toString(),
     });
-    this.loggedIn = response.ok;
-    return;
+
+    if (response.ok) {
+      this.loggedIn = true;
+      return;
+    }
+    
+    throw response;
   },
 
   async logout () {
