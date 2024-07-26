@@ -40,7 +40,7 @@ services:
       - inflowdb:/var/lib/postgresql/data
       - ./database/schema/schema.sql:/docker-entrypoint-initdb.d/01-init.sql
       - ./database/schema/session.sql:/docker-entrypoint-initdb.d/02-session.sql
-      - ./database/testData/dev_dataset.sql:/docker-entrypoint-initdb.d/03-data.sql
+      - ./database/test_data/dev_dataset.sql:/docker-entrypoint-initdb.d/03-data.sql
     
   adminer:
     image: adminer

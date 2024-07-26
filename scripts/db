@@ -23,7 +23,7 @@ cd "$REPO_ROOT"
 
 if [ "$cmd" = "export" ]; then
 
-    output_file="${REPO_ROOT}/database/testData/dev_dataset.sql"
+    output_file="${REPO_ROOT}/database/test_data/dev_dataset.sql"
 
     # don't clobber the existing file, just in case
     if [ -f "$output_file" ]; then
