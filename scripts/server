@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cmd_is_valid() {
-    for valid_cmd in "up down";
+    for valid_cmd in "up" "down";
     do
         if [ "$cmd" = "$valid_cmd" ]; then
             return 0
