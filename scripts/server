@@ -10,14 +10,15 @@ cmd_is_valid() {
     return 1
 }
 
-if [ -z "$1" ]; then
-    echo "Usage: server (up|down)"
-    exit 1
-fi
-
 REPO_ROOT=$(git rev-parse --show-toplevel)
 ENV=$(cat "$(dirname "$0")/.env")
 cmd="$1"
+
+# validate input
+if [[ -z "$1" ]] || ! cmd_is_valid; then
+    echo "Usage: server (up|down)"
+    exit 1
+fi
 
 cd "$REPO_ROOT"
 
