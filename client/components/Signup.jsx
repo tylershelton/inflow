@@ -1,5 +1,11 @@
 import React from 'react';
-import { Form, json, redirect, useActionData } from 'react-router-dom';
+import {
+  Form,
+  json,
+  redirect,
+  useActionData
+} from 'react-router-dom';
+
 import apiFetch from '../api/apiFetch';
 
 export async function action ({ request }) {
@@ -35,7 +41,7 @@ export default function Signup () {
   return (
     <section>
       <h2>Sign Up</h2>
-      <Form method='post' id='signup-form'>
+      <Form method='post' id='signup-form' action='/signup'>
         <section>
           <label htmlFor='username'>
             Username

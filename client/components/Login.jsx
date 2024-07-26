@@ -1,5 +1,9 @@
 import React from 'react';
-import { Form, redirect, useLocation } from 'react-router-dom';
+import {
+  Form,
+  redirect,
+  useLocation
+} from 'react-router-dom';
 
 import auth from '../api/auth';
 
@@ -28,7 +32,7 @@ export default function Login () {
   return (
     <section>
       <h2>Log In</h2>
-      <Form method='post' id='login-form' replace>
+      <Form method='post' id='login-form' action='/login' replace>
         <input type='hidden' name='redirectTo' value={from} />
         <section>
           <label>

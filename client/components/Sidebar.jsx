@@ -1,23 +1,31 @@
 import React from 'react';
-
-import CategoryList from './CategoryList';
 import {
   Link,
-  redirect,
-  useFetcher,
+  useLocation,
   useRouteLoaderData,
 } from 'react-router-dom';
 
-import auth from '../api/auth';
-
-export async function action () {
-  await auth.logout();
-  return redirect('/');
-}
+// import auth from '../api/auth';
+import CategoryList from './CategoryList';
+import Login from './Login';
+import LogoutButton from './LogoutButton';
+import Signup from './Signup';
 
 export default function Sidebar ({ categories }) {
   const { loggedIn } = useRouteLoaderData('root');
-  const fetcher = useFetcher();
+  const location = useLocation();
+
+  let form;
+  switch (location.pathname) {
+  case '/login':
+    form = <Login />;
+    break;
+  case '/signup':
+    form = <Signup />;
+    break;
+  default:
+    form = null;
+  }
 
   return (
     <section className='sidebar'>
@@ -26,11 +34,7 @@ export default function Sidebar ({ categories }) {
         <img src="#" alt="Inflow logo" />
         <section>
           {loggedIn ?
-            <fetcher.Form method="post" action="/logout">
-              <button type="submit">
-                Log Out
-              </button>
-            </fetcher.Form>
+            <LogoutButton />
             :
             <>
               <Link to="login">Log In</Link><br/>
@@ -38,6 +42,7 @@ export default function Sidebar ({ categories }) {
             </>
           }
         </section>
+        {form}
       </header>
       { loggedIn
         ? <CategoryList categories={categories} />  
