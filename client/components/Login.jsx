@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Form,
+  json,
   redirect,
+  useFetcher,
   useLocation
 } from 'react-router-dom';
 
@@ -15,7 +16,9 @@ export async function action ({ request }) {
     return auth.loggedIn ? redirect(redirectTo || '/') : null;
   }
   catch (err) {
-    return err;
+    if (err.status === 401) {
+      return json({ error: 'Invalid username or password.' });
+    }
   }
 }
 
@@ -26,13 +29,15 @@ export async function loader () {
 
 export default function Login () {
   const location = useLocation();
+  const fetcher = useFetcher();
+
   const params = new URLSearchParams(location.search);
   const from = params.get('from') || '/';
 
   return (
     <section>
       <h2>Log In</h2>
-      <Form method='post' id='login-form' action='/login' replace>
+      <fetcher.Form method='post' id='login-form' action='/login' replace>
         <input type='hidden' name='redirectTo' value={from} />
         <section>
           <label>
@@ -56,8 +61,11 @@ export default function Login () {
             />
           </label>
         </section>
+        {fetcher.data?.error && (
+          <div className='error'>{fetcher.data?.error}</div>
+        )}
         <button type='submit'>Log In</button>
-      </Form>
+      </fetcher.Form>
     </section>
   );
 }
