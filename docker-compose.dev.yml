@@ -9,9 +9,10 @@ services:
     depends_on:
       - db
     environment:
-      NODE_ENV: development
-      INFLOW_DB_HOST: db
       DEV_HOST_ENV: ${DEV_HOST_ENV}
+      NODE_ENV: development
+      INFLOW_COOKIE_SECRET: 'devmode'
+      INFLOW_DB_HOST: db
     hostname: inflow-dev
     ports:
       - 8080:8080
@@ -38,7 +39,8 @@ services:
     volumes:
       - inflowdb:/var/lib/postgresql/data
       - ./database/schema/schema.sql:/docker-entrypoint-initdb.d/01-init.sql
-      - ./database/testData/dev_dataset.sql:/docker-entrypoint-initdb.d/02-data.sql
+      - ./database/schema/session.sql:/docker-entrypoint-initdb.d/02-session.sql
+      - ./database/testData/dev_dataset.sql:/docker-entrypoint-initdb.d/03-data.sql
     
   adminer:
     image: adminer
