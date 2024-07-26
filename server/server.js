@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'such a secret',
+  secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new session.MemoryStore(),

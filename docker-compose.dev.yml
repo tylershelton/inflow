@@ -9,9 +9,10 @@ services:
     depends_on:
       - db
     environment:
-      NODE_ENV: development
-      INFLOW_DB_HOST: db
       DEV_HOST_ENV: ${DEV_HOST_ENV}
+      NODE_ENV: development
+      INFLOW_COOKIE_SECRET: 'devmode'
+      INFLOW_DB_HOST: db
     hostname: inflow-dev
     ports:
       - 8080:8080
