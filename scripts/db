@@ -31,12 +31,17 @@ if [ "$cmd" = "export" ]; then
         cp "$output_file" "$backup_file"
     fi
 
-# update the dataset used to populate the database in non-production environments
-# by dumping its current state to a file
+    # update the dataset used to populate the database in non-production environments
+    # by dumping its current state to a file
     docker compose -f ./docker-compose.dev.yml exec db \
         /bin/bash -c 'pg_dump -a -U inflow -d inflow' > "$output_file"
 
 elif [ "$cmd" = "reset" ]; then
+
+    docker compose -f ./docker-compose.dev.yml stop db
+    docker compose -f ./docker-compose.dev.yml rm -f db
+    docker volume rm inflow-dev_inflowdb
+    docker compose -f ./docker-compose.dev.yml up -d
 
 fi
 
