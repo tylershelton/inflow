@@ -9,6 +9,7 @@ const session        = require('express-session');
 
 // internal imports
 const conf         = require('./config');
+const dbpool       = require('./lib/db');
 const apiRouter    = require('./routes/api');
 const errorHandler = require('./lib/error/globalHandler');
 
@@ -17,11 +18,15 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
-  secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: new session.MemoryStore(),
-  // cookie: { secure: true },
+  secret: process.env.INFLOW_COOKIE_SECRET,
+  store: new (require('connect-pg-simple')(session))({
+    pool: dbpool,
+  }),
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+  },
 }));
 app.use(passport.authenticate('session'));
 
