@@ -1,6 +1,4 @@
 import React from 'react';
-
-import CategoryList from './CategoryList';
 import {
   Link,
   redirect,
@@ -9,6 +7,8 @@ import {
 } from 'react-router-dom';
 
 import auth from '../api/auth';
+import CategoryList from './CategoryList';
+import LogoutButton from './LogoutButton';
 
 export async function action () {
   await auth.logout();
@@ -26,11 +26,7 @@ export default function Sidebar ({ categories }) {
         <img src="#" alt="Inflow logo" />
         <section>
           {loggedIn ?
-            <fetcher.Form method="post" action="/logout">
-              <button type="submit">
-                Log Out
-              </button>
-            </fetcher.Form>
+            <LogoutButton />
             :
             <>
               <Link to="login">Log In</Link><br/>
