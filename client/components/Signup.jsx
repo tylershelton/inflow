@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-  Form,
   json,
   redirect,
-  useActionData
+  useFetcher
 } from 'react-router-dom';
 
 import apiFetch from '../api/apiFetch';
@@ -36,12 +35,14 @@ export async function action ({ request }) {
 }
 
 export default function Signup () {
-  const actionData = useActionData();
+  const fetcher = useFetcher();
+
+  console.log(fetcher.data);
 
   return (
     <section>
       <h2>Sign Up</h2>
-      <Form method='post' id='signup-form' action='/signup'>
+      <fetcher.Form method='post' id='signup-form' action='/signup'>
         <section>
           <label htmlFor='username'>
             Username
@@ -74,12 +75,12 @@ export default function Signup () {
               required
             />
           </label>
-          {actionData?.errors?.password && (
-            <div className='error'>{actionData.errors.password}</div>
+          {fetcher.data?.errors?.password && (
+            <div className='error'>{fetcher.data.errors.password}</div>
           )}
         </section>
         <button type='submit'>Sign In</button>
-      </Form>
+      </fetcher.Form>
     </section>
   );
 }
