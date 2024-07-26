@@ -1,11 +1,11 @@
 // third-party/core library imports
-const express        = require('express');
-const app            = express();
-const bodyParser     = require('body-parser');
-const cookieParser   = require('cookie-parser');
-const passport       = require('passport');
-const path           = require('path');
-const session        = require('express-session');
+const express      = require('express');
+const app          = express();
+const bodyParser   = require('body-parser');
+const cookieParser = require('cookie-parser');
+const passport     = require('passport');
+const path         = require('path');
+const session      = require('express-session');
 
 // internal imports
 const conf         = require('./config');
