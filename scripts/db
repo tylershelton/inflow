@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 cmd_is_valid() {
-    for valid_cmd in "export" "reset";
+    for valid_cmd in "export" "migrate" "reset";
     do
         if [ "$cmd" = "$valid_cmd" ]; then
             return 0
@@ -10,8 +10,8 @@ cmd_is_valid() {
     return 1
 }
 
-REPO_ROOT=$(git rev-parse --show-toplevel)
-cmd="$1"
+CMD_DIR="$(dirname "$0")/db_ops"
+CMD="$1"
 
 # validate input
 if [[ -z "$1" ]] || ! cmd_is_valid; then
@@ -19,30 +19,13 @@ if [[ -z "$1" ]] || ! cmd_is_valid; then
     exit 1
 fi
 
-cd "$REPO_ROOT"
-
-if [ "$cmd" = "export" ]; then
-
-    output_file="${REPO_ROOT}/database/test_data/dev_dataset.sql"
-
-    # don't clobber the existing file, just in case
-    if [ -f "$output_file" ]; then
-        backup_file="${output_file}.backup"
-        cp "$output_file" "$backup_file"
-    fi
-
-    # update the dataset used to populate the database in non-production environments
-    # by dumping its current state to a file
-    docker compose -f ./docker-compose.dev.yml exec db \
-        /bin/bash -c 'pg_dump -a -U inflow -d inflow' > "$output_file"
-
-elif [ "$cmd" = "reset" ]; then
-
-    docker compose -f ./docker-compose.dev.yml stop db
-    docker compose -f ./docker-compose.dev.yml rm -f db
-    docker volume rm inflow-dev_inflowdb
-    docker compose -f ./docker-compose.dev.yml up -d
-
+# try to run subcommand
+if [ -x "${CMD_DIR}/${CMD}.sh" ]; then
+    shift
+    "${CMD_DIR}/${CMD}.sh" "$@"
+else
+    echo "Error: Script for subcommand `${CMD}` not found."
+    exit 1
 fi
 
 exit 0
