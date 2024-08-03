@@ -2,9 +2,9 @@
 
 . "$(dirname "$0")/utils.sh"
 
-ensure_docker_is_running
-
 out_file="./database/test_data/dev_dataset.sql"
+
+ensure_docker_is_running
 
 # update the dataset used to populate the database in non-production environments
 # by dumping its current state to a file
