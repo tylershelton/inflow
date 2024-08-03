@@ -10,15 +10,17 @@ cmd_is_valid() {
     return 1
 }
 
-CMD_DIR="$(dirname "$0")/db_ops"
+REPO_ROOT=$(git rev-parse --show-toplevel)
+CMD_DIR="$(realpath $(dirname "$0"))/db_ops"
 CMD="$1"
 
 # validate input
 if [[ -z "$1" ]] || ! cmd_is_valid; then
-    echo "Usage: db (export|reset)"
+    echo "Usage: db (export|migrate|reset)"
     exit 1
 fi
 
+cd "$REPO_ROOT"
 # try to run subcommand
 if [ -x "${CMD_DIR}/${CMD}.sh" ]; then
     shift
