@@ -8,7 +8,7 @@ env_file=".env"
 env_exists() {
     for env in $SUPPORTED_ENVS;
     do
-        if [ "$env" = "$new_env" ]; then
+        if [ "$env" = "$1" ]; then
             return 0
         fi
     done
@@ -37,7 +37,7 @@ fi
 
 # handle runs with an argument provided
 new_env="$1"
-if env_exists; then
+if env_exists "$new_env"; then
     echo "$new_env" > "$env_file"
     echo "Setting environment to '$new_env'."
     exit 0
