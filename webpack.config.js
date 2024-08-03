@@ -52,7 +52,7 @@ module.exports = {
   },
 
   // 
-  watchOptions: process.env.DEV_HOST_ENV === 'windows'
+  watchOptions: process.env.PROJECT_HOST_OS === 'windows'
     ? { poll: 1000 }
     : {},
 

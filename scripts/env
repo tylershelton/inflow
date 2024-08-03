@@ -29,7 +29,7 @@ if [ -z "$1" ]; then
     if [ -f "$env_file" ]; then
         # print the current env name
         export $(grep -v '^#' "$env_file" | xargs)
-        echo $REPO_ENV
+        echo $PROJECT_ENV
         exit 0
     else
         echo "No environment set."
