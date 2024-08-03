@@ -3,7 +3,7 @@
 cmd_is_valid() {
     for valid_cmd in "export" "migrate" "reset";
     do
-        if [ "$cmd" = "$valid_cmd" ]; then
+        if [ "$CMD" = "$valid_cmd" ]; then
             return 0
         fi
     done
