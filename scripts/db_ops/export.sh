@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 output_file="${REPO_ROOT}/database/test_data/dev_dataset.sql"
 
