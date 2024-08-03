@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-cd $(dirname "$0")
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT"
 
 SUPPORTED_ENVS="prod dev"
 env_file=".env"
@@ -25,8 +26,10 @@ print_envs() {
 
 # handle runs with no argument provided
 if [ -z "$1" ]; then
-    if [ -e "$env_file" ]; then
-        cat "$env_file"
+    if [ -f "$env_file" ]; then
+        # print the current env name
+        export $(grep -v '^#' "$env_file" | xargs)
+        echo $REPO_ENV
         exit 0
     else
         echo "No environment set."
@@ -38,7 +41,7 @@ fi
 # handle runs with an argument provided
 new_env="$1"
 if env_exists "$new_env"; then
-    echo "$new_env" > "$env_file"
+    # echo "$new_env" > "$env_file"
     echo "Setting environment to '$new_env'."
     exit 0
 else
