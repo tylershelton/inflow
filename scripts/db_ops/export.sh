@@ -2,10 +2,10 @@
 
 output_file="${REPO_ROOT}/database/test_data/dev_dataset.sql"
 
-# don't clobber the existing file, just in case
-if [ -f "$output_file" ]; then
-    backup_file="${output_file}.backup"
-    cp "$output_file" "$backup_file"
+# ensure docker is running
+if ! docker info > /dev/null 2>&1; then
+    echo "ERROR: Docker does not appear to be running. Please start the docker service and try again."
+    exit 1
 fi
 
 # update the dataset used to populate the database in non-production environments
