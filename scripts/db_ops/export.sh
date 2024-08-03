@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-output_file="${REPO_ROOT}/database/test_data/dev_dataset.sql"
+REPO_ROOT=$(git rev-parse --show-toplevel)
 
 # ensure docker is running
 if ! docker info > /dev/null 2>&1; then
