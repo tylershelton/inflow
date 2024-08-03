@@ -26,17 +26,17 @@ cd "$REPO_ROOT"
 if [ "$1" = "up" ]; then
     if [ "$ENV" = "production" ]; then
         # <todo> generate webpack artifacts first
-        docker compose -f docker-compose.yml up --build -d
+        docker compose -f compose.yml up --build -d
     else
         # start in dev mode by default
-        docker compose -f docker-compose.dev.yml up --build -d
-        docker compose -f docker-compose.dev.yml exec inflow bash
+        docker compose -f compose.dev.yml up --build -d
+        docker compose -f compose.dev.yml exec inflow bash
     fi
 elif [ "$1" = "down" ]; then
     if [ "$ENV" = "production" ]; then
-        docker compose -f docker-compose.yml down
+        docker compose -f compose.yml down
     else
         # start in dev mode by default
-        docker compose -f docker-compose.dev.yml down
+        docker compose -f compose.dev.yml down
     fi
 fi
