@@ -1,13 +1,11 @@
 #!/usr/bin/env sh
 
+. "$(dirname "$0")/utils.sh"
+
 REPO_ROOT=$(git rev-parse --show-toplevel)
 out_file="${REPO_ROOT}/database/test_data/dev_dataset.sql"
 
-# ensure docker is running
-if ! docker info > /dev/null 2>&1; then
-    echo "ERROR: Docker does not appear to be running. Please start the docker service and try again."
-    exit 1
-fi
+ensure_docker_is_running
 
 # update the dataset used to populate the database in non-production environments
 # by dumping its current state to a file
