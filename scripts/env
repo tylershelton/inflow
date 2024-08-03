@@ -2,11 +2,11 @@
 
 cd $(dirname "$0")
 
-supported_envs="production development"
+SUPPORTED_ENVS="prod dev"
 env_file=".env"
 
 env_exists() {
-    for env in $supported_envs;
+    for env in $SUPPORTED_ENVS;
     do
         if [ "$env" = "$new_env" ]; then
             return 0
@@ -17,7 +17,7 @@ env_exists() {
 
 print_envs() {
     echo "This project supports the following environments:"
-    for env in $supported_envs;
+    for env in $SUPPORTED_ENVS;
     do
         echo "  $env"
     done
