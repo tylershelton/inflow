@@ -44,6 +44,11 @@ fi
 # handle runs with an argument provided
 NEW_ENV="$1"
 if in_array "$NEW_ENV" "$SUPPORTED_ENVS"; then
+    if [ "$NEW_ENV" = "$PROJECT_ENV" ]; then
+        echo "${NEW_ENV} is already active."
+        exit 0
+    fi
+
     # echo "$NEW_ENV" > "$env_file"
     echo "Setting environment to '$NEW_ENV'."
     exit 0
