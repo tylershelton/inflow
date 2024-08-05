@@ -11,7 +11,7 @@ fi
 # clean up webpack artifacts
 if [ -d "$REPO_ROOT/build" ]; then
     echo '==> cleaning up webpack build artifacts...'
-    rm -rf $REPO_ROOT/build
+    rm -rf "$REPO_ROOT/build"
 fi
 
 # clean up node_modules
