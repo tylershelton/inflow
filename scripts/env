@@ -9,13 +9,16 @@ SUPPORTED_ENVS="prod dev"
 env_file=".env"
 
 load_env() {
-    local env_file="$1"
+    (
+        env_file="$1"
     if [ -f "$env_file" ]; then
         # print the current env name
         export $(grep -v '^#' "$env_file" | xargs)
-            return 0
+            exit 0
         fi
-    return 1
+        exit 1
+    )
+    return $?
 }
 
 print_envs() {
