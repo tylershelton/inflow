@@ -19,7 +19,6 @@ ensure_docker_is_running() {
     return 0
 }
 
-
 in_array() {
     (
         val="$1"
