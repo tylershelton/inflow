@@ -39,16 +39,38 @@ fi
 # handle runs with an argument provided
 NEW_ENV="$1"
 if in_array "$NEW_ENV" "$SUPPORTED_ENVS"; then
+
     if [ "$NEW_ENV" = "$PROJECT_ENV" ]; then
-        echo "${NEW_ENV} is already active."
+        echo "'${NEW_ENV}' is already active."
         exit 0
     fi
 
-    # echo "$NEW_ENV" > "$env_file"
-    echo "Setting environment to '$NEW_ENV'."
-    exit 0
+    # if we have a current env and are switching to a new
+    # one, deactivate the old one without destroying it
+    if [ "$ENV_LOADED" -eq 0 ]; then
+        echo "==> Deactivating '$PROJECT_ENV'..."
+        mv "$env_file" "${env_file}.${PROJECT_ENV}"
+    fi
+
+    # check if we have a conf for the new env. if we do,
+    # activate it. if we don't, spin up a new one
+    existing_env="${env_file}.${NEW_ENV}"
+    if [ -f "$existing_env" ]; then
+        mv "$existing_env" "$env_file"
+    else
+        echo "==> Creating new .env file for environment '$NEW_ENV'..."
+        cp "${env_file}.tmpl" "$env_file"
+        set_env_var PROJECT_ENV "$NEW_ENV" "$env_file"
+        echo "==> Please review the new .env file for any needed customizations."
+    fi
+
+    echo "==> Environment '$NEW_ENV' is active."
+        exit 0
+
 else
-    echo "Unknown environment '$NEW_ENV'."
+
+    echo "ERROR: Unknown environment '$NEW_ENV'."
     print_envs
     exit 1
+
 fi
