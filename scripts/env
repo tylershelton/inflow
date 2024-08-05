@@ -8,13 +8,13 @@ cd "$REPO_ROOT"
 SUPPORTED_ENVS="prod dev"
 env_file=".env"
 
-env_exists() {
-    for env in $SUPPORTED_ENVS;
-    do
-        if [ "$env" = "$1" ]; then
+load_env() {
+    local env_file="$1"
+    if [ -f "$env_file" ]; then
+        # print the current env name
+        export $(grep -v '^#' "$env_file" | xargs)
             return 0
         fi
-    done
     return 1
 }
 
@@ -26,18 +26,19 @@ print_envs() {
     done
 }
 
+load_env "$env_file"; ENV_LOADED=$?
+
 # handle runs with no argument provided
 if [ -z "$1" ]; then
-    if [ -f "$env_file" ]; then
-        # print the current env name
-        export $(grep -v '^#' "$env_file" | xargs)
+
+    if [ "$ENV_LOADED" -eq 0 ]; then
         echo $PROJECT_ENV
-        exit 0
     else
         echo "No environment set."
         print_envs
-        exit 1
     fi
+
+    exit 0
 fi
 
 # handle runs with an argument provided
