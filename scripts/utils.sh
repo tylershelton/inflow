@@ -42,6 +42,17 @@ in_array() {
     return $?
 }
 
+load_env() {
+    env_file="$(get_repo_root)/.env" || return 1
+    if [ -f "$env_file" ]; then
+        set -a
+        . "$env_file"
+        set +a
+        return 0
+    fi
+    return 1
+}
+
 set_env_var() {
     (
         NAME="$1"

@@ -13,19 +13,6 @@ cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 
 SUPPORTED_ENVS="prod dev"
 env_file=".env"
 
-load_env() {
-    (
-        env_file="$1"
-    if [ -f "$env_file" ]; then
-        # print the current env name
-        export $(grep -v '^#' "$env_file" | xargs)
-            exit 0
-        fi
-        exit 1
-    )
-    return $?
-}
-
 print_envs() {
     echo "This project supports the following environments:"
     for env in $SUPPORTED_ENVS;
@@ -34,7 +21,7 @@ print_envs() {
     done
 }
 
-load_env "$env_file"; ENV_LOADED=$?
+load_env; ENV_LOADED=$?
 
 # handle runs with no argument provided
 if [ -z "$1" ]; then
