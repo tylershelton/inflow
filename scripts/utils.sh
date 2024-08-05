@@ -32,3 +32,14 @@ in_array() {
     )
     return $?
 }
+
+set_env_var() {
+    (
+        NAME="$1"
+        VALUE="$2"
+        ENV_FILE="$3"
+        sed -i -e "s/^#\s*${NAME}=/${NAME}=/" -e "s/^${NAME}=.*/${NAME}=${VALUE}/" "$ENV_FILE"
+        exit 0
+    )
+    return $?
+}
