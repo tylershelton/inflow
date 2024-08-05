@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+. "$(dirname "$0")/utils.sh"
+
 REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT"
 
@@ -39,13 +41,13 @@ if [ -z "$1" ]; then
 fi
 
 # handle runs with an argument provided
-new_env="$1"
-if env_exists "$new_env"; then
-    # echo "$new_env" > "$env_file"
-    echo "Setting environment to '$new_env'."
+NEW_ENV="$1"
+if in_array "$NEW_ENV" "$SUPPORTED_ENVS"; then
+    # echo "$NEW_ENV" > "$env_file"
+    echo "Setting environment to '$NEW_ENV'."
     exit 0
 else
-    echo "Unknown environment '"$new_env"'."
+    echo "Unknown environment '"$NEW_ENV"'."
     print_envs
     exit 1
 fi
