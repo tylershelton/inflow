@@ -8,23 +8,21 @@ if [ "$IS_REPO" -ne 0 ]; then
     exit 1
 fi
 cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
-}
 
-REPO_ROOT=$(git rev-parse --show-toplevel)
-ENV=$(cat "$(dirname "$0")/.env")
-cmd="$1"
+load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
+
+VALID_CMDS="up down"
+CMD="$1"
 
 # validate input
-if [[ -z "$1" ]] || ! cmd_is_valid; then
+if [ -z "$1" ] || ! in_array "$CMD" "$VALID_CMDS"; then
     echo "Usage: server (up|down)"
     exit 1
 fi
 
-cd "$REPO_ROOT"
-
 # start servers
 if [ "$1" = "up" ]; then
-    if [ "$ENV" = "production" ]; then
+    if [ "$PROJECT_ENV" = "prod" ]; then
         # <todo> generate webpack artifacts first
         docker compose -f compose.yml up --build -d
     else
