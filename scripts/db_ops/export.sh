@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-. "$(dirname "$0")/utils.sh"
+. "$(dirname "$0")/../utils.sh"
 
 out_file="./database/test_data/dev_dataset.sql"
 

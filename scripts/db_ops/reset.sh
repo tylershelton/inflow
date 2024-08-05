@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-. "$(dirname "$0")/utils.sh"
+. "$(dirname "$0")/../utils.sh"
 
 ensure_docker_is_running
 
