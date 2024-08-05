@@ -19,6 +19,15 @@ ensure_docker_is_running() {
     return 0
 }
 
+get_repo_root() {
+    repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ $? -eq 0 ]; then
+        echo "$repo_root"
+        return 0
+    fi
+    return 1
+}
+
 in_array() {
     (
         val="$1"
