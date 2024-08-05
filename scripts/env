@@ -35,7 +35,7 @@ load_env "$env_file"; ENV_LOADED=$?
 if [ -z "$1" ]; then
 
     if [ "$ENV_LOADED" -eq 0 ]; then
-        echo $PROJECT_ENV
+        echo "$PROJECT_ENV"
     else
         echo "No environment set."
         print_envs
