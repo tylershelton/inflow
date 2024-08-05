@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 cmd_is_valid() {
     for valid_cmd in "up" "down";
