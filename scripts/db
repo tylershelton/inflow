@@ -9,10 +9,13 @@ if [ "$IS_REPO" -ne 0 ]; then
 fi
 cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
 
+
+VALID_CMDS="export migrate reset"
+CMD_DIR="$(realpath "$(dirname "$0")")/db_ops"
 CMD="$1"
 
 # validate input
-if [[ -z "$1" ]] || ! cmd_is_valid; then
+if [ -z "$CMD" ] || ! in_array "$CMD" "$VALID_CMDS"; then
     echo "Usage: db (export|migrate|reset)"
     exit 1
 fi
