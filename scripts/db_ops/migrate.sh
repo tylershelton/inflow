@@ -1,5 +1,23 @@
 #!/usr/bin/env sh
 
+filename_is_valid() {
+    (
+        filename="$1"
+        if [ -z "$filename" ]; then
+            exit 1 # empty string
+        fi
+        case "$filename" in
+            *[!a-zA-Z0-9._-]*)
+                exit 1 # invalid characters
+                ;;
+            *)
+                exit 0
+                ;;
+        esac
+    )
+    return $?
+}
+
 # import functions
 . "$(dirname "$0")/../utils.sh"
 
@@ -47,6 +65,23 @@ CREATE TABLE IF NOT EXISTS migration (
 #   get the next version number up,
 #   get a filename from the user,
 #   touch files for that version and name in {migrate,rollback,validate}
+datestamp=$(date +%Y%m%d)
+
+echo "Enter a filename for this migration."
+echo "Your name will be prefixed with today's date."
+
+while true; do
+    # use of `printf` here avoids the newline at the end that `echo` would create
+    printf "[%s-<migration_name>] > " "$datestamp"
+    read -r migration_name
+    if filename_is_valid "$migration_name"; then
+        break
+    else
+        echo "Invalid filename. Please use alphanumeric characters, underscores, hyphens, and periods."
+    fi
+done
+
+echo "==> Creating migration ${datestamp}-${migration_name}.sql ..."
 
 # apply migration(s)
 #   - get the target version from .env, or run all migrations
@@ -65,3 +100,9 @@ CREATE TABLE IF NOT EXISTS migration (
 #   - get a target version from user
 #   - query database to see if the run of necessary rollbacks exist
 #   - if so, run them in reverse order
+
+# shutdown db if it was not running before the script ran
+if [ "$db_was_running" -eq 1 ]; then
+    echo "==> stopping \`db\` service container, as it was not running before export."
+    docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null 2>&1
+fi
