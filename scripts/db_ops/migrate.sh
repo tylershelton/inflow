@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS migration (
     supports_rollback   BOOLEAN     NOT NULL,
     dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
     date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
-);"
+);" > /dev/null 2>&1
 
 # create new migration
 #   get the next version number up,
