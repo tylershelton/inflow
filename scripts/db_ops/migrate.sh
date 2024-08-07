@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS migration (
     hash                CHAR(32)    NOT NULL,
     supports_rollback   BOOLEAN     NOT NULL,
     dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
-    date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT TIMESTAMP
+    date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );"
 
 # create new migration
