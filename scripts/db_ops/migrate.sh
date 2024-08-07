@@ -1,8 +1,29 @@
 #!/usr/bin/env sh
 
+# import functions
+. "$(dirname "$0")/../utils.sh"
+
+# cd to the top level of the repo
+REPO_ROOT=$(get_repo_root); IS_REPO=$?
+if [ "$IS_REPO" -ne 0 ]; then
+    echo "ERROR: The current directory does not seem to be within a git repo. Check your working directory and try again."
+    exit 1
+fi
+cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
+
+# load the project's active .env file
 if ! load_env; then
     echo "ERROR: No environment detected. Please set an environment first."
     exit 1
+fi
+
+ensure_docker_is_running
+# start db if necessary
+docker_service_is_running db; db_was_running=$?
+
+if [ "$db_was_running" -eq 1 ]; then
+    echo "==> starting the \`db\` service container..."
+    docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null 2>&1
 fi
 
 # init migration table
