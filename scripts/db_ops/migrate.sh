@@ -29,6 +29,18 @@ if [ "$IS_REPO" -ne 0 ]; then
 fi
 cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
 
+# validate input
+if [ -z "$1" ]; then
+    echo "
+Usage: db migrate [create|VERSION]
+
+    create      Generate files for writing a new migration
+    VERSION     The version number of an existing migration to update (or roll back) to.
+                (default: version specified in .env file)
+"
+    exit 1
+fi
+
 # load the project's active .env file
 if ! load_env; then
     echo "ERROR: No environment detected. Please set an environment first."
@@ -66,22 +78,22 @@ CREATE TABLE IF NOT EXISTS migration (
 #   get a filename from the user,
 #   touch files for that version and name in {migrate,rollback,validate}
 if [ "$1" = "create" ]; then
-datestamp=$(date +%Y%m%d)
+    datestamp=$(date +%Y%m%d)
 
-echo "Enter a filename for this migration."
-echo "Your name will be prefixed with today's date."
+    echo "Enter a filename for this migration."
+    echo "Your name will be prefixed with today's date."
 
-while true; do
+    while true; do
         # use of `printf` here avoids the newline at the end of the prompt that
         # `echo` would create
-    printf "[%s-<migration_name>] > " "$datestamp"
-    read -r migration_name
-    if filename_is_valid "$migration_name"; then
-        break
-    else
-        echo "Invalid filename. Please use alphanumeric characters, underscores, hyphens, and periods."
-    fi
-done
+        printf "[%s-<migration_name>] > " "$datestamp"
+        read -r migration_name
+        if filename_is_valid "$migration_name"; then
+            break
+        else
+            echo "Invalid filename. Please use alphanumeric characters, underscores, hyphens, and periods."
+        fi
+    done
 
     echo "==> Creating {migrate,rollback,validate}/${datestamp}-${migration_name}.sql ..."
 
