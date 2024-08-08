@@ -65,13 +65,15 @@ CREATE TABLE IF NOT EXISTS migration (
 #   get the next version number up,
 #   get a filename from the user,
 #   touch files for that version and name in {migrate,rollback,validate}
+if [ "$1" = "create" ]; then
 datestamp=$(date +%Y%m%d)
 
 echo "Enter a filename for this migration."
 echo "Your name will be prefixed with today's date."
 
 while true; do
-    # use of `printf` here avoids the newline at the end that `echo` would create
+        # use of `printf` here avoids the newline at the end of the prompt that
+        # `echo` would create
     printf "[%s-<migration_name>] > " "$datestamp"
     read -r migration_name
     if filename_is_valid "$migration_name"; then
@@ -81,7 +83,7 @@ while true; do
     fi
 done
 
-echo "==> Creating migration ${datestamp}-${migration_name}.sql ..."
+fi
 
 # apply migration(s)
 #   - get the target version from .env, or run all migrations
