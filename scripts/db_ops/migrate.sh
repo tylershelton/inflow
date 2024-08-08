@@ -83,6 +83,17 @@ while true; do
     fi
 done
 
+    echo "==> Creating {migrate,rollback,validate}/${datestamp}-${migration_name}.sql ..."
+
+    mkdir -p database/migrations/migrate
+    mkdir -p database/migrations/rollback
+    mkdir -p database/migrations/validate
+
+    touch -a "database/migrations/migrate/${datestamp}-${migration_name}.sql"
+    touch -a "database/migrations/rollback/${datestamp}-${migration_name}.sql"
+    touch -a "database/migrations/validate/${datestamp}-${migration_name}.sql"
+
+    exit 0
 fi
 
 # apply migration(s)
