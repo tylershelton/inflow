@@ -122,6 +122,10 @@ else
 fi
 
 #   - determine whether we're trying to migrate forward or roll back
+current_migration=$(docker compose -f "$PROJECT_COMPOSE_FILE" exec db psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" -tAc "
+SELECT COALESCE(MAX(version), 0) FROM migration;
+")
+
 
 #   - for each migration:
 #       - run migration script
