@@ -1,5 +1,13 @@
 #!/usr/bin/env sh
 
+helptext="
+Usage: db migrate [create|VERSION]
+
+    create      Generate files for writing a new migration
+    VERSION     The version number of an existing migration to update (or roll back) to.
+                (default: version specified in .env file)
+"
+
 filename_is_valid() {
     (
         filename="$1"
@@ -28,18 +36,6 @@ if [ "$IS_REPO" -ne 0 ]; then
     exit 1
 fi
 cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
-
-# validate input
-if [ -z "$1" ]; then
-    echo "
-Usage: db migrate [create|VERSION]
-
-    create      Generate files for writing a new migration
-    VERSION     The version number of an existing migration to update (or roll back) to.
-                (default: version specified in .env file)
-"
-    exit 1
-fi
 
 # load the project's active .env file
 if ! load_env; then
@@ -109,7 +105,20 @@ if [ "$1" = "create" ]; then
 fi
 
 # apply migration(s)
-#   - get the target version from .env, or run all migrations
+#   - get the target version from $1, or from .env as a fallback
+if [ -z "$1" ]; then
+    if [ -z "$DB_VERSION" ]; then
+        echo "ERROR: No migration specified, and DB_VERSION is not set in the .env file. Please provide a database version to migrate to."
+        echo "$helptext"
+        exit 1
+    fi
+    target_migration="$DB_VERSION"
+else
+    target_migration="$1"
+fi
+
+#   - determine whether we're trying to migrate forward or roll back
+
 #   - for each migration:
 #       - run migration script
 #       - run validation script. rollback upon failure
