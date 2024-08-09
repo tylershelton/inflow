@@ -136,7 +136,7 @@ fi
 #   - if so, run them in reverse order
 
 # shutdown db if it was not running before the script ran
-if [ "$db_was_running" -eq 1 ]; then
+if [ $db_was_running -eq 1 ]; then
     echo "==> stopping \`db\` service container, as it was not running before export."
     docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null 2>&1
 fi
