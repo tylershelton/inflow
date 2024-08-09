@@ -35,12 +35,26 @@ CREATE TABLE IF NOT EXISTS user_account (
 );
 
 -- table for persisting user sessions
-CREATE TABLE user_session (
-  "sid" varchar NOT NULL COLLATE "default",
-  "sess" json NOT NULL,
-  "expire" timestamp(6) NOT NULL
+CREATE TABLE IF NOT EXISTS user_session (
+  "sid"             varchar         NOT NULL COLLATE "default",
+  "sess"            json            NOT NULL,
+  "expire"          timestamp(6)    NOT NULL
 );
 
-ALTER TABLE "user_session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE;
+DO $$
+BEGIN
 
-CREATE INDEX "IDX_session_expire" ON "user_session" ("expire");
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'session_pkey') THEN
+        ALTER TABLE "user_session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE;
+    END IF;
+
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_indexes
+        WHERE tablename = 'user_session' AND indexname = 'IDX_session_expire'
+    ) THEN
+        CREATE INDEX "IDX_session_expire" ON "user_session" ("expire");
+    END IF;
+
+END $$;
+
