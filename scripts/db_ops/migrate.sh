@@ -43,32 +43,6 @@ if ! load_env; then
     exit 1
 fi
 
-ensure_docker_is_running
-# start db if necessary
-docker_service_is_running db; db_was_running=$?
-
-if [ "$db_was_running" -eq 1 ]; then
-    echo "==> starting the \`db\` service container..."
-    docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null 2>&1
-fi
-
-# init migration table
-#   table should contain the following fields --
-#       - version: int id, PK
-#       - name: the migration filename
-#       - hash: md5sum of the script
-#       - supports_rollback: whether a rollback script is implemented
-#       - dirty: script has changed on disk and needs to be re-run (or reverted)
-docker compose -f "$PROJECT_COMPOSE_FILE" exec db psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" -c "
-CREATE TABLE IF NOT EXISTS migration (
-    version             INTEGER     PRIMARY KEY,
-    name                TEXT        NOT NULL,
-    hash                CHAR(32)    NOT NULL,
-    supports_rollback   BOOLEAN     NOT NULL,
-    dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
-    date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
-);" > /dev/null 2>&1
-
 # create new migration
 #   get the next version number up,
 #   get a filename from the user,
@@ -103,6 +77,36 @@ if [ "$1" = "create" ]; then
 
     exit 0
 fi
+
+# if we've made it this far, we're attempting to run an actual set of
+# migrations (or roll them back)
+# -----------------------------------------------------------------------------
+
+ensure_docker_is_running
+# start db if necessary
+docker_service_is_running db; db_was_running=$?
+
+if [ $db_was_running -eq 1 ]; then
+    echo "==> starting the \`db\` service container..."
+    docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null 2>&1
+fi
+
+# init migration table
+#   table should contain the following fields --
+#       - version: int id, PK
+#       - name: the migration filename
+#       - hash: md5sum of the script
+#       - supports_rollback: whether a rollback script is implemented
+#       - dirty: script has changed on disk and needs to be re-run (or reverted)
+docker compose -f "$PROJECT_COMPOSE_FILE" exec db psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" -c "
+CREATE TABLE IF NOT EXISTS migration (
+    version             INTEGER     PRIMARY KEY,
+    name                TEXT        NOT NULL,
+    hash                CHAR(32)    NOT NULL,
+    supports_rollback   BOOLEAN     NOT NULL,
+    dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
+    date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
+);" > /dev/null 2>&1
 
 # apply migration(s)
 #   - get the target version from $1, or from .env as a fallback
