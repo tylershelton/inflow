@@ -86,6 +86,11 @@ ensure_docker_is_running
 # start db if necessary
 docker_service_is_running db; db_was_running=$?
 
+run_psql() {
+    docker compose -f "$PROJECT_COMPOSE_FILE" exec db \
+        psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" "$@"
+}
+
 if [ $db_was_running -eq 1 ]; then
     echo "==> starting the \`db\` service container..."
     docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null 2>&1
@@ -98,7 +103,7 @@ fi
 #       - hash: md5sum of the script
 #       - supports_rollback: whether a rollback script is implemented
 #       - dirty: script has changed on disk and needs to be re-run (or reverted)
-docker compose -f "$PROJECT_COMPOSE_FILE" exec db psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" -c "
+run_psql -c "
 CREATE TABLE IF NOT EXISTS migration (
     version             INTEGER     PRIMARY KEY,
     name                TEXT        NOT NULL,
@@ -122,7 +127,7 @@ else
 fi
 
 #   - determine whether we're trying to migrate forward or roll back
-current_migration=$(docker compose -f "$PROJECT_COMPOSE_FILE" exec db psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" -tAc "
+current_migration=$(run_psql -tAc "
 SELECT COALESCE(MAX(version), 0) FROM migration;
 ")
 
