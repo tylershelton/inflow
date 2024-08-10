@@ -131,9 +131,29 @@ current_migration=$(run_psql -tAc "
 SELECT COALESCE(MAX(version), 0) FROM migration;
 ")
 
+if [ "$current_migration" -lt "$target_migration" ]; then
 
-#   - for each migration:
-#       - run migration script
+    # for each migration:
+    for migration in ./database/migrations/migrate/*.sql; do
+        version="$(basename "$migration" | cut -d '-' -f 1)"
+        if [ "$version" -gt "$current_migration" ] &&
+           [ "$version" -le "$target_migration" ]; then
+            # run migration script
+            echo "==> Running migration $(basename "$migration")..."
+            
+        fi
+    done
+
+elif [ "$current_migration" -gt "$target_migration" ]; then
+
+    echo "Rolling back from ${current_migration} to ${target_migration}."
+
+else
+
+    echo "Already on version ${target_migration}."
+
+fi
+
 #       - run validation script. rollback upon failure
 #       - populate table with migration metadata on success
 
