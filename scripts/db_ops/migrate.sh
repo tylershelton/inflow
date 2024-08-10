@@ -104,13 +104,13 @@ fi
 #       - supports_rollback: whether a rollback script is implemented
 #       - dirty: script has changed on disk and needs to be re-run (or reverted)
 run_psql -c "
-CREATE TABLE IF NOT EXISTS migration (
-    version             INTEGER     PRIMARY KEY,
-    name                TEXT        NOT NULL,
-    hash                CHAR(32)    NOT NULL,
-    supports_rollback   BOOLEAN     NOT NULL,
-    dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
-    date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
+    CREATE TABLE IF NOT EXISTS migration (
+        version             INTEGER     PRIMARY KEY,
+        name                TEXT        NOT NULL,
+        hash                CHAR(32)    NOT NULL,
+        supports_rollback   BOOLEAN     NOT NULL,
+        dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
+        date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );" > /dev/null 2>&1
 
 # apply migration(s)
@@ -128,7 +128,7 @@ fi
 
 #   - determine whether we're trying to migrate forward or roll back
 current_migration=$(run_psql -tAc "
-SELECT COALESCE(MAX(version), 0) FROM migration;
+    SELECT COALESCE(MAX(version), 0) FROM migration;
 ")
 
 if [ "$current_migration" -lt "$target_migration" ]; then
@@ -173,3 +173,5 @@ if [ $db_was_running -eq 1 ]; then
     echo "==> stopping \`db\` service container, as it was not running before export."
     docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null 2>&1
 fi
+
+exit 0
