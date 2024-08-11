@@ -91,6 +91,11 @@ run_psql() {
         psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" "$@"
 }
 
+exec_sql() {
+    docker compose -f "$PROJECT_COMPOSE_FILE" exec -T db \
+        psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME"
+}
+
 if [ $db_was_running -eq 1 ]; then
     echo "==> starting the \`db\` service container..."
     docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null 2>&1
@@ -108,7 +113,7 @@ run_psql -c "
         version             INTEGER     PRIMARY KEY,
         name                TEXT        NOT NULL,
         hash                CHAR(32)    NOT NULL,
-        supports_rollback   BOOLEAN     NOT NULL,
+        supports_rollback   BOOLEAN     NOT NULL DEFAULT FALSE,
         dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
         date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );" > /dev/null 2>&1
@@ -136,11 +141,23 @@ if [ "$current_migration" -lt "$target_migration" ]; then
     # for each migration:
     for migration in ./database/migrations/migrate/*.sql; do
         version="$(basename "$migration" | cut -d '-' -f 1)"
+        name="$(basename -s .sql "$migration" | cut -d '-' -f 2)"
         if [ "$version" -gt "$current_migration" ] &&
            [ "$version" -le "$target_migration" ]; then
             # run migration script
             echo "==> Running migration $(basename "$migration")..."
-            
+            exec_sql < "$migration" > /dev/null 2>&1
+            # update version in db
+            run_psql -c "
+                INSERT INTO migration
+                    (version, name, hash, date_applied)
+                VALUES (
+                    '${version}',
+                    '${name}',
+                    '$(md5sum -z "$migration" | awk '{print $1}')',
+                    '$(date -u '+%Y-%m-%d %H:%M:%S%z')'
+                )
+            " > /dev/null
         fi
     done
 
