@@ -85,6 +85,16 @@ ensure_docker_is_running
 # start db if necessary
 docker_service_is_running db; db_was_running=$?
 
+cleanup() {
+    # shutdown db if it was not running before the script ran
+    if [ $db_was_running -eq 1 ]; then
+        echo "==> stopping \`db\` service container, as it was not running before export."
+        docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null 2>&1
+    fi
+
+    exit "$1"
+}
+
 exec_psql() {
     psql_cmd="psql --quiet --set CLIENT_MIN_MESSAGES=WARNING --set ON_ERROR_STOP=1 -U ${INFLOW_DB_USER} -d ${INFLOW_DB_NAME}"
     if [ $# -eq 0 ]; then
@@ -203,10 +213,4 @@ fi
 #   - query database to see if the run of necessary rollbacks exist
 #   - if so, run them in reverse order
 
-# shutdown db if it was not running before the script ran
-if [ $db_was_running -eq 1 ]; then
-    echo "==> stopping \`db\` service container, as it was not running before export."
-    docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null 2>&1
-fi
-
-exit 0
+cleanup 0
