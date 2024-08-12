@@ -112,7 +112,7 @@ exec_psql() {
 
 if [ $db_was_running -eq 1 ]; then
     echo "==> starting the \`db\` service container..."
-    docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null 2>&1
+    docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null
 fi
 
 # init migration table
@@ -130,7 +130,7 @@ exec_psql -c "
         supports_rollback   BOOLEAN     NOT NULL DEFAULT FALSE,
         dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
         date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
-);" > /dev/null 2>&1
+);" > /dev/null
 
 # apply migration(s)
 #   - get the target version from $1, or from .env as a fallback
@@ -175,6 +175,7 @@ if [ "$current_migration" -lt "$target_migration" ]; then
                     '$(date -u '+%Y-%m-%d %H:%M:%S%z')'
                 )
             " > /dev/null
+            
         fi
     done
 
