@@ -81,19 +81,33 @@ fi
 # if we've made it this far, we're attempting to run an actual set of
 # migrations (or roll them back)
 # -----------------------------------------------------------------------------
-
 ensure_docker_is_running
 # start db if necessary
 docker_service_is_running db; db_was_running=$?
 
-run_psql() {
-    docker compose -f "$PROJECT_COMPOSE_FILE" exec db \
-        psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME" "$@"
-}
-
-exec_sql() {
+exec_psql() {
+    psql_cmd="psql --quiet --set CLIENT_MIN_MESSAGES=WARNING --set ON_ERROR_STOP=1 -U ${INFLOW_DB_USER} -d ${INFLOW_DB_NAME}"
+    if [ $# -eq 0 ]; then
+        output=$(
     docker compose -f "$PROJECT_COMPOSE_FILE" exec -T db \
-        psql -U "$INFLOW_DB_USER" -d "$INFLOW_DB_NAME"
+                /bin/bash -c "$psql_cmd" 2>&1
+        )
+    else
+        output=$(
+            docker compose -f "$PROJECT_COMPOSE_FILE" exec db \
+                /bin/bash -c "$psql_cmd \"$*\"" 2>&1
+        )
+    fi
+
+    exit_status=$?
+
+    if [ $exit_status -ne 0 ]; then
+        echo "$output" >&2
+        return $exit_status
+    else
+        echo "$output" | tail -n 1 # the sql result
+        return 0
+    fi
 }
 
 if [ $db_was_running -eq 1 ]; then
@@ -108,7 +122,7 @@ fi
 #       - hash: md5sum of the script
 #       - supports_rollback: whether a rollback script is implemented
 #       - dirty: script has changed on disk and needs to be re-run (or reverted)
-run_psql -c "
+exec_psql -c "
     CREATE TABLE IF NOT EXISTS migration (
         version             INTEGER     PRIMARY KEY,
         name                TEXT        NOT NULL,
@@ -132,7 +146,7 @@ else
 fi
 
 #   - determine whether we're trying to migrate forward or roll back
-current_migration=$(run_psql -tAc "
+current_migration=$(exec_psql -tAc "
     SELECT COALESCE(MAX(version), 0) FROM migration;
 ")
 
@@ -144,11 +158,14 @@ if [ "$current_migration" -lt "$target_migration" ]; then
         name="$(basename -s .sql "$migration" | cut -d '-' -f 2)"
         if [ "$version" -gt "$current_migration" ] &&
            [ "$version" -le "$target_migration" ]; then
+
             # run migration script
             echo "==> Running migration $(basename "$migration")..."
-            exec_sql < "$migration" > /dev/null 2>&1
+            exec_psql < "$migration" > /dev/null ||
+                { echo "ERROR: Migration script $(basename "$migration") failed."; cleanup 1; }
+
             # update version in db
-            run_psql -c "
+            exec_psql -c "
                 INSERT INTO migration
                     (version, name, hash, date_applied)
                 VALUES (
