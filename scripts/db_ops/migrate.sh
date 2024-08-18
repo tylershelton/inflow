@@ -174,7 +174,10 @@ if [ "$current_migration" -lt "$target_migration" ]; then
             exec_psql < "$migration" > /dev/null ||
                 { echo "ERROR: Migration script $(basename "$migration") failed."; cleanup 1; }
 
-            # update version in db
+            # run validation script. rollback upon failure
+
+
+            # populate table with migration metadata on success
             exec_psql -c "
                 INSERT INTO migration
                     (version, name, hash, date_applied)
@@ -198,9 +201,6 @@ else
     echo "Already on version ${target_migration}."
 
 fi
-
-#       - run validation script. rollback upon failure
-#       - populate table with migration metadata on success
 
 # sync metadata table with migrations on disk
 #   loop over migrations:
