@@ -1,6 +1,17 @@
--- use a view to create an 'alias' for the Categories
--- table, as we begin the process of renaming it to
--- Collections.
-CREATE VIEW collection AS
-SELECT *
-FROM category;
+-- modify the category table, updating it to the new
+-- data model for inflow, in which categories are most
+-- analogous to collections.
+
+DO $$
+BEGIN
+
+    IF EXISTS (
+        SELECT 1
+        FROM pg_tables
+        WHERE tablename = 'category'
+    ) THEN
+        ALTER TABLE category
+        RENAME TO 'collection';
+    END IF;
+
+END $$;
