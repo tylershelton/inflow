@@ -137,10 +137,11 @@ exec_psql -c "
         version             INTEGER     PRIMARY KEY,
         name                TEXT        NOT NULL,
         hash                CHAR(32)    NOT NULL,
-        supports_rollback   BOOLEAN     NOT NULL DEFAULT FALSE,
-        dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
         date_applied        TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );" > /dev/null
+        # left out for now, as current features do not require them
+        # supports_rollback   BOOLEAN     NOT NULL DEFAULT FALSE,
+        # dirty               BOOLEAN     NOT NULL DEFAULT FALSE,
 
 # apply migration(s)
 #   - get the target version from $1, or from .env as a fallback
@@ -195,6 +196,7 @@ if [ "$current_migration" -lt "$target_migration" ]; then
 elif [ "$current_migration" -gt "$target_migration" ]; then
 
     echo "Rolling back from ${current_migration} to ${target_migration}."
+    echo "<Rollback is currently unimplemented>"
 
 else
 
