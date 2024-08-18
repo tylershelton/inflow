@@ -7,7 +7,7 @@ BEGIN
         WHERE tablename = 'collection'
     ) THEN
         ALTER TABLE collection
-        RENAME TO 'category';
+        RENAME TO category;
     END IF;
     
 END $$;
