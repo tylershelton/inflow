@@ -14,6 +14,12 @@ cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 
 load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
 
 ./scripts/bootstrap
+
+# clean up webpack artifacts, if they exist
+if [ -d "./build" ]; then
+    echo '==> cleaning up webpack build artifacts...'
+    rm -rf "./build"
+fi
 if [ "$PROJECT_ENV" = "prod" ]; then
     # build webpack artifacts
     echo '==> Running webpack build...'
