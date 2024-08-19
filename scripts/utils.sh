@@ -3,7 +3,9 @@
 docker_service_is_running() {
     (
         service_name="$1"
-        if docker compose -f compose.dev.yml ps --services --filter "status=running" | grep -q "^${service_name}$"; then
+        load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
+
+        if docker compose -f "$PROJECT_COMPOSE_FILE" ps --services --filter "status=running" | grep -q "^${service_name}$"; then
             exit 0 # service is running
         fi
         exit 1 # service is not running
