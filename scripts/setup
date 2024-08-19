@@ -20,10 +20,14 @@ if [ -d "./build" ]; then
     echo '==> cleaning up webpack build artifacts...'
     rm -rf "./build"
 fi
+
+# reset db
+./scripts/db reset
+
 if [ "$PROJECT_ENV" = "prod" ]; then
     # build webpack artifacts
     echo '==> Running webpack build...'
-npm run build
+    npm run build
 
     # build new docker image?
 fi
