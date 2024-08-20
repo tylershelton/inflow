@@ -28,6 +28,4 @@ if [ "$PROJECT_ENV" = "prod" ]; then
     # build webpack artifacts
     echo '==> Running webpack build...'
     npm run build
-
-    # build new docker image?
 fi
