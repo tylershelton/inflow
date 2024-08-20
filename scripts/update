@@ -4,7 +4,6 @@
 
 . ./scripts/utils.sh
 
-
 REPO_ROOT=$(get_repo_root); IS_REPO=$?
 if [ "$IS_REPO" -ne 0 ]; then
     echo "ERROR: The current directory does not seem to be within a git repo. Check your working directory and try again."
