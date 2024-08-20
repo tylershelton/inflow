@@ -29,3 +29,5 @@ if [ "$PROJECT_ENV" = "prod" ]; then
     echo '==> Running webpack build...'
     npm run build
 fi
+
+exit 0
