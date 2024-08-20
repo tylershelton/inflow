@@ -14,8 +14,9 @@ cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 
 
 load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
 
+echo "==> Installing npm package dependencies..."
 if [ "$PROJECT_ENV" = "prod" ]; then
     npm ci --omit=dev --no-fund
 else
-    npm install
+    npm install --no-fund --no-audit
 fi
