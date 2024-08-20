@@ -15,14 +15,14 @@ load_env || { echo "ERROR: Could not find .env file. Have you set up an environm
 
 ./scripts/bootstrap
 
-# clean up webpack artifacts, if they exist
+# reset db
+./scripts/db reset
+
 if [ -d "./build" ]; then
+    # clean up webpack artifacts, if they exist
     echo '==> cleaning up webpack build artifacts...'
     rm -rf "./build"
 fi
-
-# reset db
-./scripts/db reset
 
 if [ "$PROJECT_ENV" = "prod" ]; then
     # build webpack artifacts
