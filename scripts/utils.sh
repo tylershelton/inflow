@@ -21,6 +21,31 @@ ensure_docker_is_running() {
     return 0
 }
 
+exec_psql() {
+    psql_cmd="psql --quiet --set CLIENT_MIN_MESSAGES=WARNING --set ON_ERROR_STOP=1 -U ${INFLOW_DB_USER} -d ${INFLOW_DB_NAME}"
+    if [ $# -eq 0 ]; then
+        output=$(
+            docker compose -f "$PROJECT_COMPOSE_FILE" exec -T db \
+                /bin/bash -c "$psql_cmd" 2>&1
+        )
+    else
+        output=$(
+            docker compose -f "$PROJECT_COMPOSE_FILE" exec db \
+                /bin/bash -c "$psql_cmd \"$*\"" 2>&1
+        )
+    fi
+
+    exit_status=$?
+
+    if [ $exit_status -ne 0 ]; then
+        echo "$output" >&2
+        return $exit_status
+    else
+        echo "$output" | tail -n 1 # the sql result
+        return 0
+    fi
+}
+
 get_repo_root() {
     repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
     if [ $? -eq 0 ]; then
