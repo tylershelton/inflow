@@ -90,3 +90,13 @@ set_env_var() {
     )
     return $?
 }
+
+wait_for_postgres() {
+    (
+        load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
+        echo "==> Waiting for postgres to start..."
+        while ! docker compose -f "$PROJECT_COMPOSE_FILE" exec db pg_isready -U "$INFLOW_DB_USER" > /dev/null; do
+            sleep 1
+        done
+    )
+}

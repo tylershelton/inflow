@@ -21,11 +21,7 @@ fi
 if [ "$db_was_running" -eq 0 ]; then
     echo "==> Recreating the \`db\` service container..."
     docker compose -f "$PROJECT_COMPOSE_FILE" up db -d > /dev/null
-
-    echo "==> waiting for postgres to start..."
-    while ! docker compose -f "$PROJECT_COMPOSE_FILE" exec db pg_isready -U "$INFLOW_DB_USER" > /dev/null; do
-        sleep 1
-    done
+    wait_for_postgres
 fi
 
 exit 0
