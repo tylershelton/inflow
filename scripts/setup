@@ -15,8 +15,13 @@ load_env || { echo "ERROR: Could not find .env file. Have you set up an environm
 
 ./scripts/bootstrap
 
-# reset db
 ./scripts/db reset
+./scripts/db migrate
+
+if [ "$PROJECT_ENV" = 'dev' ]; then
+    echo "==> Populating db with test data..."
+    exec_psql < ./database/test_data/dev_dataset.sql > /dev/null
+fi
 
 if [ -d "./build" ]; then
     # clean up webpack artifacts, if they exist
