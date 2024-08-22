@@ -1,42 +1,33 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
-cmd_is_valid() {
-    for valid_cmd in "up" "down";
-    do
-        if [ "$cmd" = "$valid_cmd" ]; then
-            return 0
-        fi
-    done
-    return 1
-}
+. "$(dirname "$0")/utils.sh"
 
-REPO_ROOT=$(git rev-parse --show-toplevel)
-ENV=$(cat "$(dirname "$0")/.env")
-cmd="$1"
+REPO_ROOT=$(get_repo_root); IS_REPO=$?
+if [ "$IS_REPO" -ne 0 ]; then
+    echo "ERROR: The current directory does not seem to be within a git repo. Check your working directory and try again."
+    exit 1
+fi
+cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
+
+load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
+
+VALID_CMDS="up down"
+CMD="$1"
 
 # validate input
-if [[ -z "$1" ]] || ! cmd_is_valid; then
+if [ -z "$1" ] || ! in_array "$CMD" "$VALID_CMDS"; then
     echo "Usage: server (up|down)"
     exit 1
 fi
 
-cd "$REPO_ROOT"
-
 # start servers
 if [ "$1" = "up" ]; then
-    if [ "$ENV" = "production" ]; then
-        # <todo> generate webpack artifacts first
-        docker compose -f docker-compose.yml up --build -d
-    else
-        # start in dev mode by default
-        docker compose -f docker-compose.dev.yml up --build -d
-        docker compose -f docker-compose.dev.yml exec inflow bash
-    fi
+
+    ./scripts/update
+    docker compose -f "$PROJECT_COMPOSE_FILE" up -d
+
 elif [ "$1" = "down" ]; then
-    if [ "$ENV" = "production" ]; then
-        docker compose -f docker-compose.yml down
-    else
-        # start in dev mode by default
-        docker compose -f docker-compose.dev.yml down
-    fi
+
+    docker compose -f "$PROJECT_COMPOSE_FILE" down
+    
 fi

@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
 
-# script/bootstrap: Resolve all dependencies that the application requires to
-#                   run.
+# scripts/update: Update application to run for its current checkout.
 
-. "$(dirname "$0")/utils.sh"
+. ./scripts/utils.sh
 
 REPO_ROOT=$(get_repo_root); IS_REPO=$?
 if [ "$IS_REPO" -ne 0 ]; then
@@ -14,9 +13,18 @@ cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 
 
 load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
 
-echo "==> Installing npm package dependencies..."
-if [ "$PROJECT_ENV" = "prod" ]; then
-    npm ci --omit=dev --no-fund
-else
-    npm install --no-fund --no-audit
-fi
+./scripts/bootstrap
+
+# update npm packages
+npm update --save --no-fund
+
+# update database
+./scripts/db migrate
+
+# pull latest docker images
+docker compose -f "$PROJECT_COMPOSE_FILE" pull --ignore-buildable
+
+# update buildable images
+docker compose -f "$PROJECT_COMPOSE_FILE" build
+
+exit 0

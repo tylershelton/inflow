@@ -31,6 +31,11 @@ erDiagram
 		timestamp created_at
 		timestamp updated_at
 	}
+	user_session {
+		string sid PK
+		json sess
+		timestamp expire
+	}
 	collection-useritem {
 		int item_id PK,FK
 		int collection_id PK,FK

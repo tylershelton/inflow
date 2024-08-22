@@ -1,48 +1,76 @@
 #!/usr/bin/env sh
 
-cd $(dirname "$0")
+. "$(dirname "$0")/utils.sh"
 
-supported_envs="production development"
+REPO_ROOT=$(get_repo_root); IS_REPO=$?
+
+if [ "$IS_REPO" -ne 0 ]; then
+    echo "ERROR: The current directory does not seem to be within a git repo. Check your working directory and try again."
+    exit 1
+fi
+cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
+
+SUPPORTED_ENVS="prod dev"
 env_file=".env"
-
-env_exists() {
-    for env in $supported_envs;
-    do
-        if [ "$env" = "$new_env" ]; then
-            return 0
-        fi
-    done
-    return 1
-}
 
 print_envs() {
     echo "This project supports the following environments:"
-    for env in $supported_envs;
+    for env in $SUPPORTED_ENVS;
     do
         echo "  $env"
     done
 }
 
+load_env; ENV_LOADED=$?
+
 # handle runs with no argument provided
 if [ -z "$1" ]; then
-    if [ -e "$env_file" ]; then
-        cat "$env_file"
-        exit 0
+
+    if [ "$ENV_LOADED" -eq 0 ]; then
+        echo "$PROJECT_ENV"
     else
         echo "No environment set."
         print_envs
-        exit 1
     fi
+
+    exit 0
 fi
 
 # handle runs with an argument provided
-new_env="$1"
-if env_exists; then
-    echo "$new_env" > "$env_file"
-    echo "Setting environment to '$new_env'."
-    exit 0
+NEW_ENV="$1"
+if in_array "$NEW_ENV" "$SUPPORTED_ENVS"; then
+
+    if [ "$NEW_ENV" = "$PROJECT_ENV" ]; then
+        echo "'${NEW_ENV}' is already active."
+        exit 0
+    fi
+
+    # if we have a current env and are switching to a new
+    # one, deactivate the old one without destroying it
+    if [ "$ENV_LOADED" -eq 0 ]; then
+        echo "==> Deactivating '$PROJECT_ENV'..."
+        mv "$env_file" "${env_file}.${PROJECT_ENV}"
+    fi
+
+    # check if we have a conf for the new env. if we do,
+    # activate it. if we don't, spin up a new one
+    existing_env="${env_file}.${NEW_ENV}"
+    if [ -f "$existing_env" ]; then
+        mv "$existing_env" "$env_file"
+    else
+        echo "==> Creating new .env file for environment '$NEW_ENV'..."
+        cp "${env_file}.tmpl" "$env_file"
+        set_env_var PROJECT_ENV "$NEW_ENV" "$env_file"
+        echo "==> Please review the new .env file for any needed customizations."
+    fi
+
+    echo "==> Environment '$NEW_ENV' is active."
+        exit 0
+
 else
-    echo "Unknown environment '"$new_env"'."
+
+    echo "ERROR: Unknown environment '$NEW_ENV'."
     print_envs
     exit 1
+
 fi

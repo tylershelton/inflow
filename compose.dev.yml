@@ -9,7 +9,7 @@ services:
     depends_on:
       - db
     environment:
-      DEV_HOST_ENV: ${DEV_HOST_ENV}
+      DEV_HOST_ENV: ${PROJECT_HOST_OS}
       NODE_ENV: development
       INFLOW_COOKIE_SECRET: 'devmode'
       INFLOW_DB_HOST: db
@@ -38,9 +38,6 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - inflowdb:/var/lib/postgresql/data
-      - ./database/schema/schema.sql:/docker-entrypoint-initdb.d/01-init.sql
-      - ./database/schema/session.sql:/docker-entrypoint-initdb.d/02-session.sql
-      - ./database/test_data/dev_dataset.sql:/docker-entrypoint-initdb.d/03-data.sql
     
   adminer:
     image: adminer

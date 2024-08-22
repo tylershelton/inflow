@@ -2,11 +2,37 @@
 
 # scripts/setup: Set up application for the first time after cloning, or set it
 #                back to the initial first unused state.
+. ./scripts/utils.sh
 
-"$(dirname "$0")/bootstrap"
+REPO_ROOT=$(get_repo_root); IS_REPO=$?
+if [ "$IS_REPO" -ne 0 ]; then
+    echo "ERROR: The current directory does not seem to be within a git repo. Check your working directory and try again."
+    exit 1
+fi
+cd "$REPO_ROOT" || { echo "ERROR: Failed to navigate to \`$REPO_ROOT\`'."; exit 1; }
 
-# build webpack artifacts locally
-npm run build
+load_env || { echo "ERROR: Could not find .env file. Have you set up an environment with ./scripts/env?)" >&2; exit 1; }
 
-# create any missing database tables
-# psql -d $INFLOW_DB_URI -f $REPO_ROOT/database/schema/schema.sql
+./scripts/bootstrap
+
+./scripts/db reset
+./scripts/db migrate
+
+if [ "$PROJECT_ENV" = 'dev' ]; then
+    echo "==> Populating db with test data..."
+    exec_psql < ./database/test_data/dev_dataset.sql > /dev/null
+fi
+
+if [ -d "./build" ]; then
+    # clean up webpack artifacts, if they exist
+    echo '==> cleaning up webpack build artifacts...'
+    rm -rf "./build"
+fi
+
+if [ "$PROJECT_ENV" = "prod" ]; then
+    # build webpack artifacts
+    echo '==> Running webpack build...'
+    npm run build
+fi
+
+exit 0

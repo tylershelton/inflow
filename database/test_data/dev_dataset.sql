@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.3 (Debian 16.3-1.pgdg120+1)
--- Dumped by pg_dump version 16.3 (Debian 16.3-1.pgdg120+1)
+-- Dumped from database version 16.4 (Debian 16.4-1.pgdg120+1)
+-- Dumped by pg_dump version 16.4 (Debian 16.4-1.pgdg120+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,10 +17,10 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: inflow
+-- Data for Name: collection; Type: TABLE DATA; Schema: public; Owner: inflow
 --
 
-COPY public.category (id, title) FROM stdin;
+COPY public.collection (id, title) FROM stdin;
 1	News
 2	Engineering
 3	Business
@@ -476,6 +476,81 @@ COPY public.feeditem (id, title, description, url, pubdate, archived, feed_id, c
 437	Git migration announcement	This Friday morning (2023-05-19) the Git packaging migration will start until Sunday (2023-05-21). The Arch Linux packaging team will not be able to update packages in any of the repositories during this period. Notification when the migration...	https://archlinux.org/news/git-migration-announcement/	2023-05-15 19:50:21	f	11	5
 438	Switch to the base-devel meta package requires manual intervention	On February 2nd, the base-devel package group has been replaced by a meta package of the same name. If you installed the base-devel package group prior to this date, explicitly re-install it to get the new base-devel package installed on the...	https://archlinux.org/news/switch-to-the-base-devel-meta-package-requires-manual-intervention/	2023-02-12 14:43:35	f	11	5
 439	PHP 8.2 update and introduction of legacy branch	The php packages have been updated to the latest version 8.2. In addition to this, a new set of php-legacy packages have been introduced. These will follow the oldest but still actively supported PHP branch. This enables users to install the latest...	https://archlinux.org/news/php-82-update-and-introduction-of-legacy-branch/	2023-01-13 14:46:04	f	11	5
+440	Who spoke at the DNC: Watch speeches from Tim Walz, Bill Clinton, Oprah and Stevie Wonder	While Night 3 of the DNC was capped with Tim Walz accepting the vice presidential nomination, there were a few other twists along the way — from Oprah to Stevie Wonder and more Republicans.	https://www.npr.org/2024/08/22/nx-s1-5084839/democratic-national-convention-walz-clinton-buttigieg-oprah-stevie-wonder	2024-08-22 04:23:29	f	8	1
+441	Tim Walz headlines third night of DNC with help from Clinton, Oprah and Stevie Wonder	Tim Walz accepted the Democratic Party’s vice presidential nomination tonight in Chicago, closing out a slate of speakers that included Oprah Winfrey and former President Bill Clinton.	https://www.npr.org/2024/08/22/g-s1-18756/tim-walz-democratic-national-convention-speech	2024-08-22 04:00:15	f	8	1
+442	Pete Buttigieg calls for 'joy' — not a 're-run of some TV wresting death match'	U.S. Transportation Secretary Pete Buttigieg addressed the DNC on night 3 in advance of VP nominee Tim Walz.	https://www.npr.org/2024/08/21/g-s1-18759/pete-buttigieg-democratic-national-convention	2024-08-22 03:53:08	f	8	1
+443	WATCH: Maryland Gov. Wes Moore addresses the Democratic National Convention	Maryland's governor takes a Trump deferment jab.	https://www.npr.org/2024/08/21/g-s1-18667/maryland-wes-moore-democratic-national-convention	2024-08-22 03:47:50	f	8	1
+444	WATCH: Oprah Winfrey addresses the Democratic National Convention	Oprah Winfrey, the media mogul and influential talk show host, gave a thunderous speech endorsing the Harris-Walz campaign on Wednesday night.	https://www.npr.org/2024/08/21/g-s1-18653/oprah-winfrey-democratic-national-convention	2024-08-22 02:56:21	f	8	1
+445	WATCH: Amanda Gorman brought passion through poetry to Night 3 of the DNC	National Youth Poet Laureate Amanda Gorman delivered a poem to rouse the audience in celebration of Vice President Kamala Harris.	https://www.npr.org/2024/08/21/g-s1-18634/amanda-gorman-democratic-national-convention	2024-08-22 02:37:55	f	8	1
+446	WATCH: Former President Bill Clinton rallies the crowd around 'clear choice' in November	Former President Bill Clinton spoke to the crowd on Night 3 of the DNC, thanking President Biden for his service, praising Kamala Harris and emphasizing the high stakes of the November election.	https://www.npr.org/2024/08/21/g-s1-18611/bill-clinton-democratic-national-convention	2024-08-22 02:04:35	f	8	1
+447	Actress Mindy Kaling jokes about 'outing' Kamala Harris as Indian at Night 3 of the DNC	Actress Mindy Kaling jokes about 'outing' Kamala Harris as Indian Actress Mindy Kaling addressed the Democratic National Convention, sharing anecdotes of her and Vice President Harris’ similar Indian backgrounds.	https://www.npr.org/2024/08/21/g-s1-18630/actress-mindy-kaling-jokes-about-outing-kamala-harris-as-indian-at-night-3-of-the-dnc	2024-08-22 02:01:53	f	8	1
+448	Trump speaks behind bulletproof glass at 1st outdoor rally since attempted assassination	The event, billed as focused on national security issues, was part of former President Trump's weeklong series of counterprogramming to the Democratic National Convention in Chicago.	https://www.npr.org/2024/08/21/nx-s1-5085763/donald-trump-rally-asheboro-nc-bulletproof-glass	2024-08-22 01:49:23	f	8	1
+449	Pro-Palestinian protesters rally outside the Democratic National Convention	As the DNC gets underway for the third night, protesters gathered in Union Park, a few blocks away from the United Center.	https://www.npr.org/2024/08/21/g-s1-18606/pro-palestinian-protesters-outside-democratic-national-convention	2024-08-22 00:56:52	f	8	1
+450	How to make the best possible translation of a book?	You know that frustration of reading a book that should have been an article? Me too. So I try to do the opposite — to write so succinctly that you wish I would have said a little more. You complete it with your own thoughts. That’s why I edit the...	https://sive.rs/bpt	2024-08-14 00:00:00	f	1	3
+451	How and why to make a /now page on your site	Background I used to wonder what my friend Benny Lewis was doing. He has a website and social media accounts, but neither gave an overview of what he’s doing now. Then I realized some people might wonder the same about me. So in 2015, I made a...	https://sive.rs/now2	2024-05-18 00:00:00	f	1	3
+452	the best book ever written	I’ve asked my favorite musicians if, when they’re done writing a new song, they feel it’s the best song ever. All of them said yes. I’ve asked my favorite authors if, when they’re done writing a new book, they feel it was the best book ever. All...	https://sive.rs/htl00	2024-04-12 00:00:00	f	1	3
+453	Ben Kihnel	I just got the call from the super-connected Alex Steininger that our mutual friend Ben Kihnel died in his sleep. He was only 48. Ben was employee #2 of CD Baby. (#1 was the great John Steup.) John hired Ben the day we moved the company to...	https://sive.rs/ben-kihnel	2024-03-28 00:00:00	f	1	3
+454	It shows what you need to believe	In Harry Potter, there’s a magic mirror that reflects the viewer’s desire. What Harry sees in that mirror is very different than what Dumbledore or Ron sees, because their desires are all different. Imagine if there was something similar that...	https://sive.rs/n2b	2024-03-12 00:00:00	f	1	3
+455	AI gives the news you need	UPDATE: My metaphor was too distracting, so this post has been replaced. Please click here to read the new post instead. Both have the same intention but that one says it with less distraction. Your personal AI knows you inside-out. It’s...	https://sive.rs/ainews	2024-03-11 00:00:00	f	1	3
+457	How I backup	Some people have asked, so here is how I do my backups. It takes me about ten seconds per day and five minutes per month to maintain. It works well for me, but I’m always open to suggestions. Just email me with any ideas or questions. every-day...	https://sive.rs/backup	2024-02-27 00:00:00	f	1	3
+458	Esperanto, Toki Pona, Swahili, Indonesian	This is a lukewarm little story with a few connected bits, but it might be interesting or even helpful. Follow the links in it, for full effect. Esperanto start For decades, I’ve wanted the experience of carrying on a conversation in another...	https://sive.rs/esperanto	2024-02-26 00:00:00	f	1	3
+459	walk and talk	Kevin Kelly invited me to walk 100 kilometers (62 miles) through northern Thailand for seven days, ending in Chiang Mai. Walking with us were ten other smart interesting people, including five other authors whose work I’ve loved for years. It’s a...	https://sive.rs/wt	2023-12-12 00:00:00	f	1	3
+497	How to Live: conclusion	Is this a duck or bunny? No. This is a duck and bunny. This is an orchestra. You are the composer and conductor.	https://sive.rs/htl28	2021-12-28 00:00:00	f	1	3
+498	Here’s how to live: Balance everything.	All bad things in life come from extremes. Too much of this. Too little of that. When we lack balance, we’re upset. Over-worked, under-loved, over-eating, under-sleeping. Focused on wealth, but ignoring health. Focused on the present, but...	https://sive.rs/htl27	2021-12-27 00:00:00	f	1	3
+499	Here’s how to live: Make change.	Change the world as much as you can. All your learning and thinking is wasted if you don’t take action. People try to explain the world, but the real point is to change the world. If you go through life without changing anything, what have you...	https://sive.rs/htl26	2021-12-26 00:00:00	f	1	3
+500	Here’s how to live: Make a million mistakes.	You learn best from your mistakes. This is true. So you should deliberately make as many mistakes as possible. Try absolutely everything, all the time, expecting everything to fail. Just make sure that you capture the lessons from each...	https://sive.rs/htl25	2021-12-25 00:00:00	f	1	3
+501	Here’s how to live: Don’t die.	There’s only one law of nature: if you survive, you win. Be paranoid. Avoid failure to survive. For something to succeed, everything needs to go right. For something to fail, only one thing needs to go wrong. Don’t try to be more right. Just...	https://sive.rs/htl24	2021-12-24 00:00:00	f	1	3
+502	Here’s how to live: Create.	The most valuable real estate in the world is the graveyard. There lie millions of half-written books, ideas never launched, and talents never developed. Most people die with everything still inside of them. The way to live is to create. Die...	https://sive.rs/htl23	2021-12-23 00:00:00	f	1	3
+503	Here’s how to live: Love.	Not love, the feeling, but love the active verb. It’s not something that happens to you. It’s something you do. You choose to love something or someone. You can love anything or anyone you decide to love. Love is a combination of attention,...	https://sive.rs/htl22	2021-12-22 00:00:00	f	1	3
+504	Here’s how to live: Reinvent yourself regularly.	People say everything is connected. They’re wrong. Everything is disconnected. There is no line between moments in time. Something happened. Something else happened. People love stories, so they connect two events, calling them cause and...	https://sive.rs/htl21	2021-12-21 00:00:00	f	1	3
+505	Here’s how to live: Get rich.	Suspend judgment. Making money isn’t evil, greedy, shallow, or vain. Money isn’t your worth as a human being, or a substitute for love. But don’t pretend it doesn’t matter. Money can represent freedom, safety, experience, generosity,...	https://sive.rs/htl20	2021-12-20 00:00:00	f	1	3
+506	Here’s how to live: for others.	Focusing on yourself seems smarter and easier, but it’s short-sighted. It’s ignoring the huge benefit of cooperation. Compare survival strategies. You could prepare for disaster by stocking food and ammunition in a bunker by yourself. But what...	https://sive.rs/htl19	2021-12-19 00:00:00	f	1	3
+507	Here’s how to live: Prepare for the worst.	Things are going to get harder. The future will test your strength. So far, you’ve lived in a time of prosperity. You haven’t experienced massive devastation, but you probably will. It’ll be harder to make money. It’ll be harder to be...	https://sive.rs/htl18	2021-12-18 00:00:00	f	1	3
+508	Here’s how to live: Laugh at life.	A gorilla, speaking with sign language, makes a joke. We’re amazed. She’s showing the fullest expression of a soul. But when a person is humorless, it’s the opposite. They’ve lost the point of life. A recovering hospital patient makes a...	https://sive.rs/htl17	2021-12-17 00:00:00	f	1	3
+509	Here’s how to live: Follow the great book.	You know what your great book is. Whether the Bible, Tanakh, Upanishads, Quran, Think and Grow Rich, Seven Habits of Highly Effective People, or another, follow it diligently. Your book is wiser than you. It’s describing natural law — the way...	https://sive.rs/htl16	2021-12-16 00:00:00	f	1	3
+510	Here’s how to live: Learn.	Learning is underrated. People wonder why they’re not living their ideal life. Maybe they never learned how. You get healthy by learning healthy habits. You get wealthy by learning valuable skills. You build a great interpersonal life by...	https://sive.rs/htl15	2021-12-15 00:00:00	f	1	3
+511	Here’s how to live: Value only what has endured.	The longer something lasts, the longer it will probably last. Something that’s been around for a year will probably be around for another year. Something that’s been around for fifty years will probably be around for another fifty years. Only...	https://sive.rs/htl14	2021-12-14 00:00:00	f	1	3
+512	Here’s how to live: Chase the future.	Live in the world of tomorrow. Surround yourself only with what’s brand new and upcoming. That’s where life is made. It’s the most optimistic environment, full of hope and promises. It’s the smartest way to live. You’re moving forward in time,...	https://sive.rs/htl13	2021-12-13 00:00:00	f	1	3
+513	Here’s how to live: Be a famous pioneer.	Nobody had ever run a mile in under four minutes. It seemed impossible. But one day, Roger Bannister did it, and the news spread worldwide. Over the next two years, thirty-seven people also did it. This is the power of the pioneer: To enable...	https://sive.rs/htl12	2021-12-12 00:00:00	f	1	3
+514	Here’s how to live: Do whatever you want now.	The past? That’s what we call our memories. The future? That’s what we call our imagination. Neither exists outside of your mind. The only real time is this moment. So live accordingly. Whatever benefits you right now is the right...	https://sive.rs/htl11	2021-12-11 00:00:00	f	1	3
+515	Here’s how to live: Pursue pain.	Everything good comes from some kind of pain. Muscle fatigue makes you healthy and strong. The pain of practice leads to mastery. Difficult conversations save your relationships. But if you avoid pain, you avoid improvement. Avoid...	https://sive.rs/htl10	2021-12-10 00:00:00	f	1	3
+516	Here’s how to live: Let randomness rule.	We think we see patterns and causes. Really there are none. We think events are meaningful. Really they’re just coincidence. We’re not used to the logic of probability. Life is more random than it seems. Identical twins were separated at...	https://sive.rs/htl09	2021-12-09 00:00:00	f	1	3
+517	Here’s how to live: Master something.	Be a monomaniac on a mission to be truly great at something difficult. Pick one thing and spend the rest of your life getting deeper into it. Mastery is the best goal because the rich can’t buy it, the impatient can’t rush it, the privileged...	https://sive.rs/htl08	2021-12-08 00:00:00	f	1	3
+518	Here’s how to live: Make memories.	You recently had a day, or even a month, that you can’t remember. If I asked what you did then, you couldn’t say. There was nothing unusual about it. What if you have many more of those? What if, when you’re older, you can’t recall entire...	https://sive.rs/htl07	2021-12-07 00:00:00	f	1	3
+519	Here’s how to live: Intertwine with the world.	We’re all cousins. Everybody on Earth, no matter how far apart, has a surprisingly recent common ancestor. Go meet your family in the Middle East, in Asia, in Africa, in the Americas, and in Europe. Understand that there is no “them”. It’s just...	https://sive.rs/htl06	2021-12-06 00:00:00	f	1	3
+520	Here’s how to live: Think super-long-term.	In 1790, Benjamin Franklin gifted £2000 to the cities of Philadelphia and Boston by putting it into a 200-year trust, and by 1990 it was worth over $7 million. If you put $2000 into the stock market for 200 years at the average 8% return, it will...	https://sive.rs/htl05	2021-12-05 00:00:00	f	1	3
+521	Here’s how to live: Do nothing.	The ten commandments said what not to do. Most of being a good person is not doing bad. Don’t be cruel or selfish. Don’t lie or steal. Just do no harm. People always think they need to do something. One action creates a problem, fixed by...	https://sive.rs/htl04	2021-12-04 00:00:00	f	1	3
+522	Here’s how to live: Fill your senses.	See it all. Touch it all. Hear it all. Taste it all. Do it all. Appreciate this wonderful physical world. If you knew you’d go blind tomorrow, how intensely would you look at the world today? If you knew you’d go deaf tomorrow, how intensely...	https://sive.rs/htl03	2021-12-03 00:00:00	f	1	3
+523	Here’s how to live: Commit.	If you’ve ever been confused or distracted, with too many options… If you don’t finish what you start… If you’re not with a person you love… … then you’ve felt the problem. The problem is a lack of commitment. You’ve been looking for the best...	https://sive.rs/htl02	2021-12-02 00:00:00	f	1	3
+524	Here’s how to live: Be independent.	All misery comes from dependency. If you weren’t dependent on income, people, or technology, you would be truly free. The only way to be deeply happy is to break all dependencies. Most problems are interpersonal. To be part of society is to...	https://sive.rs/htl01	2021-12-01 00:00:00	f	1	3
+\.
+
+
+--
+-- Data for Name: migration; Type: TABLE DATA; Schema: public; Owner: inflow
+--
+
+COPY public.migration (version, name, hash, date_applied) FROM stdin;
+20240809	init	46536d7107fa3c1f709bf91445be5fef	2024-08-22 06:21:47
+20240818	collections	edc47a603a6fe44556573aad363ba562	2024-08-22 06:23:37
+\.
+
+
+--
+-- Data for Name: user_account; Type: TABLE DATA; Schema: public; Owner: inflow
+--
+
+COPY public.user_account (id, username, password_hash, password_salt, last_login, created_at, updated_at) FROM stdin;
+1	tyler	\\x8b3bbd3fcb99f919f6bff1764052393c43cba3adc93f1c66148ff5d9b6daaec5	\\x4d7ec6077ccc176dfa8660cb5809ea97	\N	2024-08-22 06:22:29.930991	2024-08-22 06:22:29.930991
+\.
+
+
+--
+-- Data for Name: user_session; Type: TABLE DATA; Schema: public; Owner: inflow
+--
+
+COPY public.user_session (sid, sess, expire) FROM stdin;
+jZBvTEs920TrJuXzGeFexp_eGiqo7LIs	{"cookie":{"originalMaxAge":2592000000,"expires":"2024-09-21T06:22:34.002Z","httpOnly":true,"path":"/"},"passport":{"user":{"id":1}}}	2024-09-21 06:25:34
 \.
 
 
@@ -497,7 +572,14 @@ SELECT pg_catalog.setval('public.feed_id_seq', 11, true);
 -- Name: feeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feeditem_id_seq', 439, true);
+SELECT pg_catalog.setval('public.feeditem_id_seq', 649, true);
+
+
+--
+-- Name: user_account_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
+--
+
+SELECT pg_catalog.setval('public.user_account_id_seq', 1, true);
 
 
 --
