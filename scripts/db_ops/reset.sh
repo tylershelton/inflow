@@ -9,17 +9,17 @@ ensure_docker_is_running
 docker_service_is_running db; db_was_running=$?
 
 if [ "$db_was_running" -eq 0 ]; then
-    echo "==> stopping the \`db\` service container..."
+    echo "==> Destroying the \`db\` service container..."
     docker compose -f "$PROJECT_COMPOSE_FILE" down db > /dev/null
 fi
 
 if docker volume ls -q | grep "^${DB_VOLUME}$" > /dev/null; then
-    echo "==> deleting the database volume..."
+    echo "==> Deleting the database volume..."
     docker volume rm "${DB_VOLUME}" > /dev/null
 fi
 
 if [ "$db_was_running" -eq 0 ]; then
-    echo "==> restarting \`db\` service container..."
+    echo "==> Recreating the \`db\` service container..."
     docker compose -f "$PROJECT_COMPOSE_FILE" up db -d > /dev/null
 fi
 
