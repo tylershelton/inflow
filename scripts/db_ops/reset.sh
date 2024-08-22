@@ -10,7 +10,7 @@ docker_service_is_running db; db_was_running=$?
 
 if [ "$db_was_running" -eq 0 ]; then
     echo "==> stopping the \`db\` service container..."
-    docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null
+    docker compose -f "$PROJECT_COMPOSE_FILE" down db > /dev/null
 fi
 
 if docker volume ls -q | grep "^${DB_VOLUME}$"; then
@@ -20,7 +20,7 @@ fi
 
 if [ "$db_was_running" -eq 0 ]; then
     echo "==> restarting \`db\` service container..."
-    docker compose -f "$PROJECT_COMPOSE_FILE" start db > /dev/null
+    docker compose -f "$PROJECT_COMPOSE_FILE" up db > /dev/null
 fi
 
 exit 0
