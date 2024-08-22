@@ -14,11 +14,11 @@ fi
 
 # update the dataset used to populate the database in non-production environments
 # by dumping its current state to a file
-echo "==> dumping database tables..."
+echo "==> Dumping database tables..."
 docker compose -f "$PROJECT_COMPOSE_FILE" exec db \
     /bin/bash -c 'pg_dump -a -U inflow -d inflow' > "$out_file"
 
 if [ "$db_was_running" -eq 1 ]; then
-    echo "==> stopping \`db\` service container, as it was not running before export."
+    echo "==> Stopping \`db\` service container, as it was not running before export."
     docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null 2>&1
 fi
