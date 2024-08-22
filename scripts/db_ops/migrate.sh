@@ -182,8 +182,7 @@ if [ "$current_migration" -lt "$target_migration" ]; then
             exec_psql < "$migration" > /dev/null ||
                 { echo "ERROR: Migration script $(basename "$migration") failed."; cleanup 1; }
 
-            # run validation script. rollback upon failure
-
+            # <todo> run validation script. rollback upon failure
 
             # populate table with migration metadata on success
             exec_psql -c "
