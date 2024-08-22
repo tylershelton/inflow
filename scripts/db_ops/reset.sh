@@ -20,7 +20,7 @@ fi
 
 if [ "$db_was_running" -eq 0 ]; then
     echo "==> restarting \`db\` service container..."
-    docker compose -f "$PROJECT_COMPOSE_FILE" up db > /dev/null
+    docker compose -f "$PROJECT_COMPOSE_FILE" up db -d > /dev/null
 fi
 
 exit 0
