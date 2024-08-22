@@ -121,8 +121,15 @@ exec_psql() {
 }
 
 if [ $db_was_running -eq 1 ]; then
+
     echo "==> starting the \`db\` service container..."
     docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null
+
+    echo "==> waiting for postgres to start..."
+    while docker compose -f "$PROJECT_COMPOSE_FILE" exec db pg_isready -U "$INFLOW_DB_USER"; do
+        sleep 1
+    done
+
 fi
 
 # init migration table
