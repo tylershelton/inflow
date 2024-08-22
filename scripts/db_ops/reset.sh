@@ -13,7 +13,7 @@ if [ "$db_was_running" -eq 0 ]; then
     docker compose -f "$PROJECT_COMPOSE_FILE" down db > /dev/null
 fi
 
-if docker volume ls -q | grep "^${DB_VOLUME}$"; then
+if docker volume ls -q | grep "^${DB_VOLUME}$" > /dev/null; then
     echo "==> deleting the database volume..."
     docker volume rm "${DB_VOLUME}" > /dev/null
 fi
