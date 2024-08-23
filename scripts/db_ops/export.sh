@@ -16,7 +16,9 @@ fi
 # by dumping its current state to a file
 echo "==> Dumping database tables..."
 docker compose -f "$PROJECT_COMPOSE_FILE" exec db \
-    /bin/bash -c 'pg_dump -a -U inflow -d inflow' > "$out_file"
+    /bin/bash -c 'pg_dump -a -U inflow -d inflow \
+                    --exclude-table-data=migration \
+                    --exclude-table-data=user_session' > "$out_file"
 
 if [ "$db_was_running" -eq 1 ]; then
     echo "==> Stopping \`db\` service container, as it was not running before export."

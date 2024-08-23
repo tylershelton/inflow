@@ -19,8 +19,18 @@ load_env || { echo "ERROR: Could not find .env file. Have you set up an environm
 ./scripts/db migrate
 
 if [ "$PROJECT_ENV" = 'dev' ]; then
+    docker_service_is_running db; db_was_running=$?
+    if [ $db_was_running -eq 1 ]; then
+        echo "==> starting the \`db\` service container..."
+        docker compose -f "$PROJECT_COMPOSE_FILE" up -d db > /dev/null
+        wait_for_postgres
+    fi
     echo "==> Populating db with test data..."
     exec_psql < ./database/test_data/dev_dataset.sql > /dev/null
+    if [ $db_was_running -eq 1 ]; then
+        echo "==> stopping \`db\` service container..."
+        docker compose -f "$PROJECT_COMPOSE_FILE" stop db > /dev/null 2>&1
+    fi
 fi
 
 if [ -d "./build" ]; then
