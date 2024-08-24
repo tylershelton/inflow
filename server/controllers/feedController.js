@@ -5,7 +5,7 @@ const FeedItem = require('../models/feedItem');
 module.exports = {
   getFeed: async (req, res, next) => {
     try {
-      res.locals.feed = await Feed.get(req.params.id);
+      res.locals.feed = await Feed.get(req.user.id, req.params.id);
       // TODO: handle when no item found in db
       next();
     }

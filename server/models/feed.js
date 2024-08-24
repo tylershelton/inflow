@@ -16,11 +16,13 @@ module.exports = {
     `, [user_id, feed_id]);
   },
 
-  get: async id => {
+  get: async (user_id, feed_id) => {
     try {
       const result = await pool.query(`
-        SELECT * FROM feed WHERE id = $1
-      `, [id]);
+        SELECT feed.* FROM feed
+        INNER JOIN user_feed ON feed.id = user_feed.feed_id
+        WHERE user_feed.user_id = $1 AND user_feed.feed_id = $2
+      `, [user_id, feed_id]);
       return result.rows[0];
     }
     catch (err) {
