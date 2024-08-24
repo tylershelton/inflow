@@ -30,7 +30,7 @@ router.post('/subscribe', feedController.subscribe, (req, res) => {
 
 // unsubscribe from a feed
 router.delete('/:id', feedController.unsubscribe, (req, res) => {
-  return res.status(200).send({ success: true });
+  return res.sendStatus(200);
 });
 
 // update info about a feed. updating the URL is not allowed
