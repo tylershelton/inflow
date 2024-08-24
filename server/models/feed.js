@@ -3,11 +3,34 @@ const FeedItem = require('./feedItem');
 const { AppError, DatabaseError } = require('../lib/error/errors');
 
 module.exports = {
-  create: (url, title, desc, category_id) => {
-    return pool.query(`
-      INSERT INTO feed (url, title, description, category_id)
-      VALUES ($1, $2, $3, $4)
-    `, [url, title, desc, category_id]);
+  create: async (user_id, url, title, desc, category_id) => {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+
+      const feed_result = await client.query(`
+        INSERT INTO feed (url, title, description, category_id)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (url) DO UPDATE
+        SET url = EXCLUDED.url
+        RETURNING id;
+      `, [url, title, desc, category_id]);
+
+      await client.query(`
+        INSERT INTO user_feed (user_id, feed_id)
+        VALUES ($1, $2)
+        ON CONFLICT DO NOTHING
+      `, [user_id, feed_result.rows[0].id]);
+
+      await client.query('COMMIT');
+    }
+    catch (err) {
+      await client.query('ROLLBACK');
+      throw new DatabaseError({ cause: err });
+    }
+    finally {
+      client.release();
+    }
   },
 
   delete: (user_id, feed_id) => {
@@ -96,9 +119,9 @@ module.exports = {
       }
 
       const result = client.query(`
-      UPDATE feed
-      SET title = $2, description = $3, category_id = $4
-      WHERE id = $1
+        UPDATE feed
+        SET title = $2, description = $3, category_id = $4
+        WHERE id = $1
       `, [feed_id, changes.title, changes.description, changes.category_id]);
 
       client.release();

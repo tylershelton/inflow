@@ -36,6 +36,7 @@ module.exports = {
       const rss  = await import('@extractus/feed-extractor');
       const feed = await rss.extract(req.body.url);
       await Feed.create(
+        req.user.id,
         req.body.url,
         feed.title,
         feed.description,
