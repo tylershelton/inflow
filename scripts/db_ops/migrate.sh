@@ -123,11 +123,10 @@ exec_psql -c "
 #   - get the target version from $1, or from .env as a fallback
 if [ -z "$1" ]; then
     if [ -z "$DB_VERSION" ]; then
-        echo "ERROR: No migration specified, and DB_VERSION is not set in the .env file. Please provide a database version to migrate to."
-        echo "$helptext"
-        exit 1
+        target_migration=''
+    else
+        target_migration="$DB_VERSION"
     fi
-    target_migration="$DB_VERSION"
 else
     target_migration="$1"
 fi
@@ -137,34 +136,38 @@ current_migration=$(exec_psql -tAc "
     SELECT COALESCE(MAX(version), 0) FROM migration;
 ")
 
-if [ "$current_migration" -lt "$target_migration" ]; then
+if [ -z "$target_migration" ] || [ "$current_migration" -lt "$target_migration" ]; then
 
     # for each migration:
     for migration in ./database/migrations/migrate/*.sql; do
         version="$(basename "$migration" | cut -d '-' -f 1)"
         name="$(basename -s .sql "$migration" | cut -d '-' -f 2)"
-        if [ "$version" -gt "$current_migration" ] &&
-           [ "$version" -le "$target_migration" ]; then
 
-            # run migration script
-            echo "==> Running migration $(basename "$migration")..."
-            exec_psql < "$migration" > /dev/null ||
-                { echo "ERROR: Migration script $(basename "$migration") failed."; cleanup 1; }
+        # don't run migrations that have already been run
+        if [ "$version" -gt "$current_migration" ]; then
+            # stop at specified migration, or run them all if no target specified
+            if [ -z "$target_migration" ] || [ "$version" -le "$target_migration" ]; then
 
-            # <todo> run validation script. rollback upon failure
+                # run migration script
+                echo "==> Running migration $(basename "$migration")..."
+                exec_psql < "$migration" > /dev/null ||
+                    { echo "ERROR: Migration script $(basename "$migration") failed."; cleanup 1; }
 
-            # populate table with migration metadata on success
-            exec_psql -c "
-                INSERT INTO migration
-                    (version, name, hash, date_applied)
-                VALUES (
-                    '${version}',
-                    '${name}',
-                    '$(md5sum -z "$migration" | awk '{print $1}')',
-                    '$(date -u '+%Y-%m-%d %H:%M:%S%z')'
-                )
-            " > /dev/null
-            
+                # <todo> run validation script. rollback upon failure
+
+                # populate table with migration metadata on success
+                exec_psql -c "
+                    INSERT INTO migration
+                        (version, name, hash, date_applied)
+                    VALUES (
+                        '${version}',
+                        '${name}',
+                        '$(md5sum -z "$migration" | awk '{print $1}')',
+                        '$(date -u '+%Y-%m-%d %H:%M:%S%z')'
+                    )
+                " > /dev/null
+
+            fi
         fi
     done
 
