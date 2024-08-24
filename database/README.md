@@ -25,8 +25,8 @@ erDiagram
 	user_account {
 		int id PK
 		string username
-		string password_hash
-		string password_salt
+		byte password_hash
+		byte password_salt
 		timestamp last_login
 		timestamp created_at
 		timestamp updated_at
