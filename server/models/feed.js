@@ -1,5 +1,6 @@
 const pool     = require('../lib/db');
 const FeedItem = require('./feedItem');
+const { DatabaseError } = require('../lib/error/errors');
 
 module.exports = {
   create: (url, title, desc, category_id) => {
@@ -54,9 +55,10 @@ module.exports = {
     return result.rows[0]; 
   },
 
-  sync: async id => {
+  sync: async (user_id, feed_id) => {
     try {
-      const feed = await module.exports.get(id);
+      const feed = await module.exports.get(user_id, feed_id);
+      console.log('feed:', feed);
       const rss  = await import('@extractus/feed-extractor');
       let { entries } = await rss.extract(feed.url);
       entries = entries.map(entry => {
@@ -73,7 +75,7 @@ module.exports = {
       return await FeedItem.createMany(entries);
     }
     catch (err) {
-      return err;
+      throw new DatabaseError({ cause: err });
     }
   },
 

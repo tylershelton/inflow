@@ -50,7 +50,7 @@ module.exports = {
 
   sync: async (req, res, next) => {
     try {
-      await Feed.sync(req.params.id);
+      await Feed.sync(req.user.id, req.params.id);
       next();
     }
     catch (err) {
