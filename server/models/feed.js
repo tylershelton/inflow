@@ -75,7 +75,7 @@ module.exports = {
       return await FeedItem.createMany(entries);
     }
     catch (err) {
-      throw new DatabaseError({ cause: err });
+      throw new AppError({ cause: err });
     }
   },
 
