@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS user_feed (
 
     PRIMARY KEY (user_id, feed_id),
     FOREIGN KEY (user_id) REFERENCES user_account (id) ON DELETE CASCADE,
-    FOREIGN KEY (feed_id) REFERENCES feed (id) ON DELETE CASCADE
+    FOREIGN KEY (feed_id) REFERENCES feed (id) ON DELETE RESTRICT
 );
 
 -- assign any "orphan" feeds to the first user in the db
