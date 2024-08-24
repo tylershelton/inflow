@@ -9,10 +9,11 @@ module.exports = {
     `, [url, title, desc, category_id]);
   },
 
-  delete: id => {
+  delete: (user_id, feed_id) => {
     return pool.query(`
-      DELETE FROM feed WHERE id = $1
-    `, [id]);
+      DELETE FROM user_feed
+      WHERE user_id = $1 AND feed_id = $2
+    `, [user_id, feed_id]);
   },
 
   get: async id => {
