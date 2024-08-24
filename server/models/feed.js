@@ -27,14 +27,20 @@ module.exports = {
     }
   },
 
-  getAll: () => {
-    return pool.query('SELECT * FROM feed');
+  getAll: user_id => {
+    return pool.query(`
+      SELECT feed.* FROM feed
+      INNER JOIN user_feed ON feed.id = user_feed.feed_id
+      WHERE user_feed.user_id = $1
+    `, [user_id]);
   },
 
-  getAllByCategory: async category_id => {
+  getAllByCategory: async (user_id, category_id) => {
     const result = await pool.query(`
-      SELECT * FROM feed WHERE category_id = $1
-    `, [category_id]);
+      SELECT feed.* FROM feed
+      INNER JOIN user_feed ON feed.id = user_feed.feed_id
+      WHERE user_feed.user_id = $1 AND category_id = $2
+    `, [user_id, category_id]);
     return result.rows;
   },
 

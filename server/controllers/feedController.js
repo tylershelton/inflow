@@ -16,7 +16,7 @@ module.exports = {
   
   getFeeds: async (req, res, next) => {
     try {
-      const result = await Feed.getAll();
+      const result = await Feed.getAll(req.user.id);
       res.locals.feeds = result.rows;
       next();
     }

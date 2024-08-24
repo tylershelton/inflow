@@ -38,9 +38,9 @@ module.exports = {
     }
   },
 
-  sync: async id => {
+  sync: async (user_id, id) => {
     try {
-      const feeds = await Feed.getAllByCategory(id);
+      const feeds = await Feed.getAllByCategory(user_id, id);
       for (const feed of feeds) {
         await Feed.sync(feed.id);
       }
