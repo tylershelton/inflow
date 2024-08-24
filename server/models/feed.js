@@ -1,6 +1,6 @@
 const pool     = require('../lib/db');
 const FeedItem = require('./feedItem');
-const { DatabaseError } = require('../lib/error/errors');
+const { AppError, DatabaseError } = require('../lib/error/errors');
 
 module.exports = {
   create: (url, title, desc, category_id) => {
@@ -27,7 +27,7 @@ module.exports = {
       return result.rows[0];
     }
     catch (err) {
-      return err;
+      throw new DatabaseError({ cause: err });
     }
   },
 
@@ -79,11 +79,33 @@ module.exports = {
     }
   },
 
-  update: (id, changes) => {
-    return pool.query(`
+  update: async (user_id, feed_id, changes) => {
+    try {
+      const client = await pool.connect();
+      const feed = await client.query(`
+        SELECT 1 FROM user_feed uf
+        WHERE uf.user_id = $1 AND uf.feed_id = $2
+      `, [user_id, feed_id]);
+
+      if (!feed.rows[0]) {
+        client.release();
+        throw new AppError({
+          message: `User ${user_id} tried to update feed ${feed_id}, which they are not subscribed to.`,
+          statusCode: 500
+        });
+      }
+
+      const result = client.query(`
       UPDATE feed
       SET title = $2, description = $3, category_id = $4
       WHERE id = $1
-    `, [id, changes.title, changes.description, changes.category_id]);
+      `, [feed_id, changes.title, changes.description, changes.category_id]);
+
+      client.release();
+      return result;
+    }
+    catch (err) {
+      throw new DatabaseError({ cause: err });
+    }
   }
 };
