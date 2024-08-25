@@ -41,24 +41,43 @@ module.exports = {
   },
 
   get: async (user_id, feed_id) => {
+    const client = await pool.connect();
+    let result;
+
     try {
-      const result = await pool.query(`
-        SELECT feed.* FROM feed
-        INNER JOIN user_feed ON feed.id = user_feed.feed_id
-        WHERE user_feed.user_id = $1 AND user_feed.feed_id = $2
-      `, [user_id, feed_id]);
-      return result.rows[0];
+      result = (await client.query(`
+        SELECT
+          f.id,
+          f.url,
+          COALESCE(uf.title, f.title) AS title,
+          COALESCE(uf.description, f.description) AS description,
+          f.category_id
+        FROM feed f
+        INNER JOIN user_feed uf ON f.id = uf.feed_id
+        WHERE uf.user_id = $1 AND uf.feed_id = $2
+      `, [user_id, feed_id])).rows[0];
     }
     catch (err) {
       throw new DatabaseError({ cause: err });
     }
+    finally {
+      client.release();
+    }
+
+    return result;
   },
 
   getAll: user_id => {
     return pool.query(`
-      SELECT feed.* FROM feed
-      INNER JOIN user_feed ON feed.id = user_feed.feed_id
-      WHERE user_feed.user_id = $1
+      SELECT
+          f.id,
+          f.url,
+          COALESCE(uf.title, f.title) AS title,
+          COALESCE(uf.description, f.description) AS description,
+          f.category_id
+      FROM feed f
+      INNER JOIN user_feed uf ON f.id = uf.feed_id
+      WHERE uf.user_id = $1
     `, [user_id]);
   },
 
