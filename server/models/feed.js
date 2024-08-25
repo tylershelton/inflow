@@ -122,14 +122,14 @@ module.exports = {
   },
 
   update: async (user_id, feed_id, changes) => {
+    const client = await pool.connect();
     try {
-      const client = await pool.connect();
-      const feed = await client.query(`
+      const userfeed = await client.query(`
         SELECT 1 FROM user_feed uf
         WHERE uf.user_id = $1 AND uf.feed_id = $2
       `, [user_id, feed_id]);
 
-      if (!feed.rows[0]) {
+      if (!userfeed.rows[0]) {
         client.release();
         throw new AppError({
           message: `User ${user_id} tried to update feed ${feed_id}, which they are not subscribed to.`,
@@ -137,17 +137,40 @@ module.exports = {
         });
       }
 
-      const result = client.query(`
-        UPDATE feed
-        SET title = $2, description = $3, category_id = $4
-        WHERE id = $1
-      `, [feed_id, changes.title, changes.description, changes.category_id]);
+      const defaults = (await client.query(`
+          SELECT feed.title, feed.description
+          FROM feed
+          WHERE id = $1
+        `, [feed_id])
+      ).rows[0];
+      
+      // if user-set metadata is identical to the feed's default value, simply erase the customized
+      // record so that we stop masking the default
+      const title = (changes.title === defaults.title || changes.title === '') ? null : changes.title;
+      const description = (changes.description === defaults.description || changes.description === '') ? null : changes.description;
 
-      client.release();
-      return result;
+      await client.query('BEGIN');
+      await client.query(`
+        UPDATE feed
+        SET category_id = $2
+        WHERE id = $1
+      `, [feed_id, changes.category_id]);
+
+      await client.query(`
+        UPDATE user_feed
+        SET title = $3, description = $4
+        WHERE user_id = $1 AND feed_id = $2
+      `, [user_id, feed_id, title, description]);
+      await client.query('COMMIT');
     }
     catch (err) {
+      await client.query('ROLLBACK');
       throw new DatabaseError({ cause: err });
     }
+    finally {
+      client.release();
+    }
+
+    return;
   }
 };
