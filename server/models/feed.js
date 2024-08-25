@@ -83,9 +83,15 @@ module.exports = {
 
   getAllByCategory: async (user_id, category_id) => {
     const result = await pool.query(`
-      SELECT feed.* FROM feed
-      INNER JOIN user_feed ON feed.id = user_feed.feed_id
-      WHERE user_feed.user_id = $1 AND category_id = $2
+      SELECT
+        f.id,
+        f.url,
+        COALESCE(uf.title, f.title) AS title,
+        COALESCE(uf.description, f.description) AS description,
+        f.category_id
+      FROM feed f
+      INNER JOIN user_feed uf ON f.id = uf.feed_id
+      WHERE uf.user_id = $1 AND f.category_id = $2
     `, [user_id, category_id]);
     return result.rows;
   },
