@@ -41,32 +41,57 @@ module.exports = {
   },
 
   get: async (user_id, feed_id) => {
+    const client = await pool.connect();
+    let result;
+
     try {
-      const result = await pool.query(`
-        SELECT feed.* FROM feed
-        INNER JOIN user_feed ON feed.id = user_feed.feed_id
-        WHERE user_feed.user_id = $1 AND user_feed.feed_id = $2
-      `, [user_id, feed_id]);
-      return result.rows[0];
+      result = (await client.query(`
+        SELECT
+          f.id,
+          f.url,
+          COALESCE(uf.title, f.title) AS title,
+          COALESCE(uf.description, f.description) AS description,
+          f.category_id
+        FROM feed f
+        INNER JOIN user_feed uf ON f.id = uf.feed_id
+        WHERE uf.user_id = $1 AND uf.feed_id = $2
+      `, [user_id, feed_id])).rows[0];
     }
     catch (err) {
       throw new DatabaseError({ cause: err });
     }
+    finally {
+      client.release();
+    }
+
+    return result;
   },
 
   getAll: user_id => {
     return pool.query(`
-      SELECT feed.* FROM feed
-      INNER JOIN user_feed ON feed.id = user_feed.feed_id
-      WHERE user_feed.user_id = $1
+      SELECT
+          f.id,
+          f.url,
+          COALESCE(uf.title, f.title) AS title,
+          COALESCE(uf.description, f.description) AS description,
+          f.category_id
+      FROM feed f
+      INNER JOIN user_feed uf ON f.id = uf.feed_id
+      WHERE uf.user_id = $1
     `, [user_id]);
   },
 
   getAllByCategory: async (user_id, category_id) => {
     const result = await pool.query(`
-      SELECT feed.* FROM feed
-      INNER JOIN user_feed ON feed.id = user_feed.feed_id
-      WHERE user_feed.user_id = $1 AND category_id = $2
+      SELECT
+        f.id,
+        f.url,
+        COALESCE(uf.title, f.title) AS title,
+        COALESCE(uf.description, f.description) AS description,
+        f.category_id
+      FROM feed f
+      INNER JOIN user_feed uf ON f.id = uf.feed_id
+      WHERE uf.user_id = $1 AND f.category_id = $2
     `, [user_id, category_id]);
     return result.rows;
   },
@@ -103,14 +128,14 @@ module.exports = {
   },
 
   update: async (user_id, feed_id, changes) => {
+    const client = await pool.connect();
     try {
-      const client = await pool.connect();
-      const feed = await client.query(`
+      const userfeed = await client.query(`
         SELECT 1 FROM user_feed uf
         WHERE uf.user_id = $1 AND uf.feed_id = $2
       `, [user_id, feed_id]);
 
-      if (!feed.rows[0]) {
+      if (!userfeed.rows[0]) {
         client.release();
         throw new AppError({
           message: `User ${user_id} tried to update feed ${feed_id}, which they are not subscribed to.`,
@@ -118,17 +143,40 @@ module.exports = {
         });
       }
 
-      const result = client.query(`
-        UPDATE feed
-        SET title = $2, description = $3, category_id = $4
-        WHERE id = $1
-      `, [feed_id, changes.title, changes.description, changes.category_id]);
+      const defaults = (await client.query(`
+          SELECT feed.title, feed.description
+          FROM feed
+          WHERE id = $1
+        `, [feed_id])
+      ).rows[0];
+      
+      // if user-set metadata is identical to the feed's default value, simply erase the customized
+      // record so that we stop masking the default
+      const title = (changes.title === defaults.title || changes.title === '') ? null : changes.title;
+      const description = (changes.description === defaults.description || changes.description === '') ? null : changes.description;
 
-      client.release();
-      return result;
+      await client.query('BEGIN');
+      await client.query(`
+        UPDATE feed
+        SET category_id = $2
+        WHERE id = $1
+      `, [feed_id, changes.category_id]);
+
+      await client.query(`
+        UPDATE user_feed
+        SET title = $3, description = $4
+        WHERE user_id = $1 AND feed_id = $2
+      `, [user_id, feed_id, title, description]);
+      await client.query('COMMIT');
     }
     catch (err) {
+      await client.query('ROLLBACK');
       throw new DatabaseError({ cause: err });
     }
+    finally {
+      client.release();
+    }
+
+    return;
   }
 };

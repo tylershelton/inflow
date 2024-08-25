@@ -71,6 +71,11 @@ module.exports = {
   },
 
   updateMetadata: async (req, res, next) => {
+    const processUpdate = (key, value, current) => {
+      if (typeof value !== 'string') return current[key];
+      return (value.length) ? value : null;
+    };
+
     try {
       // update category metadata
       let category = {id: undefined};
@@ -85,12 +90,14 @@ module.exports = {
         message: `User ${req.user.id} tried to update feed ${req.params.id}, which they are not subscribed to.`,
         statusCode: 500
       });
+
       const changes = {
-        title: req.body.title || current.title,
-        description: req.body.description || current.description,
+        title: processUpdate('title', req.body?.title, current),
+        description: processUpdate('description', req.body?.description, current),
         category_id: category.id || current.category_id,
       };
       await Feed.update(req.user.id, req.params.id, changes);
+
       res.locals.feed = await Feed.get(req.user.id, req.params.id);
       next();
     }
