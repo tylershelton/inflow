@@ -43,7 +43,7 @@ erDiagram
 	user_feed {
 		int user_id PK,FK
 		int feed_id PK,FK
-		string title "unique per user_id"
+		string title "unique per user id"
 		string description
 	}
 	user_item {
