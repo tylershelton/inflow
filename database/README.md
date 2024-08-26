@@ -19,7 +19,7 @@ erDiagram
 		string title
 		string description
 		string url
-		timestamp pub_date
+		timestamp pubdate
 		int feed_id FK
 	}
 	user_account {
