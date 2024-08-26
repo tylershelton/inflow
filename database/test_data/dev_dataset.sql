@@ -408,6 +408,26 @@ COPY public.feeditem (id, title, description, url, pubdate, archived, feed_id, c
 
 COPY public.user_account (id, username, password_hash, password_salt, last_login, created_at, updated_at) FROM stdin;
 2	user	\\xe0de93b7b3c6bfaccbbaf0ccce3ee8740430b9117c1392994cdfa6de662f0f70	\\xeac899dcde1f9be69437c9ad9761a69e	\N	2024-08-23 05:07:15.044644	2024-08-23 05:07:15.044644
+3	user2	\\xca19e6e744dc45fd059e3469ba6f2484ed1128be76267805118b512006d90793	\\xd32a8e8ad281dd969256998e5abe3ca8	\N	2024-08-26 05:47:27.056855	2024-08-26 05:47:27.056855
+\.
+
+
+--
+-- Data for Name: user_feed; Type: TABLE DATA; Schema: public; Owner: inflow
+--
+
+COPY public.user_feed (user_id, feed_id, title, description) FROM stdin;
+2	1	\N	\N
+2	2	\N	\N
+2	3	\N	\N
+2	4	\N	\N
+2	5	\N	\N
+2	6	\N	\N
+2	7	\N	\N
+2	8	\N	\N
+2	9	\N	\N
+2	10	\N	\N
+2	11	\N	\N
 \.
 
 
@@ -436,7 +456,7 @@ SELECT pg_catalog.setval('public.feeditem_id_seq', 360, true);
 -- Name: user_account_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.user_account_id_seq', 2, true);
+SELECT pg_catalog.setval('public.user_account_id_seq', 3, true);
 
 
 --
