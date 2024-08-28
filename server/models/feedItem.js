@@ -76,11 +76,12 @@ module.exports = {
     return rowCount === 0 ? false : true;
   },
 
-  get: async id => {
+  get: async (user_id, item_id) => {
     try {
       const result = await pool.query(`
-        SELECT * FROM feeditem WHERE id = $1
-      `, [id]);
+        SELECT * FROM view_user_item
+        WHERE user_id = $1 AND id = $2
+      `, [user_id, item_id]);
       return result.rows[0];
     }
     catch (err) {
