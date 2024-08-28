@@ -50,7 +50,8 @@ module.exports = {
           f.id,
           f.url,
           COALESCE(uf.title, f.title) AS title,
-          COALESCE(uf.description, f.description) AS description
+          COALESCE(uf.description, f.description) AS description,
+          f.category_id
         FROM feed f
         INNER JOIN user_feed uf ON f.id = uf.feed_id
         WHERE uf.user_id = $1 AND uf.feed_id = $2
@@ -72,7 +73,8 @@ module.exports = {
           f.id,
           f.url,
           COALESCE(uf.title, f.title) AS title,
-          COALESCE(uf.description, f.description) AS description
+          COALESCE(uf.description, f.description) AS description,
+          f.category_id
       FROM feed f
       INNER JOIN user_feed uf ON f.id = uf.feed_id
       WHERE uf.user_id = $1
@@ -85,7 +87,8 @@ module.exports = {
         f.id,
         f.url,
         COALESCE(uf.title, f.title) AS title,
-        COALESCE(uf.description, f.description) AS description
+        COALESCE(uf.description, f.description) AS description,
+        f.category_id
       FROM feed f
       INNER JOIN user_feed uf ON f.id = uf.feed_id
       WHERE uf.user_id = $1 AND f.id IN (
