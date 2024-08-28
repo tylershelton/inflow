@@ -107,23 +107,26 @@ module.exports = {
     return result.rows[0]; 
   },
 
+  subscribers: async (feed_id) => {
+    try {
+      const result = await pool.query(`
+        SELECT user_id FROM user_feed
+        WHERE feed_id = $1
+      `, [feed_id]);
+      return result.rows;
+    }
+    catch (err) {
+      throw new DatabaseError({ cause: err });
+    }
+  },
+
   sync: async (user_id, feed_id) => {
     try {
       const feed = await module.exports.get(user_id, feed_id);
       const rss  = await import('@extractus/feed-extractor');
-      let { entries } = await rss.extract(feed.url);
-      entries = entries.map(entry => {
-        return [
-          entry.title,
-          entry.description,
-          entry.link,
-          entry.published,
-          false, // is the item archived?
-          feed.id,
-          feed.category_id,
-        ];
-      });
-      return await FeedItem.createMany(entries);
+      const { entries } = await rss.extract(feed.url);
+      const users = await module.exports.subscribers(feed_id);
+      return await FeedItem.createMany(feed, users, entries);
     }
     catch (err) {
       throw new AppError({ cause: err });

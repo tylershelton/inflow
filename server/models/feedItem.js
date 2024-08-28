@@ -1,5 +1,6 @@
 const pool   = require('../lib/db');
 const format = require('pg-format');
+const { DatabaseError } = require('../lib/error/errors');
 
 module.exports = {
   create: data => {
@@ -15,17 +16,56 @@ module.exports = {
       data.archived,
       data.feed_id,
       data.category_id
-    ]);
-  },
+  createMany: async (feed, users, items) => {
+    const client = await pool.connect();
 
-  createMany: arr => {
-    const sql = format(`
+    try {
+      await client.query('BEGIN');
+
+      for (const item of items) {
+        // insert item data shared by all users
+        const feeditem = (await client.query(`
     INSERT INTO feeditem
-      (title, description, url, pubdate, archived, feed_id, category_id)
+          (title, description, url, pubdate, feed_id, category_id)
+          VALUES
+          ($1, $2, $3, $4, $5, $6)
+          ON CONFLICT DO NOTHING
+          RETURNING id
+        `, [
+          item.title,
+          item.description,
+          item.link,
+          item.published,
+          feed.id,
+          feed.category_id
+        ])).rows[0];
+        
+        if (!feeditem) continue;
+
+        const useritems = [];
+        for (const u of users) {
+          useritems.push([u.user_id, feeditem.id]);
+        }
+
+        // insert per-user metadata records for each item
+        // being created
+        await client.query(format(`
+          INSERT INTO user_item
+            (user_id, item_id)
     VALUES %L
     ON CONFLICT DO NOTHING
-    `, arr);
-    return pool.query(sql);
+        `, useritems));
+      }
+
+      await client.query('COMMIT');
+    }
+    catch (err) {
+      await client.query('ROLLBACK');
+      throw new DatabaseError({ cause: err });
+    }
+    finally {
+      client.release();
+    }
   },
 
   delete: async id => {
