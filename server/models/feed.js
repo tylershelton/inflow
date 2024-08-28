@@ -110,7 +110,6 @@ module.exports = {
   sync: async (user_id, feed_id) => {
     try {
       const feed = await module.exports.get(user_id, feed_id);
-      console.log('feed:', feed);
       const rss  = await import('@extractus/feed-extractor');
       let { entries } = await rss.extract(feed.url);
       entries = entries.map(entry => {
