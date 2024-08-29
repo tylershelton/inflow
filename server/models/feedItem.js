@@ -101,11 +101,11 @@ module.exports = {
     }
   },
 
-  delete: async id => {
+  delete: async (user_id, item_id) => {
     const { rowCount } = await pool.query(`
-      DELETE FROM feeditem
-      WHERE id = $1
-    `, [id]);
+      DELETE FROM user_item
+      WHERE user_id = $1 AND item_id = $2
+    `, [user_id, item_id]);
     return rowCount > 0 ? true : false;
   },
 
