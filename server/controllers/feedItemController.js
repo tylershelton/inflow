@@ -5,7 +5,7 @@ const FeedItem = require('../models/feedItem');
 module.exports = {
   deleteFeedItem: async (req, res, next) => {
     try {
-      res.locals.success = await FeedItem.delete(req.params.id);
+      res.locals.success = await FeedItem.delete(req.user.id, req.params.id);
       return next();
     } catch (err) {
       return next(err);
@@ -19,7 +19,7 @@ module.exports = {
 
   getItemsByCategory: async (req, res, next) => {
     try {
-      res.locals.feeditems = await FeedItem.getByCategory(req.params.id, req.query.all);
+      res.locals.feeditems = await FeedItem.getByCategory(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -29,7 +29,7 @@ module.exports = {
 
   getItemsByFeed: async (req, res, next) => {
     try {
-      res.locals.feeditems = await FeedItem.getByFeed(req.params.id, req.query.all);
+      res.locals.feeditems = await FeedItem.getByFeed(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -39,14 +39,14 @@ module.exports = {
 
   toggleArchived: async (req, res, next) => {
     try {
-      const current = await FeedItem.get(req.params.id);
+      const current = await FeedItem.get(req.user.id, req.params.id);
       await FeedItem.update(
         req.params.id, {
           archived: req.query.archived || current.category_id,
           category_id: current.category_id,
         }
       );
-      res.locals.feeditem = await FeedItem.get(req.params.id);
+      res.locals.feeditem = await FeedItem.get(req.user.id, req.params.id);
       return next();
     }
     catch (err) {
