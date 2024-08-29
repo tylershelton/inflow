@@ -122,19 +122,19 @@ module.exports = {
     }
   },
 
-  getByCategory: async (categoryId, includeArchived) => {
+  getByCategory: async (user_id, categoryId, includeArchived) => {
     try {
-      const params = [categoryId];
+      const params = [user_id, categoryId];
       let addendum = '';
       if (!includeArchived) {
-        addendum = ' AND archived = $2';
+        addendum = ' AND archived = $3';
         params.push(includeArchived);
       }
       const result = await pool.query(`
-        SELECT fi.*, f.title AS feed_title 
-        FROM feeditem fi INNER JOIN feed f ON fi.feed_id = f.id
-        WHERE fi.category_id = $1 ${addendum}
-        ORDER BY fi.pubdate DESC
+        SELECT vui.*, f.title AS feed_title 
+        FROM view_user_item vui INNER JOIN feed f ON vui.feed_id = f.id
+        WHERE vui.user_id = $1 AND vui.category_id = $2 ${addendum}
+        ORDER BY vui.pubdate DESC
       `, params);
       return result.rows;
     }
@@ -143,17 +143,17 @@ module.exports = {
     }
   },
 
-  getByFeed: async (feedId, includeArchived) => {
+  getByFeed: async (user_id, feedId, includeArchived) => {
     try {
-      const params = [feedId];
+      const params = [user_id, feedId];
       let addendum = '';
       if (!includeArchived) {
-        addendum = ' AND archived = $2';
+        addendum = ' AND archived = $3';
         params.push(includeArchived);
       }
       const result = await pool.query(`
-        SELECT * FROM feeditem
-        WHERE feed_id = $1 ${addendum}
+        SELECT * FROM view_user_item
+        WHERE user_id = $1 AND feed_id = $2 ${addendum}
         ORDER BY pubdate DESC
       `, params);
       return result.rows;
