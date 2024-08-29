@@ -3,19 +3,52 @@ const format = require('pg-format');
 const { DatabaseError } = require('../lib/error/errors');
 
 module.exports = {
-  create: data => {
-    return pool.query(`
-      INSERT INTO feeditem
-        (title, description, url, pubdate, archived, feed_id, category_id)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-    `, [
-      data.title,
-      data.description,
-      data.url,
-      data.pubdate,
-      data.archived,
-      data.feed_id,
-      data.category_id
+  // create: async (user_id, data) => {
+  //   const client = await pool.connect();
+  //   let useritem_result, feeditem_result;
+    
+  //   try {
+  //     await client.query('BEGIN');
+  //     feeditem_result = (await pool.query(`
+  //       INSERT INTO feeditem
+  //         (title, description, url, pubdate, feed_id, category_id)
+  //       VALUES ($1, $2, $3, $4, $5, $6, $7)
+  //     `, [
+  //       data.title,
+  //       data.description,
+  //       data.url,
+  //       data.pubdate,
+  //       data.feed_id,
+  //       data.category_id
+  //     ])).rows[0];
+
+  //     const archived_at = data.archived ? new Date() : null;
+  //     useritem_result = (await pool.query(`
+  //       INSERT INTO user_item
+  //         (user_id, item_id, archived, archived_at)
+  //       VALUES ($1, $2, $3, $4)
+  //     `, [
+  //       user_id,
+  //       feeditem_result.id,
+  //       data.archived,
+  //       archived_at
+  //     ])).rows[0];
+  //     await client.query('COMMIT');
+  //   }
+  //   catch (err) {
+  //     await client.query('ROLLBACK');
+  //     throw new DatabaseError({ cause: err });
+  //   }
+  //   finally {
+  //     client.release();
+  //   }
+
+  //   return ({
+  //     ...feeditem_result,
+  //     ...useritem_result
+  //   });
+  // },
+
   createMany: async (feed, users, items) => {
     const client = await pool.connect();
 
@@ -73,7 +106,7 @@ module.exports = {
       DELETE FROM feeditem
       WHERE id = $1
     `, [id]);
-    return rowCount === 0 ? false : true;
+    return rowCount > 0 ? true : false;
   },
 
   get: async (user_id, item_id) => {
@@ -85,7 +118,7 @@ module.exports = {
       return result.rows[0];
     }
     catch (err) {
-      return err;
+      throw new DatabaseError({ cause: err });
     }
   },
 
@@ -106,7 +139,7 @@ module.exports = {
       return result.rows;
     }
     catch (err) {
-      return err;
+      throw new DatabaseError({ cause: err });
     }
   },
 
@@ -126,7 +159,7 @@ module.exports = {
       return result.rows;
     }
     catch (err) {
-      return err;
+      throw new DatabaseError({ cause: err });
     }  
   },  
 
