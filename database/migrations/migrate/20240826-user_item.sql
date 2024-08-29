@@ -38,6 +38,7 @@ BEGIN
                 i.url,
                 i.pubdate,
                 i.feed_id,
+                i.category_id,
                 ui.user_id,
                 ui.read,
                 ui.archived,
