@@ -49,10 +49,10 @@ COPY public.feed (id, url, title, description, category_id) FROM stdin;
 
 
 --
--- Data for Name: feeditem; Type: TABLE DATA; Schema: public; Owner: inflow
+-- Data for Name: item; Type: TABLE DATA; Schema: public; Owner: inflow
 --
 
-COPY public.feeditem (id, title, description, url, pubdate, feed_id, category_id) FROM stdin;
+COPY public.item (id, title, description, url, pubdate, feed_id, category_id) FROM stdin;
 1	WATCH: DNC Night 4 speeches from Harris, Whitmer, Sharpton, Kinzinger and more	Gun violence, race, climate change and, of course, Donald Trump were themes of the night that culminated in Kamala Harris  accepting the Democratic Party's nomination for president.	https://www.npr.org/2024/08/23/nx-s1-5086821/democratic-national-convention-speakers-harris-kinzinger-whitmer-warren-sharpton	2024-08-23 04:58:07	8	1
 2	Harris had one of the shortest acceptance speeches in history. Trump had the longest	Her speech, at only 38 minutes, was the 12th-shortest in modern history, while her opponent holds the records for the three longest acceptance speeches in American political history.	https://www.npr.org/2024/08/23/g-s1-19242/kamala-harris-acceptance-speech-dnc-trump	2024-08-23 04:48:50	8	1
 3	Fact checking Trump's claims during Harris' acceptance speech	Former President Donald Trump was posting on Truth Social throughout Kamala Harris' DNC speech, where she formally accepted the party's nomination for president.	https://www.npr.org/2024/08/23/g-s1-19229/trump-fact-check-kamala-harris-dnc-speech	2024-08-23 04:46:09	8	1
@@ -463,6 +463,24 @@ COPY public.feeditem (id, title, description, url, pubdate, feed_id, category_id
 465	Intel Posts New Patches For GPU Shared Virtual Memory With Xe Driver	Intel Linux graphics driver engineers continue to be very busy enabling the Xe Direct Rendering Manager that is becoming the default kernel graphics driver beginning with Xe2 Lunar Lake and Battlemage hardware (it currently works as an experimental...	https://www.phoronix.com/news/Intel-Xe-GPU-SVM-RFC-Patches	2024-08-28 10:40:00	7	5
 466	Microsoft Azure Linux 3.0.20240824 Enables More Kernel Features, Adds XWayland	Azure Linux as Microsoft's in-house Linux operating system that is used for a variety of purposes is out with a new feature release...	https://www.phoronix.com/news/Azure-Linux-3.0.20240824	2024-08-28 10:10:15	7	5
 467	Freedreno Gallium3D Enables Adreno 621 & 505 GPU Support	Being merged for Mesa 24.3 to the Freedreno open-source Gallium3D (OpenGL) driver for Qualcomm Adreno GPUs is now supporting the Adreno 621 and 505 graphics processors...	https://www.phoronix.com/news/Freedreno-Mesa-A505-A621	2024-08-28 09:45:28	7	5
+488	Army says Arlington National Cemetery worker was 'pushed aside' by Trump aides	The statement Thursday comes in response to NPR's reporting on former President Donald Trump's visit to Arlington and an altercation his staff had with a cemetery employee.	https://www.npr.org/2024/08/29/nx-s1-5092087/trump-arlington-cemetery-altercation-video	2024-08-30 03:06:00	8	1
+489	Trump said he'd vote for abortion rights in Florida. His campaign says not so fast	In an interview with NBC News, former President Donald Trump — the Republican nominee — indicated he will vote in favor of abortion rights in his home state of Florida, where it's on the ballot.	https://www.npr.org/2024/08/29/g-s1-20187/trump-ivf-funding-abortion-reproductive-rights-election-2024	2024-08-29 22:51:55	8	1
+490	Should police be able to interrogate kids alone? A growing number of states say no	In most states, children and teenagers can waive their right to a lawyer during police questioning. Some states are now requiring that they speak to an attorney first.	https://www.npr.org/2024/08/29/nx-s1-4917976/juvenile-miranda-rights-police-interrogations	2024-08-29 21:48:56	8	1
+491	Critics wary as China promises tighter fentanyl controls	Chinese factories churn out many of the chemicals used to make  fentanyl that kills 70,000 people each year in the U.S. China's government says new regulations are coming but critics are skeptical.	https://www.npr.org/2024/08/29/nx-s1-5089978/fentanyl-china-precursors	2024-08-29 21:20:00	8	1
+492	Accusations that Amazon Mistreats Workers in India	Just like in the U.S., Amazon is a big e-commerce presence in India. And also like the U.S., Amazon's fulfillment centers in India have been the subject of complaints of unsafe conditions for workers. To understand what those conditions are like,...	https://www.npr.org/2024/08/29/1196983430/accusations-that-amazon-mistreats-workers-in-india	2024-08-29 20:33:59	8	1
+493	Shohei Ohtani's dog 'throws out' 1st pitch at Dodgers game	To the delight of the sellout crowd, the star player’s pup Decoy “threw out” the ceremonial first pitch before a game at the Los Angeles stadium against the Baltimore Orioles.	https://www.npr.org/2024/08/29/nx-s1-5094463/shohei-ohtani-dog-first-pitch-dodgers	2024-08-29 19:48:00	8	1
+494	Arlington National Cemetery meant to be 'neutral zone,' says military chaplain	Retired military chaplain David Peters, who has conducted services at Arlington National Cemetery, tells NPR's Michel Martin that the final resting place of some 400,000 U.S. service members is supposed to be free of politics.	https://www.npr.org/2024/08/29/nx-s1-5092074/retired-military-chaplain-reflects-on-trump-altercation-arlington-national-cemeterys-sacred-ground	2024-08-29 19:23:55	8	1
+495	Where do different ideas of masculinity fit into the presidential election?	Richard Reeves, the author of ‘Of Boys and Men,’ offers insights on masculinity in politics.	https://www.npr.org/2024/08/29/nx-s1-5086473/richard-reeves-boys-men-masculinity-2024-elections	2024-08-29 18:34:19	8	1
+496	FBI is still mishandling child sex crimes even after Nassar case, watchdog finds	The FBI's inspector general slammed the agency for not complying with reporting rules for child sex abuse, warning that failure to do so leads to continued abuse.	https://www.npr.org/2024/08/29/g-s1-20077/fbi-child-sex-abuse-larry-nassar	2024-08-29 18:13:49	8	1
+497	When birds build nests, they're also building a culture	Nest-building isn’t just instinct. Birds can learn from others, letting groups within one species develop their own distinctive nest-building traditions.	https://www.npr.org/2024/08/29/nx-s1-5090967/birds-build-nests-tradition-culture-architecture	2024-08-29 18:00:24	8	1
+498	Debian Orphans Bcachefs-Tools: "Impossible To Maintain In Debian Stable"	Even before the Bcachefs file-system driver was accepted into the mainline kernel, Debian for the past five years has offered a "bcachefs-tools" package to provide the user-space programs to this copy-on-write file-system. It was simple at first...	https://www.phoronix.com/news/Debian-Orphans-Bcachefs-Tools	2024-08-29 21:12:50	7	5
+499	Ubuntu 24.04.1 LTS Released With All Stable Release Updates Included	Ubuntu 24.04.1 LTS has been released as the first point release of the current Long Term Support series that began in April with the "Noble Numbat" debut...	https://www.phoronix.com/news/Ubuntu-24.04.1-LTS-Released	2024-08-29 20:16:03	7	5
+500	Linux 6.12 To Optionally Display A QR Code During Kernel Panics	Submitted today via DRM-Misc-Next to DRM-Next for staging ahead of the Linux 6.12 merge window in mid-September is optional support for displaying a QR code within the DRM Panic handler infrastructure when a Linux kernel panic occurs...	https://www.phoronix.com/news/Linux-6.12-DRM-Panic-QR-Code	2024-08-29 15:00:00	7	5
+501	AmpereOne Performance Scaling From 32 To 192 Cores, Core-For-Core Benchmarks Against Ampere Altra Max	Earlier this week I began with AmpereOne A192-32X benchmarks and will continue for the next several weeks in finally having hands-on with the 192-core AArch64 server processor using a Supermicro ARS-211M-NR R13SPD 2U server platform. In today's...	https://www.phoronix.com/review/ampereone-benchmarks	2024-08-29 14:25:00	7	5
+502	Intel Enables Xe2 Lunar Lake & Battlemage Graphics By Default With Linux 6.12	It's happening! The upcoming Linux 6.12 kernel cycle will be enabling the Xe2 graphics in Lunar Lake and Battlemage out-of-the-box / by-default. The Xe2 support within the open-source "Xe" kernel graphics driver appears to be stable enough now for...	https://www.phoronix.com/news/Linux-6.12-Intel-Xe2-Stable	2024-08-29 11:00:00	7	5
+503	AMDVLK 2024.Q3.2 Brings "Strix 1" Support & Performance Tuning	Following the AMDVLK 2024.Q3.1 driver release from earlier in the month, AMDVLK 2024.Q3.2 is now available as the latest update to this official open-source AMD Radeon Vulkan driver for Linux systems...	https://www.phoronix.com/news/AMDVLK-2024.Q3.2-Released	2024-08-29 10:45:45	7	5
+504	Intel's Current IAA & DSA Accelerators Aren't Safe For VMs Due To A Security Issue	With the Intel In-Memory Analytics Accelerator (IAA) and Data Streaming Accelerator (DSA) introduced first with Xeon Scalable "Sapphire Rapids" processors, they can be a big performance win for some workloads but can be a pain to setup and with...	https://www.phoronix.com/news/Intel-IAA-DSA-Security-VMs	2024-08-29 10:28:12	7	5
+505	Mesa's Gallium3D Direct3D 9 "Nine" State Tracker To Be Retired	It's crazy that Gallium Nine is already a decade old for providing a Direct3D 9 (D3D9) state tracker implementation for Gallium3D hardware drivers. Gallium Nine was useful years ago for speeding up Direct3D 9 support when using Wine on Linux for...	https://www.phoronix.com/news/Mesa-Gallium3D-Nine-Sunset	2024-08-29 09:57:34	7	5
 \.
 
 
@@ -956,6 +974,32 @@ COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at) F
 3	466	f	f	\N	\N
 2	467	f	f	\N	\N
 3	467	f	f	\N	\N
+2	488	f	f	\N	\N
+2	489	f	f	\N	\N
+2	490	f	f	\N	\N
+2	491	f	f	\N	\N
+2	492	f	f	\N	\N
+2	493	f	f	\N	\N
+2	494	f	f	\N	\N
+2	495	f	f	\N	\N
+2	496	f	f	\N	\N
+2	497	f	f	\N	\N
+2	498	f	f	\N	\N
+3	498	f	f	\N	\N
+2	499	f	f	\N	\N
+3	499	f	f	\N	\N
+2	500	f	f	\N	\N
+3	500	f	f	\N	\N
+2	501	f	f	\N	\N
+3	501	f	f	\N	\N
+2	502	f	f	\N	\N
+3	502	f	f	\N	\N
+2	503	f	f	\N	\N
+3	503	f	f	\N	\N
+2	504	f	f	\N	\N
+3	504	f	f	\N	\N
+2	505	f	f	\N	\N
+3	505	f	f	\N	\N
 \.
 
 
@@ -977,7 +1021,7 @@ SELECT pg_catalog.setval('public.feed_id_seq', 13, true);
 -- Name: feeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feeditem_id_seq', 487, true);
+SELECT pg_catalog.setval('public.feeditem_id_seq', 539, true);
 
 
 --

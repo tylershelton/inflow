@@ -1,11 +1,9 @@
-const Category = require('../models/category');
-const Feed = require('../models/feed');
-const FeedItem = require('../models/feedItem');
+const Item = require('../models/item');
 
 module.exports = {
   deleteFeedItem: async (req, res, next) => {
     try {
-      res.locals.success = await FeedItem.delete(req.user.id, req.params.id);
+      res.locals.success = await Item.delete(req.user.id, req.params.id);
       return next();
     } catch (err) {
       return next(err);
@@ -13,13 +11,13 @@ module.exports = {
   },
 
   getFeedItem: async (req, res, next) => {
-    res.locals.feeditem = await FeedItem.get(req.user.id, req.params.itemId);
+    res.locals.feeditem = await Item.get(req.user.id, req.params.itemId);
     return next();
   },
 
   getItemsByCategory: async (req, res, next) => {
     try {
-      res.locals.feeditems = await FeedItem.getByCategory(req.user.id, req.params.id, req.query.all);
+      res.locals.feeditems = await Item.getByCategory(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -29,7 +27,7 @@ module.exports = {
 
   getItemsByFeed: async (req, res, next) => {
     try {
-      res.locals.feeditems = await FeedItem.getByFeed(req.user.id, req.params.id, req.query.all);
+      res.locals.feeditems = await Item.getByFeed(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -39,14 +37,14 @@ module.exports = {
 
   toggleArchived: async (req, res, next) => {
     try {
-      const current = await FeedItem.get(req.user.id, req.params.id);
-      await FeedItem.update(
+      const current = await Item.get(req.user.id, req.params.id);
+      await Item.update(
         req.params.id, {
           archived: req.query.archived || current.archived,
           category_id: current.category_id,
         }
       );
-      res.locals.feeditem = await FeedItem.get(req.user.id, req.params.id);
+      res.locals.feeditem = await Item.get(req.user.id, req.params.id);
       return next();
     }
     catch (err) {

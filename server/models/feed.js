@@ -1,5 +1,5 @@
 const pool     = require('../lib/db');
-const FeedItem = require('./feedItem');
+const Item = require('./item');
 const { AppError, DatabaseError } = require('../lib/error/errors');
 
 module.exports = {
@@ -93,9 +93,9 @@ module.exports = {
       INNER JOIN user_feed uf ON f.id = uf.feed_id
       WHERE uf.user_id = $1 AND f.id IN (
         -- only present feeds that have items
-        SELECT DISTINCT feeditem.feed_id
-        FROM feeditem
-        WHERE feeditem.category_id = $2
+        SELECT DISTINCT item.feed_id
+        FROM item
+        WHERE item.category_id = $2
       )
     `, [user_id, category_id]);
     return result.rows;
@@ -127,7 +127,7 @@ module.exports = {
       const rss  = await import('@extractus/feed-extractor');
       const { entries } = await rss.extract(feed.url);
       const users = await module.exports.subscribers(feed_id);
-      return await FeedItem.createMany(feed, users, entries);
+      return await Item.createMany(feed, users, entries);
     }
     catch (err) {
       throw new AppError({ cause: err });

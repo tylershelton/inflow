@@ -1,7 +1,6 @@
 const { AppError } = require('../lib/error/errors');
 const Category = require('../models/category');
 const Feed = require('../models/feed');
-const FeedItem = require('../models/feedItem');
 
 module.exports = {
   getFeed: async (req, res, next) => {
