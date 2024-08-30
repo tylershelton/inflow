@@ -3,7 +3,7 @@ const router = express.Router();
 
 const asyncHandler       = require('../lib/error/asyncHandler');
 const categoryController = require('../controllers/categoryController');
-const feedItemController = require('../controllers/feedItemController');
+const itemController = require('../controllers/itemController');
 
 // get category list
 router.get('/',
@@ -29,7 +29,7 @@ router.get('/:id/sync',
 );
 
 router.get('/:id/item/:itemId',
-  asyncHandler(feedItemController.getFeedItem),
+  asyncHandler(itemController.getFeedItem),
   (req, res) => res.status(200).json(res.locals.feeditem),
 );
 
