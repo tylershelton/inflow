@@ -93,9 +93,9 @@ module.exports = {
       INNER JOIN user_feed uf ON f.id = uf.feed_id
       WHERE uf.user_id = $1 AND f.id IN (
         -- only present feeds that have items
-        SELECT DISTINCT feeditem.feed_id
-        FROM feeditem
-        WHERE feeditem.category_id = $2
+        SELECT DISTINCT item.feed_id
+        FROM item
+        WHERE item.category_id = $2
       )
     `, [user_id, category_id]);
     return result.rows;

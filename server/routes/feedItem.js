@@ -7,19 +7,19 @@ router.get('/:id', feedItemController.getFeedItem, (req, res) => {
   return res.status(200).json(res.locals.feeditem);
 });
 
-// get all feeditems in a given category
+// get all items in a given category
 router.get('/category/:id', feedItemController.getItemsByCategory, (req, res) => {
   // TODO: support all vs unread only
   return res.status(200).json(res.locals.feeditems);
 });
 
-// get all feeditems from a given feed
+// get all items from a given feed
 router.get('/feed/:id', feedItemController.getItemsByFeed, (req, res) => {
   // TODO: support all vs unread only
   return res.status(200).json(res.locals.feeditems);
 });
 
-// mark a feeditem as read or unread
+// mark a item as read or unread
 router.put('/:id', feedItemController.toggleArchived, (req, res) => {
   return res.status(200).json(res.locals.feeditem);
 });

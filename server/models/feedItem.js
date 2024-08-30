@@ -5,12 +5,12 @@ const { DatabaseError } = require('../lib/error/errors');
 module.exports = {
   // create: async (user_id, data) => {
   //   const client = await pool.connect();
-  //   let useritem_result, feeditem_result;
+  //   let useritem_result, item_result;
     
   //   try {
   //     await client.query('BEGIN');
-  //     feeditem_result = (await pool.query(`
-  //       INSERT INTO feeditem
+  //     item_result = (await pool.query(`
+  //       INSERT INTO item
   //         (title, description, url, pubdate, feed_id, category_id)
   //       VALUES ($1, $2, $3, $4, $5, $6, $7)
   //     `, [
@@ -29,7 +29,7 @@ module.exports = {
   //       VALUES ($1, $2, $3, $4)
   //     `, [
   //       user_id,
-  //       feeditem_result.id,
+  //       item_result.id,
   //       data.archived,
   //       archived_at
   //     ])).rows[0];
@@ -44,7 +44,7 @@ module.exports = {
   //   }
 
   //   return ({
-  //     ...feeditem_result,
+  //     ...item_result,
   //     ...useritem_result
   //   });
   // },
@@ -57,8 +57,8 @@ module.exports = {
 
       for (const item of items) {
         // insert item data shared by all users
-        const feeditem = (await client.query(`
-          INSERT INTO feeditem
+        const item = (await client.query(`
+          INSERT INTO item
           (title, description, url, pubdate, feed_id, category_id)
           VALUES
           ($1, $2, $3, $4, $5, $6)
@@ -73,11 +73,11 @@ module.exports = {
           feed.category_id
         ])).rows[0];
         
-        if (!feeditem) continue;
+        if (!item) continue;
 
         const useritems = [];
         for (const u of users) {
-          useritems.push([u.user_id, feeditem.id]);
+          useritems.push([u.user_id, item.id]);
         }
 
         // insert per-user metadata records for each item
