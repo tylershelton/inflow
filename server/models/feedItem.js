@@ -57,7 +57,7 @@ module.exports = {
 
       for (const item of items) {
         // insert item data shared by all users
-        const item = (await client.query(`
+        const dbitem = (await client.query(`
           INSERT INTO item
           (title, description, url, pubdate, feed_id, category_id)
           VALUES
@@ -73,11 +73,11 @@ module.exports = {
           feed.category_id
         ])).rows[0];
         
-        if (!item) continue;
+        if (!dbitem) continue;
 
         const useritems = [];
         for (const u of users) {
-          useritems.push([u.user_id, item.id]);
+          useritems.push([u.user_id, dbitem.id]);
         }
 
         // insert per-user metadata records for each item
