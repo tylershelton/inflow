@@ -58,7 +58,7 @@ module.exports = {
       for (const item of items) {
         // insert item data shared by all users
         const feeditem = (await client.query(`
-    INSERT INTO feeditem
+          INSERT INTO feeditem
           (title, description, url, pubdate, feed_id, category_id)
           VALUES
           ($1, $2, $3, $4, $5, $6)
@@ -85,8 +85,8 @@ module.exports = {
         await client.query(format(`
           INSERT INTO user_item
             (user_id, item_id)
-    VALUES %L
-    ON CONFLICT DO NOTHING
+          VALUES %L
+          ON CONFLICT DO NOTHING
         `, useritems));
       }
 
@@ -165,8 +165,10 @@ module.exports = {
 
   update: (id, changes) => {
     return pool.query(`
-      UPDATE feeditem
-      SET archived = $2, category_id = $3
+      UPDATE view_user_item
+      SET
+        archived = $2,
+        category_id = $3
       WHERE id = $1
     `, [id, changes.archived, changes.category_id]);
   }
