@@ -10,16 +10,9 @@ CREATE TABLE IF NOT EXISTS user_feed (
     FOREIGN KEY (feed_id) REFERENCES feed (id) ON DELETE RESTRICT
 );
 
--- assign any "orphan" feeds to the first user in the db
+-- assign all feeds to everyone in the db, since they were shared before
 INSERT INTO user_feed (user_id, feed_id)
-    SELECT MIN(user_account.id), feed.id
-    FROM user_account CROSS JOIN feed
-    WHERE NOT EXISTS (
-        SELECT 1
-        FROM user_feed
-        WHERE user_feed.feed_id = feed.id
-    )
-    GROUP BY feed.id
-    ORDER BY feed.id ASC;
+    SELECT user_account.id, feed.id
+    FROM user_account CROSS JOIN feed;
 
 COMMIT;

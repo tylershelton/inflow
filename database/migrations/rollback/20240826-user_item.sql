@@ -1,0 +1,6 @@
+DROP VIEW IF EXISTS view_user_item;
+
+ALTER TABLE feeditem
+ADD COLUMN IF NOT EXISTS archived BOOLEAN DEFAULT false;
+
+DROP TABLE IF EXISTS user_item;

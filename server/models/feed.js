@@ -91,7 +91,12 @@ module.exports = {
         f.category_id
       FROM feed f
       INNER JOIN user_feed uf ON f.id = uf.feed_id
-      WHERE uf.user_id = $1 AND f.category_id = $2
+      WHERE uf.user_id = $1 AND f.id IN (
+        -- only present feeds that have items
+        SELECT DISTINCT feeditem.feed_id
+        FROM feeditem
+        WHERE feeditem.category_id = $2
+      )
     `, [user_id, category_id]);
     return result.rows;
   },
@@ -103,24 +108,26 @@ module.exports = {
     return result.rows[0]; 
   },
 
+  subscribers: async (feed_id) => {
+    try {
+      const result = await pool.query(`
+        SELECT user_id FROM user_feed
+        WHERE feed_id = $1
+      `, [feed_id]);
+      return result.rows;
+    }
+    catch (err) {
+      throw new DatabaseError({ cause: err });
+    }
+  },
+
   sync: async (user_id, feed_id) => {
     try {
       const feed = await module.exports.get(user_id, feed_id);
-      console.log('feed:', feed);
       const rss  = await import('@extractus/feed-extractor');
-      let { entries } = await rss.extract(feed.url);
-      entries = entries.map(entry => {
-        return [
-          entry.title,
-          entry.description,
-          entry.link,
-          entry.published,
-          false, // is the item archived?
-          feed.id,
-          feed.category_id,
-        ];
-      });
-      return await FeedItem.createMany(entries);
+      const { entries } = await rss.extract(feed.url);
+      const users = await module.exports.subscribers(feed_id);
+      return await FeedItem.createMany(feed, users, entries);
     }
     catch (err) {
       throw new AppError({ cause: err });
