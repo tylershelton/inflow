@@ -42,7 +42,7 @@ module.exports = {
       const current = await FeedItem.get(req.user.id, req.params.id);
       await FeedItem.update(
         req.params.id, {
-          archived: req.query.archived || current.category_id,
+          archived: req.query.archived || current.archived,
           category_id: current.category_id,
         }
       );
