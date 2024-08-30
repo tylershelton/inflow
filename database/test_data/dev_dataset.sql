@@ -441,6 +441,28 @@ COPY public.feeditem (id, title, description, url, pubdate, feed_id, category_id
 431	Linux 6.11 Kernel Features Deliver A Lot For New/Upcoming Intel & AMD Hardware	Linux 6.11 as often is the case each kernel cycle brings a lot of new improvements for recent/upcoming Intel and AMD platforms. There are big step forwards for AMD confidential computing, initial RDNA4 graphics support, new AMD P-State driver...	https://www.phoronix.com/review/linux-611-features	2024-08-25 13:12:15	7	5
 432	Linux 6.11-rc5 Released With Slimmed Down Set Of Bcachefs Fixes	The Linux 6.11-rc5 kernel is already out as stable today, roughly a half-day ahead of time due to travels by Linus Torvalds...	https://www.phoronix.com/news/Linux-6.11-rc5-Released	2024-08-25 10:26:54	7	5
 433	Codon 0.17 Released For LLVM-Based Python Implementation For 10~100x Speedups	Codon is an open-source project that leverages the LLVM compiler infrastructure and aims for super fast Python code with as much as 10~100x speedups. Released this week  was Codon 0.17 as the newest step forward for this alternative Python...	https://www.phoronix.com/news/Codon-0.17-Python-Released	2024-08-25 10:19:33	7	5
+446	Jeff Goldblum was bullied growing up. It made him crave something 'finer'	Jeff Goldblum has a special brand of charisma — the kind that seeps its way into all of his roles. Whether it's in The Fly or Independence Day or Jurassic Park — or his newest show KAOS — every character feels like a version of Jeff Goldblum...	https://www.npr.org/2024/08/29/1244131022/jeff-goldblum-kaos-new-show-childhood	2024-08-29 07:00:59	8	1
+447	Breaks in water pipeline for Grand Canyon prompt shutdown of overnight hotel stays	The restrictions will run throughout the Labor Day holiday when hotels are near or at capacity. It's an unprecedented move, even for a waterline that has experienced frequent failures.	https://www.npr.org/2024/08/29/g-s1-20001/breaks-water-pipeline-grand-canyon-hotel-stays	2024-08-29 05:25:16	8	1
+448	Backpage founder Michael Lacey sentenced to 5 years in prison for money laundering	Michael Lacey, a founder of the classified site Backpage.com, was sentenced to five years in prison and fined $3 million in a money laundering case in a case involving allegations of sex trafficking.	https://www.npr.org/2024/08/29/g-s1-19995/backpage-founder-michael-lacey-prison-money-laundering	2024-08-29 04:11:39	8	1
+449	Arlington National Cemetery’s Section 60 is a focus of controversy. What is the area?	Many U.S. servicemembers from Afghanistan and Iraq wars are interred in this solemn place. It made news after a cemetery official tried to prevent former President Trump’s campaign from taking photos.	https://www.npr.org/2024/08/28/nx-s1-5092041/arlington-trump-section60-veterans-altercation	2024-08-28 21:43:53	8	1
+450	'Very demure, very mindful' trademark issue is 'handled,' TikTok influencer says	While Jools Lebron was captivating millions of people with her "very demure, very mindful" TikTok videos, at least two people submitted applications to trademark her catchphrases.	https://www.npr.org/2024/08/28/nx-s1-5090081/very-demure-very-mindful-jools-lebron-trademark	2024-08-28 21:31:29	8	1
+451	Understanding Israel's Raids And Settler Expansion in the West Bank	On Wednesday Israel launched raids into the Occupied West Bank, they say to root out Hamas militants and prevent another attack like the one that occurred on October 7th. We hear the latest on those raids.  And Israelis who believe the West Bank...	https://www.npr.org/2024/08/28/1196983425/understanding-israels-raids-and-settler-expansion-in-the-west-bank	2024-08-28 21:01:38	8	1
+452	Trump shooter saw rally as 'target of opportunity,' FBI says	The FBI says the gunman who targeted former President Donald Trump at a rally in Butler, Pa., in mid-July viewed it as a "target of opportunity."	https://www.npr.org/2024/08/28/g-s1-19944/trump-rally-assassination-motive-attack	2024-08-28 20:59:02	8	1
+453	Supreme Court rebuffs Biden administration plea to restore SAVE student debt plan	The justices rejected an administration request to put most of the latest multibillion-dollar plan back into effect while lawsuits make their way through lower courts.	https://www.npr.org/2024/08/28/g-s1-19940/save-student-debt-plan-supreme-court-biden-administration	2024-08-28 20:15:05	8	1
+454	Former elected official found guilty of murdering Las Vegas veteran reporter	An elected official in Las Vegas blamed his 2022 primary defeat on negative stories in the local newspaper. Now a jury has found him guilty of murdering the journalist who wrote them.	https://www.npr.org/2024/08/28/g-s1-19685/former-elected-official-found-guilty-of-murdering-las-vegas-veteran-reporter	2024-08-28 20:11:13	8	1
+455	FAA grounds SpaceX ahead of historic Polaris Dawn commercial spacewalk	The Federal Aviation Administration opened the investigation after a rocket booster toppled aboard a drone ship after it was returning from lofting SpaceX's Starlink internet satellites into space.	https://www.npr.org/2024/08/28/g-s1-19934/faa-spacex-falcon9-grounded-polaris-dawn	2024-08-28 19:42:03	8	1
+456	One Of The Rust Linux Kernel Maintainers Steps Down - Cites "Nontechnical Nonsense"	One of the several Rust for Linux kernel maintainers has decided to step away from the project. The move is being driven at least in part due to having to deal with increased "nontechnical nonsense" raised around Rust programming language use...	https://www.phoronix.com/news/Rust-Linux-Maintainer-Step-Down	2024-08-29 04:00:01	7	5
+457	Mesa 24.2.1 Released, Mesa 24.1 Series Comes To An End	Mesa 24.2.1 was released today as the first bi-weekly point release to the newly-minted Mesa 24.2 stable series. This also marks the Mesa 24.1 series from last quarter drawing to a close with one last point release...	https://www.phoronix.com/news/Mesa-24.2.1-Released	2024-08-29 04:00:00	7	5
+458	GNU Screen 5.0 Released With Rewritten Authentication Mechanism	The very useful GNU Screen program for multiplexing terminals between processes is out with a shiny new feature release...	https://www.phoronix.com/news/GNU-Screen-5.0	2024-08-29 01:38:04	7	5
+459	Wireshark 4.4 Released For This Leading Network Protocol Analyzer	Wireshark 4.4 has been released as the newest version of this leading network protocol analyzer. Wireshark 4.4 brings many new and improved features...	https://www.phoronix.com/news/Wireshark-4.4-Released	2024-08-28 23:20:56	7	5
+460	TUXEDO Sirius 16 Gen 2 Linux Laptop Pairs The AMD Ryzen 7 8845HS With Radeon RX 7600M XT	While AMD Ryzen AI 300 series laptops have begun appearing with Zen 5 CPU cores, to date the launched laptops have revolved around having either the integrated Radeon 890M RDNA3.5 graphics and/or NVIDIA GeForce discrete graphics. For those wanting...	https://www.phoronix.com/review/tuxedo-sirius16-gen2	2024-08-28 21:08:04	7	5
+461	Microsoft Advances Its Open-Source Font For Developers With "Cascadia Next"	Back in 2019 Microsoft announced Cascadia Code as an open-source font designed for terminals and code editors. This monospaced font they view is great for developers like those using Visual Studio Code. Over the years Microsoft has further improved...	https://www.phoronix.com/news/Microsoft-Cascadia-Next	2024-08-28 19:11:30	7	5
+462	Ubuntu 24.10 Prepares To Employ The Linux 6.11 Kernel	Thanks to the Canonical decision to commit to shipping the very latest upstream Linux kernels in Ubuntu releases moving forward, Ubuntu 24.10 shipping in October will have the Linux 6.11 kernel that is debuting as stable in mid-September....	https://www.phoronix.com/news/Ubuntu-24.10-Preps-Linux-6.11	2024-08-28 16:55:04	7	5
+463	LLVM's Modern Fortran Compiler "Flang-New" Is Looking Good	The LLVM Fortran "Flang" compiler effort has been a long time coming over the years with this programming language continuing to be popular among some HPC codebases and other applications. The "Flang-New" compiler code has been maturing nicely and...	https://www.phoronix.com/news/LLVM-Flang-New-Looking-Good	2024-08-28 12:50:00	7	5
+464	AMD PMC Driver Patches Submitted To Linux 6.11 Prepare For More Upcoming Zen 5 SoCs	The AMD PMC driver used for the SoC power management controller already supports the initial AMD Zen 5 SoCs but new patches coming in as "fixes" for the Linux 6.11 kernel extend the coverage for some upcoming AMD platforms...	https://www.phoronix.com/news/AMD-PMC-Linux-6.11-More-Zen-5	2024-08-28 11:00:00	7	5
+465	Intel Posts New Patches For GPU Shared Virtual Memory With Xe Driver	Intel Linux graphics driver engineers continue to be very busy enabling the Xe Direct Rendering Manager that is becoming the default kernel graphics driver beginning with Xe2 Lunar Lake and Battlemage hardware (it currently works as an experimental...	https://www.phoronix.com/news/Intel-Xe-GPU-SVM-RFC-Patches	2024-08-28 10:40:00	7	5
+466	Microsoft Azure Linux 3.0.20240824 Enables More Kernel Features, Adds XWayland	Azure Linux as Microsoft's in-house Linux operating system that is used for a variety of purposes is out with a new feature release...	https://www.phoronix.com/news/Azure-Linux-3.0.20240824	2024-08-28 10:10:15	7	5
+467	Freedreno Gallium3D Enables Adreno 621 & 505 GPU Support	Being merged for Mesa 24.3 to the Freedreno open-source Gallium3D (OpenGL) driver for Qualcomm Adreno GPUs is now supporting the Adreno 621 and 505 graphics processors...	https://www.phoronix.com/news/Freedreno-Mesa-A505-A621	2024-08-28 09:45:28	7	5
 \.
 
 
@@ -900,6 +922,40 @@ COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at) F
 3	444	f	f	\N	\N
 2	445	f	f	\N	\N
 3	445	f	f	\N	\N
+2	446	f	f	\N	\N
+2	447	f	f	\N	\N
+2	448	f	f	\N	\N
+2	449	f	f	\N	\N
+2	450	f	f	\N	\N
+2	451	f	f	\N	\N
+2	452	f	f	\N	\N
+2	453	f	f	\N	\N
+2	454	f	f	\N	\N
+2	455	f	f	\N	\N
+2	456	f	f	\N	\N
+3	456	f	f	\N	\N
+2	457	f	f	\N	\N
+3	457	f	f	\N	\N
+2	458	f	f	\N	\N
+3	458	f	f	\N	\N
+2	459	f	f	\N	\N
+3	459	f	f	\N	\N
+2	460	f	f	\N	\N
+3	460	f	f	\N	\N
+2	461	f	f	\N	\N
+3	461	f	f	\N	\N
+2	462	f	f	\N	\N
+3	462	f	f	\N	\N
+2	463	f	f	\N	\N
+3	463	f	f	\N	\N
+2	464	f	f	\N	\N
+3	464	f	f	\N	\N
+2	465	f	f	\N	\N
+3	465	f	f	\N	\N
+2	466	f	f	\N	\N
+3	466	f	f	\N	\N
+2	467	f	f	\N	\N
+3	467	f	f	\N	\N
 \.
 
 
@@ -921,7 +977,7 @@ SELECT pg_catalog.setval('public.feed_id_seq', 13, true);
 -- Name: feeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feeditem_id_seq', 445, true);
+SELECT pg_catalog.setval('public.feeditem_id_seq', 487, true);
 
 
 --
