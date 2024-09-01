@@ -45,7 +45,7 @@ erDiagram
 		int feed_id PK,FK
 		string title "unique per user id"
 		string description
-		int collection_id FK
+		int collection_id FK "default collection for new items"
 	}
 	user_item {
 		int user_id PK,FK
@@ -66,5 +66,6 @@ erDiagram
 	
 	feed one -- one or more user_feed : ""
 	
+	collection one -- zero or more user_feed : ""
 	collection one -- zero or more collection_useritem : ""
 ```

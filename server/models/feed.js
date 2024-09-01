@@ -1,4 +1,4 @@
-const pool     = require('../lib/db');
+const pool = require('../lib/db');
 const Item = require('./item');
 const { AppError, DatabaseError } = require('../lib/error/errors');
 
@@ -91,12 +91,7 @@ module.exports = {
         uf.collection_id
       FROM feed f
       INNER JOIN user_feed uf ON f.id = uf.feed_id
-      WHERE uf.user_id = $1 AND f.id IN (
-        -- only present feeds that have items
-        SELECT DISTINCT item.feed_id
-        FROM item
-        WHERE item.category_id = $2
-      )
+      WHERE uf.user_id = $1 AND uf.collection_id = $2
     `, [user_id, collection_id]);
     return result.rows;
   },

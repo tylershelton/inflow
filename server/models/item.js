@@ -59,9 +59,9 @@ module.exports = {
         // insert item data shared by all users
         const dbitem = (await client.query(`
           INSERT INTO item
-          (title, description, url, pubdate, feed_id, category_id)
+          (title, description, url, pubdate, feed_id)
           VALUES
-          ($1, $2, $3, $4, $5, $6)
+          ($1, $2, $3, $4, $5)
           ON CONFLICT DO NOTHING
           RETURNING id
         `, [
@@ -70,21 +70,20 @@ module.exports = {
           item.link,
           item.published,
           feed.id,
-          feed.collection_id
         ])).rows[0];
         
         if (!dbitem) continue;
 
         const useritems = [];
         for (const u of users) {
-          useritems.push([u.user_id, dbitem.id]);
+          useritems.push([u.user_id, dbitem.id, feed.collection_id]);
         }
 
         // insert per-user metadata records for each item
         // being created
         await client.query(format(`
           INSERT INTO user_item
-            (user_id, item_id)
+            (user_id, item_id, collection_id)
           VALUES %L
           ON CONFLICT DO NOTHING
         `, useritems));
@@ -122,9 +121,9 @@ module.exports = {
     }
   },
 
-  getByCategory: async (user_id, categoryId, includeArchived) => {
+  getByCollection: async (user_id, collection_id, includeArchived) => {
     try {
-      const params = [user_id, categoryId];
+      const params = [user_id, collection_id];
       let addendum = '';
       if (!includeArchived) {
         addendum = ' AND archived = $3';
@@ -132,8 +131,10 @@ module.exports = {
       }
       const result = await pool.query(`
         SELECT vui.*, f.title AS feed_title 
-        FROM view_user_item vui INNER JOIN feed f ON vui.feed_id = f.id
-        WHERE vui.user_id = $1 AND vui.category_id = $2 ${addendum}
+        FROM view_user_item vui
+        INNER JOIN feed f ON vui.feed_id = f.id
+        WHERE vui.user_id = $1
+          AND vui.collection_id = $2 ${addendum}
         ORDER BY vui.pubdate DESC
       `, params);
       return result.rows;
@@ -165,11 +166,11 @@ module.exports = {
 
   update: (id, changes) => {
     return pool.query(`
-      UPDATE view_user_item
+      UPDATE user_item
       SET
         archived = $2,
-        category_id = $3
+        collection_id = $3
       WHERE id = $1
-    `, [id, changes.archived, changes.category_id]);
+    `, [id, changes.archived, changes.collection_id]);
   }
 };

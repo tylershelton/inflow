@@ -17,7 +17,7 @@ module.exports = {
 
   getItemsByCategory: async (req, res, next) => {
     try {
-      res.locals.feeditems = await Item.getByCategory(req.user.id, req.params.id, req.query.all);
+      res.locals.feeditems = await Item.getByCollection(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -41,7 +41,7 @@ module.exports = {
       await Item.update(
         req.params.id, {
           archived: req.query.archived || current.archived,
-          category_id: current.category_id,
+          collection_id: current.collection_id,
         }
       );
       res.locals.feeditem = await Item.get(req.user.id, req.params.id);
