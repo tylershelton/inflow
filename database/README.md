@@ -45,6 +45,7 @@ erDiagram
 		int feed_id PK,FK
 		string title "unique per user id"
 		string description
+		int collection_id FK
 	}
 	user_item {
 		int user_id PK,FK
