@@ -16,7 +16,7 @@ module.exports = {
   },
 
   getContents: async (req, res, next) => {
-    res.locals.contents = await Feed.getAllByCategory(req.user.id, req.params.id);
+    res.locals.contents = await Feed.getAllByCollection(req.user.id, req.params.id);
     return next();
   },
 

@@ -29,8 +29,8 @@ module.exports = {
     try {
       // if user specified a category, get it from the db.
       // create the category if it does not yet exist
-      let category = await Category.getByTitle(req.body.category);
-      if (!category) category = Category.create(req.body.category);
+      let collection = await Category.getByTitle(req.body.collection);
+      if (!collection) collection = await Category.create(req.body.collection);
       
       const rss  = await import('@extractus/feed-extractor');
       const feed = await rss.extract(req.body.url);
@@ -39,7 +39,7 @@ module.exports = {
         req.body.url,
         feed.title,
         feed.description,
-        category.id
+        collection.id
       );
       res.locals.feed = await Feed.getByURL(req.body.url);
       next();
@@ -93,7 +93,7 @@ module.exports = {
       const changes = {
         title: processUpdate('title', req.body?.title, current),
         description: processUpdate('description', req.body?.description, current),
-        category_id: category.id || current.category_id,
+        collection_id: category.id || current.category_id,
       };
       await Feed.update(req.user.id, req.params.id, changes);
 

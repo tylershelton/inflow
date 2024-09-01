@@ -3,24 +3,24 @@ const Item = require('./item');
 const { AppError, DatabaseError } = require('../lib/error/errors');
 
 module.exports = {
-  create: async (user_id, url, title, desc, category_id) => {
+  create: async (user_id, url, title, desc, collection_id) => {
     const client = await pool.connect();
     try {
       await client.query('BEGIN');
 
       const feed_result = await client.query(`
-        INSERT INTO feed (url, title, description, category_id)
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO feed (url, title, description)
+        VALUES ($1, $2, $3)
         ON CONFLICT (url) DO UPDATE
         SET url = EXCLUDED.url
         RETURNING id;
-      `, [url, title, desc, category_id]);
+      `, [url, title, desc]);
 
       await client.query(`
-        INSERT INTO user_feed (user_id, feed_id)
-        VALUES ($1, $2)
+        INSERT INTO user_feed (user_id, feed_id, collection_id)
+        VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
-      `, [user_id, feed_result.rows[0].id]);
+      `, [user_id, feed_result.rows[0].id, collection_id]);
 
       await client.query('COMMIT');
     }
@@ -51,7 +51,7 @@ module.exports = {
           f.url,
           COALESCE(uf.title, f.title) AS title,
           COALESCE(uf.description, f.description) AS description,
-          f.category_id
+          uf.collection_id
         FROM feed f
         INNER JOIN user_feed uf ON f.id = uf.feed_id
         WHERE uf.user_id = $1 AND uf.feed_id = $2
@@ -74,21 +74,21 @@ module.exports = {
           f.url,
           COALESCE(uf.title, f.title) AS title,
           COALESCE(uf.description, f.description) AS description,
-          f.category_id
+          uf.collection_id
       FROM feed f
       INNER JOIN user_feed uf ON f.id = uf.feed_id
       WHERE uf.user_id = $1
     `, [user_id]);
   },
 
-  getAllByCategory: async (user_id, category_id) => {
+  getAllByCollection: async (user_id, collection_id) => {
     const result = await pool.query(`
       SELECT
         f.id,
         f.url,
         COALESCE(uf.title, f.title) AS title,
         COALESCE(uf.description, f.description) AS description,
-        f.category_id
+        uf.collection_id
       FROM feed f
       INNER JOIN user_feed uf ON f.id = uf.feed_id
       WHERE uf.user_id = $1 AND f.id IN (
@@ -97,7 +97,7 @@ module.exports = {
         FROM item
         WHERE item.category_id = $2
       )
-    `, [user_id, category_id]);
+    `, [user_id, collection_id]);
     return result.rows;
   },
 
@@ -137,6 +137,7 @@ module.exports = {
   update: async (user_id, feed_id, changes) => {
     const client = await pool.connect();
     try {
+      await client.query('BEGIN');
       const userfeed = await client.query(`
         SELECT 1 FROM user_feed uf
         WHERE uf.user_id = $1 AND uf.feed_id = $2
@@ -162,18 +163,11 @@ module.exports = {
       const title = (changes.title === defaults.title || changes.title === '') ? null : changes.title;
       const description = (changes.description === defaults.description || changes.description === '') ? null : changes.description;
 
-      await client.query('BEGIN');
-      await client.query(`
-        UPDATE feed
-        SET category_id = $2
-        WHERE id = $1
-      `, [feed_id, changes.category_id]);
-
       await client.query(`
         UPDATE user_feed
-        SET title = $3, description = $4
+        SET title = $3, description = $4, collection_id = $5
         WHERE user_id = $1 AND feed_id = $2
-      `, [user_id, feed_id, title, description]);
+      `, [user_id, feed_id, title, description, changes.collection_id]);
       await client.query('COMMIT');
     }
     catch (err) {

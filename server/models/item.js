@@ -70,7 +70,7 @@ module.exports = {
           item.link,
           item.published,
           feed.id,
-          feed.category_id
+          feed.collection_id
         ])).rows[0];
         
         if (!dbitem) continue;

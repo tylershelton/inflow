@@ -33,18 +33,18 @@ COPY public.collection (id, title) FROM stdin;
 -- Data for Name: feed; Type: TABLE DATA; Schema: public; Owner: inflow
 --
 
-COPY public.feed (id, url, title, description, category_id) FROM stdin;
-1	https://sive.rs/feed	Derek Sivers blog		3
-2	http://blog.mozilla.com/feed/	The Mozilla Blog	News and Updates about Mozilla	2
-3	https://developer.mozilla.org/en-US/blog/rss.xml	MDN Blog	The MDN Web Docs blog publishes articles about web development, open source software, web platform updates, tutorials, changes and updates to MDN, and more.	2
-4	http://martinfowler.com/bliki/bliki.atom	Martin Fowler	Master feed of news and updates from martinfowler.com	2
-5	http://patflynn.com/feed/	Pat Flynn	Father, husband, entrepreneur, author, speaker.	3
-6	http://www.ansible.com/blog/rss.xml	Ansible Blog	The official blog for Ansible by Red Hat and the Ansible open source project.	5
-8	https://feeds.npr.org/1001/rss.xml	News : NPR	NPR news, audio, and podcasts. Coverage of breaking stories, national and world news, politics, business, science, technology, and extended coverage of major national and world events.	1
-9	http://code.blender.org/index.php/feed/	Developer Blog	code.blender.org	2
-10	https://www.unrealengine.com/rss	Unreal Engine - News, Developer Interviews, Spotlights, Tech Blogs		4
-11	http://www.archlinux.org/feeds/news/	Arch Linux: Recent news updates	The latest and greatest news from the Arch Linux distribution.	5
-7	http://feeds.feedburner.com/Phoronix	Phoronix	Linux Hardware Reviews, Benchmarks & Open-Source News	5
+COPY public.feed (id, url, title, description) FROM stdin;
+1	https://sive.rs/feed	Derek Sivers blog	
+2	http://blog.mozilla.com/feed/	The Mozilla Blog	News and Updates about Mozilla
+3	https://developer.mozilla.org/en-US/blog/rss.xml	MDN Blog	The MDN Web Docs blog publishes articles about web development, open source software, web platform updates, tutorials, changes and updates to MDN, and more.
+4	http://martinfowler.com/bliki/bliki.atom	Martin Fowler	Master feed of news and updates from martinfowler.com
+5	http://patflynn.com/feed/	Pat Flynn	Father, husband, entrepreneur, author, speaker.
+6	http://www.ansible.com/blog/rss.xml	Ansible Blog	The official blog for Ansible by Red Hat and the Ansible open source project.
+8	https://feeds.npr.org/1001/rss.xml	News : NPR	NPR news, audio, and podcasts. Coverage of breaking stories, national and world news, politics, business, science, technology, and extended coverage of major national and world events.
+9	http://code.blender.org/index.php/feed/	Developer Blog	code.blender.org
+10	https://www.unrealengine.com/rss	Unreal Engine - News, Developer Interviews, Spotlights, Tech Blogs	
+11	http://www.archlinux.org/feeds/news/	Arch Linux: Recent news updates	The latest and greatest news from the Arch Linux distribution.
+7	http://feeds.feedburner.com/Phoronix	Phoronix	Linux Hardware Reviews, Benchmarks & Open-Source News
 \.
 
 
@@ -481,6 +481,28 @@ COPY public.item (id, title, description, url, pubdate, feed_id, category_id) FR
 503	AMDVLK 2024.Q3.2 Brings "Strix 1" Support & Performance Tuning	Following the AMDVLK 2024.Q3.1 driver release from earlier in the month, AMDVLK 2024.Q3.2 is now available as the latest update to this official open-source AMD Radeon Vulkan driver for Linux systems...	https://www.phoronix.com/news/AMDVLK-2024.Q3.2-Released	2024-08-29 10:45:45	7	5
 504	Intel's Current IAA & DSA Accelerators Aren't Safe For VMs Due To A Security Issue	With the Intel In-Memory Analytics Accelerator (IAA) and Data Streaming Accelerator (DSA) introduced first with Xeon Scalable "Sapphire Rapids" processors, they can be a big performance win for some workloads but can be a pain to setup and with...	https://www.phoronix.com/news/Intel-IAA-DSA-Security-VMs	2024-08-29 10:28:12	7	5
 505	Mesa's Gallium3D Direct3D 9 "Nine" State Tracker To Be Retired	It's crazy that Gallium Nine is already a decade old for providing a Direct3D 9 (D3D9) state tracker implementation for Gallium3D hardware drivers. Gallium Nine was useful years ago for speeding up Direct3D 9 support when using Wine on Linux for...	https://www.phoronix.com/news/Mesa-Gallium3D-Nine-Sunset	2024-08-29 09:57:34	7	5
+540	Israel recovers bodies of 6 hostages, including Israeli-American Hersh Goldberg-Polin	Hersh Goldberg-Polin became one of the most well-known captives held by Hamas as his parents met with world leaders and pressed for his release, including at the Democratic convention last month.	https://www.npr.org/2024/09/01/g-s1-20505/family-confirms-death-hersh-goldberg-polin	2024-09-01 04:32:13	8	1
+541	Oasis says reunion tour tickets can only be resold at face value on official sites	Ticket prices for the U.K. tour have skyrocketed on resale sites since presale started Friday. The British rock band said tickets offered on the secondary market will be voided.	https://www.npr.org/2024/08/31/nx-s1-5096775/oasis-reunion-tour-tickets-resale-ticketmaster	2024-08-31 22:26:49	8	1
+542	Over 17 million airline passengers head out for the busiest Labor Day weekend ever	This weekend caps a record-breaking season for travel, and those hitting the road will find lower gas prices than they did last year.	https://www.npr.org/2024/08/31/nx-s1-5096772/labor-day-travel-busy-flights-packed	2024-08-31 18:26:57	8	1
+543	Mississippi bus crash kills 7 and injures 37	Seven people were killed and dozens were injured in Mississippi after a commercial bus overturned on Interstate 20 on Saturday morning. The bus was traveling near Bovina in Warren County.	https://www.npr.org/2024/08/31/nx-s1-5096784/fatal-mississippi-bus-crash	2024-08-31 17:43:41	8	1
+544	As polio vaccinations begin in Gaza, U.N. says success hinges on a pause in fighting	Health care workers plan to reach more than 640,000 Palestinian children in a matter of days while Israel has agreed to staggered pauses in fighting.	https://www.npr.org/2024/08/31/nx-s1-5096742/gaza-polio-vaccination-israel-pause	2024-08-31 17:35:12	8	1
+545	Children in Gaza who need medical care are not being allowed to evacuate, say aid groups	Aid groups that help families get a sick or injured child to another country for care say obtaining approval from Israel for the child and an adult companion to leave has become intensely difficult.	https://www.npr.org/sections/goats-and-soda/2024/08/31/g-s1-20287/children-in-gaza-who-need-medical-care-are-not-being-allowed-to-evacuate-say-aid-groups	2024-08-31 15:11:51	8	1
+546	7 U.S. troops hurt in Iraq raid targeting Islamic State group militants that killed 15	The U.S. military and Iraq launched a joint raid targeting suspected Islamic State group militants that killed at least 15 people and saw seven U.S. troops hurt, officials said.	https://www.npr.org/2024/08/31/nx-s1-5096744/iraq-isis-us-military-raid	2024-08-31 12:45:10	8	1
+547	Harris, Walz campaign in battleground of Georgia. Here's what it means for Trump	We look at how Vice President Kamala Harris and Tim Walz, are campaigning in the battleground state of Georgia, and what former President Trump will have to do to win back the state.	https://www.npr.org/2024/08/31/nx-s1-5094226/trump-georgia-harris-battleground	2024-08-31 11:51:39	8	1
+548	Why the U.S. isn't ready for wars of the future, according to experts	These experts argue technological developments have changed warfare more in the past several years than the decades spanning from the introduction of the airplane.	https://www.npr.org/2024/08/31/g-s1-20106/us-war-warfare-drones-ai-pentagon-ukraine-gaza	2024-08-31 10:00:00	8	1
+549	Too hot for trout: Why some anglers are rethinking their approach to fly fishing	As Western Montana's blue-ribbon trout waters warm due to climate change, anglers are increasingly wrestling with the ethics of their sport.	https://www.npr.org/2024/08/31/g-s1-19833/fishing-angling-trout-montana-water-climate-change-blackfoot-river	2024-08-31 09:15:00	8	1
+550	Debian 12.7 Released With Many Security Updates	Debian 12.7 is out today as the latest stable release update for the Debian Bookworm series...	https://www.phoronix.com/news/Debian-12.7-Released	2024-08-31 17:46:53	7	5
+551	Servo Browser Now Supports Tabbed Browsing, WAV Audio Files	The Rust-based, open-source Servo web engine had a very eventful month as the developers involved continue advancing this browser engine as well as their example/reference web browser...	https://www.phoronix.com/news/Servo-August-2024	2024-08-31 13:21:48	7	5
+552	AMD Preferred Core Fix Lands Ahead Of Linux 6.11-rc6	This week's batch of power management fixes for the Linux 6.11 kernel are just a set of three patches for AMD processors...	https://www.phoronix.com/news/AMD-PM-Linux-6.11-rc6	2024-08-31 11:04:00	7	5
+553	New AVX2 Code Helps FFmpeg With VVC Decoding Performance	A new AVX2 code path for FFmpeg's VVC decoding "vvcdec" is helping provide significant speed-ups for CPU-based H.266 decoding...	https://www.phoronix.com/news/FFmpeg-VVC-Decode-AVX2	2024-08-31 10:51:31	7	5
+554	Wayland Protocols 1.37 Introduces Three New Protocols	Jonas Ådahl released Wayland-Protocols 1.37 as the newest update to this defined set of Wayland protocols. With the new release there are three new protocols added plus various other maintenance items addressed within the Wayland-Protocols...	https://www.phoronix.com/news/Wayland-Protocols-1.37	2024-08-31 10:32:15	7	5
+555	KDE Desktop Will Remind You Yearly For Donations, Other Changes For Plasma 6.2	Plasma 6.2 this week entered its soft feature freeze ahead of the Plasma 6.2 stable release in October. The focus now is on bug-fixing for Plasma 6.2 and at the moment they are at 301 bug reports, which is their lowest amount going back to 2015....	https://www.phoronix.com/news/Plasma-6.2-Bug-Fixes-Start	2024-08-31 10:17:21	7	5
+556	Intel Battlemage Battles More Linux 6.12 Kernel Graphics Driver Changes	Following the pull request from earlier this week that enables Intel Xe2 Lunar Lake and Battlemage graphics by default for Linux 6.12, a final set of feature updates for the Intel kernel graphics driver have been submitted ahead of this next kernel...	https://www.phoronix.com/news/Intel-Ends-Linux-612-Feature-Xe	2024-08-30 14:18:22	7	5
+557	Vulkan 1.3.295 Released With Compute Shader Derivatives Extension	Following last week's Vulkan 1.3.294 with pipeline binary extension, Vulkan 1.3.295 is out today and it too introduces a prominent new extension...	https://www.phoronix.com/news/Vulkan-1.3.295-Released	2024-08-30 12:40:30	7	5
+558	Microsoft Further Improves D3D12 Video Acceleration In Mesa	Microsoft engineers continue contributing to the open-source Mesa graphics driver code for benefiting Windows Subsystem for Linux (WSL) usage and other related use atop Windows 11. The latest contribution to Mesa is wiring up direct DPB management...	https://www.phoronix.com/news/Mesa-D3D12-Video-Direct-DPB	2024-08-30 10:53:02	7	5
+559	Important Linux Patch Arriving For Intel Arrow Lake Graphics	While all of the focus recently when it comes to Intel's open-source Linux graphics driver has been around getting Lunar Lake and Battlemage graphics ready, there is an important last-minute fix that is also needed for ensuring Arrow Lake graphics...	https://www.phoronix.com/news/Intel-Require-Newer-ARL-GSC	2024-08-30 10:39:19	7	5
+560	Rust Linux Developers Compared To Road Builders & Mapmakers	Longtime Direct Rendering Manager (DRM) subsystem maintainer David Airlie of Red Hat has written an interesting blog post providing an analogy to types of developers compared to road builders and hotels...	https://www.phoronix.com/news/Airlie-Rust-Linux-Dev-Compare	2024-08-30 10:23:34	7	5
+561	VKD3D 1.13 Improves Direct3D 12 API Support Atop Vulkan	The Wine project has released VKD3D 1.13 as the newest version of this open-source code for mapping Microsoft's Direct3D 12 API atop the Vulkan API for helping to accelerate Windows games and applications on Linux...	https://www.phoronix.com/news/VKD3D-1.13-Released	2024-08-30 10:00:00	7	5
 \.
 
 
@@ -498,20 +520,20 @@ COPY public.user_account (id, username, password_hash, password_salt, last_login
 -- Data for Name: user_feed; Type: TABLE DATA; Schema: public; Owner: inflow
 --
 
-COPY public.user_feed (user_id, feed_id, title, description) FROM stdin;
-2	1	\N	\N
-2	2	\N	\N
-2	3	\N	\N
-2	4	\N	\N
-2	5	\N	\N
-2	6	\N	\N
-2	7	\N	\N
-2	8	\N	\N
-2	9	\N	\N
-2	10	\N	\N
-2	11	\N	\N
-3	11	\N	\N
-3	7	\N	\N
+COPY public.user_feed (user_id, feed_id, title, description, collection_id) FROM stdin;
+2	1	\N	\N	3
+2	2	\N	\N	2
+2	3	\N	\N	2
+2	4	\N	\N	2
+2	5	\N	\N	3
+2	6	\N	\N	5
+2	7	\N	\N	5
+2	8	\N	\N	1
+2	9	\N	\N	2
+2	10	\N	\N	4
+2	11	\N	\N	5
+3	11	\N	\N	5
+3	7	\N	\N	5
 \.
 
 
@@ -1000,6 +1022,40 @@ COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at) F
 3	504	f	f	\N	\N
 2	505	f	f	\N	\N
 3	505	f	f	\N	\N
+2	540	f	f	\N	\N
+2	541	f	f	\N	\N
+2	542	f	f	\N	\N
+2	543	f	f	\N	\N
+2	544	f	f	\N	\N
+2	545	f	f	\N	\N
+2	546	f	f	\N	\N
+2	547	f	f	\N	\N
+2	548	f	f	\N	\N
+2	549	f	f	\N	\N
+2	550	f	f	\N	\N
+3	550	f	f	\N	\N
+2	551	f	f	\N	\N
+3	551	f	f	\N	\N
+2	552	f	f	\N	\N
+3	552	f	f	\N	\N
+2	553	f	f	\N	\N
+3	553	f	f	\N	\N
+2	554	f	f	\N	\N
+3	554	f	f	\N	\N
+2	555	f	f	\N	\N
+3	555	f	f	\N	\N
+2	556	f	f	\N	\N
+3	556	f	f	\N	\N
+2	557	f	f	\N	\N
+3	557	f	f	\N	\N
+2	558	f	f	\N	\N
+3	558	f	f	\N	\N
+2	559	f	f	\N	\N
+3	559	f	f	\N	\N
+2	560	f	f	\N	\N
+3	560	f	f	\N	\N
+2	561	f	f	\N	\N
+3	561	f	f	\N	\N
 \.
 
 
@@ -1021,7 +1077,7 @@ SELECT pg_catalog.setval('public.feed_id_seq', 13, true);
 -- Name: feeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feeditem_id_seq', 539, true);
+SELECT pg_catalog.setval('public.feeditem_id_seq', 581, true);
 
 
 --
