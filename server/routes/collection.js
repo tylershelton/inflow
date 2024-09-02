@@ -8,13 +8,13 @@ const itemController       = require('../controllers/itemController');
 
 // get collection list
 router.get('/',
-  asyncHandler(collectionController.getCategories),
+  asyncHandler(collectionController.getCollections),
   (req, res) => res.status(200).json(res.locals.categories),
 );
 
 // get specific collection
 router.get('/:id',
-  asyncHandler(collectionController.getCategory),
+  asyncHandler(collectionController.getCollection),
   (req, res) => res.status(200).json(res.locals.category),
 );
 
@@ -36,19 +36,19 @@ router.get('/:id/item/:itemId',
 
 // create new collection
 router.post('/',
-  asyncHandler(collectionController.createCategory),
+  asyncHandler(collectionController.createCollection),
   (req, res) => res.status(200).json(res.locals.category),
 );
 
 // rename collection
 router.put('/:id',
-  asyncHandler(collectionController.renameCategory),
+  asyncHandler(collectionController.renameCollection),
   (req, res) => res.status(200).json(res.locals.category),
 );
 
 // delete collection
 router.delete('/:id',
-  asyncHandler(collectionController.deleteCategory),
+  asyncHandler(collectionController.deleteCollection),
   (req, res) => res.status(200).send({ success: true }),
 );
 
