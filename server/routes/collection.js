@@ -1,30 +1,31 @@
 const express = require('express');
-const router = express.Router();
+const router  = express.Router();
 
-const asyncHandler       = require('../lib/error/asyncHandler');
-const categoryController = require('../controllers/categoryController');
-const itemController = require('../controllers/itemController');
+const asyncHandler = require('../lib/error/asyncHandler');
 
-// get category list
+const collectionController = require('../controllers/collectionController');
+const itemController       = require('../controllers/itemController');
+
+// get collection list
 router.get('/',
-  asyncHandler(categoryController.getCategories),
+  asyncHandler(collectionController.getCategories),
   (req, res) => res.status(200).json(res.locals.categories),
 );
 
-// get specific category
+// get specific collection
 router.get('/:id',
-  asyncHandler(categoryController.getCategory),
+  asyncHandler(collectionController.getCategory),
   (req, res) => res.status(200).json(res.locals.category),
 );
 
-// get contents for a given category (feeds, individually saved pages)
+// get contents for a given collection (feeds, individually saved pages)
 router.get('/:id/contents',
-  asyncHandler(categoryController.getContents),
+  asyncHandler(collectionController.getContents),
   (req, res) => res.status(200).json(res.locals.contents),
 );
 
 router.get('/:id/sync',
-  asyncHandler(categoryController.sync),
+  asyncHandler(collectionController.sync),
   (req, res) => res.sendStatus(200),
 );
 
@@ -33,21 +34,21 @@ router.get('/:id/item/:itemId',
   (req, res) => res.status(200).json(res.locals.feeditem),
 );
 
-// create new category
+// create new collection
 router.post('/',
-  asyncHandler(categoryController.createCategory),
+  asyncHandler(collectionController.createCategory),
   (req, res) => res.status(200).json(res.locals.category),
 );
 
-// rename category
+// rename collection
 router.put('/:id',
-  asyncHandler(categoryController.renameCategory),
+  asyncHandler(collectionController.renameCategory),
   (req, res) => res.status(200).json(res.locals.category),
 );
 
-// delete category
+// delete collection
 router.delete('/:id',
-  asyncHandler(categoryController.deleteCategory),
+  asyncHandler(collectionController.deleteCategory),
   (req, res) => res.status(200).send({ success: true }),
 );
 
