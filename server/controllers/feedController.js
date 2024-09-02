@@ -30,7 +30,7 @@ module.exports = {
       // if user specified a collection, get it from the db.
       // create the collection if it does not yet exist
       let collection = await Collection.getByTitle(req.body.collection);
-      if (!collection) collection = await Collection.create(req.body.collection);
+      if (!collection) collection = await Collection.create(req.user.id, req.body.collection);
       
       const rss  = await import('@extractus/feed-extractor');
       const feed = await rss.extract(req.body.url);
@@ -80,7 +80,7 @@ module.exports = {
       let category = {id: undefined};
       if (req.body.category) {
         category = await Collection.getByTitle(req.body.category);
-        if (!category) category = Collection.create(req.body.category);
+        if (!category) category = Collection.create(req.user.id, req.body.category);
       }
 
       // update feed metadata
