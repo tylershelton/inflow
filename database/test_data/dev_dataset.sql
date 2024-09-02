@@ -17,15 +17,26 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Data for Name: user_account; Type: TABLE DATA; Schema: public; Owner: inflow
+--
+
+COPY public.user_account (id, username, password_hash, password_salt, last_login, created_at, updated_at) FROM stdin;
+2	user	\\xe0de93b7b3c6bfaccbbaf0ccce3ee8740430b9117c1392994cdfa6de662f0f70	\\xeac899dcde1f9be69437c9ad9761a69e	\N	2024-08-23 05:07:15.044644	2024-08-23 05:07:15.044644
+3	user2	\\xca19e6e744dc45fd059e3469ba6f2484ed1128be76267805118b512006d90793	\\xd32a8e8ad281dd969256998e5abe3ca8	\N	2024-08-26 05:47:27.056855	2024-08-26 05:47:27.056855
+\.
+
+
+--
 -- Data for Name: collection; Type: TABLE DATA; Schema: public; Owner: inflow
 --
 
-COPY public.collection (id, title) FROM stdin;
-1	News
-2	Engineering
-3	Business
-4	Game Dev
-5	Sysadmin
+COPY public.collection (id, title, user_id) FROM stdin;
+39	Game Dev	2
+40	Engineering	2
+41	Sysadmin	2
+42	Business	2
+43	News	2
+44	Sysadmin	3
 \.
 
 
@@ -508,22 +519,30 @@ COPY public.item (id, title, description, url, pubdate, feed_id) FROM stdin;
 584	FreeBSD 13.4-RC2 Brings Improvements For AMD Phoenix SoCs	FreeBSD 13.4 is due out in just over one week's time while this weekend brought FreeBSD 13.4-RC2 as the last planned test candidate...	https://www.phoronix.com/news/FreeBSD-13.4-RC2	2024-09-01 10:45:55	7
 585	Panthor DRM Driver For Arm Mali Graphics Working On User Submission Handling	Arm engineer Mihail Atanassov proposed a set of "request for comments" patches this week for adding user submission support to the Panthor DRM driver that is used for handling newer Arm Mali graphics under Linux. This would allow user-space more...	https://www.phoronix.com/news/Panthor-Driver-User-Submission	2024-09-01 10:36:08	7
 586	Intel oneVPL Preps For Battlemage, Adds AI-Based Super Resolution	Intel has released a new version of their open-source Video Processing Library (VPL) for hardware-accelerated video encode / decode / processing across Intel graphics hardware...	https://www.phoronix.com/news/Intel-oneVPL-2.13-Released	2024-09-01 10:28:03	7
+624	Titanic research dive reveals discovery, decay and new photos	This summer, RMS Titanic, Inc. — the salvor-in-possession of the wreck — made its first unmanned dive to the wreck in 14 years. The team uncovered some rare finds — and losses.	https://www.npr.org/2024/09/02/nx-s1-5097403/titanic-dive-reveal-photo-research-discovery-statue	2024-09-02 13:00:00	8
+625	Whatever happened to ... the Bolivian women who skateboard in Indigenous garb?	Skateboarding women of Bolivia wear Indigenous garb to pay homage to the strength of their mothers and grandmothers. Their motto: When you fall, you have the power to get back up.	https://www.npr.org/sections/goats-and-soda/2024/09/02/g-s1-20283/skateboard-bolivia-indigenous-women	2024-09-02 11:53:34	8
+626	The labor movement could prove pivotal this election year	Younger generations are bringing fresh strategies to the U.S. labor movement. They could prove pivotal for the candidate who harnesses that energy.	https://www.npr.org/2024/09/02/g-s1-20539/labor-day-2024-election-gen-z	2024-09-02 11:00:00	8
+627	This metabolic brain boost revives memory in Alzheimer’s mice	An experimental cancer drug that helps the brain turn glucose into energy was able to reverse memory loss in a mouse model of Alzheimer’s disease.	https://www.npr.org/sections/shots-health-news/2024/09/02/g-s1-20328/metabolic-brain-boost-revives-memory-alzheimers-mice	2024-09-02 11:00:00	8
+628	5 takeaways from Germany's regional elections after far right makes historic gains	The Alternative for Germany party made huge gains in two eastern states, handing the German far right its best results since World War II.	https://www.npr.org/2024/09/02/nx-s1-5097895/5-takeaways-germanys-regional-elections	2024-09-02 10:38:23	8
+629	'I got you, girl': A toll collector's unexpected reply to a driver's tears	When the toll collector asked Leahruth Jemilo how she was doing, she burst into tears. The collector's response has stayed with her ever since.	https://www.npr.org/2024/08/30/nx-s1-5096113/kindness-stranger-good-news-toll-collector	2024-09-02 10:00:00	8
+630	Hear what the nation's top student podcasters have to say	In its sixth year, our contest handed over the mic to fourth graders for the very first time. We received nearly 2,000 entries from all around the country — and we've narrowed it down to 10 middle school and 10 high school finalists.	https://www.npr.org/2024/08/30/g-s1-19902/student-podcast-challenge-2024-finalists	2024-09-02 10:00:00	8
+631	Wheelies look fun, but they're a serious skill for kids in wheelchairs	It takes skill and practice to navigate the world in a wheelchair. This summer program teaches kids how, one wheelie at a time.	https://www.npr.org/2024/09/02/g-s1-20071/wheelies-arent-just-fun-for-kids-in-wheelchairs-they-take-practice	2024-09-02 09:00:00	8
+632	Israel's labor strike over hostages is called off after court order	A general strike in Israel to protest the government's failure to return hostages from Gaza led to some closures and disruptions. A major union said it was calling off the strike after a court order.	https://www.npr.org/2024/09/02/g-s1-20547/general-strike-in-israel-over-hostages-leads-to-uneven-closures	2024-09-02 08:19:17	8
+633	The Darker Side of the Allies' D-Day Victory in France	In the summer of 1944, as American and Allied soldiers celebrated the liberation of France from the Nazis, one French family experienced a trauma that would be felt for generations. A murder and sexual assault so traumatic they are only now coming...	https://www.npr.org/2024/09/02/1197425307/the-darker-side-of-the-allies-d-day-victory-in-france	2024-09-02 07:00:00	8
 614	A German far-right party wins its first state election	The far-right Alternative for Germany won a state election for the first time Sunday in the country's east, and was set to finish at least a very close second in a second vote, projections showed.	https://www.npr.org/2024/09/01/g-s1-20528/a-german-far-right-party-wins-its-first-state-election	2024-09-01 18:32:10	8
 615	Israelis protest and workers' strike is planned after 6 more hostages die in Gaza	Israelis surged into the streets Sunday night to demand a cease-fire with Hamas after six hostages were found dead in Gaza. Israel's largest trade union also called a general strike for Monday.	https://www.npr.org/2024/09/01/g-s1-20521/protests-and-strike-are-planned-in-israel-after-hostage-deaths	2024-09-01 15:29:54	8
 616	Russia says it downed over 150 drones in Ukrainian attack	Russian air defenses intercepted and destroyed 158 Ukrainian drones overnight, including two over Moscow and nine over the surrounding region, the Defense Ministry said Sunday.	https://www.npr.org/2024/09/01/g-s1-20509/russia-downed-drones-in-ukrainian-attack	2024-09-01 12:22:22	8
 617	Whatever happened to ... the Rohingya refugee who won a U.N. award for his photos?	We catch up with Sahat Zia Hero, a winner last year of the Nansen Refugee Award for "outstanding work" helping displaced people. He is still making pictures: "This is a tough life."	https://www.npr.org/2024/09/01/g-s1-20025/whatever-happened-to-the-rohingya-refugee-who-won-a-u-n-award-for-his-photos	2024-09-01 11:19:28	8
 618	2 years and counting. Inmate says medical delays still plague federal prison in Oregon	A federal prison in Oregon says it's made a dent in the backlog of prisoners' medical requests after a scathing DOJ report. One prisoner, Luke Thornhill, says that can't be farther from the truth.	https://www.npr.org/2024/08/29/nx-s1-5065930/sheridan-oregon-prison-medical-health-care-delays	2024-09-01 09:00:00	8
 619	From lost followers to backlash in the comments, content creators reflect on the DNC	For the first time, the Democratic National Convention invited 200 content creators — including ones who never talk politics. Now that it's over, those creators and influencers have some notes.	https://www.npr.org/2024/09/01/nx-s1-5091076/dnc-content-creators-influencers-convention-tiktok-instagram	2024-09-01 09:00:00	8
-\.
-
-
---
--- Data for Name: user_account; Type: TABLE DATA; Schema: public; Owner: inflow
---
-
-COPY public.user_account (id, username, password_hash, password_salt, last_login, created_at, updated_at) FROM stdin;
-2	user	\\xe0de93b7b3c6bfaccbbaf0ccce3ee8740430b9117c1392994cdfa6de662f0f70	\\xeac899dcde1f9be69437c9ad9761a69e	\N	2024-08-23 05:07:15.044644	2024-08-23 05:07:15.044644
-3	user2	\\xca19e6e744dc45fd059e3469ba6f2484ed1128be76267805118b512006d90793	\\xd32a8e8ad281dd969256998e5abe3ca8	\N	2024-08-26 05:47:27.056855	2024-08-26 05:47:27.056855
+634	AMD GCN3 / Fiji Support Being Retired From The GCC Compiler	The AMD GCN3 (GFX8) support and in particular the Fiji GPU support is being retired from the GNU Compiler Collection (GCC). The Fiji GPU support in the GCC compiler was already deprecated in part due to the LLVM compiler having already removed Fiji...	https://www.phoronix.com/news/AMD-GCN3-Fiji-GCC-Removal	2024-09-02 14:36:33	7
+635	New Rust PHY Network Driver To Be Merged In Linux 6.12	One year ago the first Rust-written network PHY driver was merged for the Linux 6.8 kernel. Since then we've continued seeing steady progress on more Rust-written Linux network code. With the upcoming Linux 6.12 merge window another Rust PHY driver...	https://www.phoronix.com/news/New-Rust-PHY-Driver-Linux-6.12	2024-09-02 12:47:53	7
+636	Intel Compute Runtime 24.31.30508.7 Brings Initial Xe2 Platform Support	Intel Compute Runtime 24.31.30508.7 was released this morning as the newest version of this OpenCL and oneAPI Level Zero compute stack used on both Windows and Linux platforms. Notable with the Intel Compute Runtime 24.31.30508.7 is having initial...	https://www.phoronix.com/news/Intel-Compute-24.31.30508.7	2024-09-02 11:00:00	7
+637	GNOME Mutter 47.rc Ships Experimental Color Management Protocol	Ahead of this week's GNOME 47 release candidate announcement the "47.rc" versions of the GNOME Shell and Mutter were tagged on Sunday...	https://www.phoronix.com/news/GNOME-Mutter-47-RC	2024-09-02 10:34:59	7
+638	Kdenlive 24.08 Video Editor Offers UI Improvements, Better Performance	Kdenlive as the KDE-aligned non-linear open-source video editing application is out with its newest feature release...	https://www.phoronix.com/news/Kdenlive-24.08-Released	2024-09-02 10:26:07	7
+639	Armbian 24.8 Moves To Linux 6.10, Supports Newer ARM & RISC-V Boards	Armbian 24.8 has been released as the newest version of this Debian-based Linux distribution that began with a focus on ARM boards but has also expanded to include RISC-V as well as traditional x86_64 Intel/AMD systems too...	https://www.phoronix.com/news/Armbian-24.8-Released	2024-09-02 10:15:39	7
+640	Steam On Linux Drops Below 2% For August 2024 Survey	With the start of the new month comes the Steam Survey results for the month prior. The August 2024 data is in and it points to the Steam on Linux statistics dipping back below 2%...	https://www.phoronix.com/news/Steam-Survey-August-2024	2024-09-02 00:49:34	7
+676	How to sync Mac and Linux /home	the problem: My main computer is a Linux/BSD desktop, but I also use a Mac laptop for recording and travel. This created a problem keeping them in sync. I don’t like that the MacOS user’s home has directories like Movies and Pictures that we...	https://sive.rs/macx	2024-08-31 00:00:00	1
 \.
 
 
@@ -532,19 +551,19 @@ COPY public.user_account (id, username, password_hash, password_salt, last_login
 --
 
 COPY public.user_feed (user_id, feed_id, title, description, collection_id) FROM stdin;
-2	1	\N	\N	3
-2	2	\N	\N	2
-2	3	\N	\N	2
-2	4	\N	\N	2
-2	5	\N	\N	3
-2	6	\N	\N	5
-2	7	\N	\N	5
-2	8	\N	\N	1
-2	9	\N	\N	2
-2	10	\N	\N	4
-2	11	\N	\N	5
-3	11	\N	\N	5
-3	7	\N	\N	5
+2	10	\N	\N	39
+2	9	\N	\N	40
+2	4	\N	\N	40
+2	3	\N	\N	40
+2	2	\N	\N	40
+2	11	\N	\N	41
+2	7	\N	\N	41
+2	6	\N	\N	41
+2	5	\N	\N	42
+2	1	\N	\N	42
+2	8	\N	\N	43
+3	7	\N	\N	44
+3	11	\N	\N	44
 \.
 
 
@@ -553,536 +572,561 @@ COPY public.user_feed (user_id, feed_id, title, description, collection_id) FROM
 --
 
 COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at, collection_id) FROM stdin;
-2	582	f	f	\N	\N	5
-3	582	f	f	\N	\N	5
-2	583	f	f	\N	\N	5
-3	583	f	f	\N	\N	5
-2	584	f	f	\N	\N	5
-3	584	f	f	\N	\N	5
-2	585	f	f	\N	\N	5
-3	585	f	f	\N	\N	5
-2	586	f	f	\N	\N	5
-3	586	f	f	\N	\N	5
-2	614	f	f	\N	\N	1
-2	615	f	f	\N	\N	1
-2	616	f	f	\N	\N	1
-2	617	f	f	\N	\N	1
-2	618	f	f	\N	\N	1
-2	619	f	f	\N	\N	1
-2	1	f	f	\N	\N	1
-2	2	f	f	\N	\N	1
-2	3	f	f	\N	\N	1
-2	4	f	f	\N	\N	1
-2	5	f	f	\N	\N	1
-2	6	f	f	\N	\N	1
-2	7	f	f	\N	\N	1
-2	8	f	f	\N	\N	1
-2	9	f	f	\N	\N	1
-2	10	f	f	\N	\N	1
-2	11	f	f	\N	\N	2
-2	12	f	f	\N	\N	2
-2	13	f	f	\N	\N	2
-2	14	f	f	\N	\N	2
-2	15	f	f	\N	\N	2
-2	16	f	f	\N	\N	2
-2	17	f	f	\N	\N	2
-2	18	f	f	\N	\N	2
-2	19	f	f	\N	\N	2
-2	20	f	f	\N	\N	2
-2	21	f	f	\N	\N	2
-2	22	f	f	\N	\N	2
-2	23	f	f	\N	\N	2
-2	24	f	f	\N	\N	2
-2	25	f	f	\N	\N	2
-2	26	f	f	\N	\N	2
-2	27	f	f	\N	\N	2
-2	28	f	f	\N	\N	2
-2	29	f	f	\N	\N	2
-2	30	f	f	\N	\N	2
-2	31	f	f	\N	\N	2
-2	32	f	f	\N	\N	2
-2	33	f	f	\N	\N	2
-2	34	f	f	\N	\N	2
-2	35	f	f	\N	\N	2
-2	36	f	f	\N	\N	2
-2	37	f	f	\N	\N	2
-2	38	f	f	\N	\N	2
-2	39	f	f	\N	\N	2
-2	40	f	f	\N	\N	2
-2	41	f	f	\N	\N	2
-2	42	f	f	\N	\N	2
-2	43	f	f	\N	\N	2
-2	44	f	f	\N	\N	2
-2	45	f	f	\N	\N	2
-2	46	f	f	\N	\N	2
-2	47	f	f	\N	\N	2
-2	48	f	f	\N	\N	2
-2	49	f	f	\N	\N	2
-2	50	f	f	\N	\N	2
-2	51	f	f	\N	\N	2
-2	52	f	f	\N	\N	2
-2	53	f	f	\N	\N	2
-2	54	f	f	\N	\N	2
-2	55	f	f	\N	\N	2
-2	56	f	f	\N	\N	2
-2	57	f	f	\N	\N	2
-2	58	f	f	\N	\N	2
-2	59	f	f	\N	\N	2
-2	60	f	f	\N	\N	2
-2	61	f	f	\N	\N	2
-2	62	f	f	\N	\N	2
-2	63	f	f	\N	\N	2
-2	64	f	f	\N	\N	2
-2	65	f	f	\N	\N	2
-2	66	f	f	\N	\N	2
-2	67	f	f	\N	\N	2
-2	68	f	f	\N	\N	2
-2	69	f	f	\N	\N	2
-2	70	f	f	\N	\N	2
-2	71	f	f	\N	\N	2
-2	72	f	f	\N	\N	2
-2	75	f	f	\N	\N	2
-2	77	f	f	\N	\N	2
-2	83	f	f	\N	\N	2
-2	84	f	f	\N	\N	2
-2	85	f	f	\N	\N	2
-2	88	f	f	\N	\N	2
-2	89	f	f	\N	\N	2
-2	92	f	f	\N	\N	2
-2	93	f	f	\N	\N	2
-2	96	f	f	\N	\N	2
-2	97	f	f	\N	\N	2
-2	98	f	f	\N	\N	2
-2	99	f	f	\N	\N	2
-2	100	f	f	\N	\N	2
-2	101	f	f	\N	\N	2
-2	102	f	f	\N	\N	2
-2	103	f	f	\N	\N	2
-2	104	f	f	\N	\N	2
-2	105	f	f	\N	\N	2
-2	106	f	f	\N	\N	2
-2	107	f	f	\N	\N	2
-2	108	f	f	\N	\N	2
-2	109	f	f	\N	\N	3
-2	110	f	f	\N	\N	3
-2	111	f	f	\N	\N	3
-2	112	f	f	\N	\N	3
-2	113	f	f	\N	\N	3
-2	114	f	f	\N	\N	3
-2	115	f	f	\N	\N	3
-2	116	f	f	\N	\N	3
-2	117	f	f	\N	\N	3
-2	118	f	f	\N	\N	3
-2	119	f	f	\N	\N	3
-2	120	f	f	\N	\N	3
-2	121	f	f	\N	\N	3
-2	122	f	f	\N	\N	3
-2	123	f	f	\N	\N	3
-2	124	f	f	\N	\N	3
-2	125	f	f	\N	\N	3
-2	126	f	f	\N	\N	3
-2	127	f	f	\N	\N	3
-2	128	f	f	\N	\N	3
-2	129	f	f	\N	\N	3
-2	130	f	f	\N	\N	3
-2	131	f	f	\N	\N	3
-2	132	f	f	\N	\N	3
-2	133	f	f	\N	\N	3
-2	134	f	f	\N	\N	3
-2	135	f	f	\N	\N	3
-2	136	f	f	\N	\N	3
-2	137	f	f	\N	\N	3
-2	138	f	f	\N	\N	3
-2	139	f	f	\N	\N	3
-2	140	f	f	\N	\N	3
-2	141	f	f	\N	\N	3
-2	142	f	f	\N	\N	3
-2	143	f	f	\N	\N	3
-2	144	f	f	\N	\N	3
-2	145	f	f	\N	\N	3
-2	146	f	f	\N	\N	3
-2	147	f	f	\N	\N	3
-2	148	f	f	\N	\N	3
-2	149	f	f	\N	\N	3
-2	150	f	f	\N	\N	3
-2	151	f	f	\N	\N	3
-2	152	f	f	\N	\N	3
-2	153	f	f	\N	\N	3
-2	154	f	f	\N	\N	3
-2	155	f	f	\N	\N	3
-2	156	f	f	\N	\N	3
-2	157	f	f	\N	\N	3
-2	158	f	f	\N	\N	3
-2	159	f	f	\N	\N	3
-2	160	f	f	\N	\N	3
-2	161	f	f	\N	\N	3
-2	162	f	f	\N	\N	3
-2	163	f	f	\N	\N	3
-2	164	f	f	\N	\N	3
-2	165	f	f	\N	\N	3
-2	166	f	f	\N	\N	3
-2	167	f	f	\N	\N	3
-2	168	f	f	\N	\N	3
-2	169	f	f	\N	\N	3
-2	170	f	f	\N	\N	3
-2	171	f	f	\N	\N	3
-2	172	f	f	\N	\N	3
-2	173	f	f	\N	\N	3
-2	174	f	f	\N	\N	3
-2	175	f	f	\N	\N	3
-2	176	f	f	\N	\N	3
-2	177	f	f	\N	\N	3
-2	178	f	f	\N	\N	3
-2	179	f	f	\N	\N	3
-2	180	f	f	\N	\N	3
-2	181	f	f	\N	\N	3
-2	182	f	f	\N	\N	3
-2	183	f	f	\N	\N	3
-2	184	f	f	\N	\N	3
-2	185	f	f	\N	\N	3
-2	186	f	f	\N	\N	3
-2	187	f	f	\N	\N	3
-2	188	f	f	\N	\N	3
-2	189	f	f	\N	\N	3
-2	190	f	f	\N	\N	3
-2	191	f	f	\N	\N	3
-2	192	f	f	\N	\N	3
-2	193	f	f	\N	\N	3
-2	194	f	f	\N	\N	3
-2	195	f	f	\N	\N	3
-2	196	f	f	\N	\N	3
-2	197	f	f	\N	\N	3
-2	198	f	f	\N	\N	3
-2	199	f	f	\N	\N	3
-2	200	f	f	\N	\N	3
-2	201	f	f	\N	\N	3
-2	202	f	f	\N	\N	3
-2	203	f	f	\N	\N	3
-2	204	f	f	\N	\N	3
-2	205	f	f	\N	\N	3
-2	206	f	f	\N	\N	3
-2	207	f	f	\N	\N	3
-2	208	f	f	\N	\N	3
-2	209	f	f	\N	\N	3
-2	210	f	f	\N	\N	3
-2	211	f	f	\N	\N	3
-2	212	f	f	\N	\N	3
-2	213	f	f	\N	\N	3
-2	214	f	f	\N	\N	3
-2	215	f	f	\N	\N	3
-2	216	f	f	\N	\N	3
-2	217	f	f	\N	\N	3
-2	218	f	f	\N	\N	3
-2	219	f	f	\N	\N	3
-2	220	f	f	\N	\N	3
-2	221	f	f	\N	\N	3
-2	222	f	f	\N	\N	3
-2	223	f	f	\N	\N	3
-2	224	f	f	\N	\N	3
-2	225	f	f	\N	\N	3
-2	226	f	f	\N	\N	3
-2	227	f	f	\N	\N	3
-2	228	f	f	\N	\N	3
-2	229	f	f	\N	\N	3
-2	230	f	f	\N	\N	3
-2	231	f	f	\N	\N	3
-2	232	f	f	\N	\N	3
-2	233	f	f	\N	\N	3
-2	234	f	f	\N	\N	3
-2	235	f	f	\N	\N	3
-2	236	f	f	\N	\N	3
-2	237	f	f	\N	\N	3
-2	238	f	f	\N	\N	3
-2	239	f	f	\N	\N	3
-2	240	f	f	\N	\N	3
-2	241	f	f	\N	\N	3
-2	242	f	f	\N	\N	3
-2	243	f	f	\N	\N	3
-2	244	f	f	\N	\N	3
-2	245	f	f	\N	\N	3
-2	246	f	f	\N	\N	3
-2	247	f	f	\N	\N	3
-2	248	f	f	\N	\N	3
-2	249	f	f	\N	\N	3
-2	250	f	f	\N	\N	3
-2	251	f	f	\N	\N	3
-2	252	f	f	\N	\N	3
-2	253	f	f	\N	\N	3
-2	254	f	f	\N	\N	3
-2	255	f	f	\N	\N	3
-2	256	f	f	\N	\N	3
-2	257	f	f	\N	\N	3
-2	258	f	f	\N	\N	3
-2	259	f	f	\N	\N	3
-2	260	f	f	\N	\N	3
-2	261	f	f	\N	\N	3
-2	262	f	f	\N	\N	3
-2	263	f	f	\N	\N	3
-2	264	f	f	\N	\N	3
-2	265	f	f	\N	\N	3
-2	266	f	f	\N	\N	3
-2	267	f	f	\N	\N	3
-2	268	f	f	\N	\N	3
-2	269	f	f	\N	\N	3
-2	270	f	f	\N	\N	3
-2	271	f	f	\N	\N	3
-2	272	f	f	\N	\N	3
-2	273	f	f	\N	\N	3
-2	274	f	f	\N	\N	3
-2	275	f	f	\N	\N	3
-2	276	f	f	\N	\N	3
-2	277	f	f	\N	\N	3
-2	278	f	f	\N	\N	3
-2	279	f	f	\N	\N	3
-2	280	f	f	\N	\N	3
-2	281	f	f	\N	\N	3
-2	282	f	f	\N	\N	3
-2	283	f	f	\N	\N	3
-2	284	f	f	\N	\N	3
-2	285	f	f	\N	\N	3
-2	286	f	f	\N	\N	3
-2	287	f	f	\N	\N	3
-2	288	f	f	\N	\N	3
-2	289	f	f	\N	\N	3
-2	290	f	f	\N	\N	3
-2	291	f	f	\N	\N	3
-2	292	f	f	\N	\N	3
-2	293	f	f	\N	\N	3
-2	294	f	f	\N	\N	3
-2	295	f	f	\N	\N	3
-2	296	f	f	\N	\N	3
-2	297	f	f	\N	\N	3
-2	298	f	f	\N	\N	3
-2	299	f	f	\N	\N	3
-2	300	f	f	\N	\N	3
-2	301	f	f	\N	\N	3
-2	302	f	f	\N	\N	3
-2	303	f	f	\N	\N	3
-2	304	f	f	\N	\N	3
-2	305	f	f	\N	\N	3
-2	306	f	f	\N	\N	3
-2	307	f	f	\N	\N	3
-2	308	f	f	\N	\N	3
-2	309	f	f	\N	\N	5
-2	310	f	f	\N	\N	5
-2	311	f	f	\N	\N	5
-2	312	f	f	\N	\N	5
-2	313	f	f	\N	\N	5
-2	314	f	f	\N	\N	5
-2	315	f	f	\N	\N	5
-2	316	f	f	\N	\N	5
-2	317	f	f	\N	\N	5
-2	318	f	f	\N	\N	5
-2	319	f	f	\N	\N	5
-2	320	f	f	\N	\N	5
-2	321	f	f	\N	\N	5
-2	322	f	f	\N	\N	5
-2	323	f	f	\N	\N	5
-2	324	f	f	\N	\N	5
-2	325	f	f	\N	\N	5
-2	326	f	f	\N	\N	5
-2	327	f	f	\N	\N	5
-2	328	f	f	\N	\N	5
-2	329	f	f	\N	\N	5
-2	330	f	f	\N	\N	5
-2	331	f	f	\N	\N	5
-2	332	f	f	\N	\N	5
-2	333	f	f	\N	\N	5
-2	334	f	f	\N	\N	5
-2	335	f	f	\N	\N	5
-2	336	f	f	\N	\N	5
-2	337	f	f	\N	\N	5
-2	338	f	f	\N	\N	5
-2	339	f	f	\N	\N	5
-2	340	f	f	\N	\N	5
-2	341	f	f	\N	\N	5
-2	342	f	f	\N	\N	5
-2	343	f	f	\N	\N	5
-2	344	f	f	\N	\N	5
-2	345	f	f	\N	\N	5
-2	346	f	f	\N	\N	5
-2	347	f	f	\N	\N	5
-2	348	f	f	\N	\N	5
-2	349	f	f	\N	\N	5
-2	350	f	f	\N	\N	5
-2	351	f	f	\N	\N	5
-2	352	f	f	\N	\N	5
-2	353	f	f	\N	\N	5
-2	354	f	f	\N	\N	5
-2	355	f	f	\N	\N	5
-2	356	f	f	\N	\N	5
-2	357	f	f	\N	\N	5
-2	358	f	f	\N	\N	5
-2	359	f	f	\N	\N	5
-2	360	f	f	\N	\N	5
-2	364	f	f	\N	\N	1
-2	365	f	f	\N	\N	1
-2	366	f	f	\N	\N	1
-2	367	f	f	\N	\N	1
-2	368	f	f	\N	\N	1
-2	369	f	f	\N	\N	1
-2	370	f	f	\N	\N	1
-2	371	f	f	\N	\N	1
-2	372	f	f	\N	\N	1
-2	373	f	f	\N	\N	1
-2	414	f	f	\N	\N	5
-3	414	f	f	\N	\N	5
-2	415	f	f	\N	\N	5
-3	415	f	f	\N	\N	5
-2	416	f	f	\N	\N	5
-3	416	f	f	\N	\N	5
-2	417	f	f	\N	\N	5
-3	417	f	f	\N	\N	5
-2	418	f	f	\N	\N	5
-3	418	f	f	\N	\N	5
-2	419	f	f	\N	\N	5
-3	419	f	f	\N	\N	5
-2	420	f	f	\N	\N	5
-3	420	f	f	\N	\N	5
-2	421	f	f	\N	\N	5
-3	421	f	f	\N	\N	5
-2	422	f	f	\N	\N	5
-3	422	f	f	\N	\N	5
-2	423	f	f	\N	\N	5
-3	423	f	f	\N	\N	5
-2	424	f	f	\N	\N	5
-3	424	f	f	\N	\N	5
-2	425	f	f	\N	\N	5
-3	425	f	f	\N	\N	5
-2	426	f	f	\N	\N	5
-3	426	f	f	\N	\N	5
-2	427	f	f	\N	\N	5
-3	427	f	f	\N	\N	5
-2	428	f	f	\N	\N	5
-3	428	f	f	\N	\N	5
-2	429	f	f	\N	\N	5
-3	429	f	f	\N	\N	5
-2	430	f	f	\N	\N	5
-3	430	f	f	\N	\N	5
-2	431	f	f	\N	\N	5
-3	431	f	f	\N	\N	5
-2	432	f	f	\N	\N	5
-3	432	f	f	\N	\N	5
-2	433	f	f	\N	\N	5
-3	433	f	f	\N	\N	5
-2	434	f	f	\N	\N	5
-3	434	f	f	\N	\N	5
-2	435	f	f	\N	\N	5
-3	435	f	f	\N	\N	5
-2	436	f	f	\N	\N	5
-3	436	f	f	\N	\N	5
-2	437	f	f	\N	\N	5
-3	437	f	f	\N	\N	5
-2	438	f	f	\N	\N	5
-3	438	f	f	\N	\N	5
-2	439	f	f	\N	\N	5
-3	439	f	f	\N	\N	5
-2	440	f	f	\N	\N	5
-3	440	f	f	\N	\N	5
-2	441	f	f	\N	\N	5
-3	441	f	f	\N	\N	5
-2	442	f	f	\N	\N	5
-3	442	f	f	\N	\N	5
-2	443	f	f	\N	\N	5
-3	443	f	f	\N	\N	5
-2	444	f	f	\N	\N	5
-3	444	f	f	\N	\N	5
-2	445	f	f	\N	\N	5
-3	445	f	f	\N	\N	5
-2	446	f	f	\N	\N	1
-2	447	f	f	\N	\N	1
-2	448	f	f	\N	\N	1
-2	449	f	f	\N	\N	1
-2	450	f	f	\N	\N	1
-2	451	f	f	\N	\N	1
-2	452	f	f	\N	\N	1
-2	453	f	f	\N	\N	1
-2	454	f	f	\N	\N	1
-2	455	f	f	\N	\N	1
-2	456	f	f	\N	\N	5
-3	456	f	f	\N	\N	5
-2	457	f	f	\N	\N	5
-3	457	f	f	\N	\N	5
-2	458	f	f	\N	\N	5
-3	458	f	f	\N	\N	5
-2	459	f	f	\N	\N	5
-3	459	f	f	\N	\N	5
-2	460	f	f	\N	\N	5
-3	460	f	f	\N	\N	5
-2	461	f	f	\N	\N	5
-3	461	f	f	\N	\N	5
-2	462	f	f	\N	\N	5
-3	462	f	f	\N	\N	5
-2	463	f	f	\N	\N	5
-3	463	f	f	\N	\N	5
-2	464	f	f	\N	\N	5
-3	464	f	f	\N	\N	5
-2	465	f	f	\N	\N	5
-3	465	f	f	\N	\N	5
-2	466	f	f	\N	\N	5
-3	466	f	f	\N	\N	5
-2	467	f	f	\N	\N	5
-3	467	f	f	\N	\N	5
-2	488	f	f	\N	\N	1
-2	489	f	f	\N	\N	1
-2	490	f	f	\N	\N	1
-2	491	f	f	\N	\N	1
-2	492	f	f	\N	\N	1
-2	493	f	f	\N	\N	1
-2	494	f	f	\N	\N	1
-2	495	f	f	\N	\N	1
-2	496	f	f	\N	\N	1
-2	497	f	f	\N	\N	1
-2	498	f	f	\N	\N	5
-3	498	f	f	\N	\N	5
-2	499	f	f	\N	\N	5
-3	499	f	f	\N	\N	5
-2	500	f	f	\N	\N	5
-3	500	f	f	\N	\N	5
-2	501	f	f	\N	\N	5
-3	501	f	f	\N	\N	5
-2	502	f	f	\N	\N	5
-3	502	f	f	\N	\N	5
-2	503	f	f	\N	\N	5
-3	503	f	f	\N	\N	5
-2	504	f	f	\N	\N	5
-3	504	f	f	\N	\N	5
-2	505	f	f	\N	\N	5
-3	505	f	f	\N	\N	5
-2	540	f	f	\N	\N	1
-2	541	f	f	\N	\N	1
-2	542	f	f	\N	\N	1
-2	543	f	f	\N	\N	1
-2	544	f	f	\N	\N	1
-2	545	f	f	\N	\N	1
-2	546	f	f	\N	\N	1
-2	547	f	f	\N	\N	1
-2	548	f	f	\N	\N	1
-2	549	f	f	\N	\N	1
-2	550	f	f	\N	\N	5
-3	550	f	f	\N	\N	5
-2	551	f	f	\N	\N	5
-3	551	f	f	\N	\N	5
-2	552	f	f	\N	\N	5
-3	552	f	f	\N	\N	5
-2	553	f	f	\N	\N	5
-3	553	f	f	\N	\N	5
-2	554	f	f	\N	\N	5
-3	554	f	f	\N	\N	5
-2	555	f	f	\N	\N	5
-3	555	f	f	\N	\N	5
-2	556	f	f	\N	\N	5
-3	556	f	f	\N	\N	5
-2	557	f	f	\N	\N	5
-3	557	f	f	\N	\N	5
-2	558	f	f	\N	\N	5
-3	558	f	f	\N	\N	5
-2	559	f	f	\N	\N	5
-3	559	f	f	\N	\N	5
-2	560	f	f	\N	\N	5
-3	560	f	f	\N	\N	5
-2	561	f	f	\N	\N	5
-3	561	f	f	\N	\N	5
+2	624	f	f	\N	\N	43
+2	625	f	f	\N	\N	43
+2	626	f	f	\N	\N	43
+2	627	f	f	\N	\N	43
+2	628	f	f	\N	\N	43
+2	629	f	f	\N	\N	43
+2	630	f	f	\N	\N	43
+2	631	f	f	\N	\N	43
+2	632	f	f	\N	\N	43
+2	633	f	f	\N	\N	43
+2	373	f	f	\N	\N	43
+2	372	f	f	\N	\N	43
+2	371	f	f	\N	\N	43
+2	370	f	f	\N	\N	43
+2	369	f	f	\N	\N	43
+2	368	f	f	\N	\N	43
+2	367	f	f	\N	\N	43
+2	366	f	f	\N	\N	43
+2	365	f	f	\N	\N	43
+2	364	f	f	\N	\N	43
+2	47	f	f	\N	\N	40
+2	48	f	f	\N	\N	40
+2	49	f	f	\N	\N	40
+2	50	f	f	\N	\N	40
+2	51	f	f	\N	\N	40
+2	83	f	f	\N	\N	40
+2	53	f	f	\N	\N	40
+2	54	f	f	\N	\N	40
+2	55	f	f	\N	\N	40
+2	56	f	f	\N	\N	40
+2	57	f	f	\N	\N	40
+2	58	f	f	\N	\N	40
+2	59	f	f	\N	\N	40
+2	60	f	f	\N	\N	40
+2	61	f	f	\N	\N	40
+2	62	f	f	\N	\N	40
+2	63	f	f	\N	\N	40
+2	64	f	f	\N	\N	40
+2	65	f	f	\N	\N	40
+2	66	f	f	\N	\N	40
+2	67	f	f	\N	\N	40
+2	68	f	f	\N	\N	40
+2	69	f	f	\N	\N	40
+2	70	f	f	\N	\N	40
+2	71	f	f	\N	\N	40
+2	72	f	f	\N	\N	40
+2	75	f	f	\N	\N	40
+2	77	f	f	\N	\N	40
+2	52	f	f	\N	\N	40
+2	84	f	f	\N	\N	40
+2	85	f	f	\N	\N	40
+2	88	f	f	\N	\N	40
+2	89	f	f	\N	\N	40
+2	92	f	f	\N	\N	40
+2	93	f	f	\N	\N	40
+2	96	f	f	\N	\N	40
+2	97	f	f	\N	\N	40
+2	98	f	f	\N	\N	40
+2	99	f	f	\N	\N	40
+2	100	f	f	\N	\N	40
+2	101	f	f	\N	\N	40
+2	102	f	f	\N	\N	40
+2	103	f	f	\N	\N	40
+2	104	f	f	\N	\N	40
+2	105	f	f	\N	\N	40
+2	106	f	f	\N	\N	40
+2	107	f	f	\N	\N	40
+2	108	f	f	\N	\N	40
+2	42	f	f	\N	\N	40
+2	43	f	f	\N	\N	40
+2	44	f	f	\N	\N	40
+2	45	f	f	\N	\N	40
+2	46	f	f	\N	\N	40
+2	249	f	f	\N	\N	42
+2	250	f	f	\N	\N	42
+2	251	f	f	\N	\N	42
+2	252	f	f	\N	\N	42
+2	253	f	f	\N	\N	42
+2	254	f	f	\N	\N	42
+2	255	f	f	\N	\N	42
+2	256	f	f	\N	\N	42
+2	257	f	f	\N	\N	42
+2	258	f	f	\N	\N	42
+2	259	f	f	\N	\N	42
+2	260	f	f	\N	\N	42
+2	261	f	f	\N	\N	42
+2	262	f	f	\N	\N	42
+2	263	f	f	\N	\N	42
+2	264	f	f	\N	\N	42
+2	265	f	f	\N	\N	42
+2	266	f	f	\N	\N	42
+2	267	f	f	\N	\N	42
+2	268	f	f	\N	\N	42
+2	269	f	f	\N	\N	42
+2	270	f	f	\N	\N	42
+2	271	f	f	\N	\N	42
+2	272	f	f	\N	\N	42
+2	273	f	f	\N	\N	42
+2	274	f	f	\N	\N	42
+2	275	f	f	\N	\N	42
+2	276	f	f	\N	\N	42
+2	277	f	f	\N	\N	42
+2	278	f	f	\N	\N	42
+2	279	f	f	\N	\N	42
+2	280	f	f	\N	\N	42
+2	281	f	f	\N	\N	42
+2	282	f	f	\N	\N	42
+2	283	f	f	\N	\N	42
+2	284	f	f	\N	\N	42
+2	285	f	f	\N	\N	42
+2	286	f	f	\N	\N	42
+2	287	f	f	\N	\N	42
+2	288	f	f	\N	\N	42
+2	289	f	f	\N	\N	42
+2	290	f	f	\N	\N	42
+2	291	f	f	\N	\N	42
+2	292	f	f	\N	\N	42
+2	293	f	f	\N	\N	42
+2	294	f	f	\N	\N	42
+2	295	f	f	\N	\N	42
+2	296	f	f	\N	\N	42
+2	297	f	f	\N	\N	42
+2	298	f	f	\N	\N	42
+2	299	f	f	\N	\N	42
+2	300	f	f	\N	\N	42
+2	301	f	f	\N	\N	42
+2	302	f	f	\N	\N	42
+2	303	f	f	\N	\N	42
+2	304	f	f	\N	\N	42
+2	305	f	f	\N	\N	42
+2	306	f	f	\N	\N	42
+2	307	f	f	\N	\N	42
+2	308	f	f	\N	\N	42
+2	131	f	f	\N	\N	42
+2	109	f	f	\N	\N	42
+2	110	f	f	\N	\N	42
+2	111	f	f	\N	\N	42
+2	112	f	f	\N	\N	42
+2	113	f	f	\N	\N	42
+2	114	f	f	\N	\N	42
+2	115	f	f	\N	\N	42
+2	116	f	f	\N	\N	42
+2	117	f	f	\N	\N	42
+2	118	f	f	\N	\N	42
+2	119	f	f	\N	\N	42
+2	120	f	f	\N	\N	42
+2	121	f	f	\N	\N	42
+2	122	f	f	\N	\N	42
+2	123	f	f	\N	\N	42
+2	124	f	f	\N	\N	42
+2	125	f	f	\N	\N	42
+2	126	f	f	\N	\N	42
+2	127	f	f	\N	\N	42
+2	128	f	f	\N	\N	42
+2	129	f	f	\N	\N	42
+2	130	f	f	\N	\N	42
+2	132	f	f	\N	\N	42
+2	133	f	f	\N	\N	42
+2	134	f	f	\N	\N	42
+2	135	f	f	\N	\N	42
+2	136	f	f	\N	\N	42
+2	137	f	f	\N	\N	42
+2	138	f	f	\N	\N	42
+2	139	f	f	\N	\N	42
+2	140	f	f	\N	\N	42
+2	141	f	f	\N	\N	42
+2	142	f	f	\N	\N	42
+2	143	f	f	\N	\N	42
+2	144	f	f	\N	\N	42
+2	145	f	f	\N	\N	42
+2	146	f	f	\N	\N	42
+2	147	f	f	\N	\N	42
+2	148	f	f	\N	\N	42
+2	149	f	f	\N	\N	42
+2	150	f	f	\N	\N	42
+2	151	f	f	\N	\N	42
+2	152	f	f	\N	\N	42
+2	153	f	f	\N	\N	42
+2	154	f	f	\N	\N	42
+2	155	f	f	\N	\N	42
+2	156	f	f	\N	\N	42
+2	157	f	f	\N	\N	42
+2	158	f	f	\N	\N	42
+2	159	f	f	\N	\N	42
+2	160	f	f	\N	\N	42
+2	617	f	f	\N	\N	43
+2	618	f	f	\N	\N	43
+2	619	f	f	\N	\N	43
+2	614	f	f	\N	\N	43
+2	615	f	f	\N	\N	43
+2	616	f	f	\N	\N	43
+2	161	f	f	\N	\N	42
+2	162	f	f	\N	\N	42
+2	163	f	f	\N	\N	42
+2	164	f	f	\N	\N	42
+2	165	f	f	\N	\N	42
+2	166	f	f	\N	\N	42
+2	167	f	f	\N	\N	42
+2	168	f	f	\N	\N	42
+2	169	f	f	\N	\N	42
+2	170	f	f	\N	\N	42
+2	171	f	f	\N	\N	42
+2	172	f	f	\N	\N	42
+2	173	f	f	\N	\N	42
+2	174	f	f	\N	\N	42
+2	175	f	f	\N	\N	42
+2	176	f	f	\N	\N	42
+2	177	f	f	\N	\N	42
+2	178	f	f	\N	\N	42
+2	179	f	f	\N	\N	42
+2	180	f	f	\N	\N	42
+2	181	f	f	\N	\N	42
+2	182	f	f	\N	\N	42
+2	183	f	f	\N	\N	42
+2	184	f	f	\N	\N	42
+2	185	f	f	\N	\N	42
+2	186	f	f	\N	\N	42
+2	187	f	f	\N	\N	42
+2	188	f	f	\N	\N	42
+2	189	f	f	\N	\N	42
+2	190	f	f	\N	\N	42
+2	191	f	f	\N	\N	42
+2	192	f	f	\N	\N	42
+2	193	f	f	\N	\N	42
+2	194	f	f	\N	\N	42
+2	195	f	f	\N	\N	42
+2	196	f	f	\N	\N	42
+2	197	f	f	\N	\N	42
+2	198	f	f	\N	\N	42
+2	199	f	f	\N	\N	42
+2	200	f	f	\N	\N	42
+2	201	f	f	\N	\N	42
+2	202	f	f	\N	\N	42
+2	203	f	f	\N	\N	42
+2	204	f	f	\N	\N	42
+2	205	f	f	\N	\N	42
+2	206	f	f	\N	\N	42
+2	207	f	f	\N	\N	42
+2	208	f	f	\N	\N	42
+2	209	f	f	\N	\N	42
+2	210	f	f	\N	\N	42
+2	211	f	f	\N	\N	42
+2	212	f	f	\N	\N	42
+2	213	f	f	\N	\N	42
+2	214	f	f	\N	\N	42
+2	215	f	f	\N	\N	42
+2	216	f	f	\N	\N	42
+2	217	f	f	\N	\N	42
+2	218	f	f	\N	\N	42
+2	219	f	f	\N	\N	42
+2	220	f	f	\N	\N	42
+2	221	f	f	\N	\N	42
+2	222	f	f	\N	\N	42
+2	223	f	f	\N	\N	42
+2	224	f	f	\N	\N	42
+2	225	f	f	\N	\N	42
+2	226	f	f	\N	\N	42
+2	227	f	f	\N	\N	42
+2	228	f	f	\N	\N	42
+2	229	f	f	\N	\N	42
+2	230	f	f	\N	\N	42
+2	231	f	f	\N	\N	42
+2	232	f	f	\N	\N	42
+2	233	f	f	\N	\N	42
+2	234	f	f	\N	\N	42
+2	235	f	f	\N	\N	42
+2	236	f	f	\N	\N	42
+2	237	f	f	\N	\N	42
+2	238	f	f	\N	\N	42
+2	239	f	f	\N	\N	42
+2	240	f	f	\N	\N	42
+2	241	f	f	\N	\N	42
+2	242	f	f	\N	\N	42
+2	243	f	f	\N	\N	42
+2	244	f	f	\N	\N	42
+2	245	f	f	\N	\N	42
+2	246	f	f	\N	\N	42
+2	247	f	f	\N	\N	42
+2	248	f	f	\N	\N	42
+2	421	f	f	\N	\N	41
+2	340	f	f	\N	\N	41
+2	341	f	f	\N	\N	41
+2	342	f	f	\N	\N	41
+2	343	f	f	\N	\N	41
+2	344	f	f	\N	\N	41
+2	345	f	f	\N	\N	41
+2	346	f	f	\N	\N	41
+2	347	f	f	\N	\N	41
+2	348	f	f	\N	\N	41
+2	349	f	f	\N	\N	41
+2	350	f	f	\N	\N	41
+2	351	f	f	\N	\N	41
+2	352	f	f	\N	\N	41
+2	353	f	f	\N	\N	41
+2	354	f	f	\N	\N	41
+2	355	f	f	\N	\N	41
+2	356	f	f	\N	\N	41
+2	357	f	f	\N	\N	41
+2	358	f	f	\N	\N	41
+2	359	f	f	\N	\N	41
+2	360	f	f	\N	\N	41
+2	338	f	f	\N	\N	41
+2	337	f	f	\N	\N	41
+2	336	f	f	\N	\N	41
+2	335	f	f	\N	\N	41
+2	334	f	f	\N	\N	41
+2	333	f	f	\N	\N	41
+2	332	f	f	\N	\N	41
+2	331	f	f	\N	\N	41
+2	330	f	f	\N	\N	41
+2	329	f	f	\N	\N	41
+2	414	f	f	\N	\N	41
+2	434	f	f	\N	\N	41
+2	435	f	f	\N	\N	41
+2	436	f	f	\N	\N	41
+2	437	f	f	\N	\N	41
+2	438	f	f	\N	\N	41
+2	439	f	f	\N	\N	41
+2	440	f	f	\N	\N	41
+2	441	f	f	\N	\N	41
+2	328	f	f	\N	\N	41
+2	327	f	f	\N	\N	41
+2	326	f	f	\N	\N	41
+2	325	f	f	\N	\N	41
+2	324	f	f	\N	\N	41
+2	323	f	f	\N	\N	41
+2	322	f	f	\N	\N	41
+2	321	f	f	\N	\N	41
+2	320	f	f	\N	\N	41
+2	319	f	f	\N	\N	41
+2	318	f	f	\N	\N	41
+2	317	f	f	\N	\N	41
+2	316	f	f	\N	\N	41
+2	315	f	f	\N	\N	41
+2	314	f	f	\N	\N	41
+2	313	f	f	\N	\N	41
+2	312	f	f	\N	\N	41
+2	311	f	f	\N	\N	41
+2	310	f	f	\N	\N	41
+2	309	f	f	\N	\N	41
+2	582	f	f	\N	\N	41
+2	586	f	f	\N	\N	41
+2	585	f	f	\N	\N	41
+2	584	f	f	\N	\N	41
+2	583	f	f	\N	\N	41
+2	415	f	f	\N	\N	41
+2	416	f	f	\N	\N	41
+2	417	f	f	\N	\N	41
+2	418	f	f	\N	\N	41
+2	419	f	f	\N	\N	41
+2	420	f	f	\N	\N	41
+2	339	f	f	\N	\N	41
+2	422	f	f	\N	\N	41
+2	423	f	f	\N	\N	41
+2	424	f	f	\N	\N	41
+2	425	f	f	\N	\N	41
+2	426	f	f	\N	\N	41
+2	427	f	f	\N	\N	41
+2	428	f	f	\N	\N	41
+2	429	f	f	\N	\N	41
+2	430	f	f	\N	\N	41
+2	431	f	f	\N	\N	41
+2	432	f	f	\N	\N	41
+2	433	f	f	\N	\N	41
+2	634	f	f	\N	\N	41
+3	634	f	f	\N	\N	41
+2	635	f	f	\N	\N	41
+3	635	f	f	\N	\N	41
+2	636	f	f	\N	\N	41
+3	636	f	f	\N	\N	41
+2	1	f	f	\N	\N	43
+2	2	f	f	\N	\N	43
+2	3	f	f	\N	\N	43
+2	4	f	f	\N	\N	43
+2	5	f	f	\N	\N	43
+2	6	f	f	\N	\N	43
+2	7	f	f	\N	\N	43
+2	8	f	f	\N	\N	43
+2	9	f	f	\N	\N	43
+2	10	f	f	\N	\N	43
+2	11	f	f	\N	\N	40
+2	12	f	f	\N	\N	40
+2	13	f	f	\N	\N	40
+2	14	f	f	\N	\N	40
+2	15	f	f	\N	\N	40
+2	16	f	f	\N	\N	40
+2	17	f	f	\N	\N	40
+2	18	f	f	\N	\N	40
+2	19	f	f	\N	\N	40
+2	20	f	f	\N	\N	40
+2	21	f	f	\N	\N	40
+2	22	f	f	\N	\N	40
+2	23	f	f	\N	\N	40
+2	24	f	f	\N	\N	40
+2	25	f	f	\N	\N	40
+2	26	f	f	\N	\N	40
+2	27	f	f	\N	\N	40
+2	28	f	f	\N	\N	40
+2	29	f	f	\N	\N	40
+2	30	f	f	\N	\N	40
+2	31	f	f	\N	\N	40
+2	32	f	f	\N	\N	40
+2	33	f	f	\N	\N	40
+2	34	f	f	\N	\N	40
+2	35	f	f	\N	\N	40
+2	36	f	f	\N	\N	40
+2	37	f	f	\N	\N	40
+2	38	f	f	\N	\N	40
+2	39	f	f	\N	\N	40
+2	40	f	f	\N	\N	40
+2	41	f	f	\N	\N	40
+3	414	f	f	\N	\N	44
+3	415	f	f	\N	\N	44
+3	582	f	f	\N	\N	44
+3	416	f	f	\N	\N	44
+3	417	f	f	\N	\N	44
+3	418	f	f	\N	\N	44
+3	419	f	f	\N	\N	44
+3	420	f	f	\N	\N	44
+3	421	f	f	\N	\N	44
+3	422	f	f	\N	\N	44
+3	423	f	f	\N	\N	44
+3	424	f	f	\N	\N	44
+3	425	f	f	\N	\N	44
+3	426	f	f	\N	\N	44
+3	427	f	f	\N	\N	44
+3	428	f	f	\N	\N	44
+3	429	f	f	\N	\N	44
+3	430	f	f	\N	\N	44
+3	431	f	f	\N	\N	44
+3	462	f	f	\N	\N	44
+3	432	f	f	\N	\N	44
+3	559	f	f	\N	\N	44
+3	433	f	f	\N	\N	44
+3	463	f	f	\N	\N	44
+3	434	f	f	\N	\N	44
+3	503	f	f	\N	\N	44
+3	435	f	f	\N	\N	44
+3	464	f	f	\N	\N	44
+3	436	f	f	\N	\N	44
+3	552	f	f	\N	\N	44
+3	437	f	f	\N	\N	44
+3	465	f	f	\N	\N	44
+3	438	f	f	\N	\N	44
+3	504	f	f	\N	\N	44
+3	439	f	f	\N	\N	44
+3	466	f	f	\N	\N	44
+3	440	f	f	\N	\N	44
+3	557	f	f	\N	\N	44
+3	441	f	f	\N	\N	44
+3	467	f	f	\N	\N	44
+3	442	f	f	\N	\N	44
+3	505	f	f	\N	\N	44
+3	443	f	f	\N	\N	44
+3	553	f	f	\N	\N	44
+3	444	f	f	\N	\N	44
+3	586	f	f	\N	\N	44
+3	445	f	f	\N	\N	44
+3	561	f	f	\N	\N	44
+3	585	f	f	\N	\N	44
+3	554	f	f	\N	\N	44
+3	584	f	f	\N	\N	44
+3	558	f	f	\N	\N	44
+3	583	f	f	\N	\N	44
+2	637	f	f	\N	\N	41
+3	637	f	f	\N	\N	41
+2	638	f	f	\N	\N	41
+3	638	f	f	\N	\N	41
+2	639	f	f	\N	\N	41
+3	639	f	f	\N	\N	41
+2	640	f	f	\N	\N	41
+3	640	f	f	\N	\N	41
+2	676	f	f	\N	\N	42
+2	540	f	f	\N	\N	43
+2	549	f	f	\N	\N	43
+2	548	f	f	\N	\N	43
+2	547	f	f	\N	\N	43
+2	546	f	f	\N	\N	43
+2	545	f	f	\N	\N	43
+2	544	f	f	\N	\N	43
+2	543	f	f	\N	\N	43
+2	542	f	f	\N	\N	43
+2	541	f	f	\N	\N	43
+2	497	f	f	\N	\N	43
+2	496	f	f	\N	\N	43
+2	495	f	f	\N	\N	43
+2	494	f	f	\N	\N	43
+2	493	f	f	\N	\N	43
+2	492	f	f	\N	\N	43
+2	491	f	f	\N	\N	43
+2	490	f	f	\N	\N	43
+2	489	f	f	\N	\N	43
+2	488	f	f	\N	\N	43
+2	455	f	f	\N	\N	43
+2	454	f	f	\N	\N	43
+2	453	f	f	\N	\N	43
+2	452	f	f	\N	\N	43
+2	451	f	f	\N	\N	43
+2	450	f	f	\N	\N	43
+2	449	f	f	\N	\N	43
+2	448	f	f	\N	\N	43
+2	447	f	f	\N	\N	43
+2	446	f	f	\N	\N	43
+2	442	f	f	\N	\N	41
+2	443	f	f	\N	\N	41
+2	444	f	f	\N	\N	41
+2	445	f	f	\N	\N	41
+2	456	f	f	\N	\N	41
+2	457	f	f	\N	\N	41
+2	458	f	f	\N	\N	41
+2	459	f	f	\N	\N	41
+2	460	f	f	\N	\N	41
+2	461	f	f	\N	\N	41
+2	462	f	f	\N	\N	41
+2	463	f	f	\N	\N	41
+2	464	f	f	\N	\N	41
+2	465	f	f	\N	\N	41
+2	466	f	f	\N	\N	41
+2	467	f	f	\N	\N	41
+2	498	f	f	\N	\N	41
+2	499	f	f	\N	\N	41
+2	500	f	f	\N	\N	41
+2	501	f	f	\N	\N	41
+2	502	f	f	\N	\N	41
+2	503	f	f	\N	\N	41
+2	504	f	f	\N	\N	41
+2	505	f	f	\N	\N	41
+2	550	f	f	\N	\N	41
+2	551	f	f	\N	\N	41
+2	552	f	f	\N	\N	41
+2	553	f	f	\N	\N	41
+2	554	f	f	\N	\N	41
+2	555	f	f	\N	\N	41
+2	556	f	f	\N	\N	41
+2	557	f	f	\N	\N	41
+2	558	f	f	\N	\N	41
+2	559	f	f	\N	\N	41
+2	560	f	f	\N	\N	41
+2	561	f	f	\N	\N	41
+3	555	f	f	\N	\N	44
+3	498	f	f	\N	\N	44
+3	560	f	f	\N	\N	44
+3	499	f	f	\N	\N	44
+3	456	f	f	\N	\N	44
+3	550	f	f	\N	\N	44
+3	457	f	f	\N	\N	44
+3	500	f	f	\N	\N	44
+3	458	f	f	\N	\N	44
+3	556	f	f	\N	\N	44
+3	459	f	f	\N	\N	44
+3	501	f	f	\N	\N	44
+3	460	f	f	\N	\N	44
+3	551	f	f	\N	\N	44
+3	461	f	f	\N	\N	44
+3	502	f	f	\N	\N	44
 \.
 
 
@@ -1090,7 +1134,7 @@ COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at, c
 -- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.category_id_seq', 6, true);
+SELECT pg_catalog.setval('public.category_id_seq', 48, true);
 
 
 --
@@ -1104,7 +1148,7 @@ SELECT pg_catalog.setval('public.feed_id_seq', 13, true);
 -- Name: feeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feeditem_id_seq', 623, true);
+SELECT pg_catalog.setval('public.feeditem_id_seq', 875, true);
 
 
 --
