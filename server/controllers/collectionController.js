@@ -1,15 +1,15 @@
-const Category = require('../models/category');
-const Feed     = require('../models/feed');
+const Collection = require('../models/collection');
+const Feed       = require('../models/feed');
 
 module.exports = {
   getCategories: async (req, res, next) => {
-    const categories = await Category.getAll();
+    const categories = await Collection.getAll();
     res.locals.categories = categories.rows;
     return next();
   },
 
   getCategory: async (req, res, next) => {
-    const result = await Category.get(req.params.id);
+    const result = await Collection.get(req.params.id);
     if (result) res.locals.category = result;
     // TODO: handle when no item found in db
     return next();
@@ -21,28 +21,28 @@ module.exports = {
   },
 
   createCategory: async (req, res, next) => {
-    await Category.create(req.body.title);
-    res.locals.category = await Category.getByTitle(req.body.title);
+    await Collection.create(req.body.title);
+    res.locals.category = await Collection.getByTitle(req.body.title);
     return next();
   },
 
   renameCategory: async (req, res, next) => {
-    const current = await Category.get(req.params.id);
-    await Category.update(req.params.id, {
+    const current = await Collection.get(req.params.id);
+    await Collection.update(req.params.id, {
       title: req.body.title || current.title
     });
-    const result = await Category.get(req.params.id);
+    const result = await Collection.get(req.params.id);
     res.locals.category = result;
     return next();
   },
 
   sync: async (req, res, next) => {
-    await Category.sync(req.params.id);
+    await Collection.sync(req.params.id);
     return next();
   },
 
   deleteCategory: async (req, res, next) => {
-    await Category.delete(req.params.id);
+    await Collection.delete(req.params.id);
     return next();
   },
 };

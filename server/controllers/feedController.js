@@ -1,5 +1,5 @@
 const { AppError } = require('../lib/error/errors');
-const Category = require('../models/category');
+const Collection = require('../models/collection');
 const Feed = require('../models/feed');
 
 module.exports = {
@@ -27,10 +27,10 @@ module.exports = {
   
   subscribe: async (req, res, next) => {
     try {
-      // if user specified a category, get it from the db.
-      // create the category if it does not yet exist
-      let collection = await Category.getByTitle(req.body.collection);
-      if (!collection) collection = await Category.create(req.body.collection);
+      // if user specified a collection, get it from the db.
+      // create the collection if it does not yet exist
+      let collection = await Collection.getByTitle(req.body.collection);
+      if (!collection) collection = await Collection.create(req.body.collection);
       
       const rss  = await import('@extractus/feed-extractor');
       const feed = await rss.extract(req.body.url);
@@ -76,11 +76,11 @@ module.exports = {
     };
 
     try {
-      // update category metadata
+      // update collection metadata
       let category = {id: undefined};
       if (req.body.category) {
-        category = await Category.getByTitle(req.body.category);
-        if (!category) category = Category.create(req.body.category);
+        category = await Collection.getByTitle(req.body.category);
+        if (!category) category = Collection.create(req.body.category);
       }
 
       // update feed metadata
