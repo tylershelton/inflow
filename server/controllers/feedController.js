@@ -29,7 +29,7 @@ module.exports = {
     try {
       // if user specified a collection, get it from the db.
       // create the collection if it does not yet exist
-      let collection = await Collection.getByTitle(req.body.collection);
+      let collection = await Collection.getByTitle(req.user.id, req.body.collection);
       if (!collection) collection = await Collection.create(req.user.id, req.body.collection);
       
       const rss  = await import('@extractus/feed-extractor');

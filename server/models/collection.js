@@ -38,6 +38,15 @@ module.exports = {
     `, [user_id]);
   },
 
+  getByTitle: async (user_id, title) => {
+    const result = await pool.query(`
+      SELECT id, title FROM collection
+      WHERE user_id = $1 AND title = $2
+    `, [user_id, title]);
+
+    return result.rows[0] || null;
+  },
+
   sync: async (user_id, id) => {
     try {
       const feeds = await Feed.getAllByCollection(user_id, id);
