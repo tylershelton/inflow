@@ -87,18 +87,22 @@ module.exports = {
   },
 
   getAllByCollection: async (user_id, collection_id) => {
-    const result = await pool.query(`
-      SELECT
-        f.id,
-        f.url,
-        COALESCE(uf.title, f.title) AS title,
-        COALESCE(uf.description, f.description) AS description,
-        uf.collection_id
-      FROM feed f
-      INNER JOIN user_feed uf ON f.id = uf.feed_id
-      WHERE uf.user_id = $1 AND uf.collection_id = $2
-    `, [user_id, collection_id]);
-    return result.rows;
+    try {
+      const result = await pool.query(`
+        SELECT
+          f.id,
+          f.url,
+          COALESCE(uf.title, f.title) AS title,
+          COALESCE(uf.description, f.description) AS description
+        FROM feed f
+        INNER JOIN user_feed uf ON f.id = uf.feed_id
+        WHERE uf.user_id = $1 AND uf.collection_id = $2
+      `, [user_id, collection_id]);
+      return result.rows;
+    }
+    catch (err) {
+      throw new DatabaseError({ cause: err });
+    }
   },
 
   subscribers: async (feed_id) => {
