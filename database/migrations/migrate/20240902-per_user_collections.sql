@@ -28,10 +28,10 @@ BEGIN
     IF NOT EXISTS (
         SELECT 1
         FROM pg_constraint
-        WHERE conname = 'unique_collection_per_user'
+        WHERE conname = 'unique_collection_title_per_user'
     ) THEN
         ALTER TABLE collection
-        ADD CONSTRAINT unique_collection_per_user UNIQUE (user_id, title);
+        ADD CONSTRAINT unique_collection_title_per_user UNIQUE (user_id, title);
     END IF;
 
     IF NOT EXISTS (
