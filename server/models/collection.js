@@ -8,7 +8,7 @@ module.exports = {
       return (await pool.query(`
         INSERT INTO collection (title, user_id)
         VALUES ($1, $2)
-        RETURNING *
+        RETURNING id, title
       `, [title, user_id])).rows[0];
     }
     catch (err) {
