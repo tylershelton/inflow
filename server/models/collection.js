@@ -24,11 +24,16 @@ module.exports = {
   },
   
   get: async (user_id, id) => {
-    const result = await pool.query(`
-      SELECT id, title FROM collection
-      WHERE id = $1 AND user_id = $2
-    `, [id, user_id]);
-    return result.rows[0];
+    try {
+      const result = await pool.query(`
+        SELECT id, title FROM collection
+        WHERE id = $1 AND user_id = $2
+      `, [id, user_id]);
+      return result.rows[0];
+    }
+    catch (err) {
+      throw new DatabaseError({ cause: err });
+    }
   },
 
   getAll: user_id => {
