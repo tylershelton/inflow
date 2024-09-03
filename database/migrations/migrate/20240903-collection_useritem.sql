@@ -57,8 +57,11 @@ BEGIN
     -- add function to handle updating collection assignments for an item. this will
     -- allow client applications to pass in an array of collection IDs, and let the
     -- database take care of conforming the collection_ids array to the new state.
-    CREATE OR REPLACE FUNCTION update_item_collections(p_user_id INTEGER, p_item_id INTEGER, p_collection_ids INTEGER[])
-    RETURNS VOID AS $function_body$
+    CREATE OR REPLACE FUNCTION update_item_collections (
+        p_user_id INTEGER,
+        p_item_id INTEGER,
+        p_collection_ids INTEGER[]
+    ) RETURNS VOID AS $function_body$
     DECLARE
         v_collection_id INTEGER;
     BEGIN
