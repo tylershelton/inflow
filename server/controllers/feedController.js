@@ -24,7 +24,7 @@ module.exports = {
       next(err);
     }
   },
-  
+
   subscribe: async (req, res, next) => {
     try {
       // if user specified a collection, get it from the db.
@@ -34,14 +34,13 @@ module.exports = {
       
       const rss  = await import('@extractus/feed-extractor');
       const feed = await rss.extract(req.body.url);
-      await Feed.create(
+      res.locals.feed = await Feed.create(
         req.user.id,
         req.body.url,
         feed.title,
         feed.description,
         collection.id
       );
-      res.locals.feed = await Feed.getByURL(req.body.url);
       next();
     }
     catch (err) {
