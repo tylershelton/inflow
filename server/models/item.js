@@ -74,15 +74,27 @@ module.exports = {
         
         if (!dbitem) continue;
 
-        const useritems = [];
-        for (const u of users) {
-          useritems.push([u.user_id, dbitem.id, feed.collection_id]);
-        }
-
+        
         // insert per-user metadata records for each item
         // being created
+        const useritems = [];
+        for (const u of users) {
+          useritems.push([u.user_id, dbitem.id]);
+        }
+
         await client.query(format(`
           INSERT INTO user_item
+          (user_id, item_id)
+          VALUES %L
+          ON CONFLICT DO NOTHING
+          `, useritems));
+
+        for (const item of useritems) {
+          item.push(feed.collection_id);
+        }
+
+        await client.query(format(`
+          INSERT INTO collection_useritem
             (user_id, item_id, collection_id)
           VALUES %L
           ON CONFLICT DO NOTHING
