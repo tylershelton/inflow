@@ -54,4 +54,26 @@ BEGIN
     ALTER TABLE user_item
     DROP COLUMN IF EXISTS collection_id;
 
+    -- add function to handle updating collection assignments for an item. this will
+    -- allow client applications to pass in an array of collection IDs, and let the
+    -- database take care of conforming the collection_ids array to the new state.
+    CREATE OR REPLACE FUNCTION update_item_collections(p_user_id INTEGER, p_item_id INTEGER, p_collection_ids INTEGER[])
+    RETURNS VOID AS $function_body$
+    DECLARE
+        v_collection_id INTEGER;
+    BEGIN
+        -- Delete any collection associations not present in the new array
+        DELETE FROM collection_useritem
+        WHERE item_id = p_item_id
+            AND collection_id != ALL(p_collection_ids);
+        
+        -- Insert any new collection associations found in the new array
+        FOREACH v_collection_id IN ARRAY p_collection_ids
+        LOOP
+            INSERT INTO collection_useritem (collection_id, user_id, item_id)
+            VALUES (v_collection_id, p_user_id, p_item_id)
+            ON CONFLICT (collection_id, user_id, item_id) DO NOTHING;
+        END LOOP;
+    END;
+    $function_body$ LANGUAGE plpgsql;
 END $$;
