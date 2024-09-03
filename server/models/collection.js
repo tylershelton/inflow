@@ -25,7 +25,7 @@ module.exports = {
   
   get: async (user_id, id) => {
     const result = await pool.query(`
-      SELECT * FROM collection
+      SELECT id, title FROM collection
       WHERE id = $1 AND user_id = $2
     `, [id, user_id]);
     return result.rows[0];
@@ -33,7 +33,7 @@ module.exports = {
 
   getAll: user_id => {
     return pool.query(`
-      SELECT * FROM collection
+      SELECT id, title FROM collection
       WHERE user_id = $1
     `, [user_id]);
   },
