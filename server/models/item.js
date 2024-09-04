@@ -152,7 +152,7 @@ module.exports = {
         FROM view_user_item vui
         INNER JOIN feed f ON vui.feed_id = f.id
         WHERE vui.user_id = $1
-          AND vui.collection_id = $2 ${addendum}
+          AND $2 = ANY(vui.collection_ids) ${addendum}
         ORDER BY vui.pubdate DESC
       `, params);
       return result.rows;
