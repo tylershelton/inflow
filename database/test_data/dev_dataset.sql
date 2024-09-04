@@ -37,6 +37,7 @@ COPY public.collection (id, title, user_id) FROM stdin;
 42	Business	2
 43	News	2
 44	Sysadmin	3
+52	Web Development	3
 \.
 
 
@@ -56,6 +57,7 @@ COPY public.feed (id, url, title, description) FROM stdin;
 10	https://www.unrealengine.com/rss	Unreal Engine - News, Developer Interviews, Spotlights, Tech Blogs	
 11	http://www.archlinux.org/feeds/news/	Arch Linux: Recent news updates	The latest and greatest news from the Arch Linux distribution.
 7	http://feeds.feedburner.com/Phoronix	Phoronix	Linux Hardware Reviews, Benchmarks & Open-Source News
+14	http://feeds.rssboard.org/rssboard	RSS Advisory Board	RSS Advisory Board announcements and Really Simple Syndication news
 \.
 
 
@@ -543,6 +545,49 @@ COPY public.item (id, title, description, url, pubdate, feed_id) FROM stdin;
 639	Armbian 24.8 Moves To Linux 6.10, Supports Newer ARM & RISC-V Boards	Armbian 24.8 has been released as the newest version of this Debian-based Linux distribution that began with a focus on ARM boards but has also expanded to include RISC-V as well as traditional x86_64 Intel/AMD systems too...	https://www.phoronix.com/news/Armbian-24.8-Released	2024-09-02 10:15:39	7
 640	Steam On Linux Drops Below 2% For August 2024 Survey	With the start of the new month comes the Steam Survey results for the month prior. The August 2024 data is in and it points to the Steam on Linux statistics dipping back below 2%...	https://www.phoronix.com/news/Steam-Survey-August-2024	2024-09-02 00:49:34	7
 676	How to sync Mac and Linux /home	the problem: My main computer is a Linux/BSD desktop, but I also use a Mac laptop for recording and travel. This created a problem keeping them in sync. I don’t like that the MacOS user’s home has directories like Movies and Pictures that we...	https://sive.rs/macx	2024-08-31 00:00:00	1
+914	New Patches Bring Rust Linux Kernel Support To MIPS	When it comes to the Rust programming language support within the Linux kernel one of the limitations is that the CPU architecture support isn't as widespread. Currently Rust for Linux supports x86_64, AArch64 (ARM64) little-endian, LoongArch, and...	https://www.phoronix.com/news/Rust-Linux-Kernel-MIPS-Patches	2024-09-04 00:19:00	7
+915	Android 15 Released To The Android Open-Source Project	Google announced today that the Android 15 source code has been released to the Android Open-Source Project (AOSP)...	https://www.phoronix.com/news/Android-15-AOSP-Release	2024-09-03 19:31:11	7
+916	Debian Developers Figuring Out Plan For Removing More Unmaintained Packages	While there are more than 74k packages available within Debian's package management system for x86_64 systems, not all of the packages are well maintained and a portion of them haven't seen any maintenance/updates in ages. Debian developers have...	https://www.phoronix.com/news/Debian-Debates-Unmaintained-SW	2024-09-03 18:45:54	7
+917	Intel Launches Core Ultra 200V "Lunar Lake" While Linux Support Settling	Intel formally announced their Core Ultra 200V series "Lunar Lake" laptop processors today in Berlin...	https://www.phoronix.com/news/Intel-Lunar-Lake-Launched	2024-09-03 16:30:17	7
+918	AMD Zen 5 Tuning "Part Two" Merged For GCC Compiler	Merged today for the GCC 15 compiler in development and potentially for back-porting to the next GCC 14 point release is a second round of AMD Zen 5 "znver5" tuning...	https://www.phoronix.com/news/AMD-Zen-5-Tuning-Part-2-GCC	2024-09-03 14:30:02	7
+919	Intel Battlemage OpenGL & Vulkan Driver Support Enabled By Default For Linux	Now that Linux 6.12 will enable Intel Battlemage and Lunar Lake graphics by default for the out-of-the-box kernel graphics driver support, the user-space Intel Mesa drivers with Iris Gallium3D (OpenGL) and ANV Vulkan are moving ahead to enable...	https://www.phoronix.com/news/Intel-Battlemage-Mesa-Default	2024-09-03 14:08:55	7
+920	Samba 4.21 Released With LDAP TLS/SASL Channel Binding, Other Improvements	Samba 4.21 is out as the newest version of this SMB networking protocol implementation commonly used on Linux systems for file and print services interaction with Windows systems...	https://www.phoronix.com/news/Samba-4.21-Released	2024-09-03 13:48:36	7
+921	Klp-build Proposed As A New Means Of Generating Linux Kernel Livepatch Modules	Posted today as a "request for comments" by longtime Linux developer Josh Poimboeuf of Red Hat is klp-build. The klp-build proposal is a new means of building livepatch modules for live-patching the Linux kernel to address bugs and security issues...	https://www.phoronix.com/news/Linux-Livepatch-klp-build	2024-09-03 12:41:33	7
+922	F2FS Inline Tail Allows For Saving Space On Small Files & Reducing I/O	Patches posted to the Linux kernel mailing list today allow for inline tail support within the Flash-Friendly File-System (F2FS). This inline tail support allows for saving space when storing many small files and with reduced I/O can lead to faster...	https://www.phoronix.com/news/F2FS-Inline-Tail-Patches	2024-09-03 10:56:05	7
+923	Power Profiles Daemon 0.22 Released With Several AMD Improvements	Power Profiles Daemon as the UPower project to make Linux laptop/system power profile handling via D-Bus is out with a new release. This is the Linux/open-source solution for exposing of power profiles to the Linux desktop and better managing the...	https://www.phoronix.com/news/Power-Profiles-Daemon-0.22	2024-09-03 10:41:32	7
+924	Coreboot 24.08 Released With 31 New Motherboards, Initial Intel Panther Lake Support	Coreboot 24.08 debuted on Monday night as the newest feature release for this open-source system firmware project that allows replacing the proprietary BIOS/firmware on many different platforms. With Coreboot 24.08 comes more than 900 patches from...	https://www.phoronix.com/news/Coreboot-24.08-Released	2024-09-03 10:31:56	7
+925	Google Increases AVIF Image Format Support With Google Search Support	While two years ago Google notably axed support for JPEG-XL within the Chrome web browser, they remain bullish on WebP and AVIF for imaging needs. This past week they finally announced Google Search is now supporting AVIF images...	https://www.phoronix.com/news/Google-Search-AVIF	2024-09-03 10:03:14	7
+946	How to Read an RSS Feed with Java Using XOM	There are a lot of libraries for processing XML data with Java that can be used to read RSS feeds. One of the best is the open source library XOM created by the computer book author Elliotte Rusty Harold.As he wrote one of his 20 books about Java...	https://www.rssboard.org/news/221/read-rss-feed-java-using-xom	2023-08-02 03:25:57	14
+947	The RSS Advisory Board Just Turned 20	"Tomorrow we will run faster, stretch out our arms farther."Today is the 20th birthday of the RSS Advisory Board, the group that publishes the RSS specification. It was formed on July 18, 2003, when the copyright of the specification was...	https://www.rssboard.org/news/220/rss-advisory-board-just-turned-20	2023-07-18 19:50:24	14
+948	Downloading 50,000 Podcast Feeds to Analyze Their RSS	The software developer Niko Abeler has crawled 51,165 podcast feeds to study what RSS elements they contain. His comprehensive Podcast Feed Standard report looks at the usage of core RSS elements and namespace elements from Apple iTunes, Atom,...	https://www.rssboard.org/news/219/downloading-50000-podcast-feeds-analyze	2023-07-14 14:38:42	14
+949	Tara Calishain Explains: What is RSS?	The exodus of users away from Twitter and Reddit has led many of those information refugees to discover the joy of subscribing to feeds in a reader. RSS and Atom feeds are an enormous open decentralized network that can never be ruined under new...	https://www.rssboard.org/news/218/tara-calishain-explains-rss	2023-07-13 01:45:48	14
+950	Be Unique And Use RSS Guid Like Everybody Else	Winter scenes: Snowflakes by Theodor HorydczakIf you publish an RSS feed, you should do a solid for the developers of RSS readers by including a guid in each item. The guid's job is to be a unique identifier that helps software downloading your...	https://www.rssboard.org/news/217/unique-and-use-rss-guid-like-everybody	2023-07-11 02:30:01	14
+951	Has the RSS Advisory Board Followed the Roadmap?	There has been recent discussion about the roadmap that was added to the RSS 2.0 specification in August 2002 announcing that there would be no new additions to RSS, freezing its set of elements and attributes forever and ever amen. The roadmap...	https://www.rssboard.org/news/216/has-rss-advisory-board-followed	2023-07-05 18:52:11	14
+952	RSS Enclosure Support in Micro.Blog	An effort is underway to examine how feed publishers and feed consumers are handling the lack of clarity in the RSS 2.0 specification about whether an item can contain more than one enclosure. The RSS Best Practices Profile recommends that a feed...	https://www.rssboard.org/news/214/rss-enclosure-support-microblog	2023-07-03 03:35:33	14
+953	Atom Feed Format Was Born 20 Years Ago	This month marks the 20th anniversary of the effort that became the Atom feed format. It all began on June 16, 2003, with a blog post from Apache Software Foundation contributor Sam Ruby asking for feedback about what constitutes a well-formed blog...	https://www.rssboard.org/news/213/atom-feed-format-born-20-years-ago	2023-06-29 20:39:54	14
+954	How to Read an RSS Feed with PHP Using SimplePie	If you need to load an RSS feed with the PHP programming language, the open source library SimplePie greatly simplifies the process of pulling in items from a feed to present on a website, store in a database or do something else coooool with the...	https://www.rssboard.org/news/212/read-rss-feed-php-using	2023-06-26 19:08:40	14
+955	Every Mastodon User Has an RSS Feed	The distributed social network Mastodon has grown to 12.8 million user accounts, supporting itself through user donations and a lot of effort by the volunteers running servers. There's no CEO changing the network at whim, no ads and no algorithms...	https://www.rssboard.org/news/211/every-mastodon-user-has-rss-feed	2023-06-24 12:34:48	14
+956	RSS Enclosure Support in WordPress	One of the biggest challenges for a software developer implementing the RSS 2.0 specification is the issue of enclosures in a feed item. The specification is infamously unclear on whether an item allows one enclosure or multiple enclosures.The RSS...	https://www.rssboard.org/news/210/rss-enclosure-support-wordpress	2023-06-23 01:44:06	14
+957	Where to Find the RSS Specification	The RSS Advisory Board has published the RSS 2.0 Specification for 20 years, releasing 10 revisions over that time. The current version of the specification can always be found at this URL:https://www.rssboard.org/rss-specificationThe revisions...	https://www.rssboard.org/news/209/find-rss-specification	2023-06-18 18:11:52	14
+958	Should Feed Readers Count Unread Items?	Brent Simmons, the developer of the NetNewsWire RSS reader, is questioning his decision to put an unread count next to each feed, reasoning that it encourages people to be too obsessive about reading every item:Instead of a dozen bookmarks, people...	https://www.rssboard.org/news/208/should-feed-readers-count-unread-items	2014-04-02 15:12:53	14
+959	WordPress Uses RSS as Blog Export Format	If you export your WordPress blog, it is delivered to you as an RSS feed that holds all of the blog's entries, pages and comments. WordPress makes use of five namespaces and calls the format WordPress eXtended RSS (WXR). I'm working on a Java...	https://www.rssboard.org/news/207/wordpress-uses-rss-blog-export-format	2014-03-11 20:18:14	14
+960	Yahoo Groups Dropped RSS Feed Support	The RSS feeds of the RSS-Public and RSS-Board mailing lists are no longer available. Yahoo Groups used to offer feeds for each of its public lists, but Yahoo dropped support last year. A member of the service's product team said the feature was...	https://www.rssboard.org/news/206/yahoo-groups-dropped-rss-feed-support	2014-03-06 20:47:26	14
+1025	Emma Navarro reaches her first Grand Slam at the U.S. Open with win over Paula Badosa	The 13th-seeded Navarro will next face Aryna Sabalenka, while Americans Taylor Fritz and Frances Tiafoe advanced to the semis on the men's side of the tournament.	https://www.npr.org/2024/09/04/g-s1-20727/emma-navarro-us-open-taylor-fritz-frances-tiafoe	2024-09-04 05:21:57	8
+1026	Abuse claims trigger a reckoning in India's Mollywood	A report into sexual assault in one of India's most respected film industries has triggered a #MeToo-style reckoning.	https://www.npr.org/2024/09/03/nx-s1-5095743/abuse-claims-trigger-a-reckoning-in-indias-mollywood	2024-09-04 01:03:46	8
+1027	Coastal flooding is getting more common, even on sunny days	High tide floods – when water collects in streets or even seeps into buildings on days without rain – are increasingly common in coastal areas as sea levels rise, a new report warns.	https://www.npr.org/2024/08/06/nx-s1-5057482/high-tide-floods-get-worse	2024-09-03 23:37:27	8
+1028	U.S. charges Hamas leaders with terrorism over October attack in Israel	The Justice Department is charging six Hamas leaders with terrorism, including the architect of the group’s deadly Oct. 7 attack against Israel.	https://www.npr.org/2024/09/03/g-s1-20701/hamas-terrorism-us-israel-middle-east	2024-09-03 22:01:36	8
+1029	Israel Mourns Dead Hostages; Gaza Civilians Don't Know Where to Go	Israel mourns six hostages, who were captured during the October 7th attacks by Hamas, and found by the Israeli military in Gaza, recently killed. We go to the funeral of one of the hostages, in Jerusalem.  And in Gaza, nearly all residents have...	https://www.npr.org/2024/09/03/1197477616/israel-mourns-dead-hostages-gaza-civilians-dont-know-where-to-go	2024-09-03 21:51:36	8
+1030	5 things to know about the U.K.’s suspension of some arms exports to Israel	The U.K. exports explosive devices, guns and fighter jet components to Israel. But it's suspending some arms shipments, fearing Israel could used them in violation of international law.	https://www.npr.org/2024/09/03/nx-s1-5098300/uk-suspends-arms-israel	2024-09-03 21:09:42	8
+1031	A new version of the 1977 Star Wars features a dub in a Native American language	A new version of the 1977 classic Star Wars opens in Minnesota theaters, now dubbed over in Ojibwe -- the indigenous language of one of the largest Native American tribes in the United States.	https://www.npr.org/2024/09/03/nx-s1-5094903-e1/encore-ojibwe-star-wars	2024-09-03 20:21:01	8
+1032	Despite evidence, Trump calls Arlington Cemetery incident a 'made up story'	Meanwhile, members of Congress are asking for details about the incident, which was first reported by NPR.	https://www.npr.org/2024/09/03/g-s1-20680/trump-arlington-cemetery	2024-09-03 19:19:27	8
+1033	'I want to write myself into existence,' says 'Colored Television' author	Danzy Senna was born in 1970, just a few years after Loving v. Virginia legalized interracial marriage. “Just merely existing as a family was a radical statement at that time,” she says.	https://www.npr.org/2024/09/03/nx-s1-5095921/colored-television-danzy-senna	2024-09-03 18:26:27	8
+1034	Beloved 'Russian spy whale' Hvaldimir is found dead under mysterious circumstances	A beloved beluga whale with a mysterious past was found dead in the waters of Norway over the weekend. Admirers are paying tribute as authorities investigate.	https://www.npr.org/2024/09/03/nx-s1-5098968/hvaldimir-russian-spy-beluga-whale-dead	2024-09-03 17:34:13	8
+1035	How Mozilla’s AI website creator, Solo, is shaking up a $2.1 billion industry	In the world of entrepreneurship, one business owner’s journey proves the power of simple technology. And group chats. When Richelle Samy founded Culture of Stamina, a coaching service, she set out to create an online presence that was elegant and...	https://blog.mozilla.org/en/mozilla/ai/mozilla-solo-artifical-intelligence-website-creator-ai/	2024-08-28 19:24:04	2
+1036	Fakespot’s guide to trending back-to-school products	Back-to-school season is here, and TikTok is teeming with viral product recommendations. Gone are the days of battling crowded aisles and long checkout lines at big box stores. Now, with just a few clicks, you can have almost anything you want...	https://blog.mozilla.org/en/mozilla/news/fakespots-guide-to-trending-back-to-school-products/	2024-08-26 13:00:00	2
+1045	Locale-sensitive text segmentation in JavaScript with Intl.Segmenter	Learn how to use Intl.Segmenter for locale-sensitive text segmentation in JavaScript to simplify localization, count words or sentences in different languages, and more.	https://developer.mozilla.org/en-US/blog/javascript-intl-segmenter-i18n/	2024-09-03 00:00:00	3
+1046	Optimize your workflow with Git stash	Learn how to use Git stash to break down large commits. Discover a better approach for saving work when switching branches.	https://developer.mozilla.org/en-US/blog/optimize-your-workflow-git-stash/	2024-08-28 00:00:00	3
+1125	VSE Workshop: August 2024	Write up on the workshop around the Video Sequence Editor that took place at the Blender HQ in August 2024.	https://code.blender.org/2024/08/vse-workshop-august-2024/	2024-08-26 13:26:41	9
+882	Firefox 130 Now Available With WebCodecs API Enabled On The Desktop	Firefox 130 web browser binaries were published today ahead of the official release announcement going out on Tuesday. Firefox 130 isn't too particularly exciting but there are a few changes worth mentioning...	https://www.phoronix.com/news/Firefox-130	2024-09-03 00:22:13	7
 \.
 
 
@@ -916,7 +961,6 @@ COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at) F
 2	432	f	f	\N	\N
 2	433	f	f	\N	\N
 2	634	f	f	\N	\N
-3	634	f	f	\N	\N
 2	635	f	f	\N	\N
 3	635	f	f	\N	\N
 2	636	f	f	\N	\N
@@ -1106,6 +1150,63 @@ COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at) F
 3	551	f	f	\N	\N
 3	461	f	f	\N	\N
 3	502	f	f	\N	\N
+2	882	f	f	\N	\N
+3	882	f	f	\N	\N
+2	914	f	f	\N	\N
+3	914	f	f	\N	\N
+2	915	f	f	\N	\N
+3	915	f	f	\N	\N
+2	916	f	f	\N	\N
+3	916	f	f	\N	\N
+2	917	f	f	\N	\N
+3	917	f	f	\N	\N
+2	918	f	f	\N	\N
+3	918	f	f	\N	\N
+2	919	f	f	\N	\N
+3	919	f	f	\N	\N
+2	920	f	f	\N	\N
+3	920	f	f	\N	\N
+2	921	f	f	\N	\N
+3	921	f	f	\N	\N
+2	922	f	f	\N	\N
+3	922	f	f	\N	\N
+2	923	f	f	\N	\N
+3	923	f	f	\N	\N
+2	924	f	f	\N	\N
+3	924	f	f	\N	\N
+2	925	f	f	\N	\N
+3	925	f	f	\N	\N
+3	946	f	f	\N	\N
+3	947	f	f	\N	\N
+3	948	f	f	\N	\N
+3	949	f	f	\N	\N
+3	950	f	f	\N	\N
+3	951	f	f	\N	\N
+3	952	f	f	\N	\N
+3	953	f	f	\N	\N
+3	954	f	f	\N	\N
+3	955	f	f	\N	\N
+3	956	f	f	\N	\N
+3	957	f	f	\N	\N
+3	958	f	f	\N	\N
+3	959	f	f	\N	\N
+3	960	f	f	\N	\N
+3	634	f	f	\N	\N
+2	1025	f	f	\N	\N
+2	1026	f	f	\N	\N
+2	1027	f	f	\N	\N
+2	1028	f	f	\N	\N
+2	1029	f	f	\N	\N
+2	1030	f	f	\N	\N
+2	1031	f	f	\N	\N
+2	1032	f	f	\N	\N
+2	1033	f	f	\N	\N
+2	1034	f	f	\N	\N
+2	1035	f	f	\N	\N
+2	1036	f	f	\N	\N
+2	1045	f	f	\N	\N
+2	1046	f	f	\N	\N
+2	1125	f	f	\N	\N
 \.
 
 
@@ -1669,6 +1770,62 @@ COPY public.collection_useritem (collection_id, user_id, item_id) FROM stdin;
 44	3	551
 44	3	461
 44	3	502
+44	2	882
+44	3	882
+44	2	914
+44	3	914
+44	2	915
+44	3	915
+44	2	916
+44	3	916
+44	2	917
+44	3	917
+44	2	918
+44	3	918
+44	2	919
+44	3	919
+44	2	920
+44	3	920
+44	2	921
+44	3	921
+44	2	922
+44	3	922
+44	2	923
+44	3	923
+44	2	924
+44	3	924
+44	2	925
+44	3	925
+52	3	946
+52	3	947
+52	3	948
+52	3	949
+52	3	950
+52	3	951
+52	3	952
+52	3	953
+52	3	954
+52	3	955
+52	3	956
+52	3	957
+52	3	958
+52	3	959
+52	3	960
+43	2	1025
+43	2	1026
+43	2	1027
+43	2	1028
+43	2	1029
+43	2	1030
+43	2	1031
+43	2	1032
+43	2	1033
+43	2	1034
+40	2	1035
+40	2	1036
+40	2	1045
+40	2	1046
+40	2	1125
 \.
 
 
@@ -1690,6 +1847,7 @@ COPY public.user_feed (user_id, feed_id, title, description, collection_id) FROM
 2	8	\N	\N	43
 3	7	\N	\N	44
 3	11	\N	\N	44
+3	14	\N	\N	52
 \.
 
 
@@ -1697,21 +1855,21 @@ COPY public.user_feed (user_id, feed_id, title, description, collection_id) FROM
 -- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.category_id_seq', 49, true);
+SELECT pg_catalog.setval('public.category_id_seq', 52, true);
 
 
 --
 -- Name: feed_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feed_id_seq', 13, true);
+SELECT pg_catalog.setval('public.feed_id_seq', 15, true);
 
 
 --
 -- Name: feeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feeditem_id_seq', 875, true);
+SELECT pg_catalog.setval('public.feeditem_id_seq', 1144, true);
 
 
 --
