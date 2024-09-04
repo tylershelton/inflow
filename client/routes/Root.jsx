@@ -2,7 +2,7 @@
 import React from 'react';
 import { Outlet, useLoaderData } from 'react-router-dom';
 
-import { getCollections } from '../api/categories';
+import { getCollections } from '../api/collections';
 
 // internal components
 import Sidebar from '../components/Sidebar';
