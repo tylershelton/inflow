@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Category from './Category';
+import Collection from './Collection';
 
 export default function CollectionList ({ collections }) {
-  const collectionComponents = collections.map((cat, i) => {
-    return (<Category
+  const collectionComponents = collections.map((coll, i) => {
+    return (<Collection
       key      = {`cat-${i}`}
-      catid    = {cat.id}
-      title    = {cat.title}
-      contents = {cat.contents}
+      coll_id  = {coll.id}
+      title    = {coll.title}
+      contents = {coll.contents}
     />);
   });
 
