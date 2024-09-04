@@ -11,7 +11,7 @@ module.exports = {
   },
 
   getFeedItem: async (req, res, next) => {
-    res.locals.feeditem = await Item.get(req.user.id, req.params.id);
+    res.locals.feeditem = await Item.get(req.user.id, req.params.itemId);
     return next();
   },
 
