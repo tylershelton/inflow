@@ -3,8 +3,8 @@ const Feed       = require('../models/feed');
 
 module.exports = {
   getCollections: async (req, res, next) => {
-    const categories = await Collection.getAll(req.user.id);
-    res.locals.categories = categories.rows;
+    const collections = await Collection.getAll(req.user.id);
+    res.locals.categories = collections.rows;
     return next();
   },
 
