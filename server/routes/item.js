@@ -4,13 +4,15 @@ const router  = express.Router();
 const itemController = require('../controllers/itemController');
 
 router.get('/:id', itemController.getFeedItem, (req, res) => {
-  return res.status(200).json(res.locals.feeditem);
+  if (res.locals.feeditem) return res.status(200).json(res.locals.feeditem);
+  else return res.sendStatus(404);
 });
 
 // get all items in a given category
 router.get('/category/:id', itemController.getItemsByCategory, (req, res) => {
   // TODO: support all vs unread only
-  return res.status(200).json(res.locals.feeditems);
+  if (res.locals.feeditems) return res.status(200).json(res.locals.feeditems);
+  else return res.status(404);
 });
 
 // get all items from a given feed
