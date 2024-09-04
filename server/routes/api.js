@@ -10,7 +10,7 @@ const itemRouter       = require('./item');
 
 // api routes
 router.use('/auth', authRouter);
-router.use('/categories', isLoggedIn, collectionRouter);
+router.use('/collections', isLoggedIn, collectionRouter);
 router.use('/feeds', isLoggedIn, feedRouter);
 router.use('/feeditems', isLoggedIn, itemRouter);
 
