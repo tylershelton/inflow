@@ -86,7 +86,7 @@ module.exports = {
         for (const u of users) {
           useritems.push([u.user_id, dbitem.id]);
         }
-
+        
         await client.query(format(`
           INSERT INTO user_item
           (user_id, item_id)
@@ -183,13 +183,29 @@ module.exports = {
     }  
   },  
 
-  update: (id, changes) => {
-    return pool.query(`
-      UPDATE user_item
-      SET
-        archived = $2,
-        collection_id = $3
-      WHERE id = $1
-    `, [id, changes.archived, changes.collection_id]);
+  update: async (user_id, item_id, changes) => {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+
+      await pool.query(`
+        UPDATE user_item
+        SET archived = $3
+        WHERE user_id = $1 AND item_id = $2
+      `, [user_id, item_id, changes.archived]);
+
+      await pool.query(`
+        SELECT update_item_collections($1, $2, $3::integer[])
+      `, [user_id, item_id, changes.collection_ids]);
+
+      await pool.query('COMMIT');
+    }
+    catch (err) {
+      await client.query('ROLLBACK');
+      throw new DatabaseError({ cause: err });
+    }
+    finally {
+      client.release();
+    }
   }
 };

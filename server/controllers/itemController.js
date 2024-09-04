@@ -39,9 +39,10 @@ module.exports = {
     try {
       const current = await Item.get(req.user.id, req.params.id);
       await Item.update(
+        req.user.id,
         req.params.id, {
-          archived: req.query.archived || current.archived,
-          collection_id: current.collection_id,
+          archived: !current.archived,
+          collection_ids: current.collection_ids,
         }
       );
       res.locals.feeditem = await Item.get(req.user.id, req.params.id);
