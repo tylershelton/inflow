@@ -2,6 +2,11 @@ const pool   = require('../lib/db');
 const format = require('pg-format');
 const { DatabaseError } = require('../lib/error/errors');
 
+const vui_columns = `
+  vui.id, vui.title, vui.description, vui.url, vui.pubdate, vui.feed_id,
+  vui.collection_ids, vui.read, vui.archived, vui.read_at, vui.archived_at
+`;
+
 module.exports = {
   // create: async (user_id, data) => {
   //   const client = await pool.connect();
@@ -74,15 +79,27 @@ module.exports = {
         
         if (!dbitem) continue;
 
-        const useritems = [];
-        for (const u of users) {
-          useritems.push([u.user_id, dbitem.id, feed.collection_id]);
-        }
-
+        
         // insert per-user metadata records for each item
         // being created
+        const useritems = [];
+        for (const u of users) {
+          useritems.push([u.user_id, dbitem.id]);
+        }
+        
         await client.query(format(`
           INSERT INTO user_item
+          (user_id, item_id)
+          VALUES %L
+          ON CONFLICT DO NOTHING
+          `, useritems));
+
+        for (const item of useritems) {
+          item.push(feed.collection_id);
+        }
+
+        await client.query(format(`
+          INSERT INTO collection_useritem
             (user_id, item_id, collection_id)
           VALUES %L
           ON CONFLICT DO NOTHING
@@ -111,7 +128,8 @@ module.exports = {
   get: async (user_id, item_id) => {
     try {
       const result = await pool.query(`
-        SELECT * FROM view_user_item
+        SELECT ${vui_columns}
+        FROM view_user_item vui
         WHERE user_id = $1 AND id = $2
       `, [user_id, item_id]);
       return result.rows[0];
@@ -130,11 +148,11 @@ module.exports = {
         params.push(includeArchived);
       }
       const result = await pool.query(`
-        SELECT vui.*, f.title AS feed_title 
+        SELECT ${vui_columns}, f.title AS feed_title 
         FROM view_user_item vui
         INNER JOIN feed f ON vui.feed_id = f.id
         WHERE vui.user_id = $1
-          AND vui.collection_id = $2 ${addendum}
+          AND $2 = ANY(vui.collection_ids) ${addendum}
         ORDER BY vui.pubdate DESC
       `, params);
       return result.rows;
@@ -153,7 +171,8 @@ module.exports = {
         params.push(includeArchived);
       }
       const result = await pool.query(`
-        SELECT * FROM view_user_item
+        SELECT ${vui_columns}
+        FROM view_user_item vui
         WHERE user_id = $1 AND feed_id = $2 ${addendum}
         ORDER BY pubdate DESC
       `, params);
@@ -164,13 +183,29 @@ module.exports = {
     }  
   },  
 
-  update: (id, changes) => {
-    return pool.query(`
-      UPDATE user_item
-      SET
-        archived = $2,
-        collection_id = $3
-      WHERE id = $1
-    `, [id, changes.archived, changes.collection_id]);
+  update: async (user_id, item_id, changes) => {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+
+      await pool.query(`
+        UPDATE user_item
+        SET archived = $3
+        WHERE user_id = $1 AND item_id = $2
+      `, [user_id, item_id, changes.archived]);
+
+      await pool.query(`
+        SELECT update_item_collections($1, $2, $3::integer[])
+      `, [user_id, item_id, changes.collection_ids]);
+
+      await pool.query('COMMIT');
+    }
+    catch (err) {
+      await client.query('ROLLBACK');
+      throw new DatabaseError({ cause: err });
+    }
+    finally {
+      client.release();
+    }
   }
 };

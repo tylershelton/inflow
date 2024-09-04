@@ -8,7 +8,7 @@ module.exports = {
       return (await pool.query(`
         INSERT INTO collection (title, user_id)
         VALUES ($1, $2)
-        RETURNING *
+        RETURNING id, title
       `, [title, user_id])).rows[0];
     }
     catch (err) {
@@ -24,18 +24,32 @@ module.exports = {
   },
   
   get: async (user_id, id) => {
-    const result = await pool.query(`
-      SELECT * FROM collection
-      WHERE id = $1 AND user_id = $2
-    `, [id, user_id]);
-    return result.rows[0];
+    try {
+      const result = await pool.query(`
+        SELECT id, title FROM collection
+        WHERE id = $1 AND user_id = $2
+      `, [id, user_id]);
+      return result.rows[0];
+    }
+    catch (err) {
+      throw new DatabaseError({ cause: err });
+    }
   },
 
   getAll: user_id => {
     return pool.query(`
-      SELECT * FROM collection
+      SELECT id, title FROM collection
       WHERE user_id = $1
     `, [user_id]);
+  },
+
+  getByTitle: async (user_id, title) => {
+    const result = await pool.query(`
+      SELECT id, title FROM collection
+      WHERE user_id = $1 AND title = $2
+    `, [user_id, title]);
+
+    return result.rows[0] || null;
   },
 
   sync: async (user_id, id) => {

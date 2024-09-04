@@ -1,7 +1,7 @@
 const Item = require('../models/item');
 
 module.exports = {
-  deleteFeedItem: async (req, res, next) => {
+  deleteItem: async (req, res, next) => {
     try {
       res.locals.success = await Item.delete(req.user.id, req.params.id);
       return next();
@@ -10,14 +10,14 @@ module.exports = {
     }
   },
 
-  getFeedItem: async (req, res, next) => {
-    res.locals.feeditem = await Item.get(req.user.id, req.params.itemId);
+  getItem: async (req, res, next) => {
+    res.locals.item = await Item.get(req.user.id, req.params.itemId);
     return next();
   },
 
-  getItemsByCategory: async (req, res, next) => {
+  getItemsByCollection: async (req, res, next) => {
     try {
-      res.locals.feeditems = await Item.getByCollection(req.user.id, req.params.id, req.query.all);
+      res.locals.items = await Item.getByCollection(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -27,7 +27,7 @@ module.exports = {
 
   getItemsByFeed: async (req, res, next) => {
     try {
-      res.locals.feeditems = await Item.getByFeed(req.user.id, req.params.id, req.query.all);
+      res.locals.items = await Item.getByFeed(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -39,12 +39,13 @@ module.exports = {
     try {
       const current = await Item.get(req.user.id, req.params.id);
       await Item.update(
+        req.user.id,
         req.params.id, {
-          archived: req.query.archived || current.archived,
-          collection_id: current.collection_id,
+          archived: !current.archived,
+          collection_ids: current.collection_ids,
         }
       );
-      res.locals.feeditem = await Item.get(req.user.id, req.params.id);
+      res.locals.item = await Item.get(req.user.id, req.params.id);
       return next();
     }
     catch (err) {

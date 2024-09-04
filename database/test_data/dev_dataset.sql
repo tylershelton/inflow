@@ -37,6 +37,7 @@ COPY public.collection (id, title, user_id) FROM stdin;
 42	Business	2
 43	News	2
 44	Sysadmin	3
+52	Web Development	3
 \.
 
 
@@ -56,6 +57,7 @@ COPY public.feed (id, url, title, description) FROM stdin;
 10	https://www.unrealengine.com/rss	Unreal Engine - News, Developer Interviews, Spotlights, Tech Blogs	
 11	http://www.archlinux.org/feeds/news/	Arch Linux: Recent news updates	The latest and greatest news from the Arch Linux distribution.
 7	http://feeds.feedburner.com/Phoronix	Phoronix	Linux Hardware Reviews, Benchmarks & Open-Source News
+14	http://feeds.rssboard.org/rssboard	RSS Advisory Board	RSS Advisory Board announcements and Really Simple Syndication news
 \.
 
 
@@ -543,6 +545,1287 @@ COPY public.item (id, title, description, url, pubdate, feed_id) FROM stdin;
 639	Armbian 24.8 Moves To Linux 6.10, Supports Newer ARM & RISC-V Boards	Armbian 24.8 has been released as the newest version of this Debian-based Linux distribution that began with a focus on ARM boards but has also expanded to include RISC-V as well as traditional x86_64 Intel/AMD systems too...	https://www.phoronix.com/news/Armbian-24.8-Released	2024-09-02 10:15:39	7
 640	Steam On Linux Drops Below 2% For August 2024 Survey	With the start of the new month comes the Steam Survey results for the month prior. The August 2024 data is in and it points to the Steam on Linux statistics dipping back below 2%...	https://www.phoronix.com/news/Steam-Survey-August-2024	2024-09-02 00:49:34	7
 676	How to sync Mac and Linux /home	the problem: My main computer is a Linux/BSD desktop, but I also use a Mac laptop for recording and travel. This created a problem keeping them in sync. I don’t like that the MacOS user’s home has directories like Movies and Pictures that we...	https://sive.rs/macx	2024-08-31 00:00:00	1
+914	New Patches Bring Rust Linux Kernel Support To MIPS	When it comes to the Rust programming language support within the Linux kernel one of the limitations is that the CPU architecture support isn't as widespread. Currently Rust for Linux supports x86_64, AArch64 (ARM64) little-endian, LoongArch, and...	https://www.phoronix.com/news/Rust-Linux-Kernel-MIPS-Patches	2024-09-04 00:19:00	7
+915	Android 15 Released To The Android Open-Source Project	Google announced today that the Android 15 source code has been released to the Android Open-Source Project (AOSP)...	https://www.phoronix.com/news/Android-15-AOSP-Release	2024-09-03 19:31:11	7
+916	Debian Developers Figuring Out Plan For Removing More Unmaintained Packages	While there are more than 74k packages available within Debian's package management system for x86_64 systems, not all of the packages are well maintained and a portion of them haven't seen any maintenance/updates in ages. Debian developers have...	https://www.phoronix.com/news/Debian-Debates-Unmaintained-SW	2024-09-03 18:45:54	7
+917	Intel Launches Core Ultra 200V "Lunar Lake" While Linux Support Settling	Intel formally announced their Core Ultra 200V series "Lunar Lake" laptop processors today in Berlin...	https://www.phoronix.com/news/Intel-Lunar-Lake-Launched	2024-09-03 16:30:17	7
+918	AMD Zen 5 Tuning "Part Two" Merged For GCC Compiler	Merged today for the GCC 15 compiler in development and potentially for back-porting to the next GCC 14 point release is a second round of AMD Zen 5 "znver5" tuning...	https://www.phoronix.com/news/AMD-Zen-5-Tuning-Part-2-GCC	2024-09-03 14:30:02	7
+919	Intel Battlemage OpenGL & Vulkan Driver Support Enabled By Default For Linux	Now that Linux 6.12 will enable Intel Battlemage and Lunar Lake graphics by default for the out-of-the-box kernel graphics driver support, the user-space Intel Mesa drivers with Iris Gallium3D (OpenGL) and ANV Vulkan are moving ahead to enable...	https://www.phoronix.com/news/Intel-Battlemage-Mesa-Default	2024-09-03 14:08:55	7
+920	Samba 4.21 Released With LDAP TLS/SASL Channel Binding, Other Improvements	Samba 4.21 is out as the newest version of this SMB networking protocol implementation commonly used on Linux systems for file and print services interaction with Windows systems...	https://www.phoronix.com/news/Samba-4.21-Released	2024-09-03 13:48:36	7
+921	Klp-build Proposed As A New Means Of Generating Linux Kernel Livepatch Modules	Posted today as a "request for comments" by longtime Linux developer Josh Poimboeuf of Red Hat is klp-build. The klp-build proposal is a new means of building livepatch modules for live-patching the Linux kernel to address bugs and security issues...	https://www.phoronix.com/news/Linux-Livepatch-klp-build	2024-09-03 12:41:33	7
+922	F2FS Inline Tail Allows For Saving Space On Small Files & Reducing I/O	Patches posted to the Linux kernel mailing list today allow for inline tail support within the Flash-Friendly File-System (F2FS). This inline tail support allows for saving space when storing many small files and with reduced I/O can lead to faster...	https://www.phoronix.com/news/F2FS-Inline-Tail-Patches	2024-09-03 10:56:05	7
+923	Power Profiles Daemon 0.22 Released With Several AMD Improvements	Power Profiles Daemon as the UPower project to make Linux laptop/system power profile handling via D-Bus is out with a new release. This is the Linux/open-source solution for exposing of power profiles to the Linux desktop and better managing the...	https://www.phoronix.com/news/Power-Profiles-Daemon-0.22	2024-09-03 10:41:32	7
+924	Coreboot 24.08 Released With 31 New Motherboards, Initial Intel Panther Lake Support	Coreboot 24.08 debuted on Monday night as the newest feature release for this open-source system firmware project that allows replacing the proprietary BIOS/firmware on many different platforms. With Coreboot 24.08 comes more than 900 patches from...	https://www.phoronix.com/news/Coreboot-24.08-Released	2024-09-03 10:31:56	7
+925	Google Increases AVIF Image Format Support With Google Search Support	While two years ago Google notably axed support for JPEG-XL within the Chrome web browser, they remain bullish on WebP and AVIF for imaging needs. This past week they finally announced Google Search is now supporting AVIF images...	https://www.phoronix.com/news/Google-Search-AVIF	2024-09-03 10:03:14	7
+946	How to Read an RSS Feed with Java Using XOM	There are a lot of libraries for processing XML data with Java that can be used to read RSS feeds. One of the best is the open source library XOM created by the computer book author Elliotte Rusty Harold.As he wrote one of his 20 books about Java...	https://www.rssboard.org/news/221/read-rss-feed-java-using-xom	2023-08-02 03:25:57	14
+947	The RSS Advisory Board Just Turned 20	"Tomorrow we will run faster, stretch out our arms farther."Today is the 20th birthday of the RSS Advisory Board, the group that publishes the RSS specification. It was formed on July 18, 2003, when the copyright of the specification was...	https://www.rssboard.org/news/220/rss-advisory-board-just-turned-20	2023-07-18 19:50:24	14
+948	Downloading 50,000 Podcast Feeds to Analyze Their RSS	The software developer Niko Abeler has crawled 51,165 podcast feeds to study what RSS elements they contain. His comprehensive Podcast Feed Standard report looks at the usage of core RSS elements and namespace elements from Apple iTunes, Atom,...	https://www.rssboard.org/news/219/downloading-50000-podcast-feeds-analyze	2023-07-14 14:38:42	14
+949	Tara Calishain Explains: What is RSS?	The exodus of users away from Twitter and Reddit has led many of those information refugees to discover the joy of subscribing to feeds in a reader. RSS and Atom feeds are an enormous open decentralized network that can never be ruined under new...	https://www.rssboard.org/news/218/tara-calishain-explains-rss	2023-07-13 01:45:48	14
+950	Be Unique And Use RSS Guid Like Everybody Else	Winter scenes: Snowflakes by Theodor HorydczakIf you publish an RSS feed, you should do a solid for the developers of RSS readers by including a guid in each item. The guid's job is to be a unique identifier that helps software downloading your...	https://www.rssboard.org/news/217/unique-and-use-rss-guid-like-everybody	2023-07-11 02:30:01	14
+951	Has the RSS Advisory Board Followed the Roadmap?	There has been recent discussion about the roadmap that was added to the RSS 2.0 specification in August 2002 announcing that there would be no new additions to RSS, freezing its set of elements and attributes forever and ever amen. The roadmap...	https://www.rssboard.org/news/216/has-rss-advisory-board-followed	2023-07-05 18:52:11	14
+952	RSS Enclosure Support in Micro.Blog	An effort is underway to examine how feed publishers and feed consumers are handling the lack of clarity in the RSS 2.0 specification about whether an item can contain more than one enclosure. The RSS Best Practices Profile recommends that a feed...	https://www.rssboard.org/news/214/rss-enclosure-support-microblog	2023-07-03 03:35:33	14
+953	Atom Feed Format Was Born 20 Years Ago	This month marks the 20th anniversary of the effort that became the Atom feed format. It all began on June 16, 2003, with a blog post from Apache Software Foundation contributor Sam Ruby asking for feedback about what constitutes a well-formed blog...	https://www.rssboard.org/news/213/atom-feed-format-born-20-years-ago	2023-06-29 20:39:54	14
+954	How to Read an RSS Feed with PHP Using SimplePie	If you need to load an RSS feed with the PHP programming language, the open source library SimplePie greatly simplifies the process of pulling in items from a feed to present on a website, store in a database or do something else coooool with the...	https://www.rssboard.org/news/212/read-rss-feed-php-using	2023-06-26 19:08:40	14
+955	Every Mastodon User Has an RSS Feed	The distributed social network Mastodon has grown to 12.8 million user accounts, supporting itself through user donations and a lot of effort by the volunteers running servers. There's no CEO changing the network at whim, no ads and no algorithms...	https://www.rssboard.org/news/211/every-mastodon-user-has-rss-feed	2023-06-24 12:34:48	14
+956	RSS Enclosure Support in WordPress	One of the biggest challenges for a software developer implementing the RSS 2.0 specification is the issue of enclosures in a feed item. The specification is infamously unclear on whether an item allows one enclosure or multiple enclosures.The RSS...	https://www.rssboard.org/news/210/rss-enclosure-support-wordpress	2023-06-23 01:44:06	14
+957	Where to Find the RSS Specification	The RSS Advisory Board has published the RSS 2.0 Specification for 20 years, releasing 10 revisions over that time. The current version of the specification can always be found at this URL:https://www.rssboard.org/rss-specificationThe revisions...	https://www.rssboard.org/news/209/find-rss-specification	2023-06-18 18:11:52	14
+958	Should Feed Readers Count Unread Items?	Brent Simmons, the developer of the NetNewsWire RSS reader, is questioning his decision to put an unread count next to each feed, reasoning that it encourages people to be too obsessive about reading every item:Instead of a dozen bookmarks, people...	https://www.rssboard.org/news/208/should-feed-readers-count-unread-items	2014-04-02 15:12:53	14
+959	WordPress Uses RSS as Blog Export Format	If you export your WordPress blog, it is delivered to you as an RSS feed that holds all of the blog's entries, pages and comments. WordPress makes use of five namespaces and calls the format WordPress eXtended RSS (WXR). I'm working on a Java...	https://www.rssboard.org/news/207/wordpress-uses-rss-blog-export-format	2014-03-11 20:18:14	14
+960	Yahoo Groups Dropped RSS Feed Support	The RSS feeds of the RSS-Public and RSS-Board mailing lists are no longer available. Yahoo Groups used to offer feeds for each of its public lists, but Yahoo dropped support last year. A member of the service's product team said the feature was...	https://www.rssboard.org/news/206/yahoo-groups-dropped-rss-feed-support	2014-03-06 20:47:26	14
+1025	Emma Navarro reaches her first Grand Slam at the U.S. Open with win over Paula Badosa	The 13th-seeded Navarro will next face Aryna Sabalenka, while Americans Taylor Fritz and Frances Tiafoe advanced to the semis on the men's side of the tournament.	https://www.npr.org/2024/09/04/g-s1-20727/emma-navarro-us-open-taylor-fritz-frances-tiafoe	2024-09-04 05:21:57	8
+1026	Abuse claims trigger a reckoning in India's Mollywood	A report into sexual assault in one of India's most respected film industries has triggered a #MeToo-style reckoning.	https://www.npr.org/2024/09/03/nx-s1-5095743/abuse-claims-trigger-a-reckoning-in-indias-mollywood	2024-09-04 01:03:46	8
+1027	Coastal flooding is getting more common, even on sunny days	High tide floods – when water collects in streets or even seeps into buildings on days without rain – are increasingly common in coastal areas as sea levels rise, a new report warns.	https://www.npr.org/2024/08/06/nx-s1-5057482/high-tide-floods-get-worse	2024-09-03 23:37:27	8
+1028	U.S. charges Hamas leaders with terrorism over October attack in Israel	The Justice Department is charging six Hamas leaders with terrorism, including the architect of the group’s deadly Oct. 7 attack against Israel.	https://www.npr.org/2024/09/03/g-s1-20701/hamas-terrorism-us-israel-middle-east	2024-09-03 22:01:36	8
+1029	Israel Mourns Dead Hostages; Gaza Civilians Don't Know Where to Go	Israel mourns six hostages, who were captured during the October 7th attacks by Hamas, and found by the Israeli military in Gaza, recently killed. We go to the funeral of one of the hostages, in Jerusalem.  And in Gaza, nearly all residents have...	https://www.npr.org/2024/09/03/1197477616/israel-mourns-dead-hostages-gaza-civilians-dont-know-where-to-go	2024-09-03 21:51:36	8
+1030	5 things to know about the U.K.’s suspension of some arms exports to Israel	The U.K. exports explosive devices, guns and fighter jet components to Israel. But it's suspending some arms shipments, fearing Israel could used them in violation of international law.	https://www.npr.org/2024/09/03/nx-s1-5098300/uk-suspends-arms-israel	2024-09-03 21:09:42	8
+1031	A new version of the 1977 Star Wars features a dub in a Native American language	A new version of the 1977 classic Star Wars opens in Minnesota theaters, now dubbed over in Ojibwe -- the indigenous language of one of the largest Native American tribes in the United States.	https://www.npr.org/2024/09/03/nx-s1-5094903-e1/encore-ojibwe-star-wars	2024-09-03 20:21:01	8
+1032	Despite evidence, Trump calls Arlington Cemetery incident a 'made up story'	Meanwhile, members of Congress are asking for details about the incident, which was first reported by NPR.	https://www.npr.org/2024/09/03/g-s1-20680/trump-arlington-cemetery	2024-09-03 19:19:27	8
+1033	'I want to write myself into existence,' says 'Colored Television' author	Danzy Senna was born in 1970, just a few years after Loving v. Virginia legalized interracial marriage. “Just merely existing as a family was a radical statement at that time,” she says.	https://www.npr.org/2024/09/03/nx-s1-5095921/colored-television-danzy-senna	2024-09-03 18:26:27	8
+1034	Beloved 'Russian spy whale' Hvaldimir is found dead under mysterious circumstances	A beloved beluga whale with a mysterious past was found dead in the waters of Norway over the weekend. Admirers are paying tribute as authorities investigate.	https://www.npr.org/2024/09/03/nx-s1-5098968/hvaldimir-russian-spy-beluga-whale-dead	2024-09-03 17:34:13	8
+1035	How Mozilla’s AI website creator, Solo, is shaking up a $2.1 billion industry	In the world of entrepreneurship, one business owner’s journey proves the power of simple technology. And group chats. When Richelle Samy founded Culture of Stamina, a coaching service, she set out to create an online presence that was elegant and...	https://blog.mozilla.org/en/mozilla/ai/mozilla-solo-artifical-intelligence-website-creator-ai/	2024-08-28 19:24:04	2
+1036	Fakespot’s guide to trending back-to-school products	Back-to-school season is here, and TikTok is teeming with viral product recommendations. Gone are the days of battling crowded aisles and long checkout lines at big box stores. Now, with just a few clicks, you can have almost anything you want...	https://blog.mozilla.org/en/mozilla/news/fakespots-guide-to-trending-back-to-school-products/	2024-08-26 13:00:00	2
+1045	Locale-sensitive text segmentation in JavaScript with Intl.Segmenter	Learn how to use Intl.Segmenter for locale-sensitive text segmentation in JavaScript to simplify localization, count words or sentences in different languages, and more.	https://developer.mozilla.org/en-US/blog/javascript-intl-segmenter-i18n/	2024-09-03 00:00:00	3
+1046	Optimize your workflow with Git stash	Learn how to use Git stash to break down large commits. Discover a better approach for saving work when switching branches.	https://developer.mozilla.org/en-US/blog/optimize-your-workflow-git-stash/	2024-08-28 00:00:00	3
+1125	VSE Workshop: August 2024	Write up on the workshop around the Video Sequence Editor that took place at the Blender HQ in August 2024.	https://code.blender.org/2024/08/vse-workshop-august-2024/	2024-08-26 13:26:41	9
+882	Firefox 130 Now Available With WebCodecs API Enabled On The Desktop	Firefox 130 web browser binaries were published today ahead of the official release announcement going out on Tuesday. Firefox 130 isn't too particularly exciting but there are a few changes worth mentioning...	https://www.phoronix.com/news/Firefox-130	2024-09-03 00:22:13	7
+\.
+
+
+--
+-- Data for Name: user_item; Type: TABLE DATA; Schema: public; Owner: inflow
+--
+
+COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at) FROM stdin;
+2	624	f	f	\N	\N
+2	625	f	f	\N	\N
+2	626	f	f	\N	\N
+2	627	f	f	\N	\N
+2	628	f	f	\N	\N
+2	629	f	f	\N	\N
+2	630	f	f	\N	\N
+2	631	f	f	\N	\N
+2	632	f	f	\N	\N
+2	633	f	f	\N	\N
+2	373	f	f	\N	\N
+2	372	f	f	\N	\N
+2	371	f	f	\N	\N
+2	370	f	f	\N	\N
+2	369	f	f	\N	\N
+2	368	f	f	\N	\N
+2	367	f	f	\N	\N
+2	366	f	f	\N	\N
+2	365	f	f	\N	\N
+2	364	f	f	\N	\N
+2	47	f	f	\N	\N
+2	48	f	f	\N	\N
+2	49	f	f	\N	\N
+2	50	f	f	\N	\N
+2	51	f	f	\N	\N
+2	83	f	f	\N	\N
+2	53	f	f	\N	\N
+2	54	f	f	\N	\N
+2	55	f	f	\N	\N
+2	56	f	f	\N	\N
+2	57	f	f	\N	\N
+2	58	f	f	\N	\N
+2	59	f	f	\N	\N
+2	60	f	f	\N	\N
+2	61	f	f	\N	\N
+2	62	f	f	\N	\N
+2	63	f	f	\N	\N
+2	64	f	f	\N	\N
+2	65	f	f	\N	\N
+2	66	f	f	\N	\N
+2	67	f	f	\N	\N
+2	68	f	f	\N	\N
+2	69	f	f	\N	\N
+2	70	f	f	\N	\N
+2	71	f	f	\N	\N
+2	72	f	f	\N	\N
+2	75	f	f	\N	\N
+2	77	f	f	\N	\N
+2	52	f	f	\N	\N
+2	84	f	f	\N	\N
+2	85	f	f	\N	\N
+2	88	f	f	\N	\N
+2	89	f	f	\N	\N
+2	92	f	f	\N	\N
+2	93	f	f	\N	\N
+2	96	f	f	\N	\N
+2	97	f	f	\N	\N
+2	98	f	f	\N	\N
+2	99	f	f	\N	\N
+2	100	f	f	\N	\N
+2	101	f	f	\N	\N
+2	102	f	f	\N	\N
+2	103	f	f	\N	\N
+2	104	f	f	\N	\N
+2	105	f	f	\N	\N
+2	106	f	f	\N	\N
+2	107	f	f	\N	\N
+2	108	f	f	\N	\N
+2	42	f	f	\N	\N
+2	43	f	f	\N	\N
+2	44	f	f	\N	\N
+2	45	f	f	\N	\N
+2	46	f	f	\N	\N
+2	249	f	f	\N	\N
+2	250	f	f	\N	\N
+2	251	f	f	\N	\N
+2	252	f	f	\N	\N
+2	253	f	f	\N	\N
+2	254	f	f	\N	\N
+2	255	f	f	\N	\N
+2	256	f	f	\N	\N
+2	257	f	f	\N	\N
+2	258	f	f	\N	\N
+2	259	f	f	\N	\N
+2	260	f	f	\N	\N
+2	261	f	f	\N	\N
+2	262	f	f	\N	\N
+2	263	f	f	\N	\N
+2	264	f	f	\N	\N
+2	265	f	f	\N	\N
+2	266	f	f	\N	\N
+2	267	f	f	\N	\N
+2	268	f	f	\N	\N
+2	269	f	f	\N	\N
+2	270	f	f	\N	\N
+2	271	f	f	\N	\N
+2	272	f	f	\N	\N
+2	273	f	f	\N	\N
+2	274	f	f	\N	\N
+2	275	f	f	\N	\N
+2	276	f	f	\N	\N
+2	277	f	f	\N	\N
+2	278	f	f	\N	\N
+2	279	f	f	\N	\N
+2	280	f	f	\N	\N
+2	281	f	f	\N	\N
+2	282	f	f	\N	\N
+2	283	f	f	\N	\N
+2	284	f	f	\N	\N
+2	285	f	f	\N	\N
+2	286	f	f	\N	\N
+2	287	f	f	\N	\N
+2	288	f	f	\N	\N
+2	289	f	f	\N	\N
+2	290	f	f	\N	\N
+2	291	f	f	\N	\N
+2	292	f	f	\N	\N
+2	293	f	f	\N	\N
+2	294	f	f	\N	\N
+2	295	f	f	\N	\N
+2	296	f	f	\N	\N
+2	297	f	f	\N	\N
+2	298	f	f	\N	\N
+2	299	f	f	\N	\N
+2	300	f	f	\N	\N
+2	301	f	f	\N	\N
+2	302	f	f	\N	\N
+2	303	f	f	\N	\N
+2	304	f	f	\N	\N
+2	305	f	f	\N	\N
+2	306	f	f	\N	\N
+2	307	f	f	\N	\N
+2	308	f	f	\N	\N
+2	131	f	f	\N	\N
+2	109	f	f	\N	\N
+2	110	f	f	\N	\N
+2	111	f	f	\N	\N
+2	112	f	f	\N	\N
+2	113	f	f	\N	\N
+2	114	f	f	\N	\N
+2	115	f	f	\N	\N
+2	116	f	f	\N	\N
+2	117	f	f	\N	\N
+2	118	f	f	\N	\N
+2	119	f	f	\N	\N
+2	120	f	f	\N	\N
+2	121	f	f	\N	\N
+2	122	f	f	\N	\N
+2	123	f	f	\N	\N
+2	124	f	f	\N	\N
+2	125	f	f	\N	\N
+2	126	f	f	\N	\N
+2	127	f	f	\N	\N
+2	128	f	f	\N	\N
+2	129	f	f	\N	\N
+2	130	f	f	\N	\N
+2	132	f	f	\N	\N
+2	133	f	f	\N	\N
+2	134	f	f	\N	\N
+2	135	f	f	\N	\N
+2	136	f	f	\N	\N
+2	137	f	f	\N	\N
+2	138	f	f	\N	\N
+2	139	f	f	\N	\N
+2	140	f	f	\N	\N
+2	141	f	f	\N	\N
+2	142	f	f	\N	\N
+2	143	f	f	\N	\N
+2	144	f	f	\N	\N
+2	145	f	f	\N	\N
+2	146	f	f	\N	\N
+2	147	f	f	\N	\N
+2	148	f	f	\N	\N
+2	149	f	f	\N	\N
+2	150	f	f	\N	\N
+2	151	f	f	\N	\N
+2	152	f	f	\N	\N
+2	153	f	f	\N	\N
+2	154	f	f	\N	\N
+2	155	f	f	\N	\N
+2	156	f	f	\N	\N
+2	157	f	f	\N	\N
+2	158	f	f	\N	\N
+2	159	f	f	\N	\N
+2	160	f	f	\N	\N
+2	617	f	f	\N	\N
+2	618	f	f	\N	\N
+2	619	f	f	\N	\N
+2	614	f	f	\N	\N
+2	615	f	f	\N	\N
+2	616	f	f	\N	\N
+2	161	f	f	\N	\N
+2	162	f	f	\N	\N
+2	163	f	f	\N	\N
+2	164	f	f	\N	\N
+2	165	f	f	\N	\N
+2	166	f	f	\N	\N
+2	167	f	f	\N	\N
+2	168	f	f	\N	\N
+2	169	f	f	\N	\N
+2	170	f	f	\N	\N
+2	171	f	f	\N	\N
+2	172	f	f	\N	\N
+2	173	f	f	\N	\N
+2	174	f	f	\N	\N
+2	175	f	f	\N	\N
+2	176	f	f	\N	\N
+2	177	f	f	\N	\N
+2	178	f	f	\N	\N
+2	179	f	f	\N	\N
+2	180	f	f	\N	\N
+2	181	f	f	\N	\N
+2	182	f	f	\N	\N
+2	183	f	f	\N	\N
+2	184	f	f	\N	\N
+2	185	f	f	\N	\N
+2	186	f	f	\N	\N
+2	187	f	f	\N	\N
+2	188	f	f	\N	\N
+2	189	f	f	\N	\N
+2	190	f	f	\N	\N
+2	191	f	f	\N	\N
+2	192	f	f	\N	\N
+2	193	f	f	\N	\N
+2	194	f	f	\N	\N
+2	195	f	f	\N	\N
+2	196	f	f	\N	\N
+2	197	f	f	\N	\N
+2	198	f	f	\N	\N
+2	199	f	f	\N	\N
+2	200	f	f	\N	\N
+2	201	f	f	\N	\N
+2	202	f	f	\N	\N
+2	203	f	f	\N	\N
+2	204	f	f	\N	\N
+2	205	f	f	\N	\N
+2	206	f	f	\N	\N
+2	207	f	f	\N	\N
+2	208	f	f	\N	\N
+2	209	f	f	\N	\N
+2	210	f	f	\N	\N
+2	211	f	f	\N	\N
+2	212	f	f	\N	\N
+2	213	f	f	\N	\N
+2	214	f	f	\N	\N
+2	215	f	f	\N	\N
+2	216	f	f	\N	\N
+2	217	f	f	\N	\N
+2	218	f	f	\N	\N
+2	219	f	f	\N	\N
+2	220	f	f	\N	\N
+2	221	f	f	\N	\N
+2	222	f	f	\N	\N
+2	223	f	f	\N	\N
+2	224	f	f	\N	\N
+2	225	f	f	\N	\N
+2	226	f	f	\N	\N
+2	227	f	f	\N	\N
+2	228	f	f	\N	\N
+2	229	f	f	\N	\N
+2	230	f	f	\N	\N
+2	231	f	f	\N	\N
+2	232	f	f	\N	\N
+2	233	f	f	\N	\N
+2	234	f	f	\N	\N
+2	235	f	f	\N	\N
+2	236	f	f	\N	\N
+2	237	f	f	\N	\N
+2	238	f	f	\N	\N
+2	239	f	f	\N	\N
+2	240	f	f	\N	\N
+2	241	f	f	\N	\N
+2	242	f	f	\N	\N
+2	243	f	f	\N	\N
+2	244	f	f	\N	\N
+2	245	f	f	\N	\N
+2	246	f	f	\N	\N
+2	247	f	f	\N	\N
+2	248	f	f	\N	\N
+2	421	f	f	\N	\N
+2	340	f	f	\N	\N
+2	341	f	f	\N	\N
+2	342	f	f	\N	\N
+2	343	f	f	\N	\N
+2	344	f	f	\N	\N
+2	345	f	f	\N	\N
+2	346	f	f	\N	\N
+2	347	f	f	\N	\N
+2	348	f	f	\N	\N
+2	349	f	f	\N	\N
+2	350	f	f	\N	\N
+2	351	f	f	\N	\N
+2	352	f	f	\N	\N
+2	353	f	f	\N	\N
+2	354	f	f	\N	\N
+2	355	f	f	\N	\N
+2	356	f	f	\N	\N
+2	357	f	f	\N	\N
+2	358	f	f	\N	\N
+2	359	f	f	\N	\N
+2	360	f	f	\N	\N
+2	338	f	f	\N	\N
+2	337	f	f	\N	\N
+2	336	f	f	\N	\N
+2	335	f	f	\N	\N
+2	334	f	f	\N	\N
+2	333	f	f	\N	\N
+2	332	f	f	\N	\N
+2	331	f	f	\N	\N
+2	330	f	f	\N	\N
+2	329	f	f	\N	\N
+2	414	f	f	\N	\N
+2	434	f	f	\N	\N
+2	435	f	f	\N	\N
+2	436	f	f	\N	\N
+2	437	f	f	\N	\N
+2	438	f	f	\N	\N
+2	439	f	f	\N	\N
+2	440	f	f	\N	\N
+2	441	f	f	\N	\N
+2	328	f	f	\N	\N
+2	327	f	f	\N	\N
+2	326	f	f	\N	\N
+2	325	f	f	\N	\N
+2	324	f	f	\N	\N
+2	323	f	f	\N	\N
+2	322	f	f	\N	\N
+2	321	f	f	\N	\N
+2	320	f	f	\N	\N
+2	319	f	f	\N	\N
+2	318	f	f	\N	\N
+2	317	f	f	\N	\N
+2	316	f	f	\N	\N
+2	315	f	f	\N	\N
+2	314	f	f	\N	\N
+2	313	f	f	\N	\N
+2	312	f	f	\N	\N
+2	311	f	f	\N	\N
+2	310	f	f	\N	\N
+2	309	f	f	\N	\N
+2	582	f	f	\N	\N
+2	586	f	f	\N	\N
+2	585	f	f	\N	\N
+2	584	f	f	\N	\N
+2	583	f	f	\N	\N
+2	415	f	f	\N	\N
+2	416	f	f	\N	\N
+2	417	f	f	\N	\N
+2	418	f	f	\N	\N
+2	419	f	f	\N	\N
+2	420	f	f	\N	\N
+2	339	f	f	\N	\N
+2	422	f	f	\N	\N
+2	423	f	f	\N	\N
+2	424	f	f	\N	\N
+2	425	f	f	\N	\N
+2	426	f	f	\N	\N
+2	427	f	f	\N	\N
+2	428	f	f	\N	\N
+2	429	f	f	\N	\N
+2	430	f	f	\N	\N
+2	431	f	f	\N	\N
+2	432	f	f	\N	\N
+2	433	f	f	\N	\N
+2	634	f	f	\N	\N
+2	635	f	f	\N	\N
+3	635	f	f	\N	\N
+2	636	f	f	\N	\N
+3	636	f	f	\N	\N
+2	1	f	f	\N	\N
+2	2	f	f	\N	\N
+2	3	f	f	\N	\N
+2	4	f	f	\N	\N
+2	5	f	f	\N	\N
+2	6	f	f	\N	\N
+2	7	f	f	\N	\N
+2	8	f	f	\N	\N
+2	9	f	f	\N	\N
+2	10	f	f	\N	\N
+2	11	f	f	\N	\N
+2	12	f	f	\N	\N
+2	13	f	f	\N	\N
+2	14	f	f	\N	\N
+2	15	f	f	\N	\N
+2	16	f	f	\N	\N
+2	17	f	f	\N	\N
+2	18	f	f	\N	\N
+2	19	f	f	\N	\N
+2	20	f	f	\N	\N
+2	21	f	f	\N	\N
+2	22	f	f	\N	\N
+2	23	f	f	\N	\N
+2	24	f	f	\N	\N
+2	25	f	f	\N	\N
+2	26	f	f	\N	\N
+2	27	f	f	\N	\N
+2	28	f	f	\N	\N
+2	29	f	f	\N	\N
+2	30	f	f	\N	\N
+2	31	f	f	\N	\N
+2	32	f	f	\N	\N
+2	33	f	f	\N	\N
+2	34	f	f	\N	\N
+2	35	f	f	\N	\N
+2	36	f	f	\N	\N
+2	37	f	f	\N	\N
+2	38	f	f	\N	\N
+2	39	f	f	\N	\N
+2	40	f	f	\N	\N
+2	41	f	f	\N	\N
+3	414	f	f	\N	\N
+3	415	f	f	\N	\N
+3	582	f	f	\N	\N
+3	416	f	f	\N	\N
+3	417	f	f	\N	\N
+3	418	f	f	\N	\N
+3	419	f	f	\N	\N
+3	420	f	f	\N	\N
+3	421	f	f	\N	\N
+3	422	f	f	\N	\N
+3	423	f	f	\N	\N
+3	424	f	f	\N	\N
+3	425	f	f	\N	\N
+3	426	f	f	\N	\N
+3	427	f	f	\N	\N
+3	428	f	f	\N	\N
+3	429	f	f	\N	\N
+3	430	f	f	\N	\N
+3	431	f	f	\N	\N
+3	462	f	f	\N	\N
+3	432	f	f	\N	\N
+3	559	f	f	\N	\N
+3	433	f	f	\N	\N
+3	463	f	f	\N	\N
+3	434	f	f	\N	\N
+3	503	f	f	\N	\N
+3	435	f	f	\N	\N
+3	464	f	f	\N	\N
+3	436	f	f	\N	\N
+3	552	f	f	\N	\N
+3	437	f	f	\N	\N
+3	465	f	f	\N	\N
+3	438	f	f	\N	\N
+3	504	f	f	\N	\N
+3	439	f	f	\N	\N
+3	466	f	f	\N	\N
+3	440	f	f	\N	\N
+3	557	f	f	\N	\N
+3	441	f	f	\N	\N
+3	467	f	f	\N	\N
+3	442	f	f	\N	\N
+3	505	f	f	\N	\N
+3	443	f	f	\N	\N
+3	553	f	f	\N	\N
+3	444	f	f	\N	\N
+3	586	f	f	\N	\N
+3	445	f	f	\N	\N
+3	561	f	f	\N	\N
+3	585	f	f	\N	\N
+3	554	f	f	\N	\N
+3	584	f	f	\N	\N
+3	558	f	f	\N	\N
+3	583	f	f	\N	\N
+2	637	f	f	\N	\N
+3	637	f	f	\N	\N
+2	638	f	f	\N	\N
+3	638	f	f	\N	\N
+2	639	f	f	\N	\N
+3	639	f	f	\N	\N
+2	640	f	f	\N	\N
+3	640	f	f	\N	\N
+2	676	f	f	\N	\N
+2	540	f	f	\N	\N
+2	549	f	f	\N	\N
+2	548	f	f	\N	\N
+2	547	f	f	\N	\N
+2	546	f	f	\N	\N
+2	545	f	f	\N	\N
+2	544	f	f	\N	\N
+2	543	f	f	\N	\N
+2	542	f	f	\N	\N
+2	541	f	f	\N	\N
+2	497	f	f	\N	\N
+2	496	f	f	\N	\N
+2	495	f	f	\N	\N
+2	494	f	f	\N	\N
+2	493	f	f	\N	\N
+2	492	f	f	\N	\N
+2	491	f	f	\N	\N
+2	490	f	f	\N	\N
+2	489	f	f	\N	\N
+2	488	f	f	\N	\N
+2	455	f	f	\N	\N
+2	454	f	f	\N	\N
+2	453	f	f	\N	\N
+2	452	f	f	\N	\N
+2	451	f	f	\N	\N
+2	450	f	f	\N	\N
+2	449	f	f	\N	\N
+2	448	f	f	\N	\N
+2	447	f	f	\N	\N
+2	446	f	f	\N	\N
+2	442	f	f	\N	\N
+2	443	f	f	\N	\N
+2	444	f	f	\N	\N
+2	445	f	f	\N	\N
+2	456	f	f	\N	\N
+2	457	f	f	\N	\N
+2	458	f	f	\N	\N
+2	459	f	f	\N	\N
+2	460	f	f	\N	\N
+2	461	f	f	\N	\N
+2	462	f	f	\N	\N
+2	463	f	f	\N	\N
+2	464	f	f	\N	\N
+2	465	f	f	\N	\N
+2	466	f	f	\N	\N
+2	467	f	f	\N	\N
+2	498	f	f	\N	\N
+2	499	f	f	\N	\N
+2	500	f	f	\N	\N
+2	501	f	f	\N	\N
+2	502	f	f	\N	\N
+2	503	f	f	\N	\N
+2	504	f	f	\N	\N
+2	505	f	f	\N	\N
+2	550	f	f	\N	\N
+2	551	f	f	\N	\N
+2	552	f	f	\N	\N
+2	553	f	f	\N	\N
+2	554	f	f	\N	\N
+2	555	f	f	\N	\N
+2	556	f	f	\N	\N
+2	557	f	f	\N	\N
+2	558	f	f	\N	\N
+2	559	f	f	\N	\N
+2	560	f	f	\N	\N
+2	561	f	f	\N	\N
+3	555	f	f	\N	\N
+3	498	f	f	\N	\N
+3	560	f	f	\N	\N
+3	499	f	f	\N	\N
+3	456	f	f	\N	\N
+3	550	f	f	\N	\N
+3	457	f	f	\N	\N
+3	500	f	f	\N	\N
+3	458	f	f	\N	\N
+3	556	f	f	\N	\N
+3	459	f	f	\N	\N
+3	501	f	f	\N	\N
+3	460	f	f	\N	\N
+3	551	f	f	\N	\N
+3	461	f	f	\N	\N
+3	502	f	f	\N	\N
+2	882	f	f	\N	\N
+3	882	f	f	\N	\N
+2	914	f	f	\N	\N
+3	914	f	f	\N	\N
+2	915	f	f	\N	\N
+3	915	f	f	\N	\N
+2	916	f	f	\N	\N
+3	916	f	f	\N	\N
+2	917	f	f	\N	\N
+3	917	f	f	\N	\N
+2	918	f	f	\N	\N
+3	918	f	f	\N	\N
+2	919	f	f	\N	\N
+3	919	f	f	\N	\N
+2	920	f	f	\N	\N
+3	920	f	f	\N	\N
+2	921	f	f	\N	\N
+3	921	f	f	\N	\N
+2	922	f	f	\N	\N
+3	922	f	f	\N	\N
+2	923	f	f	\N	\N
+3	923	f	f	\N	\N
+2	924	f	f	\N	\N
+3	924	f	f	\N	\N
+2	925	f	f	\N	\N
+3	925	f	f	\N	\N
+3	946	f	f	\N	\N
+3	947	f	f	\N	\N
+3	948	f	f	\N	\N
+3	949	f	f	\N	\N
+3	950	f	f	\N	\N
+3	951	f	f	\N	\N
+3	952	f	f	\N	\N
+3	953	f	f	\N	\N
+3	954	f	f	\N	\N
+3	955	f	f	\N	\N
+3	956	f	f	\N	\N
+3	957	f	f	\N	\N
+3	958	f	f	\N	\N
+3	959	f	f	\N	\N
+3	960	f	f	\N	\N
+3	634	f	f	\N	\N
+2	1025	f	f	\N	\N
+2	1026	f	f	\N	\N
+2	1027	f	f	\N	\N
+2	1028	f	f	\N	\N
+2	1029	f	f	\N	\N
+2	1030	f	f	\N	\N
+2	1031	f	f	\N	\N
+2	1032	f	f	\N	\N
+2	1033	f	f	\N	\N
+2	1034	f	f	\N	\N
+2	1035	f	f	\N	\N
+2	1036	f	f	\N	\N
+2	1045	f	f	\N	\N
+2	1046	f	f	\N	\N
+2	1125	f	f	\N	\N
+\.
+
+
+--
+-- Data for Name: collection_useritem; Type: TABLE DATA; Schema: public; Owner: inflow
+--
+
+COPY public.collection_useritem (collection_id, user_id, item_id) FROM stdin;
+43	2	624
+43	2	625
+43	2	626
+43	2	627
+43	2	628
+43	2	629
+43	2	630
+43	2	631
+43	2	632
+43	2	633
+43	2	373
+43	2	372
+43	2	371
+43	2	370
+43	2	369
+43	2	368
+43	2	367
+43	2	366
+43	2	365
+43	2	364
+40	2	47
+40	2	48
+40	2	49
+40	2	50
+40	2	51
+40	2	83
+40	2	53
+40	2	54
+40	2	55
+40	2	56
+40	2	57
+40	2	58
+40	2	59
+40	2	60
+40	2	61
+40	2	62
+40	2	63
+40	2	64
+40	2	65
+40	2	66
+40	2	67
+40	2	68
+40	2	69
+40	2	70
+40	2	71
+40	2	72
+40	2	75
+40	2	77
+40	2	52
+40	2	84
+40	2	85
+40	2	88
+40	2	89
+40	2	92
+40	2	93
+40	2	96
+40	2	97
+40	2	98
+40	2	99
+40	2	100
+40	2	101
+40	2	102
+40	2	103
+40	2	104
+40	2	105
+40	2	106
+40	2	107
+40	2	108
+40	2	42
+40	2	43
+40	2	44
+40	2	45
+40	2	46
+42	2	249
+42	2	250
+42	2	251
+42	2	252
+42	2	253
+42	2	254
+42	2	255
+42	2	256
+42	2	257
+42	2	258
+42	2	259
+42	2	260
+42	2	261
+42	2	262
+42	2	263
+42	2	264
+42	2	265
+42	2	266
+42	2	267
+42	2	268
+42	2	269
+42	2	270
+42	2	271
+42	2	272
+42	2	273
+42	2	274
+42	2	275
+42	2	276
+42	2	277
+42	2	278
+42	2	279
+42	2	280
+42	2	281
+42	2	282
+42	2	283
+42	2	284
+42	2	285
+42	2	286
+42	2	287
+42	2	288
+42	2	289
+42	2	290
+42	2	291
+42	2	292
+42	2	293
+42	2	294
+42	2	295
+42	2	296
+42	2	297
+42	2	298
+42	2	299
+42	2	300
+42	2	301
+42	2	302
+42	2	303
+42	2	304
+42	2	305
+42	2	306
+42	2	307
+42	2	308
+42	2	131
+42	2	109
+42	2	110
+42	2	111
+42	2	112
+42	2	113
+42	2	114
+42	2	115
+42	2	116
+42	2	117
+42	2	118
+42	2	119
+42	2	120
+42	2	121
+42	2	122
+42	2	123
+42	2	124
+42	2	125
+42	2	126
+42	2	127
+42	2	128
+42	2	129
+42	2	130
+42	2	132
+42	2	133
+42	2	134
+42	2	135
+42	2	136
+42	2	137
+42	2	138
+42	2	139
+42	2	140
+42	2	141
+42	2	142
+42	2	143
+42	2	144
+42	2	145
+42	2	146
+42	2	147
+42	2	148
+42	2	149
+42	2	150
+42	2	151
+42	2	152
+42	2	153
+42	2	154
+42	2	155
+42	2	156
+42	2	157
+42	2	158
+42	2	159
+42	2	160
+43	2	617
+43	2	618
+43	2	619
+43	2	614
+43	2	615
+43	2	616
+42	2	161
+42	2	162
+42	2	163
+42	2	164
+42	2	165
+42	2	166
+42	2	167
+42	2	168
+42	2	169
+42	2	170
+42	2	171
+42	2	172
+42	2	173
+42	2	174
+42	2	175
+42	2	176
+42	2	177
+42	2	178
+42	2	179
+42	2	180
+42	2	181
+42	2	182
+42	2	183
+42	2	184
+42	2	185
+42	2	186
+42	2	187
+42	2	188
+42	2	189
+42	2	190
+42	2	191
+42	2	192
+42	2	193
+42	2	194
+42	2	195
+42	2	196
+42	2	197
+42	2	198
+42	2	199
+42	2	200
+42	2	201
+42	2	202
+42	2	203
+42	2	204
+42	2	205
+42	2	206
+42	2	207
+42	2	208
+42	2	209
+42	2	210
+42	2	211
+42	2	212
+42	2	213
+42	2	214
+42	2	215
+42	2	216
+42	2	217
+42	2	218
+42	2	219
+42	2	220
+42	2	221
+42	2	222
+42	2	223
+42	2	224
+42	2	225
+42	2	226
+42	2	227
+42	2	228
+42	2	229
+42	2	230
+42	2	231
+42	2	232
+42	2	233
+42	2	234
+42	2	235
+42	2	236
+42	2	237
+42	2	238
+42	2	239
+42	2	240
+42	2	241
+42	2	242
+42	2	243
+42	2	244
+42	2	245
+42	2	246
+42	2	247
+42	2	248
+41	2	421
+41	2	340
+41	2	341
+41	2	342
+41	2	343
+41	2	344
+41	2	345
+41	2	346
+41	2	347
+41	2	348
+41	2	349
+41	2	350
+41	2	351
+41	2	352
+41	2	353
+41	2	354
+41	2	355
+41	2	356
+41	2	357
+41	2	358
+41	2	359
+41	2	360
+41	2	338
+41	2	337
+41	2	336
+41	2	335
+41	2	334
+41	2	333
+41	2	332
+41	2	331
+41	2	330
+41	2	329
+41	2	414
+41	2	434
+41	2	435
+41	2	436
+41	2	437
+41	2	438
+41	2	439
+41	2	440
+41	2	441
+41	2	328
+41	2	327
+41	2	326
+41	2	325
+41	2	324
+41	2	323
+41	2	322
+41	2	321
+41	2	320
+41	2	319
+41	2	318
+41	2	317
+41	2	316
+41	2	315
+41	2	314
+41	2	313
+41	2	312
+41	2	311
+41	2	310
+41	2	309
+41	2	582
+41	2	586
+41	2	585
+41	2	584
+41	2	583
+41	2	415
+41	2	416
+41	2	417
+41	2	418
+41	2	419
+41	2	420
+41	2	339
+41	2	422
+41	2	423
+41	2	424
+41	2	425
+41	2	426
+41	2	427
+41	2	428
+41	2	429
+41	2	430
+41	2	431
+41	2	432
+41	2	433
+41	2	634
+41	3	634
+41	2	635
+41	3	635
+41	2	636
+41	3	636
+43	2	1
+43	2	2
+43	2	3
+43	2	4
+43	2	5
+43	2	6
+43	2	7
+43	2	8
+43	2	9
+43	2	10
+40	2	11
+40	2	12
+40	2	13
+40	2	14
+40	2	15
+40	2	16
+40	2	17
+40	2	18
+40	2	19
+40	2	20
+40	2	21
+40	2	22
+40	2	23
+40	2	24
+40	2	25
+40	2	26
+40	2	27
+40	2	28
+40	2	29
+40	2	30
+40	2	31
+40	2	32
+40	2	33
+40	2	34
+40	2	35
+40	2	36
+40	2	37
+40	2	38
+40	2	39
+40	2	40
+40	2	41
+44	3	414
+44	3	415
+44	3	582
+44	3	416
+44	3	417
+44	3	418
+44	3	419
+44	3	420
+44	3	421
+44	3	422
+44	3	423
+44	3	424
+44	3	425
+44	3	426
+44	3	427
+44	3	428
+44	3	429
+44	3	430
+44	3	431
+44	3	462
+44	3	432
+44	3	559
+44	3	433
+44	3	463
+44	3	434
+44	3	503
+44	3	435
+44	3	464
+44	3	436
+44	3	552
+44	3	437
+44	3	465
+44	3	438
+44	3	504
+44	3	439
+44	3	466
+44	3	440
+44	3	557
+44	3	441
+44	3	467
+44	3	442
+44	3	505
+44	3	443
+44	3	553
+44	3	444
+44	3	586
+44	3	445
+44	3	561
+44	3	585
+44	3	554
+44	3	584
+44	3	558
+44	3	583
+41	2	637
+41	3	637
+41	2	638
+41	3	638
+41	2	639
+41	3	639
+41	2	640
+41	3	640
+42	2	676
+43	2	540
+43	2	549
+43	2	548
+43	2	547
+43	2	546
+43	2	545
+43	2	544
+43	2	543
+43	2	542
+43	2	541
+43	2	497
+43	2	496
+43	2	495
+43	2	494
+43	2	493
+43	2	492
+43	2	491
+43	2	490
+43	2	489
+43	2	488
+43	2	455
+43	2	454
+43	2	453
+43	2	452
+43	2	451
+43	2	450
+43	2	449
+43	2	448
+43	2	447
+43	2	446
+41	2	442
+41	2	443
+41	2	444
+41	2	445
+41	2	456
+41	2	457
+41	2	458
+41	2	459
+41	2	460
+41	2	461
+41	2	462
+41	2	463
+41	2	464
+41	2	465
+41	2	466
+41	2	467
+41	2	498
+41	2	499
+41	2	500
+41	2	501
+41	2	502
+41	2	503
+41	2	504
+41	2	505
+41	2	550
+41	2	551
+41	2	552
+41	2	553
+41	2	554
+41	2	555
+41	2	556
+41	2	557
+41	2	558
+41	2	559
+41	2	560
+41	2	561
+44	3	555
+44	3	498
+44	3	560
+44	3	499
+44	3	456
+44	3	550
+44	3	457
+44	3	500
+44	3	458
+44	3	556
+44	3	459
+44	3	501
+44	3	460
+44	3	551
+44	3	461
+44	3	502
+44	2	882
+44	3	882
+44	2	914
+44	3	914
+44	2	915
+44	3	915
+44	2	916
+44	3	916
+44	2	917
+44	3	917
+44	2	918
+44	3	918
+44	2	919
+44	3	919
+44	2	920
+44	3	920
+44	2	921
+44	3	921
+44	2	922
+44	3	922
+44	2	923
+44	3	923
+44	2	924
+44	3	924
+44	2	925
+44	3	925
+52	3	946
+52	3	947
+52	3	948
+52	3	949
+52	3	950
+52	3	951
+52	3	952
+52	3	953
+52	3	954
+52	3	955
+52	3	956
+52	3	957
+52	3	958
+52	3	959
+52	3	960
+43	2	1025
+43	2	1026
+43	2	1027
+43	2	1028
+43	2	1029
+43	2	1030
+43	2	1031
+43	2	1032
+43	2	1033
+43	2	1034
+40	2	1035
+40	2	1036
+40	2	1045
+40	2	1046
+40	2	1125
 \.
 
 
@@ -564,569 +1847,7 @@ COPY public.user_feed (user_id, feed_id, title, description, collection_id) FROM
 2	8	\N	\N	43
 3	7	\N	\N	44
 3	11	\N	\N	44
-\.
-
-
---
--- Data for Name: user_item; Type: TABLE DATA; Schema: public; Owner: inflow
---
-
-COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at, collection_id) FROM stdin;
-2	624	f	f	\N	\N	43
-2	625	f	f	\N	\N	43
-2	626	f	f	\N	\N	43
-2	627	f	f	\N	\N	43
-2	628	f	f	\N	\N	43
-2	629	f	f	\N	\N	43
-2	630	f	f	\N	\N	43
-2	631	f	f	\N	\N	43
-2	632	f	f	\N	\N	43
-2	633	f	f	\N	\N	43
-2	373	f	f	\N	\N	43
-2	372	f	f	\N	\N	43
-2	371	f	f	\N	\N	43
-2	370	f	f	\N	\N	43
-2	369	f	f	\N	\N	43
-2	368	f	f	\N	\N	43
-2	367	f	f	\N	\N	43
-2	366	f	f	\N	\N	43
-2	365	f	f	\N	\N	43
-2	364	f	f	\N	\N	43
-2	47	f	f	\N	\N	40
-2	48	f	f	\N	\N	40
-2	49	f	f	\N	\N	40
-2	50	f	f	\N	\N	40
-2	51	f	f	\N	\N	40
-2	83	f	f	\N	\N	40
-2	53	f	f	\N	\N	40
-2	54	f	f	\N	\N	40
-2	55	f	f	\N	\N	40
-2	56	f	f	\N	\N	40
-2	57	f	f	\N	\N	40
-2	58	f	f	\N	\N	40
-2	59	f	f	\N	\N	40
-2	60	f	f	\N	\N	40
-2	61	f	f	\N	\N	40
-2	62	f	f	\N	\N	40
-2	63	f	f	\N	\N	40
-2	64	f	f	\N	\N	40
-2	65	f	f	\N	\N	40
-2	66	f	f	\N	\N	40
-2	67	f	f	\N	\N	40
-2	68	f	f	\N	\N	40
-2	69	f	f	\N	\N	40
-2	70	f	f	\N	\N	40
-2	71	f	f	\N	\N	40
-2	72	f	f	\N	\N	40
-2	75	f	f	\N	\N	40
-2	77	f	f	\N	\N	40
-2	52	f	f	\N	\N	40
-2	84	f	f	\N	\N	40
-2	85	f	f	\N	\N	40
-2	88	f	f	\N	\N	40
-2	89	f	f	\N	\N	40
-2	92	f	f	\N	\N	40
-2	93	f	f	\N	\N	40
-2	96	f	f	\N	\N	40
-2	97	f	f	\N	\N	40
-2	98	f	f	\N	\N	40
-2	99	f	f	\N	\N	40
-2	100	f	f	\N	\N	40
-2	101	f	f	\N	\N	40
-2	102	f	f	\N	\N	40
-2	103	f	f	\N	\N	40
-2	104	f	f	\N	\N	40
-2	105	f	f	\N	\N	40
-2	106	f	f	\N	\N	40
-2	107	f	f	\N	\N	40
-2	108	f	f	\N	\N	40
-2	42	f	f	\N	\N	40
-2	43	f	f	\N	\N	40
-2	44	f	f	\N	\N	40
-2	45	f	f	\N	\N	40
-2	46	f	f	\N	\N	40
-2	249	f	f	\N	\N	42
-2	250	f	f	\N	\N	42
-2	251	f	f	\N	\N	42
-2	252	f	f	\N	\N	42
-2	253	f	f	\N	\N	42
-2	254	f	f	\N	\N	42
-2	255	f	f	\N	\N	42
-2	256	f	f	\N	\N	42
-2	257	f	f	\N	\N	42
-2	258	f	f	\N	\N	42
-2	259	f	f	\N	\N	42
-2	260	f	f	\N	\N	42
-2	261	f	f	\N	\N	42
-2	262	f	f	\N	\N	42
-2	263	f	f	\N	\N	42
-2	264	f	f	\N	\N	42
-2	265	f	f	\N	\N	42
-2	266	f	f	\N	\N	42
-2	267	f	f	\N	\N	42
-2	268	f	f	\N	\N	42
-2	269	f	f	\N	\N	42
-2	270	f	f	\N	\N	42
-2	271	f	f	\N	\N	42
-2	272	f	f	\N	\N	42
-2	273	f	f	\N	\N	42
-2	274	f	f	\N	\N	42
-2	275	f	f	\N	\N	42
-2	276	f	f	\N	\N	42
-2	277	f	f	\N	\N	42
-2	278	f	f	\N	\N	42
-2	279	f	f	\N	\N	42
-2	280	f	f	\N	\N	42
-2	281	f	f	\N	\N	42
-2	282	f	f	\N	\N	42
-2	283	f	f	\N	\N	42
-2	284	f	f	\N	\N	42
-2	285	f	f	\N	\N	42
-2	286	f	f	\N	\N	42
-2	287	f	f	\N	\N	42
-2	288	f	f	\N	\N	42
-2	289	f	f	\N	\N	42
-2	290	f	f	\N	\N	42
-2	291	f	f	\N	\N	42
-2	292	f	f	\N	\N	42
-2	293	f	f	\N	\N	42
-2	294	f	f	\N	\N	42
-2	295	f	f	\N	\N	42
-2	296	f	f	\N	\N	42
-2	297	f	f	\N	\N	42
-2	298	f	f	\N	\N	42
-2	299	f	f	\N	\N	42
-2	300	f	f	\N	\N	42
-2	301	f	f	\N	\N	42
-2	302	f	f	\N	\N	42
-2	303	f	f	\N	\N	42
-2	304	f	f	\N	\N	42
-2	305	f	f	\N	\N	42
-2	306	f	f	\N	\N	42
-2	307	f	f	\N	\N	42
-2	308	f	f	\N	\N	42
-2	131	f	f	\N	\N	42
-2	109	f	f	\N	\N	42
-2	110	f	f	\N	\N	42
-2	111	f	f	\N	\N	42
-2	112	f	f	\N	\N	42
-2	113	f	f	\N	\N	42
-2	114	f	f	\N	\N	42
-2	115	f	f	\N	\N	42
-2	116	f	f	\N	\N	42
-2	117	f	f	\N	\N	42
-2	118	f	f	\N	\N	42
-2	119	f	f	\N	\N	42
-2	120	f	f	\N	\N	42
-2	121	f	f	\N	\N	42
-2	122	f	f	\N	\N	42
-2	123	f	f	\N	\N	42
-2	124	f	f	\N	\N	42
-2	125	f	f	\N	\N	42
-2	126	f	f	\N	\N	42
-2	127	f	f	\N	\N	42
-2	128	f	f	\N	\N	42
-2	129	f	f	\N	\N	42
-2	130	f	f	\N	\N	42
-2	132	f	f	\N	\N	42
-2	133	f	f	\N	\N	42
-2	134	f	f	\N	\N	42
-2	135	f	f	\N	\N	42
-2	136	f	f	\N	\N	42
-2	137	f	f	\N	\N	42
-2	138	f	f	\N	\N	42
-2	139	f	f	\N	\N	42
-2	140	f	f	\N	\N	42
-2	141	f	f	\N	\N	42
-2	142	f	f	\N	\N	42
-2	143	f	f	\N	\N	42
-2	144	f	f	\N	\N	42
-2	145	f	f	\N	\N	42
-2	146	f	f	\N	\N	42
-2	147	f	f	\N	\N	42
-2	148	f	f	\N	\N	42
-2	149	f	f	\N	\N	42
-2	150	f	f	\N	\N	42
-2	151	f	f	\N	\N	42
-2	152	f	f	\N	\N	42
-2	153	f	f	\N	\N	42
-2	154	f	f	\N	\N	42
-2	155	f	f	\N	\N	42
-2	156	f	f	\N	\N	42
-2	157	f	f	\N	\N	42
-2	158	f	f	\N	\N	42
-2	159	f	f	\N	\N	42
-2	160	f	f	\N	\N	42
-2	617	f	f	\N	\N	43
-2	618	f	f	\N	\N	43
-2	619	f	f	\N	\N	43
-2	614	f	f	\N	\N	43
-2	615	f	f	\N	\N	43
-2	616	f	f	\N	\N	43
-2	161	f	f	\N	\N	42
-2	162	f	f	\N	\N	42
-2	163	f	f	\N	\N	42
-2	164	f	f	\N	\N	42
-2	165	f	f	\N	\N	42
-2	166	f	f	\N	\N	42
-2	167	f	f	\N	\N	42
-2	168	f	f	\N	\N	42
-2	169	f	f	\N	\N	42
-2	170	f	f	\N	\N	42
-2	171	f	f	\N	\N	42
-2	172	f	f	\N	\N	42
-2	173	f	f	\N	\N	42
-2	174	f	f	\N	\N	42
-2	175	f	f	\N	\N	42
-2	176	f	f	\N	\N	42
-2	177	f	f	\N	\N	42
-2	178	f	f	\N	\N	42
-2	179	f	f	\N	\N	42
-2	180	f	f	\N	\N	42
-2	181	f	f	\N	\N	42
-2	182	f	f	\N	\N	42
-2	183	f	f	\N	\N	42
-2	184	f	f	\N	\N	42
-2	185	f	f	\N	\N	42
-2	186	f	f	\N	\N	42
-2	187	f	f	\N	\N	42
-2	188	f	f	\N	\N	42
-2	189	f	f	\N	\N	42
-2	190	f	f	\N	\N	42
-2	191	f	f	\N	\N	42
-2	192	f	f	\N	\N	42
-2	193	f	f	\N	\N	42
-2	194	f	f	\N	\N	42
-2	195	f	f	\N	\N	42
-2	196	f	f	\N	\N	42
-2	197	f	f	\N	\N	42
-2	198	f	f	\N	\N	42
-2	199	f	f	\N	\N	42
-2	200	f	f	\N	\N	42
-2	201	f	f	\N	\N	42
-2	202	f	f	\N	\N	42
-2	203	f	f	\N	\N	42
-2	204	f	f	\N	\N	42
-2	205	f	f	\N	\N	42
-2	206	f	f	\N	\N	42
-2	207	f	f	\N	\N	42
-2	208	f	f	\N	\N	42
-2	209	f	f	\N	\N	42
-2	210	f	f	\N	\N	42
-2	211	f	f	\N	\N	42
-2	212	f	f	\N	\N	42
-2	213	f	f	\N	\N	42
-2	214	f	f	\N	\N	42
-2	215	f	f	\N	\N	42
-2	216	f	f	\N	\N	42
-2	217	f	f	\N	\N	42
-2	218	f	f	\N	\N	42
-2	219	f	f	\N	\N	42
-2	220	f	f	\N	\N	42
-2	221	f	f	\N	\N	42
-2	222	f	f	\N	\N	42
-2	223	f	f	\N	\N	42
-2	224	f	f	\N	\N	42
-2	225	f	f	\N	\N	42
-2	226	f	f	\N	\N	42
-2	227	f	f	\N	\N	42
-2	228	f	f	\N	\N	42
-2	229	f	f	\N	\N	42
-2	230	f	f	\N	\N	42
-2	231	f	f	\N	\N	42
-2	232	f	f	\N	\N	42
-2	233	f	f	\N	\N	42
-2	234	f	f	\N	\N	42
-2	235	f	f	\N	\N	42
-2	236	f	f	\N	\N	42
-2	237	f	f	\N	\N	42
-2	238	f	f	\N	\N	42
-2	239	f	f	\N	\N	42
-2	240	f	f	\N	\N	42
-2	241	f	f	\N	\N	42
-2	242	f	f	\N	\N	42
-2	243	f	f	\N	\N	42
-2	244	f	f	\N	\N	42
-2	245	f	f	\N	\N	42
-2	246	f	f	\N	\N	42
-2	247	f	f	\N	\N	42
-2	248	f	f	\N	\N	42
-2	421	f	f	\N	\N	41
-2	340	f	f	\N	\N	41
-2	341	f	f	\N	\N	41
-2	342	f	f	\N	\N	41
-2	343	f	f	\N	\N	41
-2	344	f	f	\N	\N	41
-2	345	f	f	\N	\N	41
-2	346	f	f	\N	\N	41
-2	347	f	f	\N	\N	41
-2	348	f	f	\N	\N	41
-2	349	f	f	\N	\N	41
-2	350	f	f	\N	\N	41
-2	351	f	f	\N	\N	41
-2	352	f	f	\N	\N	41
-2	353	f	f	\N	\N	41
-2	354	f	f	\N	\N	41
-2	355	f	f	\N	\N	41
-2	356	f	f	\N	\N	41
-2	357	f	f	\N	\N	41
-2	358	f	f	\N	\N	41
-2	359	f	f	\N	\N	41
-2	360	f	f	\N	\N	41
-2	338	f	f	\N	\N	41
-2	337	f	f	\N	\N	41
-2	336	f	f	\N	\N	41
-2	335	f	f	\N	\N	41
-2	334	f	f	\N	\N	41
-2	333	f	f	\N	\N	41
-2	332	f	f	\N	\N	41
-2	331	f	f	\N	\N	41
-2	330	f	f	\N	\N	41
-2	329	f	f	\N	\N	41
-2	414	f	f	\N	\N	41
-2	434	f	f	\N	\N	41
-2	435	f	f	\N	\N	41
-2	436	f	f	\N	\N	41
-2	437	f	f	\N	\N	41
-2	438	f	f	\N	\N	41
-2	439	f	f	\N	\N	41
-2	440	f	f	\N	\N	41
-2	441	f	f	\N	\N	41
-2	328	f	f	\N	\N	41
-2	327	f	f	\N	\N	41
-2	326	f	f	\N	\N	41
-2	325	f	f	\N	\N	41
-2	324	f	f	\N	\N	41
-2	323	f	f	\N	\N	41
-2	322	f	f	\N	\N	41
-2	321	f	f	\N	\N	41
-2	320	f	f	\N	\N	41
-2	319	f	f	\N	\N	41
-2	318	f	f	\N	\N	41
-2	317	f	f	\N	\N	41
-2	316	f	f	\N	\N	41
-2	315	f	f	\N	\N	41
-2	314	f	f	\N	\N	41
-2	313	f	f	\N	\N	41
-2	312	f	f	\N	\N	41
-2	311	f	f	\N	\N	41
-2	310	f	f	\N	\N	41
-2	309	f	f	\N	\N	41
-2	582	f	f	\N	\N	41
-2	586	f	f	\N	\N	41
-2	585	f	f	\N	\N	41
-2	584	f	f	\N	\N	41
-2	583	f	f	\N	\N	41
-2	415	f	f	\N	\N	41
-2	416	f	f	\N	\N	41
-2	417	f	f	\N	\N	41
-2	418	f	f	\N	\N	41
-2	419	f	f	\N	\N	41
-2	420	f	f	\N	\N	41
-2	339	f	f	\N	\N	41
-2	422	f	f	\N	\N	41
-2	423	f	f	\N	\N	41
-2	424	f	f	\N	\N	41
-2	425	f	f	\N	\N	41
-2	426	f	f	\N	\N	41
-2	427	f	f	\N	\N	41
-2	428	f	f	\N	\N	41
-2	429	f	f	\N	\N	41
-2	430	f	f	\N	\N	41
-2	431	f	f	\N	\N	41
-2	432	f	f	\N	\N	41
-2	433	f	f	\N	\N	41
-2	634	f	f	\N	\N	41
-3	634	f	f	\N	\N	41
-2	635	f	f	\N	\N	41
-3	635	f	f	\N	\N	41
-2	636	f	f	\N	\N	41
-3	636	f	f	\N	\N	41
-2	1	f	f	\N	\N	43
-2	2	f	f	\N	\N	43
-2	3	f	f	\N	\N	43
-2	4	f	f	\N	\N	43
-2	5	f	f	\N	\N	43
-2	6	f	f	\N	\N	43
-2	7	f	f	\N	\N	43
-2	8	f	f	\N	\N	43
-2	9	f	f	\N	\N	43
-2	10	f	f	\N	\N	43
-2	11	f	f	\N	\N	40
-2	12	f	f	\N	\N	40
-2	13	f	f	\N	\N	40
-2	14	f	f	\N	\N	40
-2	15	f	f	\N	\N	40
-2	16	f	f	\N	\N	40
-2	17	f	f	\N	\N	40
-2	18	f	f	\N	\N	40
-2	19	f	f	\N	\N	40
-2	20	f	f	\N	\N	40
-2	21	f	f	\N	\N	40
-2	22	f	f	\N	\N	40
-2	23	f	f	\N	\N	40
-2	24	f	f	\N	\N	40
-2	25	f	f	\N	\N	40
-2	26	f	f	\N	\N	40
-2	27	f	f	\N	\N	40
-2	28	f	f	\N	\N	40
-2	29	f	f	\N	\N	40
-2	30	f	f	\N	\N	40
-2	31	f	f	\N	\N	40
-2	32	f	f	\N	\N	40
-2	33	f	f	\N	\N	40
-2	34	f	f	\N	\N	40
-2	35	f	f	\N	\N	40
-2	36	f	f	\N	\N	40
-2	37	f	f	\N	\N	40
-2	38	f	f	\N	\N	40
-2	39	f	f	\N	\N	40
-2	40	f	f	\N	\N	40
-2	41	f	f	\N	\N	40
-3	414	f	f	\N	\N	44
-3	415	f	f	\N	\N	44
-3	582	f	f	\N	\N	44
-3	416	f	f	\N	\N	44
-3	417	f	f	\N	\N	44
-3	418	f	f	\N	\N	44
-3	419	f	f	\N	\N	44
-3	420	f	f	\N	\N	44
-3	421	f	f	\N	\N	44
-3	422	f	f	\N	\N	44
-3	423	f	f	\N	\N	44
-3	424	f	f	\N	\N	44
-3	425	f	f	\N	\N	44
-3	426	f	f	\N	\N	44
-3	427	f	f	\N	\N	44
-3	428	f	f	\N	\N	44
-3	429	f	f	\N	\N	44
-3	430	f	f	\N	\N	44
-3	431	f	f	\N	\N	44
-3	462	f	f	\N	\N	44
-3	432	f	f	\N	\N	44
-3	559	f	f	\N	\N	44
-3	433	f	f	\N	\N	44
-3	463	f	f	\N	\N	44
-3	434	f	f	\N	\N	44
-3	503	f	f	\N	\N	44
-3	435	f	f	\N	\N	44
-3	464	f	f	\N	\N	44
-3	436	f	f	\N	\N	44
-3	552	f	f	\N	\N	44
-3	437	f	f	\N	\N	44
-3	465	f	f	\N	\N	44
-3	438	f	f	\N	\N	44
-3	504	f	f	\N	\N	44
-3	439	f	f	\N	\N	44
-3	466	f	f	\N	\N	44
-3	440	f	f	\N	\N	44
-3	557	f	f	\N	\N	44
-3	441	f	f	\N	\N	44
-3	467	f	f	\N	\N	44
-3	442	f	f	\N	\N	44
-3	505	f	f	\N	\N	44
-3	443	f	f	\N	\N	44
-3	553	f	f	\N	\N	44
-3	444	f	f	\N	\N	44
-3	586	f	f	\N	\N	44
-3	445	f	f	\N	\N	44
-3	561	f	f	\N	\N	44
-3	585	f	f	\N	\N	44
-3	554	f	f	\N	\N	44
-3	584	f	f	\N	\N	44
-3	558	f	f	\N	\N	44
-3	583	f	f	\N	\N	44
-2	637	f	f	\N	\N	41
-3	637	f	f	\N	\N	41
-2	638	f	f	\N	\N	41
-3	638	f	f	\N	\N	41
-2	639	f	f	\N	\N	41
-3	639	f	f	\N	\N	41
-2	640	f	f	\N	\N	41
-3	640	f	f	\N	\N	41
-2	676	f	f	\N	\N	42
-2	540	f	f	\N	\N	43
-2	549	f	f	\N	\N	43
-2	548	f	f	\N	\N	43
-2	547	f	f	\N	\N	43
-2	546	f	f	\N	\N	43
-2	545	f	f	\N	\N	43
-2	544	f	f	\N	\N	43
-2	543	f	f	\N	\N	43
-2	542	f	f	\N	\N	43
-2	541	f	f	\N	\N	43
-2	497	f	f	\N	\N	43
-2	496	f	f	\N	\N	43
-2	495	f	f	\N	\N	43
-2	494	f	f	\N	\N	43
-2	493	f	f	\N	\N	43
-2	492	f	f	\N	\N	43
-2	491	f	f	\N	\N	43
-2	490	f	f	\N	\N	43
-2	489	f	f	\N	\N	43
-2	488	f	f	\N	\N	43
-2	455	f	f	\N	\N	43
-2	454	f	f	\N	\N	43
-2	453	f	f	\N	\N	43
-2	452	f	f	\N	\N	43
-2	451	f	f	\N	\N	43
-2	450	f	f	\N	\N	43
-2	449	f	f	\N	\N	43
-2	448	f	f	\N	\N	43
-2	447	f	f	\N	\N	43
-2	446	f	f	\N	\N	43
-2	442	f	f	\N	\N	41
-2	443	f	f	\N	\N	41
-2	444	f	f	\N	\N	41
-2	445	f	f	\N	\N	41
-2	456	f	f	\N	\N	41
-2	457	f	f	\N	\N	41
-2	458	f	f	\N	\N	41
-2	459	f	f	\N	\N	41
-2	460	f	f	\N	\N	41
-2	461	f	f	\N	\N	41
-2	462	f	f	\N	\N	41
-2	463	f	f	\N	\N	41
-2	464	f	f	\N	\N	41
-2	465	f	f	\N	\N	41
-2	466	f	f	\N	\N	41
-2	467	f	f	\N	\N	41
-2	498	f	f	\N	\N	41
-2	499	f	f	\N	\N	41
-2	500	f	f	\N	\N	41
-2	501	f	f	\N	\N	41
-2	502	f	f	\N	\N	41
-2	503	f	f	\N	\N	41
-2	504	f	f	\N	\N	41
-2	505	f	f	\N	\N	41
-2	550	f	f	\N	\N	41
-2	551	f	f	\N	\N	41
-2	552	f	f	\N	\N	41
-2	553	f	f	\N	\N	41
-2	554	f	f	\N	\N	41
-2	555	f	f	\N	\N	41
-2	556	f	f	\N	\N	41
-2	557	f	f	\N	\N	41
-2	558	f	f	\N	\N	41
-2	559	f	f	\N	\N	41
-2	560	f	f	\N	\N	41
-2	561	f	f	\N	\N	41
-3	555	f	f	\N	\N	44
-3	498	f	f	\N	\N	44
-3	560	f	f	\N	\N	44
-3	499	f	f	\N	\N	44
-3	456	f	f	\N	\N	44
-3	550	f	f	\N	\N	44
-3	457	f	f	\N	\N	44
-3	500	f	f	\N	\N	44
-3	458	f	f	\N	\N	44
-3	556	f	f	\N	\N	44
-3	459	f	f	\N	\N	44
-3	501	f	f	\N	\N	44
-3	460	f	f	\N	\N	44
-3	551	f	f	\N	\N	44
-3	461	f	f	\N	\N	44
-3	502	f	f	\N	\N	44
+3	14	\N	\N	52
 \.
 
 
@@ -1134,21 +1855,21 @@ COPY public.user_item (user_id, item_id, read, archived, read_at, archived_at, c
 -- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.category_id_seq', 48, true);
+SELECT pg_catalog.setval('public.category_id_seq', 52, true);
 
 
 --
 -- Name: feed_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feed_id_seq', 13, true);
+SELECT pg_catalog.setval('public.feed_id_seq', 15, true);
 
 
 --
 -- Name: feeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: inflow
 --
 
-SELECT pg_catalog.setval('public.feeditem_id_seq', 875, true);
+SELECT pg_catalog.setval('public.feeditem_id_seq', 1144, true);
 
 
 --

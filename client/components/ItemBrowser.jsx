@@ -3,11 +3,11 @@ import BrowserItem from './BrowserItem';
 import { Outlet, useFetcher, useLoaderData } from 'react-router-dom';
 import apiFetch from '../api/apiFetch';
 
-async function getCategory (id) {
-  const data = await apiFetch(`/api/categories/${id}`);
-  const category = await data.json();
-  category.type = 'category';
-  return category;
+async function getCollection (id) {
+  const data = await apiFetch(`/api/collections/${id}`);
+  const collection = await data.json();
+  collection.type = 'collection';
+  return collection;
 }
 
 async function getFeed (id) {
@@ -17,8 +17,8 @@ async function getFeed (id) {
   return feed;
 }
 
-async function getFeedItems (category) {
-  const data = await apiFetch(`/api/feeditems/${category.type}/${category.id}?all=false`);
+async function getItems (collection) {
+  const data = await apiFetch(`/api/items/${collection.type}/${collection.id}?all=false`);
   return await data.json();
 }
 
@@ -29,30 +29,30 @@ export async function action ({ request }) {
 
 export async function loader ({ request, params }) {
   const url = new URL(request.url);
-  const category = url.pathname.includes('categories')
-    ? await getCategory(params.categoryId)
+  const entity = url.pathname.includes('collections')
+    ? await getCollection(params.collectionId)
     : await getFeed(params.feedId);
-  return { category, items: await getFeedItems(category) };
+  return { entity: entity, items: await getItems(entity) };
 }
 
 export default function ItemBrowser () {
-  const { category, items } = useLoaderData();
+  const { entity, items } = useLoaderData();
   const fetcher = useFetcher();
 
   const syncing = fetcher.formData ? true : false;
 
-  const feedItemComponents = items.map((item, i) => {
-    return (<BrowserItem key={`browseritem-${i}`} category={category} item={item} />);
+  const itemComponents = items.map((item, i) => {
+    return (<BrowserItem key={`browseritem-${i}`} entity={entity} item={item} />);
   });
   
-  const apiCategory = category.type === 'category' ? 'categories' : 'feeds';
+  const apiEntity = entity.type === 'collection' ? 'collections' : 'feeds';
   
   return (
     <>
       <section className='itemBrowser'>
-        <h2>{category.title}</h2>
+        <h2>{entity.title}</h2>
         <fetcher.Form method="post">
-          <input type='hidden' name='endpoint' value={`/${apiCategory}/${category.id}/sync`} />
+          <input type='hidden' name='endpoint' value={`/${apiEntity}/${entity.id}/sync`} />
           <button
             name="sync"
             value={syncing ? 'false' : 'true'}
@@ -60,7 +60,7 @@ export default function ItemBrowser () {
             {syncing ? 'Syncing...' : 'Sync'}
           </button>
         </fetcher.Form>
-        {feedItemComponents}
+        {itemComponents}
       </section>
       <Outlet />
     </>

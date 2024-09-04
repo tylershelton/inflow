@@ -30,8 +30,8 @@ router.get('/:id/sync',
 );
 
 router.get('/:id/item/:itemId',
-  asyncHandler(itemController.getFeedItem),
-  (req, res) => res.status(200).json(res.locals.feeditem),
+  asyncHandler(itemController.getItem),
+  (req, res) => res.status(200).json(res.locals.item),
 );
 
 // create new collection

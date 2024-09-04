@@ -37,8 +37,9 @@ erDiagram
 		timestamp expire
 	}
 	collection_useritem {
-		int item_id PK,FK
 		int collection_id PK,FK
+		int user_id PK,FK
+		int item_id PK,FK
 	}
 	user_feed {
 		int user_id PK,FK

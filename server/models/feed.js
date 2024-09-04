@@ -5,24 +5,27 @@ const { AppError, DatabaseError } = require('../lib/error/errors');
 module.exports = {
   create: async (user_id, url, title, desc, collection_id) => {
     const client = await pool.connect();
+    let result;
     try {
       await client.query('BEGIN');
 
-      const feed_result = await client.query(`
+      const feed = (await client.query(`
         INSERT INTO feed (url, title, description)
         VALUES ($1, $2, $3)
         ON CONFLICT (url) DO UPDATE
-        SET url = EXCLUDED.url
+          SET url = EXCLUDED.url
         RETURNING id;
-      `, [url, title, desc]);
+      `, [url, title, desc])).rows[0];
 
       await client.query(`
         INSERT INTO user_feed (user_id, feed_id, collection_id)
         VALUES ($1, $2, $3)
         ON CONFLICT DO NOTHING
-      `, [user_id, feed_result.rows[0].id, collection_id]);
+      `, [user_id, feed.id, collection_id]);
 
       await client.query('COMMIT');
+
+      result = await module.exports.get(user_id, feed.id);
     }
     catch (err) {
       await client.query('ROLLBACK');
@@ -31,6 +34,8 @@ module.exports = {
     finally {
       client.release();
     }
+
+    return result;
   },
 
   delete: (user_id, feed_id) => {
@@ -82,25 +87,22 @@ module.exports = {
   },
 
   getAllByCollection: async (user_id, collection_id) => {
-    const result = await pool.query(`
-      SELECT
-        f.id,
-        f.url,
-        COALESCE(uf.title, f.title) AS title,
-        COALESCE(uf.description, f.description) AS description,
-        uf.collection_id
-      FROM feed f
-      INNER JOIN user_feed uf ON f.id = uf.feed_id
-      WHERE uf.user_id = $1 AND uf.collection_id = $2
-    `, [user_id, collection_id]);
-    return result.rows;
-  },
-
-  getByURL: async url => {
-    const result = await pool.query(`
-      SELECT * FROM feed WHERE url = $1
-    `, [url]);  
-    return result.rows[0]; 
+    try {
+      const result = await pool.query(`
+        SELECT
+          f.id,
+          f.url,
+          COALESCE(uf.title, f.title) AS title,
+          COALESCE(uf.description, f.description) AS description
+        FROM feed f
+        INNER JOIN user_feed uf ON f.id = uf.feed_id
+        WHERE uf.user_id = $1 AND uf.collection_id = $2
+      `, [user_id, collection_id]);
+      return result.rows;
+    }
+    catch (err) {
+      throw new DatabaseError({ cause: err });
+    }
   },
 
   subscribers: async (feed_id) => {
