@@ -9,7 +9,7 @@ router.get('/:id', itemController.getFeedItem, (req, res) => {
 });
 
 // get all items in a given collection
-router.get('/category/:id', itemController.getItemsByCollection, (req, res) => {
+router.get('/collection/:id', itemController.getItemsByCollection, (req, res) => {
   // TODO: support all vs unread only
   if (res.locals.feeditems) return res.status(200).json(res.locals.feeditems);
   else return res.status(404);
