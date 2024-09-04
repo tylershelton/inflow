@@ -2,7 +2,7 @@ import React from 'react';
 
 import Category from './Category';
 
-export default function CategoryList ({ collections }) {
+export default function CollectionList ({ collections }) {
   const collectionComponents = collections.map((cat, i) => {
     return (<Category
       key      = {`cat-${i}`}

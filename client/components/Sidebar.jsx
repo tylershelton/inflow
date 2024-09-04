@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 // import auth from '../api/auth';
-import CategoryList from './CategoryList';
+import CollectionList from './CollectionList';
 import Login from './Login';
 import LogoutButton from './LogoutButton';
 import Signup from './Signup';
@@ -45,7 +45,7 @@ export default function Sidebar ({ collections }) {
         {form}
       </header>
       { loggedIn
-        ? <CategoryList collections={collections} />  
+        ? <CollectionList collections={collections} />  
         : null
       }
     </section>
