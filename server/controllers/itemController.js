@@ -1,7 +1,7 @@
 const Item = require('../models/item');
 
 module.exports = {
-  deleteFeedItem: async (req, res, next) => {
+  deleteItem: async (req, res, next) => {
     try {
       res.locals.success = await Item.delete(req.user.id, req.params.id);
       return next();
@@ -10,14 +10,14 @@ module.exports = {
     }
   },
 
-  getFeedItem: async (req, res, next) => {
-    res.locals.feeditem = await Item.get(req.user.id, req.params.itemId);
+  getItem: async (req, res, next) => {
+    res.locals.item = await Item.get(req.user.id, req.params.itemId);
     return next();
   },
 
   getItemsByCollection: async (req, res, next) => {
     try {
-      res.locals.feeditems = await Item.getByCollection(req.user.id, req.params.id, req.query.all);
+      res.locals.items = await Item.getByCollection(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -27,7 +27,7 @@ module.exports = {
 
   getItemsByFeed: async (req, res, next) => {
     try {
-      res.locals.feeditems = await Item.getByFeed(req.user.id, req.params.id, req.query.all);
+      res.locals.items = await Item.getByFeed(req.user.id, req.params.id, req.query.all);
       return next();
     }
     catch (err) {
@@ -45,7 +45,7 @@ module.exports = {
           collection_ids: current.collection_ids,
         }
       );
-      res.locals.feeditem = await Item.get(req.user.id, req.params.id);
+      res.locals.item = await Item.get(req.user.id, req.params.id);
       return next();
     }
     catch (err) {

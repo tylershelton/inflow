@@ -12,6 +12,6 @@ const itemRouter       = require('./item');
 router.use('/auth', authRouter);
 router.use('/collections', isLoggedIn, collectionRouter);
 router.use('/feeds', isLoggedIn, feedRouter);
-router.use('/feeditems', isLoggedIn, itemRouter);
+router.use('/items', isLoggedIn, itemRouter);
 
 module.exports = router;

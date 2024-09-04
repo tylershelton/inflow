@@ -18,8 +18,8 @@ router.get('/:id/sync', feedController.sync, (req, res) => {
   return res.sendStatus(200);
 });
 
-router.get('/:id/item/:itemId', itemController.getFeedItem, (req, res) => {
-  return res.status(200).json(res.locals.feeditem);
+router.get('/:id/item/:itemId', itemController.getItem, (req, res) => {
+  return res.status(200).json(res.locals.item);
 });
 
 // subscribe to a new feed

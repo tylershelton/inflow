@@ -17,8 +17,8 @@ async function getFeed (id) {
   return feed;
 }
 
-async function getFeedItems (collection) {
-  const data = await apiFetch(`/api/feeditems/${collection.type}/${collection.id}?all=false`);
+async function getItems (collection) {
+  const data = await apiFetch(`/api/items/${collection.type}/${collection.id}?all=false`);
   return await data.json();
 }
 
@@ -32,7 +32,7 @@ export async function loader ({ request, params }) {
   const entity = url.pathname.includes('collections')
     ? await getCollection(params.collectionId)
     : await getFeed(params.feedId);
-  return { entity: entity, items: await getFeedItems(entity) };
+  return { entity: entity, items: await getItems(entity) };
 }
 
 export default function ItemBrowser () {
@@ -41,7 +41,7 @@ export default function ItemBrowser () {
 
   const syncing = fetcher.formData ? true : false;
 
-  const feedItemComponents = items.map((item, i) => {
+  const itemComponents = items.map((item, i) => {
     return (<BrowserItem key={`browseritem-${i}`} entity={entity} item={item} />);
   });
   
@@ -60,7 +60,7 @@ export default function ItemBrowser () {
             {syncing ? 'Syncing...' : 'Sync'}
           </button>
         </fetcher.Form>
-        {feedItemComponents}
+        {itemComponents}
       </section>
       <Outlet />
     </>
