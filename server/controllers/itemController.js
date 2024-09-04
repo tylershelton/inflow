@@ -15,7 +15,7 @@ module.exports = {
     return next();
   },
 
-  getItemsByCategory: async (req, res, next) => {
+  getItemsByCollection: async (req, res, next) => {
     try {
       res.locals.feeditems = await Item.getByCollection(req.user.id, req.params.id, req.query.all);
       return next();

@@ -8,8 +8,8 @@ router.get('/:id', itemController.getFeedItem, (req, res) => {
   else return res.sendStatus(404);
 });
 
-// get all items in a given category
-router.get('/category/:id', itemController.getItemsByCategory, (req, res) => {
+// get all items in a given collection
+router.get('/category/:id', itemController.getItemsByCollection, (req, res) => {
   // TODO: support all vs unread only
   if (res.locals.feeditems) return res.status(200).json(res.locals.feeditems);
   else return res.status(404);
