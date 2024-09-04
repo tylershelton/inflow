@@ -69,20 +69,17 @@ module.exports = {
   },
 
   updateMetadata: async (req, res, next) => {
+    // `title` and `description` metadata have a few cases to handle --
+    //    1) value is undefined/non-string -- no update necessary, retain current value
+    //    2) value is an empty string -- null the user-set prop value and fall back to default
+    //    3) value is a non-empty string -- set the new value
     const processUpdate = (key, value, current) => {
       if (typeof value !== 'string') return current[key];
       return (value.length) ? value : null;
     };
 
     try {
-      // update collection metadata
-      let category = {id: undefined};
-      if (req.body.category) {
-        category = await Collection.getByTitle(req.body.category);
-        if (!category) category = Collection.create(req.user.id, req.body.category);
-      }
-
-      // update feed metadata
+      // check if user is subscribed to the feed they're trying to modify
       const current = await Feed.get(req.user.id, req.params.id);
       if (!current) throw new AppError({
         message: `User ${req.user.id} tried to update feed ${req.params.id}, which they are not subscribed to.`,
@@ -92,7 +89,7 @@ module.exports = {
       const changes = {
         title: processUpdate('title', req.body?.title, current),
         description: processUpdate('description', req.body?.description, current),
-        collection_id: category.id || current.category_id,
+        collection_id: req.body?.collection_id || current.collection_id,
       };
       await Feed.update(req.user.id, req.params.id, changes);
 
