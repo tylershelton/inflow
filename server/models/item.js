@@ -2,6 +2,11 @@ const pool   = require('../lib/db');
 const format = require('pg-format');
 const { DatabaseError } = require('../lib/error/errors');
 
+const vui_columns = `
+  vui.id, vui.title, vui.description, vui.url, vui.pubdate, vui.feed_id,
+  vui.collection_ids, vui.read, vui.archived, vui.read_at, vui.archived_at
+`;
+
 module.exports = {
   // create: async (user_id, data) => {
   //   const client = await pool.connect();
@@ -123,7 +128,8 @@ module.exports = {
   get: async (user_id, item_id) => {
     try {
       const result = await pool.query(`
-        SELECT * FROM view_user_item
+        SELECT ${vui_columns}
+        FROM view_user_item vui
         WHERE user_id = $1 AND id = $2
       `, [user_id, item_id]);
       return result.rows[0];
@@ -142,7 +148,7 @@ module.exports = {
         params.push(includeArchived);
       }
       const result = await pool.query(`
-        SELECT vui.*, f.title AS feed_title 
+        SELECT ${vui_columns}, f.title AS feed_title 
         FROM view_user_item vui
         INNER JOIN feed f ON vui.feed_id = f.id
         WHERE vui.user_id = $1
@@ -165,7 +171,8 @@ module.exports = {
         params.push(includeArchived);
       }
       const result = await pool.query(`
-        SELECT * FROM view_user_item
+        SELECT ${vui_columns}
+        FROM view_user_item vui
         WHERE user_id = $1 AND feed_id = $2 ${addendum}
         ORDER BY pubdate DESC
       `, params);
