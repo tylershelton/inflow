@@ -53,7 +53,7 @@ const router = createBrowserRouter(
       loader={rootLoader}
     >
       <Route errorElement={<ErrorDisplay />}>
-        <Route path="categories/:categoryId"
+        <Route path="collections/:collectionId"
           loader={itemBrowserLoader}
           action={itemBrowserAction}
           element={<ItemBrowser />}

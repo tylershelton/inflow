@@ -11,7 +11,7 @@ import Login from './Login';
 import LogoutButton from './LogoutButton';
 import Signup from './Signup';
 
-export default function Sidebar ({ categories }) {
+export default function Sidebar ({ collections }) {
   const { loggedIn } = useRouteLoaderData('root');
   const location = useLocation();
 
@@ -45,7 +45,7 @@ export default function Sidebar ({ categories }) {
         {form}
       </header>
       { loggedIn
-        ? <CategoryList categories={categories} />  
+        ? <CategoryList collections={collections} />  
         : null
       }
     </section>

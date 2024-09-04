@@ -9,7 +9,7 @@ export default function Category ({ catid, title, contents }) {
 
   return (
     <div>
-      <li data-id={catid}><NavLink to={`/categories/${catid}`}>{title}</NavLink></li>
+      <li data-id={catid}><NavLink to={`/collections/${catid}`}>{title}</NavLink></li>
       {contentList}
     </div>
   );

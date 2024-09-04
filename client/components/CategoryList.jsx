@@ -2,8 +2,8 @@ import React from 'react';
 
 import Category from './Category';
 
-export default function CategoryList ({ categories }) {
-  const categoryComponents = categories.map((cat, i) => {
+export default function CategoryList ({ collections }) {
+  const collectionComponents = collections.map((cat, i) => {
     return (<Category
       key      = {`cat-${i}`}
       catid    = {cat.id}
@@ -14,9 +14,9 @@ export default function CategoryList ({ categories }) {
 
   return (
     <nav>
-      <h2>Categories</h2>
+      <h2>Collections</h2>
       <ul>
-        {categoryComponents}
+        {collectionComponents}
       </ul>
     </nav>
   );
